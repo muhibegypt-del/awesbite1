@@ -1,0 +1,90 @@
+---
+/**
+ * FOUNDATIONS SPECIMEN — not the HOME page.
+ *
+ * This exists so the layout, type scale and spacing can be checked in a
+ * browser before any real page is built. Delete it and replace with the
+ * HOME spec (slot map, HOME `/`) when page work starts.
+ */
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+import Tag from '../components/Tag.astro';
+import SectionMarker from '../components/SectionMarker.astro';
+---
+
+<Base title="foundations" description="Internal type and spacing specimen.">
+  <section class="section">
+    <div class="container editorial">
+      <SectionMarker label="Type" class="editorial-aside" />
+
+      <div class="stack">
+        <p class="t-hero">a textured word</p>
+        <p class="t-h1">Page heading, one line</p>
+        <p class="t-h2">Section head</p>
+        <p class="t-h3">Card title</p>
+        <p class="t-quote">Words are not flat. They have grain.</p>
+        <p class="t-lead">
+          Lead paragraph. Capped at 58 characters so it never runs the full
+          width of the column, and set in the body face at a generous leading.
+        </p>
+        <p class="t-body">
+          Body copy at 17px, 1.7 leading, capped at 68 characters. This is the
+          measure every paragraph on the site holds to. It should feel unhurried
+          and it should never reach the right edge of a desktop viewport.
+        </p>
+        <p class="t-small">Caption at 15px, same measure.</p>
+        <p class="t-mono">Mono label · 12px · 0.14em</p>
+        <p class="t-mono-lg">Mono selector label · 14px · 0.12em</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section band">
+    <div class="container editorial">
+      <SectionMarker label="Components" class="editorial-aside" />
+
+      <div class="stack">
+        <div class="row">
+          <Button variant="primary" href="/contact">Book a call</Button>
+          <Button variant="secondary">Listen to a sample</Button>
+          <Button variant="quiet" href="/work">See the work</Button>
+        </div>
+
+        <div class="row">
+          <Tag>04:12</Tag>
+          <Tag>IELTS</Tag>
+          <Tag>£45 / hour</Tag>
+          <Tag variant="accent">Available</Tag>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container editorial">
+      <SectionMarker label="Placeholder" class="editorial-aside" />
+
+      <div class="stack">
+        <p class="placeholder">[ HERO HEADLINE WILL GO HERE — 4 words max ]</p>
+        <p class="placeholder">
+          [ META DESCRIPTION WILL GO HERE — 150–160 characters, one per page ]
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .stack {
+    display: grid;
+    gap: var(--s-5);
+    justify-items: start;
+  }
+
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-3);
+  }
+</style>

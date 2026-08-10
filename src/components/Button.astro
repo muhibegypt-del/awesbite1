@@ -1,0 +1,106 @@
+---
+/**
+ * Button — renders <a> when given an href, <button> otherwise.
+ *
+ * Only ONE variant="primary" may be visible per viewport, per page.
+ * Body face, never mono. Radius 2px. No box-shadow.
+ */
+interface Props {
+  variant?: 'primary' | 'secondary' | 'quiet';
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+  class?: string;
+  [key: string]: unknown;
+}
+
+const {
+  variant = 'secondary',
+  href,
+  type = 'button',
+  disabled = false,
+  class: className,
+  ...rest
+} = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+const classes = ['btn', `btn--${variant}`, className].filter(Boolean).join(' ');
+const tagProps = href ? { href } : { type, disabled };
+---
+
+<Tag class={classes} {...tagProps} {...rest}>
+  <span class="btn__label"><slot /></span>
+</Tag>
+
+<style>
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--s-2);
+    padding: var(--s-3) var(--s-5);
+    font-family: var(--font-body);
+    font-size: var(--t-body);
+    font-weight: 500;
+    line-height: 1.2;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid transparent;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition:
+      background-color var(--dur-fast) var(--ease),
+      border-color var(--dur-fast) var(--ease),
+      color var(--dur-fast) var(--ease);
+  }
+
+  .btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  /* Primary — solid clay-ink. paper on clay-ink is 5.77:1. */
+  .btn--primary {
+    background: var(--clay-ink);
+    color: var(--paper);
+    border-color: var(--clay-ink);
+  }
+
+  .btn--primary:hover:not(:disabled) {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--paper);
+  }
+
+  /* Secondary — hairline outline, ink label. */
+  .btn--secondary {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--rule);
+  }
+
+  .btn--secondary:hover:not(:disabled) {
+    border-color: var(--clay-ink);
+    color: var(--clay-ink);
+  }
+
+  /* Quiet — a link that carries a button's hit area. */
+  .btn--quiet {
+    padding-inline: 0;
+    background: transparent;
+    color: var(--clay-ink);
+  }
+
+  .btn--quiet .btn__label {
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: var(--s-1);
+    transition: border-color var(--dur-fast) var(--ease);
+  }
+
+  .btn--quiet:hover:not(:disabled) {
+    color: var(--ink);
+  }
+
+  .btn--quiet:hover:not(:disabled) .btn__label {
+    border-bottom-color: var(--clay);
+  }
+</style>

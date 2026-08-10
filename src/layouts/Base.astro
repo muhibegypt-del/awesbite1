@@ -1,0 +1,376 @@
+---
+import '../styles/tokens.css';
+import '../styles/global.css';
+import global from '../content/global.json';
+
+interface Props {
+  /** Page title, sentence case. The brand name is appended and stays lowercase. */
+  title: string;
+  /** G-06. Falls back to the placeholder until Aneesa supplies one. */
+  description?: string;
+  /** Omit the suffix when the page title is already the brand name. */
+  bare?: boolean;
+}
+
+const { title, description, bare = false } = Astro.props;
+
+const pageTitle = bare ? title : `${title} — ${global.meta.titleSuffix}`;
+const pageDescription = description ?? global.meta.descriptionPlaceholder;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
+
+const socialLinks = global.social.links.filter((link) => link.url);
+---
+
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="canonical" href={canonical} />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={global.meta.titleSuffix} />
+    <meta property="og:locale" content={global.meta.locale} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonical} />
+    {global.meta.ogImage && <meta property="og:image" content={global.meta.ogImage} />}
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+
+    <meta name="theme-color" content="#F7E9DE" />
+    <slot name="head" />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#main">{global.skipLink}</a>
+
+    <div class="grain" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="site-header__inner">
+        <a class="wordmark" href="/" aria-label={`${global.brand.wordmark} — home`}>
+          {global.brand.wordmark}
+        </a>
+
+        <nav class="site-nav" aria-label="Primary">
+          <ul class="site-nav__list" role="list">
+            {
+              global.nav.items.map((item) => {
+                const isCurrent =
+                  currentPath === item.href || currentPath.startsWith(`${item.href}/`);
+                return (
+                  <li>
+                    <a
+                      class="site-nav__link"
+                      href={item.href}
+                      aria-current={isCurrent ? 'page' : undefined}
+                    >
+                      {item.label}
+                    </a>
+                  </li>
+                );
+              })
+            }
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="site-main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="site-footer__inner">
+        <div class="site-footer__brand">
+          <p class="site-footer__wordmark">{global.brand.wordmark}</p>
+          {/* G-03. Fallback if empty: omit the line, wordmark sits alone. */}
+          {
+            global.footer.tagline && (
+              <p class="site-footer__tagline placeholder">{global.footer.tagline}</p>
+            )
+          }
+        </div>
+
+        <div class="site-footer__cols">
+          <nav class="site-footer__col" aria-label="Footer">
+            <p class="site-footer__heading">pages</p>
+            <ul role="list">
+              {
+                global.nav.items.map((item) => (
+                  <li>
+                    <a href={item.href}>{item.label}</a>
+                  </li>
+                ))
+              }
+              <li><a href="/contact">contact</a></li>
+            </ul>
+          </nav>
+
+          <div class="site-footer__col">
+            <p class="site-footer__heading">contact</p>
+            <ul role="list">
+              <li><a href={`mailto:${global.contact.email}`}>{global.contact.email}</a></li>
+            </ul>
+          </div>
+
+          {/* G-04. Never render a dead icon — a null url is dropped above. */}
+          {
+            socialLinks.length > 0 && (
+              <div class="site-footer__col">
+                <p class="site-footer__heading">elsewhere</p>
+                <ul role="list">
+                  {socialLinks.map((link) => (
+                    <li>
+                      <a href={link.url} rel="me noopener">
+                        {link.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )
+          }
+        </div>
+
+        <div class="site-footer__legal">
+          <p>{global.footer.legal}</p>
+          <ul role="list">
+            {
+              global.footer.legalLinks.map((item) => (
+                <li>
+                  <a href={item.href}>{item.label}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style>
+  /* Content sits above the fixed grain layer (z-index 1 in tokens.css). */
+  .site-header,
+  .site-main,
+  .site-footer {
+    position: relative;
+    z-index: 2;
+  }
+
+  .site-main {
+    flex: 1;
+  }
+
+  /* ---- Header ---- */
+
+  .site-header {
+    border-bottom: var(--border);
+  }
+
+  .site-header__inner {
+    width: 100%;
+    max-width: var(--container);
+    margin-inline: auto;
+    padding-inline: var(--gutter-x);
+    padding-block: var(--s-5);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--s-5);
+    flex-wrap: wrap;
+  }
+
+  /* Logo sits 18px in from the header's left gutter. 18px is not on the
+     spacing scale, so this is the one place it appears — as a lockup
+     offset from brief §1.4, not as layout spacing. */
+  .wordmark {
+    margin-left: 18px;
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    text-transform: lowercase;
+    text-decoration: none;
+    color: var(--ink);
+    white-space: nowrap;
+  }
+
+  .wordmark:hover {
+    color: var(--clay-ink);
+  }
+
+  .site-nav__list {
+    display: flex;
+    align-items: baseline;
+    gap: var(--s-5);
+    list-style: none;
+  }
+
+  /* Nav is body face, never mono. Brief §3.4. */
+  .site-nav__link {
+    font-family: var(--font-body);
+    font-size: var(--t-small);
+    text-transform: lowercase;
+    text-decoration: none;
+    color: var(--ink);
+    padding-bottom: var(--s-1);
+    border-bottom: 1px solid transparent;
+    transition:
+      color var(--dur-fast) var(--ease),
+      border-color var(--dur-fast) var(--ease);
+  }
+
+  .site-nav__link:hover {
+    color: var(--clay-ink);
+    border-bottom-color: var(--clay);
+  }
+
+  .site-nav__link[aria-current='page'] {
+    color: var(--clay-ink);
+    border-bottom-color: var(--clay);
+  }
+
+  @media (max-width: 767px) {
+    .site-header__inner {
+      padding-block: var(--s-4);
+      gap: var(--s-3);
+    }
+
+    .wordmark {
+      margin-left: 0;
+    }
+
+    .site-nav__list {
+      gap: var(--s-4);
+    }
+  }
+
+  /* ---- Footer ---- */
+
+  .site-footer {
+    background: var(--plum);
+    color: var(--paper);
+    margin-top: var(--s-10);
+  }
+
+  .site-footer__inner {
+    width: 100%;
+    max-width: var(--container);
+    margin-inline: auto;
+    padding-inline: var(--gutter-x);
+    padding-block: var(--s-9) var(--s-6);
+    display: grid;
+    gap: var(--s-8);
+  }
+
+  .site-footer__wordmark {
+    font-family: var(--font-display);
+    font-size: var(--t-h2);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--paper);
+    margin: 0;
+  }
+
+  .site-footer__tagline {
+    margin-top: var(--s-4);
+  }
+
+  .site-footer__cols {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: var(--s-6);
+  }
+
+  .site-footer__heading {
+    font-family: var(--font-mono);
+    font-size: var(--t-mono);
+    letter-spacing: var(--track-mono);
+    text-transform: uppercase;
+    color: var(--coconut);
+    margin: 0 0 var(--s-3);
+  }
+
+  .site-footer__col ul {
+    list-style: none;
+    display: grid;
+    gap: var(--s-2);
+  }
+
+  .site-footer__col a {
+    font-size: var(--t-small);
+    text-decoration: none;
+    color: var(--paper);
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--dur-fast) var(--ease);
+  }
+
+  .site-footer__col a:hover {
+    color: var(--paper);
+    border-bottom-color: var(--coconut);
+  }
+
+  .site-footer__legal {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--s-4);
+    padding-top: var(--s-5);
+    border-top: 1px solid rgba(247, 233, 222, 0.18);
+  }
+
+  /* Mono is permitted on the footer legal line. Brief §3.4, item 5. */
+  .site-footer__legal,
+  .site-footer__legal a {
+    font-family: var(--font-mono);
+    font-size: var(--t-mono);
+    letter-spacing: var(--track-mono);
+    text-transform: uppercase;
+    color: var(--coconut);
+  }
+
+  .site-footer__legal p {
+    margin: 0;
+  }
+
+  .site-footer__legal ul {
+    list-style: none;
+    display: flex;
+    gap: var(--s-4);
+  }
+
+  .site-footer__legal a {
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--dur-fast) var(--ease);
+  }
+
+  .site-footer__legal a:hover {
+    border-bottom-color: var(--coconut);
+  }
+
+  /* clay-ink is near-invisible on plum, so the footer swaps the ring to
+     paper — 8.10:1 — rather than losing the focus indicator. */
+  .site-footer :focus-visible {
+    outline-color: var(--paper);
+  }
+
+  /* The placeholder chip needs a light ground against the plum footer. */
+  .site-footer :global(.placeholder) {
+    background: rgba(247, 233, 222, 0.06);
+    border-color: rgba(247, 233, 222, 0.24);
+    color: var(--coconut);
+  }
+</style>

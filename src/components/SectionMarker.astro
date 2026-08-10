@@ -1,0 +1,53 @@
+---
+/**
+ * SectionMarker — the mono marker that lives in the wide left gutter,
+ * e.g. § SERVICES. Brief §3.4, item 2.
+ *
+ * Place it as a direct child of .editorial with class "editorial-aside"
+ * and it sits in columns 1–2 on desktop, above the content below 1280px.
+ * The § is decorative and hidden from assistive tech.
+ */
+interface Props {
+  label: string;
+  /** Renders the marker sticky alongside a long content column. */
+  sticky?: boolean;
+  class?: string;
+}
+
+const { label, sticky = false, class: className } = Astro.props;
+const classes = ['marker', sticky && 'marker--sticky', className]
+  .filter(Boolean)
+  .join(' ');
+---
+
+<p class={classes}>
+  <span class="marker__sign" aria-hidden="true">§</span>{label}
+</p>
+
+<style>
+  .marker {
+    display: flex;
+    align-items: baseline;
+    gap: var(--s-2);
+    margin: 0;
+    max-inline-size: none;
+    font-family: var(--font-mono);
+    font-size: var(--t-mono);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: var(--track-mono);
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .marker__sign {
+    color: var(--clay);
+  }
+
+  @media (min-width: 1280px) {
+    .marker--sticky {
+      position: sticky;
+      top: var(--s-8);
+    }
+  }
+</style>

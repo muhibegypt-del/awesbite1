@@ -1,0 +1,52 @@
+{
+  "brand": {
+    "wordmark": "a textured word",
+    "comment_G01": "G-01. Fixed, lowercase always. OWNER: DEV."
+  },
+
+  "nav": {
+    "comment_G02": "G-02. Fixed. OWNER: DEV.",
+    "items": [
+      { "label": "about", "href": "/about" },
+      { "label": "services", "href": "/services" },
+      { "label": "reflection", "href": "/reflection" },
+      { "label": "work", "href": "/work" }
+    ]
+  },
+
+  "footer": {
+    "comment_G03": "G-03. OWNER: ANEESA. Draft available: 'words are not flat.' Fallback: omit the line, wordmark sits alone.",
+    "tagline": "[ FOOTER TAGLINE WILL GO HERE — one line, 6 words max ]",
+    "legal": "© a textured word",
+    "legalLinks": [
+      { "label": "privacy", "href": "/privacy" },
+      { "label": "terms", "href": "/terms" }
+    ]
+  },
+
+  "social": {
+    "comment_G04": "G-04. OWNER: ANEESA. Fallback: link hidden. Never render a dead icon — a null url renders nothing.",
+    "links": [
+      { "label": "instagram", "url": null, "placeholder": "[ INSTAGRAM URL WILL GO HERE ]" },
+      { "label": "linkedin", "url": null, "placeholder": "[ LINKEDIN URL WILL GO HERE ]" },
+      { "label": "substack", "url": null, "placeholder": "[ SUBSTACK URL WILL GO HERE ]" },
+      { "label": "youtube", "url": null, "placeholder": "[ YOUTUBE URL WILL GO HERE — optional, phase two ]" },
+      { "label": "tiktok", "url": null, "placeholder": "[ TIKTOK URL WILL GO HERE — optional, phase two ]" }
+    ]
+  },
+
+  "contact": {
+    "comment_G05": "G-05. Confirmed. ANEESA to confirm whether a domain address replaces this before launch.",
+    "email": "atexturedword@gmail.com"
+  },
+
+  "meta": {
+    "comment_G06": "G-06. OWNER: ANEESA, one description per page. Fallback: the page's H1 plus the brand name.",
+    "titleSuffix": "a textured word",
+    "descriptionPlaceholder": "[ META DESCRIPTION WILL GO HERE — 150–160 characters, one per page ]",
+    "locale": "en_GB",
+    "ogImage": null
+  },
+
+  "skipLink": "skip to content"
+}
