@@ -11,9 +11,15 @@ interface Props {
   description?: string;
   /** Omit the suffix when the page title is already the brand name. */
   bare?: boolean;
+  /**
+   * Keep the page out of search results. Also the flag to filter on when a
+   * sitemap integration is added — there is none yet, so nothing generates
+   * a sitemap entry for these pages today.
+   */
+  noindex?: boolean;
 }
 
-const { title, description, bare = false } = Astro.props;
+const { title, description, bare = false, noindex = false } = Astro.props;
 
 const pageTitle = bare ? title : `${title} — ${global.meta.titleSuffix}`;
 const pageDescription = description ?? global.meta.descriptionPlaceholder;
@@ -28,7 +34,8 @@ const socialLinks = global.social.links.filter((link) => link.url);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    {!noindex && <link rel="canonical" href={canonical} />}
 
     {/* Only the two faces used above the fold, and only their latin subsets.
         Brief §3.2. Cormorant is display-only and below the preload line;

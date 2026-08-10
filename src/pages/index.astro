@@ -1,0 +1,466 @@
+---
+/**
+ * HOME — hero and service selector only.
+ * Brief §6.1.1 and §6.1.2. Slot map HOME-01 to HOME-05.
+ * Everything below the texture panel is not built yet.
+ */
+import Base from '../layouts/Base.astro';
+import SectionMarker from '../components/SectionMarker.astro';
+import home from '../content/home.json';
+
+const { hero, selector } = home;
+const { sentence, services } = selector;
+
+/**
+ * Slot-map placeholders render as mono chips in --clay-ink, not at the
+ * slot's real type size — a 96px hero placeholder is unreadable and tells
+ * you nothing about the layout. Once Aneesa's copy replaces the bracketed
+ * string, the slot picks up its proper scale with no code change.
+ */
+const isPlaceholder = (value: string) => value.trimStart().startsWith('[');
+---
+
+<Base title="a textured word" bare>
+  <section class="hero">
+    <div class="container editorial hero__grid">
+      <SectionMarker label={hero.marker} class="editorial-aside" />
+
+      <div class="hero__type">
+        <h1 class={isPlaceholder(hero.headline) ? 'placeholder' : 'hero__headline'}>
+          {hero.headline}
+        </h1>
+        <p class={isPlaceholder(hero.subhead) ? 'placeholder' : 'hero__subhead'}>
+          {hero.subhead}
+        </p>
+      </div>
+
+      <div class="editorial-wide selector" data-selector>
+        {/* The sentence mirrors the tab labels, so it is decorative to
+            assistive tech — the tabs and the panel carry the same meaning
+            without the hover churn. Brief §6.1.2. */}
+        <p class="selector__sentence" aria-hidden="true">
+          {/* The blanks are underscored spans, not ▁ characters — U+2581 is
+              outside the latin and latin-ext subsets we ship, so it would
+              render from a fallback face. A border-bottom is also what the
+              brief actually asks for. */}
+          <span class="selector__sentence-desktop">
+            {sentence.lead}{' '}
+            <span class="selector__blank selector__blank--short" data-blank="number"></span>
+            {' '}{sentence.connector}{' '}
+            <span class="selector__blank selector__blank--long" data-blank="completion"></span>
+          </span>
+          <span class="selector__sentence-mobile">{sentence.mobile}</span>
+        </p>
+
+        <div class="selector__tabs" role="tablist" aria-label="Services">
+          {
+            services.map((service, i) => (
+              <button
+                class="selector__tab"
+                type="button"
+                role="tab"
+                id={`tab-${service.id}`}
+                aria-controls={`panel-${service.id}`}
+                aria-selected={i === 0 ? 'true' : 'false'}
+                tabindex={i === 0 ? 0 : -1}
+                data-service={service.id}
+                data-number={service.number}
+                data-completion={service.completion}
+              >
+                [{service.number} // {service.name}]
+              </button>
+            ))
+          }
+        </div>
+
+        <div class="selector__panels">
+          {
+            services.map((service, i) => (
+              <div
+                class="panel"
+                role="tabpanel"
+                id={`panel-${service.id}`}
+                aria-labelledby={`tab-${service.id}`}
+                data-panel={service.id}
+                aria-hidden={i === 0 ? undefined : 'true'}
+                inert={i === 0 ? undefined : true}
+              >
+                {/* HOME-04. No textures shot yet, so the slot-map fallback
+                    ships: a flat --coconut field at the panel's 16:6. */}
+                <div class="panel__texture">
+                  <div class="panel__body">
+                    <p class="panel__caption placeholder">{service.caption}</p>
+                    <a class="panel__link" href={service.link.href}>
+                      {service.link.label} <span aria-hidden="true">→</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* Never 100vh — a sliver of the next section invites the scroll.
+     Brief §6.1.1. */
+  .hero {
+    min-height: 88vh;
+    display: flex;
+    align-items: center;
+    padding-block: var(--s-9);
+  }
+
+  .hero__grid {
+    width: 100%;
+    row-gap: var(--s-8);
+  }
+
+  .hero__type {
+    display: grid;
+    gap: var(--s-5);
+  }
+
+  .hero__headline {
+    font-family: var(--font-display);
+    font-size: var(--t-hero);
+    font-weight: 300;
+    line-height: 0.94;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  /* Subhead sits in columns 3–7, not 3–9. Brief §6.1.1. */
+  .hero__subhead {
+    font-size: var(--t-lead);
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-inline-size: 52ch;
+  }
+
+  @media (min-width: 1280px) {
+    .hero__type > .hero__subhead {
+      max-inline-size: 44ch;
+    }
+  }
+
+  /* ---- Selector ---- */
+
+  .selector {
+    display: grid;
+    gap: var(--s-5);
+  }
+
+  .selector__sentence {
+    margin: 0;
+    max-inline-size: none;
+    font-family: var(--font-mono);
+    font-size: var(--t-mono);
+    line-height: 1.6;
+    letter-spacing: var(--track-mono);
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    /* Holds its box while the blanks fill, so the buttons never shift. */
+    min-block-size: calc(var(--t-mono) * 1.6 * 3);
+  }
+
+  .selector__blank {
+    display: inline-block;
+    color: var(--clay-ink);
+    border-bottom: 1px solid var(--clay);
+    /* The rule sits on the baseline rather than under the descenders. */
+    vertical-align: baseline;
+    transition: border-color var(--dur-fast) var(--ease);
+  }
+
+  .selector__blank--short {
+    min-inline-size: 5ch;
+  }
+
+  .selector__blank--long {
+    min-inline-size: 18ch;
+  }
+
+  /* Filled blanks lose the rule — the words replace it. */
+  .selector__blank.is-filled {
+    border-bottom-color: transparent;
+    min-inline-size: 0;
+  }
+
+  .selector__sentence-mobile {
+    display: none;
+  }
+
+  @media (max-width: 767px) {
+    .selector__sentence-desktop {
+      display: none;
+    }
+
+    .selector__sentence-mobile {
+      display: inline;
+    }
+
+    .selector__sentence {
+      min-block-size: 0;
+    }
+  }
+
+  .selector__tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-3);
+  }
+
+  /* Padding is 14px 20px exactly, from the component spec in brief §6.1.2.
+     Those two values are off the §4.2 spacing scale; the component spec is
+     the more specific instruction, so it wins here and only here. */
+  .selector__tab {
+    padding: 14px 20px;
+    font-family: var(--font-mono);
+    font-size: var(--t-mono-lg);
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: var(--track-mono-lg);
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    background: transparent;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+    transition:
+      color var(--dur-fast) var(--ease),
+      background-color var(--dur-fast) var(--ease),
+      border-color var(--dur-fast) var(--ease);
+  }
+
+  .selector__tab:hover {
+    color: var(--ink);
+    border-color: var(--clay);
+    background: color-mix(in srgb, var(--clay) 6%, transparent);
+  }
+
+  .selector__tab:focus-visible {
+    color: var(--ink);
+    background: color-mix(in srgb, var(--clay) 6%, transparent);
+  }
+
+  .selector__tab[aria-selected='true'] {
+    color: var(--paper);
+    background: var(--clay-ink);
+    border-color: var(--clay-ink);
+  }
+
+  @media (max-width: 767px) {
+    .selector__tabs {
+      flex-direction: column;
+      gap: var(--s-2);
+    }
+
+    .selector__tab {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  /* ---- Texture panel ---- */
+
+  .selector__panels {
+    display: grid;
+  }
+
+  /* All three stack in one cell so they can cross-fade. */
+  .panel {
+    grid-area: 1 / 1;
+    opacity: 0;
+    transition: opacity var(--dur-mid) var(--ease);
+    pointer-events: none;
+  }
+
+  .panel.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .panel__texture {
+    aspect-ratio: 16 / 6;
+    background: var(--coconut);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: flex-end;
+    padding: var(--s-5);
+  }
+
+  .panel__body {
+    display: grid;
+    gap: var(--s-3);
+    justify-items: start;
+  }
+
+  .panel__link {
+    font-family: var(--font-body);
+    font-size: var(--t-small);
+    text-decoration: none;
+    color: var(--clay-ink);
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: var(--s-1);
+    transition:
+      color var(--dur-fast) var(--ease),
+      border-color var(--dur-fast) var(--ease);
+  }
+
+  .panel__link:hover {
+    color: var(--ink);
+    border-bottom-color: var(--clay);
+  }
+
+  @media (max-width: 767px) {
+    .panel__texture {
+      /* 16:6 is unreadable at 350px wide once the caption sits inside it. */
+      aspect-ratio: auto;
+      min-block-size: 220px;
+      padding: var(--s-4);
+    }
+  }
+</style>
+
+<script>
+  const root = document.querySelector<HTMLElement>('[data-selector]');
+
+  if (root) {
+    const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
+    const panels = Array.from(root.querySelectorAll<HTMLElement>('[role="tabpanel"]'));
+    const blankNumber = root.querySelector<HTMLElement>('[data-blank="number"]');
+    const blankCompletion = root.querySelector<HTMLElement>('[data-blank="completion"]');
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const TYPE_MS = 220;
+
+    let typing = 0;
+
+    /** Shows a panel visually. Selection state is handled separately so the
+        pointer can preview a panel without changing which tab is selected. */
+    function show(id: string) {
+      for (const panel of panels) {
+        panel.classList.toggle('is-visible', panel.dataset.panel === id);
+      }
+    }
+
+    function selectedId(): string {
+      const current = tabs.find((t) => t.getAttribute('aria-selected') === 'true');
+      return current?.dataset.service ?? tabs[0].dataset.service!;
+    }
+
+    /** Types the two blanks in over 220ms. No cursor, no blink. */
+    function fill(tab: HTMLButtonElement) {
+      if (!blankNumber || !blankCompletion) return;
+
+      cancelAnimationFrame(typing);
+      const number = tab.dataset.number ?? '';
+      const completion = tab.dataset.completion ?? '';
+      blankNumber.textContent = number;
+      blankNumber.classList.add('is-filled');
+      blankCompletion.classList.add('is-filled');
+
+      if (reduceMotion.matches) {
+        blankCompletion.textContent = completion;
+        return;
+      }
+
+      const start = performance.now();
+      const step = (now: number) => {
+        const progress = Math.min((now - start) / TYPE_MS, 1);
+        blankCompletion.textContent = completion.slice(
+          0,
+          Math.ceil(completion.length * progress)
+        );
+        if (progress < 1) typing = requestAnimationFrame(step);
+      };
+      typing = requestAnimationFrame(step);
+    }
+
+    /** Back to PRESS ▁▁ IF YOU ▁▁. The resting state in brief §6.1.2. */
+    function clear() {
+      if (!blankNumber || !blankCompletion) return;
+      cancelAnimationFrame(typing);
+      blankNumber.textContent = '';
+      blankCompletion.textContent = '';
+      blankNumber.classList.remove('is-filled');
+      blankCompletion.classList.remove('is-filled');
+    }
+
+    function select(id: string, { focus = false, updateHash = true } = {}) {
+      for (const tab of tabs) {
+        const isCurrent = tab.dataset.service === id;
+        tab.setAttribute('aria-selected', String(isCurrent));
+        tab.tabIndex = isCurrent ? 0 : -1;
+        if (isCurrent && focus) tab.focus();
+      }
+
+      for (const panel of panels) {
+        const isCurrent = panel.dataset.panel === id;
+        panel.toggleAttribute('inert', !isCurrent);
+        if (isCurrent) panel.removeAttribute('aria-hidden');
+        else panel.setAttribute('aria-hidden', 'true');
+      }
+
+      show(id);
+
+      if (updateHash) {
+        // replaceState, not a hash assignment: no scroll jump, no history spam.
+        history.replaceState(null, '', `#${id}`);
+      }
+    }
+
+    for (const [i, tab] of tabs.entries()) {
+      tab.addEventListener('click', () => select(tab.dataset.service!));
+
+      // Hover previews the panel and fills the sentence. Brief §6.1.2.
+      tab.addEventListener('pointerenter', () => {
+        fill(tab);
+        show(tab.dataset.service!);
+      });
+      tab.addEventListener('pointerleave', () => {
+        clear();
+        show(selectedId());
+      });
+
+      tab.addEventListener('focus', () => fill(tab));
+      tab.addEventListener('blur', () => {
+        clear();
+        show(selectedId());
+      });
+
+      tab.addEventListener('keydown', (event) => {
+        const keys: Record<string, number> = {
+          ArrowLeft: i - 1,
+          ArrowUp: i - 1,
+          ArrowRight: i + 1,
+          ArrowDown: i + 1,
+          Home: 0,
+          End: tabs.length - 1,
+        };
+        const next = keys[event.key];
+        if (next === undefined) return;
+        event.preventDefault();
+        const wrapped = (next + tabs.length) % tabs.length;
+        select(tabs[wrapped].dataset.service!, { focus: true });
+      });
+    }
+
+    function fromHash() {
+      const id = location.hash.replace('#', '');
+      if (tabs.some((t) => t.dataset.service === id)) {
+        select(id, { updateHash: false });
+      }
+    }
+
+    // Deep links: #teach, #speak, #write.
+    fromHash();
+    window.addEventListener('hashchange', fromHash);
+
+    show(selectedId());
+  }
+</script>

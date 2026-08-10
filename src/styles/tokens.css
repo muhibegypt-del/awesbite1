@@ -26,7 +26,11 @@
 
   /* ---- Typefaces ---- */
   --font-display: "Maison", "Cormorant Garamond", "Instrument Serif", Georgia, serif;
-  --font-body:    "Avenir Next", "Jost", "Futura", -apple-system, "Segoe UI", sans-serif;
+  /* Jost leads. "Avenir Next" is deliberately absent: it is a macOS system
+     face, so listing it first would resolve locally on Mac and the
+     self-hosted Jost would never load. Reinstate it only when a licensed
+     Avenir webfont is self-hosted alongside the others. */
+  --font-body:    "Jost", "Futura", -apple-system, "Segoe UI", sans-serif;
   --font-mono:    "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
   /* ---- Type scale (fluid, 360px → 1440px) ---- */

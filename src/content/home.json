@@ -1,0 +1,51 @@
+{
+  "hero": {
+    "comment": "HOME-01, HOME-02. OWNER: ANEESA. Drafts exist in the slot map; placeholders ship until she confirms.",
+    "marker": "01",
+    "headline": "[ HERO HEADLINE WILL GO HERE — 4 words max, lowercase, ends in a full stop ]",
+    "subhead": "[ HERO SUBHEAD WILL GO HERE — 2 lines, 52 characters per line ]"
+  },
+
+  "selector": {
+    "comment_sentence": "Brief §6.1.2. The resting line is PRESS ▁▁ IF YOU ▁▁; the blanks fill on hover and focus. 'connector' is separated out because the brief's own draft completions read 'PRESS 01 IF SOMEONE…', dropping the YOU — see the note to Aneesa before HOME-03 is written.",
+    "sentence": {
+      "lead": "PRESS",
+      "connector": "IF YOU",
+      "mobile": "PRESS 01 · 02 · 03"
+    },
+
+    "comment_services": "HOME-03 completions, HOME-04 images, HOME-05 captions. All OWNER: ANEESA. Link labels and hrefs are structural — OWNER: DEV, brief §6.1.2.",
+    "services": [
+      {
+        "id": "teach",
+        "number": "01",
+        "name": "TEACH",
+        "completion": "[ TEACH SENTENCE WILL GO HERE — completes \"PRESS 01 IF…\", 7 words max, uppercase ]",
+        "image": null,
+        "imagePlaceholder": "[ TEACH TEXTURE IMAGE WILL GO HERE — 16:6, min 2400px wide ]",
+        "caption": "[ TEACH CAPTION WILL GO HERE — one line, 46 characters ]",
+        "link": { "label": "Explore teaching", "href": "/services/teaching" }
+      },
+      {
+        "id": "speak",
+        "number": "02",
+        "name": "SPEAK",
+        "completion": "[ SPEAK SENTENCE WILL GO HERE — completes \"PRESS 02 IF…\", 7 words max, uppercase ]",
+        "image": null,
+        "imagePlaceholder": "[ SPEAK TEXTURE IMAGE WILL GO HERE — 16:6, min 2400px wide ]",
+        "caption": "[ SPEAK CAPTION WILL GO HERE — one line, 46 characters ]",
+        "link": { "label": "Hear samples", "href": "/services/voice" }
+      },
+      {
+        "id": "write",
+        "number": "03",
+        "name": "WRITE",
+        "completion": "[ WRITE SENTENCE WILL GO HERE — completes \"PRESS 03 IF…\", 7 words max, uppercase ]",
+        "image": null,
+        "imagePlaceholder": "[ WRITE TEXTURE IMAGE WILL GO HERE — 16:6, min 2400px wide ]",
+        "caption": "[ WRITE CAPTION WILL GO HERE — one line, 46 characters ]",
+        "link": { "label": "See the process", "href": "/services/writing" }
+      }
+    ]
+  }
+}

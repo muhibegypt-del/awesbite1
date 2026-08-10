@@ -2,10 +2,8 @@
 /**
  * FOUNDATIONS SPECIMEN — type scale, components and spacing on one page.
  *
- * The leading underscore keeps this out of the route table, so it is not
- * a public page and never reaches the build. To look at it, temporarily
- * rename it to `specimen.astro`, run `npm run dev`, then rename it back —
- * Astro will not serve an underscore-prefixed file in dev either.
+ * Routed at /specimen so it can be pulled up any time, but noindex and
+ * never linked from nav or the footer. Reachable only by typing the URL.
  */
 import Base from '../layouts/Base.astro';
 import Button from '../components/Button.astro';
@@ -13,7 +11,7 @@ import Tag from '../components/Tag.astro';
 import SectionMarker from '../components/SectionMarker.astro';
 ---
 
-<Base title="foundations" description="Internal type and spacing specimen.">
+<Base title="foundations" description="Internal type and spacing specimen." noindex>
   <section class="section">
     <div class="container editorial">
       <SectionMarker label="Type" class="editorial-aside" />
