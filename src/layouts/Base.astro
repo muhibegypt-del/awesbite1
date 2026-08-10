@@ -1,4 +1,5 @@
 ---
+import '../styles/fonts.css';
 import '../styles/tokens.css';
 import '../styles/global.css';
 import global from '../content/global.json';
@@ -28,6 +29,25 @@ const socialLinks = global.social.links.filter((link) => link.url);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="canonical" href={canonical} />
+
+    {/* Only the two faces used above the fold, and only their latin subsets.
+        Brief §3.2. Cormorant is display-only and below the preload line;
+        latin-ext is fetched on demand by the unicode-range match.
+        crossorigin is required — font fetches are always CORS-mode. */}
+    <link
+      rel="preload"
+      href="/fonts/jost-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/jetbrains-mono-latin.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
 
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />

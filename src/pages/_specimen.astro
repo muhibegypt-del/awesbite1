@@ -1,10 +1,11 @@
 ---
 /**
- * FOUNDATIONS SPECIMEN — not the HOME page.
+ * FOUNDATIONS SPECIMEN — type scale, components and spacing on one page.
  *
- * This exists so the layout, type scale and spacing can be checked in a
- * browser before any real page is built. Delete it and replace with the
- * HOME spec (slot map, HOME `/`) when page work starts.
+ * The leading underscore keeps this out of the route table, so it is not
+ * a public page and never reaches the build. To look at it, temporarily
+ * rename it to `specimen.astro`, run `npm run dev`, then rename it back —
+ * Astro will not serve an underscore-prefixed file in dev either.
  */
 import Base from '../layouts/Base.astro';
 import Button from '../components/Button.astro';
