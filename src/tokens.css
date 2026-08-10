@@ -1,0 +1,109 @@
+/* ============================================================
+   a textured word — design tokens
+   Companion to: a-textured-word-master-web-brief.md
+   All values extracted from or derived from the client moodboard.
+   ============================================================ */
+
+:root {
+  /* ---- Surfaces ---- */
+  --paper:      #F7E9DE;   /* Albescent White — page background */
+  --paper-lift: #FCF4EC;   /* cards, inputs, modal body */
+  --coconut:    #D5CBC0;   /* alternating bands, image placeholders */
+
+  /* ---- Type & structure ---- */
+  --ink:        #241C1A;   /* headings + body. Never use #000 */
+  --ink-soft:   #5A4E48;   /* captions, mono labels at rest */
+  --rule:       rgba(36, 28, 26, 0.14);
+
+  /* ---- Accent (Terracotta family) ---- */
+  --clay:       #AF593E;   /* fills, large type ≥24px, marks. NOT small text */
+  --clay-ink:   #8F4530;   /* text-safe: links, small labels, solid buttons */
+
+  /* ---- Quiet support ---- */
+  --olive:      #6D7456;   /* Reflection only, large text only */
+  --plum:       #5B3B4E;   /* footer + one dark pull-quote band */
+  --teal:       #5F8A8B;   /* audio player scrubber ONLY */
+
+  /* ---- Typefaces ---- */
+  --font-display: "Maison", "Cormorant Garamond", "Instrument Serif", Georgia, serif;
+  --font-body:    "Avenir Next", "Jost", "Futura", -apple-system, "Segoe UI", sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* ---- Type scale (fluid, 360px → 1440px) ---- */
+  --t-hero:    clamp(2.75rem, 7vw, 6rem);
+  --t-h1:      clamp(2.25rem, 5vw, 4rem);
+  --t-h2:      clamp(1.75rem, 3.2vw, 2.75rem);
+  --t-h3:      clamp(1.25rem, 2vw, 1.5rem);
+  --t-quote:   clamp(1.5rem, 3vw, 2.25rem);
+  --t-lead:    clamp(1.125rem, 1.6vw, 1.3125rem);
+  --t-body:    1.0625rem;   /* 17px */
+  --t-small:   0.9375rem;   /* 15px */
+  --t-mono:    0.75rem;     /* 12px, tracking 0.14em */
+  --t-mono-lg: 0.875rem;    /* 14px, tracking 0.12em */
+
+  --track-mono:    0.14em;
+  --track-mono-lg: 0.12em;
+  --measure:       68ch;
+  --measure-lead:  58ch;
+
+  /* ---- Spacing (8px base — use no other values) ---- */
+  --s-1: 4px;   --s-2: 8px;   --s-3: 12px;  --s-4: 16px;
+  --s-5: 24px;  --s-6: 32px;  --s-7: 48px;  --s-8: 64px;
+  --s-9: 96px;  --s-10: 128px; --s-11: 160px;
+
+  /* ---- Radii & borders ---- */
+  --radius-none: 0;
+  --radius-sm:   2px;   /* inputs, buttons */
+  --radius-md:   10px;  /* cards, modal, audio player */
+  --border:      1px solid var(--rule);
+  /* No box-shadows anywhere on this site. */
+
+  /* ---- Layout ---- */
+  --container:    1240px;
+  --gutter-x:     88px;
+  --gutter-x-md:  48px;
+  --gutter-x-sm:  20px;
+
+  /* ---- Motion ---- */
+  --ease:      cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast:  180ms;
+  --dur-mid:   320ms;
+  --dur-slow:  640ms;
+}
+
+@media (max-width: 1023px) { :root { --gutter-x: var(--gutter-x-md); } }
+@media (max-width: 767px)  { :root { --gutter-x: var(--gutter-x-sm); } }
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --dur-fast: 120ms; --dur-mid: 120ms; --dur-slow: 120ms; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-property: opacity, color, background-color, border-color !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   Contrast reference (verified, WCAG 2.2)
+   ink / paper .............. 14.06  ✓ body
+   ink / coconut ............ 10.46  ✓ body
+   ink-soft / paper ..........  6.75  ✓ body
+   clay-ink / paper ..........  5.77  ✓ body + links
+   paper / clay-ink ..........  5.77  ✓ button label
+   paper / plum ..............  8.10  ✓ footer
+   clay / paper ..............  4.09  ✗ large text only (≥24px)
+   ink / clay ................  3.44  ✗ large text only
+   olive / paper .............  4.12  ✗ large text only
+   ============================================================ */
+
+/* ---- Grain overlay: paper tooth for the whole site ---- */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.03;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='1'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
