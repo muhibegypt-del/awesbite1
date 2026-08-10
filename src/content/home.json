@@ -7,10 +7,10 @@
   },
 
   "selector": {
-    "comment_sentence": "Brief §6.1.2. The resting line is PRESS ▁▁ IF YOU ▁▁; the blanks fill on hover and focus. 'connector' is separated out because the brief's own draft completions read 'PRESS 01 IF SOMEONE…', dropping the YOU — see the note to Aneesa before HOME-03 is written.",
+    "comment_sentence": "Brief §6.1.2. The resting line is PRESS ▁▁▁▁ IF ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁; the blanks fill on hover and focus. The connector is 'IF', matching how the HOME-03 slot is described ('completes PRESS 01 IF…').",
     "sentence": {
       "lead": "PRESS",
-      "connector": "IF YOU",
+      "connector": "IF",
       "mobile": "PRESS 01 · 02 · 03"
     },
 
@@ -46,6 +46,23 @@
         "caption": "[ WRITE CAPTION WILL GO HERE — one line, 46 characters ]",
         "link": { "label": "See the process", "href": "/services/writing" }
       }
+    ]
+  },
+
+  "about": {
+    "comment": "HOME-06 portrait and HOME-07 copy are OWNER: ANEESA, so placeholders ship. HOME-08 credentials are OWNER: DRAFT EXISTS — all four are confirmed in her notes, so the real wording ships and she confirms it.",
+    "marker": "About",
+    "portrait": null,
+    "portraitPlaceholder": "[ PORTRAIT PHOTOGRAPH WILL GO HERE — 4:5 portrait, min 1600×2000px ]",
+    "heading": "[ ABOUT HEADING WILL GO HERE — 8 words max ]",
+    "paragraphs": "[ ABOUT PARAGRAPHS WILL GO HERE — 2 paragraphs, 68 characters per line, 60 words total ]",
+    "link": { "label": "More about Aneesa", "href": "/about" },
+
+    "credentials": [
+      { "qualification": "1st Class BA (Hons)", "body": "English & American Literature, Film" },
+      { "qualification": "Trinity CertTESOL", "body": "Trinity College London" },
+      { "qualification": "PGCE & QTS", "body": "Qualified Teacher Status" },
+      { "qualification": "British Council", "body": "Former teacher, Egypt & KSA" }
     ]
   }
 }

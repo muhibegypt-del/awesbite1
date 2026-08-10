@@ -6,9 +6,10 @@
  */
 import Base from '../layouts/Base.astro';
 import SectionMarker from '../components/SectionMarker.astro';
+import Button from '../components/Button.astro';
 import home from '../content/home.json';
 
-const { hero, selector } = home;
+const { hero, selector, about } = home;
 const { sentence, services } = selector;
 
 /**
@@ -102,6 +103,56 @@ const isPlaceholder = (value: string) => value.trimStart().startsWith('[');
       </div>
     </div>
   </section>
+
+  <section class="section about">
+    <div class="container editorial about__grid">
+      {/* Rendered twice and swapped with display:none rather than moved,
+          so only one is ever in the accessibility tree. Gutter above
+          1280px, inline above the heading below it. */}
+      <SectionMarker label={about.marker} class="editorial-aside about__marker-gutter" />
+
+      <div class="about__content">
+        {/* HOME-06. No portrait shot yet, so the frame ships empty: a 4:5
+            --coconut field with the 1px inset rule 8px in from the edge. */}
+        <div class="about__media">
+          <div class="portrait"></div>
+        </div>
+
+        <div class="about__text">
+          <SectionMarker label={about.marker} class="about__marker-inline" />
+
+          {
+            isPlaceholder(about.heading) ? (
+              <p class="placeholder">{about.heading}</p>
+            ) : (
+              <h2>{about.heading}</h2>
+            )
+          }
+
+          <p class={isPlaceholder(about.paragraphs) ? 'placeholder' : 't-body'}>
+            {about.paragraphs}
+          </p>
+
+          {/* HOME-08. OWNER: DRAFT EXISTS — all four are confirmed in her
+              notes, so the real wording ships and she confirms it. */}
+          <ul class="credentials" role="list">
+            {
+              about.credentials.map((credential) => (
+                <li class="credentials__item">
+                  <span class="credentials__qualification">{credential.qualification}</span>
+                  <span class="credentials__body">{credential.body}</span>
+                </li>
+              ))
+            }
+          </ul>
+
+          <Button variant="quiet" href={about.link.href}>
+            {about.link.label}&nbsp;<span aria-hidden="true">→</span>
+          </Button>
+        </div>
+      </div>
+    </div>
+  </section>
 </Base>
 
 <style>
@@ -177,11 +228,11 @@ const isPlaceholder = (value: string) => value.trimStart().startsWith('[');
   }
 
   .selector__blank--short {
-    min-inline-size: 5ch;
+    min-inline-size: 4ch;
   }
 
   .selector__blank--long {
-    min-inline-size: 18ch;
+    min-inline-size: 16ch;
   }
 
   /* Filled blanks lose the rule — the words replace it. */
@@ -323,6 +374,133 @@ const isPlaceholder = (value: string) => value.trimStart().startsWith('[');
       min-block-size: 220px;
       padding: var(--s-4);
     }
+  }
+
+  /* ---- About strip ---- */
+
+  /* The 5/7 split is of the content area, not of the whole 12-column grid,
+     so § ABOUT lines up with § 01 in the hero rather than sitting 12px off. */
+  .about__content {
+    display: grid;
+    gap: var(--s-7);
+  }
+
+  @media (min-width: 768px) {
+    .about__content {
+      grid-template-columns: 5fr 7fr;
+      gap: var(--s-8);
+      align-items: start;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .about__grid > .about__content {
+      grid-column: 3 / -1;
+    }
+  }
+
+  /* :global because these classes land on SectionMarker's root element,
+     which carries its own scope id and not this page's. Anchored to
+     .about__grid so the rule stays contained to this section. */
+  .about__grid :global(.about__marker-gutter) {
+    display: none;
+  }
+
+  @media (min-width: 1280px) {
+    .about__grid :global(.about__marker-gutter) {
+      display: flex;
+    }
+
+    .about__grid :global(.about__marker-inline) {
+      display: none;
+    }
+  }
+
+  .about__text {
+    display: grid;
+    gap: var(--s-5);
+    justify-items: start;
+  }
+
+  /* Portrait frame: 4:5, hard corners, with the 1px rule set 8px inside the
+     image edge for a framed-print effect. Brief §6.1.3. */
+  .portrait {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    background: var(--coconut);
+    border-radius: var(--radius-none);
+  }
+
+  .portrait::after {
+    content: '';
+    position: absolute;
+    inset: var(--s-2);
+    border: var(--border);
+    pointer-events: none;
+  }
+
+  /* ---- Credential row ---- */
+
+  .credentials {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--s-5) 0;
+    width: 100%;
+    margin-block: var(--s-2);
+  }
+
+  @media (min-width: 1024px) {
+    .credentials {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .credentials__item {
+    display: grid;
+    gap: var(--s-1);
+    padding-inline: var(--s-4);
+  }
+
+  /* Hairline verticals between items — 2×2 here, so only the second of each
+     pair carries one, and the first of each pair loses its left padding so
+     both rows start on the same edge. No icons, no badges. */
+  .credentials__item:nth-child(odd) {
+    padding-inline-start: 0;
+  }
+
+  .credentials__item:nth-child(even) {
+    border-inline-start: var(--border);
+  }
+
+  @media (min-width: 1024px) {
+    /* One row of four: every item but the first carries a vertical. */
+    .credentials__item {
+      padding-inline-start: var(--s-4);
+      border-inline-start: var(--border);
+    }
+
+    .credentials__item:first-child {
+      padding-inline-start: 0;
+      border-inline-start: none;
+    }
+  }
+
+  .credentials__qualification {
+    font-family: var(--font-body);
+    font-size: var(--t-small);
+    font-weight: 500;
+    line-height: 1.35;
+    color: var(--ink);
+  }
+
+  .credentials__body {
+    font-family: var(--font-mono);
+    font-size: var(--t-mono);
+    line-height: 1.4;
+    letter-spacing: var(--track-mono);
+    text-transform: uppercase;
+    color: var(--ink-soft);
   }
 </style>
 
