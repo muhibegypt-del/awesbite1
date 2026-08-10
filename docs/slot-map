@@ -1,0 +1,522 @@
+# a textured word — Content Slot Map
+
+**Companion to:** `a-textured-word-master-web-brief.md`
+**Purpose:** every slot on the site, in build order, with the placeholder text that goes into the staging build until real content replaces it.
+
+---
+
+## How this document works
+
+Each slot has an ID, a literal placeholder, a limit, an owner and a fallback.
+
+- **OWNER: ANEESA** — copy or asset she supplies. Nothing gets written for her.
+- **OWNER: DEV** — structural, already decided in the brief, no input needed.
+- **OWNER: DRAFT EXISTS** — the facts are already in her discovery notes. She confirms or corrects the wording. She does not start from blank.
+
+**The placeholder goes into the build exactly as written**, in mono, `--clay-ink` on `--paper-lift`, so that a walkthrough of the staging site is also the content checklist. Nothing ships with lorem ipsum.
+
+**Limits are not suggestions.** They come from the type scale in §3.3 of the brief. Copy over the limit breaks the layout and creates a revision round.
+
+**Fallback** is what happens if the slot is empty at the agreed content deadline. Fallbacks are how the site launches on time. Agree the deadline in writing before build starts.
+
+---
+
+## GLOBAL
+
+### G-01 — Logo wordmark
+```
+a textured word
+```
+Fixed. Lowercase always. **OWNER: DEV.** No input needed.
+
+### G-02 — Header navigation labels
+```
+about · services · reflection · work
+```
+Fixed. **OWNER: DEV.**
+
+### G-03 — Footer tagline
+```
+[ FOOTER TAGLINE WILL GO HERE — one line, 6 words max ]
+```
+Sits under the wordmark in the footer. **OWNER: ANEESA.**
+*Draft available:* `words are not flat.`
+**Fallback:** omit the line, wordmark sits alone.
+
+### G-04 — Social links
+```
+[ INSTAGRAM URL WILL GO HERE ]
+[ LINKEDIN URL WILL GO HERE ]
+[ SUBSTACK URL WILL GO HERE ]
+[ YOUTUBE URL WILL GO HERE — optional, phase two ]
+[ TIKTOK URL WILL GO HERE — optional, phase two ]
+```
+**OWNER: ANEESA.** **Fallback:** link hidden. Never render a dead icon.
+
+### G-05 — Contact email
+```
+atexturedword@gmail.com
+```
+Confirmed. **OWNER: ANEESA** to confirm whether a domain address replaces this before launch. **Fallback:** Gmail address ships.
+
+### G-06 — Page titles and meta descriptions (10 pages)
+```
+[ META DESCRIPTION WILL GO HERE — 150–160 characters, one per page ]
+```
+**OWNER: ANEESA.** **Fallback:** the page's H1 plus the brand name. Weak but not broken.
+
+### G-07 — Legal pages
+```
+[ PRIVACY POLICY TEXT WILL GO HERE ]
+[ TERMS OF SERVICE TEXT WILL GO HERE ]
+```
+**OWNER: ANEESA.** Generated from a standard tool is fine; this is not the developer's liability to draft. **Fallback: none — this blocks launch.** A site with a contact form and no privacy policy should not go live.
+
+---
+
+## HOME `/`
+
+### HOME-01 — Hero headline
+```
+[ HERO HEADLINE WILL GO HERE — 4 words max, lowercase, ends in a full stop ]
+```
+Renders at `--t-hero`. Anything over 4 words wraps to three lines and breaks the fold. **OWNER: ANEESA.**
+*Draft available:* `words are not flat.`
+**Fallback:** the draft ships.
+
+### HOME-02 — Hero subhead
+```
+[ HERO SUBHEAD WILL GO HERE — 2 lines, 52 characters per line ]
+```
+**OWNER: ANEESA.**
+*Draft available:* `they have grain, weight, and a way of changing the person who receives them. I teach them, voice them, and reshape them.`
+**Fallback:** the draft ships.
+
+### HOME-03 — Service selector sentence completions
+```
+[ TEACH SENTENCE WILL GO HERE — completes "PRESS 01 IF…", 7 words max, uppercase ]
+[ SPEAK SENTENCE WILL GO HERE — completes "PRESS 02 IF…", 7 words max, uppercase ]
+[ WRITE SENTENCE WILL GO HERE — completes "PRESS 03 IF…", 7 words max, uppercase ]
+```
+**OWNER: ANEESA.** These are the site's signature interaction, so they are worth her time.
+**Fallback:** drafts in §6.1.2 of the brief ship.
+
+### HOME-04 — Texture panel images ×3
+```
+[ TEACH TEXTURE IMAGE WILL GO HERE — 16:6, min 2400px wide ]
+[ SPEAK TEXTURE IMAGE WILL GO HERE — 16:6, min 2400px wide ]
+[ WRITE TEXTURE IMAGE WILL GO HERE — 16:6, min 2400px wide ]
+```
+Woven paper / velvet / folded paper. All three shot under the same light or they will not sit together. **OWNER: ANEESA** to supply or commission.
+**Fallback:** panel renders as a flat `--coconut` field with the caption line only. The site works; it loses its signature.
+
+### HOME-05 — Texture panel captions ×3
+```
+[ TEACH CAPTION WILL GO HERE — one line, 46 characters ]
+[ SPEAK CAPTION WILL GO HERE — one line, 46 characters ]
+[ WRITE CAPTION WILL GO HERE — one line, 46 characters ]
+```
+**OWNER: ANEESA.** *Drafts available in brief §6.1.2.* **Fallback:** drafts ship.
+
+### HOME-06 — About strip portrait
+```
+[ PORTRAIT PHOTOGRAPH WILL GO HERE — 4:5 portrait, min 1600×2000px ]
+```
+**OWNER: ANEESA.** Shoot booked.
+**Fallback:** strip collapses to a single text column, full width. Acceptable. Not ideal.
+
+### HOME-07 — About strip heading and copy
+```
+[ ABOUT HEADING WILL GO HERE — 8 words max ]
+[ ABOUT PARAGRAPHS WILL GO HERE — 2 paragraphs, 68 characters per line, 60 words total ]
+```
+**OWNER: ANEESA.** *Draft heading available:* `twelve years, three countries, one preoccupation.`
+**Fallback:** heading draft plus a single paragraph built from the credential facts.
+
+### HOME-08 — Credential row
+```
+1st Class BA (Hons) · ENGLISH & AMERICAN LITERATURE, FILM
+Trinity CertTESOL · TRINITY COLLEGE LONDON
+PGCE & QTS · QUALIFIED TEACHER STATUS
+British Council · FORMER TEACHER, EGYPT & KSA
+```
+**OWNER: DRAFT EXISTS.** All four are confirmed in her notes. She confirms wording only. **Fallback:** ships as written above.
+
+### HOME-09 — Services grid, three columns
+```
+[ TEACHING ONE-LINER WILL GO HERE — 12 words max ]
+[ TEACHING BULLETS WILL GO HERE — 4 items, 4 words each ]
+[ TEACHING PRICE LINE WILL GO HERE — e.g. "FROM £45 / HOUR" ]
+
+[ VOICE ONE-LINER WILL GO HERE — 12 words max ]
+[ VOICE BULLETS WILL GO HERE — 4 items, 4 words each ]
+[ VOICE PRICE LINE WILL GO HERE ]
+
+[ WRITING ONE-LINER WILL GO HERE — 12 words max ]
+[ WRITING BULLETS WILL GO HERE — 4 items, 4 words each ]
+[ WRITING PRICE LINE WILL GO HERE ]
+```
+Bullets have drafts in brief §6.1.4. **OWNER: ANEESA** for one-liners and prices.
+**Fallback:** bullets ship from the draft; price line renders `PRICING ON ENQUIRY`.
+
+### HOME-10 — Reflection pull-quote
+```
+[ REFLECTION QUOTE WILL GO HERE — 3 lines max, 46 characters per line ]
+```
+**OWNER: DRAFT EXISTS.** Her own paragraph about slowing down, trimmed. She approves the trim.
+**Fallback:** the trimmed version in brief §6.1.5 ships.
+
+### HOME-11 — Instagram grid
+```
+[ 4 INSTAGRAM POSTS WILL GO HERE — square, 1080×1080 ]
+```
+**OWNER: ANEESA** — account must have at least 4 published posts by launch.
+**Fallback:** entire Reflection teaser section is hidden. An empty grid is worse than no grid.
+
+### HOME-12 — Worked-with row
+```
+British Council · [ FURTHER ORGANISATIONS WILL GO HERE — text only, permission required ]
+```
+**OWNER: ANEESA.** Text wordmarks only. No logo images without written permission from each organisation.
+**Fallback:** British Council alone, centred.
+
+### HOME-13 — Testimonials
+```
+[ TESTIMONIAL 1 WILL GO HERE — 240 characters max + attribution ]
+[ TESTIMONIAL 2 WILL GO HERE — 240 characters max + attribution ]
+[ SCANNED REVIEW-BOOK SPREADS WILL GO HERE — 6–8 photographs, optional ]
+```
+**OWNER: ANEESA.** Her notes mention a physical book of student reviews — photographed spreads work here and are more persuasive than typeset quotes. Any review from a student under 18 needs written parental permission before it goes on the site.
+**Fallback:** one quote renders centred. Zero quotes, the whole band is hidden.
+
+### HOME-14 — Availability callout
+```
+[ AVAILABILITY LIST WILL GO HERE — see brief §6.7 for the full list from her notes ]
+```
+**OWNER: DRAFT EXISTS.** She confirms which items she actually wants advertised.
+**Fallback:** the short version in brief §6.1.7 ships.
+
+### HOME-15 — Contact section
+```
+[ CONTACT HEADING WILL GO HERE — 8 words max ]
+[ CONTACT PARAGRAPH WILL GO HERE — 25 words max ]
+[ RESPONSE TIME LINE WILL GO HERE — e.g. "Replies within two working days" ]
+```
+**OWNER: ANEESA.** **Fallback:** drafts in brief §6.1.8 ship.
+
+---
+
+## ABOUT `/about`
+
+### AB-01 — Name treatment
+```
+ANEESA
+[ DESCRIPTOR LINE WILL GO HERE — 3 roles, separated by · ]
+```
+**OWNER: DRAFT EXISTS.** *Draft:* `english teacher · voice artist · content strategist`
+**Fallback:** draft ships. Surname appears nowhere, including image filenames and metadata.
+
+### AB-02 — Portrait and secondary image
+```
+[ PORTRAIT PHOTOGRAPH WILL GO HERE — 4:5 ]
+[ SECONDARY IMAGE WILL GO HERE — 3:4, teaching or recording context ]
+```
+**OWNER: ANEESA.** **Fallback:** page runs single-column with the credential row expanded.
+
+### AB-03 — Byline panel
+```
+[ BYLINE COPY WILL GO HERE — 3 lines max, 24px minimum, how the three skills are one skill ]
+```
+She specifically asked for this in her notes. **OWNER: ANEESA.**
+*Draft available in brief §6.2.3.* **Fallback:** draft ships.
+
+### AB-04 — Results block
+```
+[ RESULT 1 WILL GO HERE — figure + label, e.g. "IELTS 5.5 → 7.5 in 14 weeks" ]
+[ RESULT 2 WILL GO HERE ]
+[ RESULT 3 WILL GO HERE ]
+```
+Anonymised. Sits **above** the timeline — her own note says lead with results, not with the CV. **OWNER: ANEESA.**
+**Fallback:** block is removed entirely. Never fill it with adjectives.
+
+### AB-05 — Timeline
+```
+2014–17 · [ ENTRY WILL GO HERE — 25 words max ]
+2017–20 · [ ENTRY WILL GO HERE — 25 words max ]
+2021–26 · [ ENTRY WILL GO HERE — 25 words max ]
+alongside · [ ENTRY WILL GO HERE — acting, spoken word, care-home narration ]
+```
+**OWNER: DRAFT EXISTS.** All four drafted from her notes in brief §6.2.4. She confirms or corrects.
+**Fallback:** drafts ship.
+
+### AB-06 — Pull-quote band
+```
+[ PULL-QUOTE WILL GO HERE — 3 lines max ]
+```
+**OWNER: ANEESA.** **Fallback:** band is removed. One pull-quote per page maximum, so losing it costs nothing structurally.
+
+---
+
+## SERVICES OVERVIEW `/services`
+
+### SV-01 — Page intro
+```
+[ SERVICES INTRO WILL GO HERE — 40 words max ]
+```
+**OWNER: ANEESA.** **Fallback:** page opens directly on the first service row.
+
+### SV-02 — Pricing tables ×3 services
+```
+[ TIER 1 NAME WILL GO HERE ]  [ TIER 2 NAME ]  [ TIER 3 NAME ]
+[ PRICE WILL GO HERE ]        [ PRICE ]        [ PRICE ]
+[ BILLING UNIT WILL GO HERE — per hour / per 10 hours / per month ]
+[ 3–4 FEATURES WILL GO HERE — 5 words each ]
+[ CTA LABEL WILL GO HERE ]
+```
+**OWNER: ANEESA.** Nine prices in total. This is the largest single content dependency on the site.
+**Fallback:** the tier grid is replaced by a single line reading `PRICING ON ENQUIRY` plus the enquiry CTA. Structure survives; the page just does less.
+
+### SV-03 — FAQ
+```
+[ QUESTION WILL GO HERE ] / [ ANSWER WILL GO HERE — 60 words max ]  ×8
+```
+Suggested questions in brief §6.3. **OWNER: ANEESA.**
+**Fallback:** accordion hidden if fewer than 4 answered pairs exist.
+
+---
+
+## TEACHING `/services/teaching`
+
+### TE-01 — Service promise
+```
+[ TEACHING PROMISE WILL GO HERE — one line, 10 words max ]
+```
+**OWNER: ANEESA.**
+
+### TE-02 — Who it's for
+```
+[ WHO THIS IS FOR WILL GO HERE — 3 bullets ]
+[ WHO THIS ISN'T FOR WILL GO HERE — 2 bullets ]
+```
+She flagged she couldn't answer the ideal-client question. The second box is easier than the first and does the same filtering work. **OWNER: ANEESA.**
+**Fallback:** both boxes removed.
+
+### TE-03 — Three tracks
+```
+GENERAL ESL · [ DESCRIPTION WILL GO HERE — 30 words ] · [ OUTCOME LINE WILL GO HERE ]
+SCHOOL CURRICULUM · [ DESCRIPTION ] · [ OUTCOME LINE ]
+IELTS PREPARATION · [ DESCRIPTION ] · [ OUTCOME LINE ]
+```
+**OWNER: DRAFT EXISTS** — coverage is in brief §6.4; she supplies outcome lines.
+**Copy check:** IELTS qualification is in progress. Copy describes preparation experience, not a held examiner qualification, until she confirms otherwise in writing.
+**Fallback:** drafts ship with the IELTS track marked as preparation only.
+
+### TE-04 — How it works
+```
+01 [ STEP WILL GO HERE ]  02 [ STEP ]  03 [ STEP ]  04 [ STEP ]
+```
+**OWNER: DRAFT EXISTS** — four steps drafted in brief §6.4. **Fallback:** drafts ship.
+
+### TE-05 — Exam boards taught
+```
+[ EXAM BOARDS WILL GO HERE — AQA, Edexcel, OCR, CIE etc., mono tags ]
+```
+**OWNER: ANEESA.** Parents search by board. **Fallback:** tag row hidden.
+
+---
+
+## VOICE `/services/voice`
+
+### VO-01 — Service promise
+```
+[ VOICE PROMISE WILL GO HERE — 2 lines, 10 words each ]
+```
+*Draft:* `warm, unhurried British RP. a voice people stay listening to.` **OWNER: ANEESA.**
+
+### VO-02 — Showreel and samples
+```
+[ COMMERCIAL SHOWREEL WILL GO HERE — MP3, 128kbps mono, −16 LUFS ]
+[ AUDIOBOOK SAMPLE WILL GO HERE ]
+[ E-LEARNING SAMPLE WILL GO HERE ]
+[ EXPLAINER SAMPLE WILL GO HERE ]
+[ IVR SAMPLE WILL GO HERE ]
+```
+Each needs: title, category, duration as `MM:SS`, and a one-line context note under 90 characters.
+**OWNER: ANEESA** — files confirmed as coming.
+**Fallback:** the page cannot ship without at least one sample. If none arrive, `/services/voice` is replaced by an enquiry-only page.
+
+### VO-03 — Technical specifications
+```
+FORMAT      WAV 48kHz 24-bit · MP3 320kbps on request
+BOOTH       [ ROOM / TREATMENT WILL GO HERE ]
+MICROPHONE  [ MIC MODEL WILL GO HERE ]
+INTERFACE   [ INTERFACE MODEL WILL GO HERE ]
+DELIVERY    [ TURNAROUND IN WORKING DAYS WILL GO HERE ]
+DIRECTION   Source-Connect / Zoom / phone patch
+REVISIONS   [ REVISION POLICY WILL GO HERE ]
+USAGE       Quoted per project: usage, territory, term
+```
+**OWNER: ANEESA.** She knows all of these without looking them up.
+**Fallback:** the whole block is hidden. Never ship invented equipment names.
+
+### VO-04 — Background paragraph
+```
+[ ACTING AND VOICE BACKGROUND WILL GO HERE — 50 words max ]
+```
+**OWNER: DRAFT EXISTS** — Television Workshop, Derby Academy Acting, Beatfreeks spoken word, care-home narration, university plays in England and Canada, samples coached by Gary Terzza. RADA voice course described as intent, not achievement.
+**Fallback:** draft ships.
+
+### VO-05 — Tone tags
+```
+WARM · RP · SMOOTH · VELVETY · RESONANT · UNHURRIED
+```
+**OWNER: DRAFT EXISTS**, taken from her own wording. **Fallback:** ships as written.
+
+---
+
+## WRITING `/services/writing`
+
+### WR-01 — What it is
+```
+[ SERVICE DESCRIPTION WILL GO HERE — 60 words max ]
+```
+**OWNER: ANEESA** — depends on her course finishing. **Fallback:** page is held back to phase two and removed from navigation. This is cleaner than a vague page.
+
+### WR-02 — Transformation diagram labels
+```
+ONE LONG THING → [ INPUTS WILL GO HERE ]
+STRUCTURED INTO → [ OUTPUTS WILL GO HERE — quantities matter: "8 carousels, 2 essays" ]
+PLACED → [ PLATFORMS WILL GO HERE ]
+```
+**OWNER: ANEESA.** **Fallback:** drafts in brief §6.6 ship.
+
+### WR-03 — Process
+```
+[ PROCESS STEPS WILL GO HERE — 4 steps, discovery call first ]
+```
+**OWNER: ANEESA.** **Fallback:** section removed.
+
+### WR-04 — Capacity and founding rate
+```
+Currently taking [ NUMBER ] clients.
+FOUNDING CLIENT RATE · [ NUMBER ] PLACES · until [ DATE ]
+```
+**OWNER: ANEESA.** **Fallback:** capacity line ships as "one to two clients at a time"; founding-rate line removed.
+
+---
+
+## REFLECTION `/reflection`
+
+### RE-01 — Manifesto
+```
+[ MANIFESTO WILL GO HERE — 80 words max, 46-character measure ]
+```
+**OWNER: DRAFT EXISTS** — her own paragraph about slowing down and giving skimmed passages room. Best writing she has produced; it is the page's hero.
+**Fallback:** draft ships.
+
+### RE-02 — Literacy framing
+```
+[ LITERACY PARAGRAPH WILL GO HERE — 40 words max ]
+```
+Her notes describe wanting to contribute to the literacy conversation. This is the paragraph a festival programmer or education brand responds to. **OWNER: ANEESA.**
+**Fallback:** section removed.
+
+### RE-03 — Instagram grid
+```
+[ 9 INSTAGRAM POSTS WILL GO HERE ]
+```
+**OWNER: ANEESA / API.** **Fallback:** manually curated 9-image CMS grid. If fewer than 9 posts exist, grid renders 6 or 3 — never a partial row.
+
+### RE-04 — Substack posts
+```
+[ 3 LATEST SUBSTACK POSTS WILL GO HERE — title, date, 2-line excerpt, link ]
+[ SUBSTACK SUBSCRIBE EMBED WILL GO HERE ]
+```
+**OWNER: ANEESA.** **Fallback:** a single text link to the Substack profile.
+
+### RE-05 — Content pillars
+```
+WORDS OF THE WEEK · CLOSE READING · ADAPTATIONS · LITERARY DEVICES · NARRATED EXTRACTS · THREE TAKEAWAYS
+```
+**OWNER: DRAFT EXISTS**, from her content plan. **Fallback:** ships as written.
+
+### RE-06 — Availability panel, full list
+```
+[ FULL AVAILABILITY LIST WILL GO HERE ]
+```
+From her notes: panel moderation · literary festival hosting · author interviews · publisher and bookshop events · press junkets for film adaptations · press junkets for theatre adaptations · audiobook narration · brand partnerships with publishers, stationery and education companies · retainer ambassador partnerships · judging and prize work · literary consulting · literary travel partnerships (festivals, bookshops, museums, historic literary houses).
+**OWNER: ANEESA** — she confirms which to advertise. **Fallback:** the full list above ships.
+
+---
+
+## WORK `/work`
+
+### WK-01 — Filter chips
+```
+ALL · VOICE · TEACHING · WRITING
+```
+**OWNER: DEV.** Chips for empty categories are hidden, not disabled.
+
+### WK-02 — Work items
+```
+[ WORK ITEM WILL GO HERE — title, type, 30-word summary, media ]
+[ CASE STUDY WILL GO HERE — source material, what was produced, outcome ]
+```
+**OWNER: ANEESA.** **Fallback:** if only voice samples exist, `/work` is merged into `/services/voice` and removed from navigation.
+
+---
+
+## CONTACT `/contact`
+
+### CT-01 — Intro
+```
+[ CONTACT INTRO WILL GO HERE — 20 words max ]
+```
+*Draft:* `Tell me what you need and by when. I reply within two working days.` **OWNER: ANEESA.**
+
+### CT-02 — Form labels and options
+```
+Enquiring about: Teaching · Voiceover · Content repurposing · Hosting or partnership · Something else
+```
+**OWNER: DEV.** Fixed, matching the service structure.
+
+### CT-03 — Calendly
+```
+[ CALENDLY EVENT LINK WILL GO HERE — 20-minute call ]
+```
+**OWNER: ANEESA** — her account, her event, her availability rules.
+**Fallback:** the Book a call buttons become `mailto:` links. Modal is not built.
+
+### CT-04 — Autoresponder
+```
+[ AUTORESPONDER TEXT WILL GO HERE — plain text, 40 words max ]
+```
+**OWNER: ANEESA.** **Fallback:** no autoresponder. The form still routes to her inbox.
+
+---
+
+## ASSET SUMMARY — what she sends, in one list
+
+| # | Asset | Format | Blocks |
+|---|---|---|---|
+| 1 | Portrait photograph | 4:5, min 1600×2000 | HOME-06, AB-02 |
+| 2 | Secondary contextual image | 3:4 | AB-02 |
+| 3 | Three texture images | 16:6, min 2400px wide | HOME-04 — the signature element |
+| 4 | Voice samples ×5 | MP3 128kbps mono, −16 LUFS | VO-02 — blocks the voice page |
+| 5 | Sample durations and context notes | Text | VO-02 |
+| 6 | Studio equipment details | Text, 6 fields | VO-03 |
+| 7 | Testimonials | Text + permission | HOME-13 |
+| 8 | Review-book photographs | JPG, straight-on, even light | HOME-13 |
+| 9 | Nine prices | Text | SV-02 |
+| 10 | Social URLs | Text | G-04 |
+| 11 | Calendly event link | URL | CT-03 |
+| 12 | Privacy policy and terms | Text | G-07 — blocks launch |
+| 13 | Font licence confirmation, or approval of the free stand-ins | Written | Build start |
+
+---
+
+## Scope note
+
+This map covers the full site as specified in the master brief. Copywriting is not included in the build — every slot marked **OWNER: ANEESA** is content she supplies. Slots marked **DRAFT EXISTS** have wording already drafted from her own discovery notes; she confirms or corrects rather than writing from blank.
+
+Any slot still empty at the agreed content deadline ships as its stated fallback. Fallbacks are designed so that no missing content leaves a visible hole.
