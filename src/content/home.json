@@ -64,5 +64,42 @@
       { "qualification": "PGCE & QTS", "body": "Qualified Teacher Status" },
       { "qualification": "British Council", "body": "Former teacher, Egypt & KSA" }
     ]
+  },
+
+  "services": {
+    "comment": "HOME-09. One-liners and price lines are OWNER: ANEESA, so placeholders ship. Bullets are OWNER: DRAFT EXISTS — the §6.1.4 wording ships and she confirms it. Titles, tags and CTA labels are structural, OWNER: DEV.",
+    "marker": "Services",
+    "items": [
+      {
+        "id": "teach",
+        "number": "01",
+        "name": "TEACH",
+        "title": "Academic English & tuition",
+        "oneLiner": "[ TEACHING ONE-LINER WILL GO HERE — 12 words max ]",
+        "bullets": ["Primary reading fluency", "KS3 · GCSE", "A-Level", "IELTS 6.5–9.0"],
+        "price": "[ TEACHING PRICE LINE WILL GO HERE — e.g. \"FROM £45 / HOUR\" ]",
+        "link": { "label": "Book a trial", "href": "/services/teaching" }
+      },
+      {
+        "id": "speak",
+        "number": "02",
+        "name": "SPEAK",
+        "title": "Voiceover & audio narration",
+        "oneLiner": "[ VOICE ONE-LINER WILL GO HERE — 12 words max ]",
+        "bullets": ["Audiobooks", "E-learning", "Explainers", "IVR"],
+        "price": "[ VOICE PRICE LINE WILL GO HERE ]",
+        "link": { "label": "Hear samples", "href": "/services/voice" }
+      },
+      {
+        "id": "write",
+        "number": "03",
+        "name": "WRITE",
+        "title": "Strategic content repurposing",
+        "oneLiner": "[ WRITING ONE-LINER WILL GO HERE — 12 words max ]",
+        "bullets": ["Carousels", "Newsletters", "Articles", "Repurposing systems"],
+        "price": "[ WRITING PRICE LINE WILL GO HERE ]",
+        "link": { "label": "Start with a call", "href": "/services/writing" }
+      }
+    ]
   }
 }
