@@ -1,0 +1,34 @@
+/* ============================================================
+   Accent variant C — SAGE
+
+   Sampled from the client's photoshoot outfit.
+
+   Contrast on --paper #F7E9DE, computed not estimated:
+     --clay     #6D7454   4.13  ✗ fails normal text — large only (≥24px)
+     --clay-ink #666C4F   4.62  ✓ links, small labels, button labels
+     --paper on --clay-ink 4.62 ✓ button label
+     --ink   on --clay    3.40  ✗ large text only
+
+   --clay-ink was derived by holding the sampled hue and saturation and
+   lowering HSL lightness in 0.05% steps until the ratio cleared the
+   threshold. Two candidates:
+
+     #676E50   4.5031   clears 4.5 by 0.003
+     #666C4F   4.6209   clears 4.5 by 0.12    ← shipped
+
+   The first is a technical pass but sits on the boundary, where any later
+   nudge to --paper would silently drop it below. The second is one step
+   darker, visually indistinguishable, and holds a real margin.
+
+   Note this accent is effectively the same colour as --olive #6D7456
+   (ratio between them: 1.00). If sage is chosen, --olive stops being a
+   distinct "quiet support" token and the Reflection section will need a
+   different treatment to stay distinguishable from the accent.
+
+   To adopt site-wide: set data-variant="c" on <html> in Base.astro.
+   ============================================================ */
+
+[data-variant='c'] {
+  --clay: #6d7454;
+  --clay-ink: #666c4f;
+}

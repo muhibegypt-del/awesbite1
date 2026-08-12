@@ -1,0 +1,19 @@
+/* ============================================================
+   Accent variant A — TERRACOTTA (current)
+
+   Sampled from the client's earth-tone strip, moodboard page 5.
+   This is what tokens.css already ships in :root; the block below
+   only exists so /variants can show all three side by side.
+
+   Contrast on --paper #F7E9DE, computed not estimated:
+     --clay     #AF593E   4.09  ✗ fails normal text — large only (≥24px)
+     --clay-ink #8F4530   5.77  ✓ links, small labels, button labels
+     --ink on --clay      3.44  ✗ large text only
+
+   To adopt site-wide: set data-variant="a" on <html> in Base.astro.
+   ============================================================ */
+
+[data-variant='a'] {
+  --clay: #af593e;
+  --clay-ink: #8f4530;
+}

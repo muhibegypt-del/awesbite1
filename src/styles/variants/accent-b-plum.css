@@ -1,0 +1,33 @@
+/* ============================================================
+   Accent variant B — PLUM
+
+   Sampled from the client's photoshoot outfit.
+
+   Contrast on --paper #F7E9DE, computed not estimated:
+     --clay     #44323F   9.96  ✓ passes normal text at any size
+     --clay-ink #44323F   9.96  ✓ same colour — see below
+     --paper on --clay    9.96  ✓ button label
+     --ink   on --clay    1.41  ✗ unusable — ink must never sit on this fill
+
+   --clay-ink is not derived here because it does not need to be: at 9.96
+   the sampled colour already clears 4.5:1 with room to spare, so darkening
+   it would only push it further toward --ink for no accessibility gain.
+
+   Two consequences worth reading before approving this one:
+
+   1. The two-token split stops meaning anything. The system's rule is
+      "--clay for fills and large type, --clay-ink for anything under 24px".
+      Here both are the same colour, so the rule is unenforceable, and a
+      later swap back to a lighter accent will surface small-text failures
+      that this variant was hiding.
+   2. At 9.96 against paper this reads as a second ink rather than as an
+      accent — and it sits 1.23 from --plum #5B3B4E, the footer band, so
+      accent marks and the footer will look like the same colour.
+
+   To adopt site-wide: set data-variant="b" on <html> in Base.astro.
+   ============================================================ */
+
+[data-variant='b'] {
+  --clay: #44323f;
+  --clay-ink: #44323f;
+}
