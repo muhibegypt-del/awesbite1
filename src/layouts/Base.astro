@@ -17,9 +17,24 @@ interface Props {
    * a sitemap entry for these pages today.
    */
   noindex?: boolean;
+  /**
+   * Swaps global copy slots to their sanctioned draft wording. /preview sets
+   * it so nothing bracketed reaches a client presentation; the placeholder
+   * build leaves it off and keeps announcing what is outstanding.
+   */
+  draftCopy?: boolean;
 }
 
-const { title, description, bare = false, noindex = false } = Astro.props;
+const {
+  title,
+  description,
+  bare = false,
+  noindex = false,
+  draftCopy = false,
+} = Astro.props;
+
+/* G-03. Draft from the slot map; falls back to the placeholder. */
+const footerTagline = draftCopy ? global.footer.taglineDraft : global.footer.tagline;
 
 const pageTitle = bare ? title : `${title} — ${global.meta.titleSuffix}`;
 const pageDescription = description ?? global.meta.descriptionPlaceholder;
@@ -120,8 +135,16 @@ const socialLinks = global.social.links.filter((link) => link.url);
           <p class="site-footer__wordmark">{global.brand.wordmark}</p>
           {/* G-03. Fallback if empty: omit the line, wordmark sits alone. */}
           {
-            global.footer.tagline && (
-              <p class="site-footer__tagline placeholder">{global.footer.tagline}</p>
+            footerTagline && (
+              <p
+                class={
+                  draftCopy
+                    ? 'site-footer__tagline site-footer__tagline--draft'
+                    : 'site-footer__tagline placeholder'
+                }
+              >
+                {footerTagline}
+              </p>
             )
           }
         </div>
@@ -312,6 +335,14 @@ const socialLinks = global.social.links.filter((link) => link.url);
 
   .site-footer__tagline {
     margin-top: var(--s-4);
+  }
+
+  .site-footer__tagline--draft {
+    font-family: var(--font-display);
+    font-size: var(--t-lead);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--coconut);
   }
 
   .site-footer__cols {

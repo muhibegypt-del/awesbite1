@@ -1,0 +1,26 @@
+---
+/**
+ * PREVIEW — the home page with draft copy, for client presentation.
+ *
+ * Identical markup to index.astro. The only differences are the copy source
+ * and the two flags that stop bracketed placeholders reaching a client:
+ * nothing on this page is a slot-map placeholder, and the unshot image slots
+ * render as bare --coconut fields rather than announcing themselves.
+ *
+ * index.astro and home.json are untouched — the placeholder build is still
+ * the working build, and this page is not it. Nothing here is approved copy.
+ */
+import Base from '../layouts/Base.astro';
+import HomeSections from '../components/HomeSections.astro';
+import preview from '../content/home.preview.json';
+---
+
+<Base
+  title="a textured word"
+  bare
+  noindex
+  draftCopy
+  description="English tutor, voice artist and content repurposer. Teaching words, voicing words, reshaping words."
+>
+  <HomeSections content={preview} showImagePlaceholders={false} />
+</Base>

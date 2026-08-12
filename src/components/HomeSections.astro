@@ -8,7 +8,7 @@
  */
 import SectionMarker from '../components/SectionMarker.astro';
 import Button from '../components/Button.astro';
-import home from '../content/home.json';
+import defaultContent from '../content/home.json';
 
 interface Props {
   /**
@@ -17,11 +17,31 @@ interface Props {
    * silently wire every tablist to the first panel set.
    */
   idPrefix?: string;
+  /**
+   * Copy source. Defaults to home.json, the placeholder build. /preview
+   * passes home.preview.json, which carries the draft wording.
+   */
+  content?: typeof defaultContent;
+  /**
+   * Whether an unfilled image slot announces itself with its slot-map
+   * placeholder. True on the placeholder build so a staging walkthrough is a
+   * content checklist; false on /preview, where a client is looking at the
+   * design rather than auditing what is outstanding.
+   */
+  showImagePlaceholders?: boolean;
 }
 
-const { idPrefix = '' } = Astro.props;
+const {
+  idPrefix = '',
+  content = defaultContent,
+  showImagePlaceholders = true,
+} = Astro.props;
 
-const { hero, selector, about, services: grid } = home;
+const { hero, selector, about, services: grid } = content;
+
+/** Copy slots accept a string or an array of paragraphs. */
+const paragraphs = (value: string | string[]) =>
+  Array.isArray(value) ? value : [value];
 const { sentence, services } = selector;
 
 /**
@@ -41,9 +61,11 @@ const isPlaceholder = (value: string) => value.trimStart().startsWith('[');
         <h1 class={isPlaceholder(hero.headline) ? 'placeholder' : 'hero__headline'}>
           {hero.headline}
         </h1>
-        <p class={isPlaceholder(hero.subhead) ? 'placeholder' : 'hero__subhead'}>
-          {hero.subhead}
-        </p>
+        {
+          paragraphs(hero.subhead).map((line) => (
+            <p class={isPlaceholder(line) ? 'placeholder' : 'hero__subhead'}>{line}</p>
+          ))
+        }
       </div>
 
       <div class="editorial-wide selector" data-selector>
@@ -100,11 +122,14 @@ const isPlaceholder = (value: string) => value.trimStart().startsWith('[');
                 {/* HOME-04. No textures shot yet, so the slot-map fallback
                     ships: a flat --coconut field at the panel's 16:6. */}
                 <div class="panel__texture">
-                  {!service.image && (
+                  {!service.image && showImagePlaceholders && (
                     <p class="placeholder">{service.imagePlaceholder}</p>
                   )}
                   <div class="panel__body">
-                    <p class="panel__caption placeholder">{service.caption}</p>
+                    {/* Display-face copy once written. Brief §6.1.2. */}
+                    <p class={isPlaceholder(service.caption) ? 'placeholder' : 'panel__caption'}>
+                      {service.caption}
+                    </p>
                     <a class="panel__link" href={service.link.href}>
                       {service.link.label} <span aria-hidden="true">→</span>
                     </a>
@@ -130,7 +155,7 @@ const isPlaceholder = (value: string) => value.trimStart().startsWith('[');
             --coconut field with the 1px inset rule 8px in from the edge. */}
         <div class="about__media">
           <div class="portrait">
-            {!about.portrait && (
+            {!about.portrait && showImagePlaceholders && (
               <p class="placeholder">{about.portraitPlaceholder}</p>
             )}
           </div>
@@ -147,9 +172,11 @@ const isPlaceholder = (value: string) => value.trimStart().startsWith('[');
             )
           }
 
-          <p class={isPlaceholder(about.paragraphs) ? 'placeholder' : 't-body'}>
-            {about.paragraphs}
-          </p>
+          {
+            paragraphs(about.paragraphs).map((line) => (
+              <p class={isPlaceholder(line) ? 'placeholder' : 't-body'}>{line}</p>
+            ))
+          }
         </div>
 
         {/* Credential row and the link that follows it span the full content
@@ -417,6 +444,22 @@ const isPlaceholder = (value: string) => value.trimStart().startsWith('[');
     display: grid;
     gap: var(--s-3);
     justify-items: start;
+    /* Pinned to the bottom whether or not the image placeholder is above it.
+       space-between alone would float it to the top when it is the only
+       child, which is the case on /preview. */
+    margin-block-start: auto;
+  }
+
+  /* One line of display-face copy. Brief §6.1.2. --ink on --coconut is
+     10.46, so the caption holds up against the texture field. */
+  .panel__caption {
+    font-family: var(--font-display);
+    font-size: var(--t-h3);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.3;
+    color: var(--ink);
+    max-inline-size: 34ch;
   }
 
   .panel__link {

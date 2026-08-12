@@ -17,6 +17,7 @@
   "footer": {
     "comment_G03": "G-03. OWNER: ANEESA. Draft available: 'words are not flat.' Fallback: omit the line, wordmark sits alone.",
     "tagline": "[ FOOTER TAGLINE WILL GO HERE — one line, 6 words max ]",
+    "taglineDraft": "words are not flat.",
     "legal": "© a textured word",
     "legalLinks": [
       { "label": "privacy", "href": "/privacy" },
