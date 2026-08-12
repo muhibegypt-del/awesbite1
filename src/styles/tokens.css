@@ -21,7 +21,13 @@
 
   /* ---- Quiet support ---- */
   --olive:      #6D7456;   /* Reflection only, large text only */
-  --plum:       #5B3B4E;   /* footer + one dark pull-quote band */
+  --plum:       #5B3B4E;   /* raw palette colour */
+
+  /* ---- Dark bands ---- */
+  /* Every dark surface — the footer, and the pull-quote band when it is
+     built — reads this, never --plum directly, so the accent variants can
+     retune it. Defaults to plum, which is variant A. */
+  --surface-dark: #5B3B4E;
   --teal:       #5F8A8B;   /* audio player scrubber ONLY */
 
   /* ---- Typefaces ---- */

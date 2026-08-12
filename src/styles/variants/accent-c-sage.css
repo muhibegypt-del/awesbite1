@@ -25,10 +25,15 @@
    distinct "quiet support" token and the Reflection section will need a
    different treatment to stay distinguishable from the accent.
 
+   Dark band --surface-dark #4A4E3A:
+     --paper   on it      7.23  ✓ footer copy
+     --coconut on it      5.38  ✓ footer secondary copy
+
    To adopt site-wide: set data-variant="c" on <html> in Base.astro.
    ============================================================ */
 
 [data-variant='c'] {
   --clay: #6d7454;
   --clay-ink: #666c4f;
+  --surface-dark: #4a4e3a;
 }

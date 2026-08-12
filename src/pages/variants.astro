@@ -21,8 +21,9 @@ const variants = [
     name: 'Terracotta',
     note: 'Current. Sampled from the moodboard earth-tone strip.',
     swatches: [
-      { token: '--clay', hex: '#AF593E', ratio: '4.09', pass: false },
-      { token: '--clay-ink', hex: '#8F4530', ratio: '5.77', pass: true },
+      { token: '--clay', hex: '#AF593E', note: '4.09:1 on --paper ✗ ≥24px only' },
+      { token: '--clay-ink', hex: '#8F4530', note: '5.77:1 on --paper ✓ any size' },
+      { token: '--surface-dark', hex: '#5B3B4E', note: '--paper on it 8.10 ✓ · --coconut 6.02 ✓' },
     ],
   },
   {
@@ -31,8 +32,9 @@ const variants = [
     name: 'Plum',
     note: 'Sampled from the photoshoot outfit. Accent already clears 4.5:1, so both tokens are the same colour.',
     swatches: [
-      { token: '--clay', hex: '#44323F', ratio: '9.96', pass: true },
-      { token: '--clay-ink', hex: '#44323F', ratio: '9.96', pass: true },
+      { token: '--clay', hex: '#44323F', note: '9.96:1 on --paper ✓ any size' },
+      { token: '--clay-ink', hex: '#44323F', note: '9.96:1 on --paper ✓ any size' },
+      { token: '--surface-dark', hex: '#44323F', note: '--paper on it 9.96 ✓ · --coconut 7.40 ✓' },
     ],
   },
   {
@@ -41,14 +43,25 @@ const variants = [
     name: 'Sage',
     note: 'Sampled from the photoshoot outfit. --clay-ink darkened from the sample until it cleared 4.5:1 with margin.',
     swatches: [
-      { token: '--clay', hex: '#6D7454', ratio: '4.13', pass: false },
-      { token: '--clay-ink', hex: '#666C4F', ratio: '4.62', pass: true },
+      { token: '--clay', hex: '#6D7454', note: '4.13:1 on --paper ✗ ≥24px only' },
+      { token: '--clay-ink', hex: '#666C4F', note: '4.62:1 on --paper ✓ any size' },
+      { token: '--surface-dark', hex: '#4A4E3A', note: '--paper on it 7.23 ✓ · --coconut 5.38 ✓' },
     ],
   },
 ];
 ---
 
 <Base title="colour variants" description="Internal accent palette comparison." noindex>
+  <div class="container variants__note">
+    <p class="t-small">
+      Each block below is the same home page markup under a different accent
+      palette. The page footer is part of the layout, not of any one block, so
+      it renders in variant A throughout — compare
+      <code>--surface-dark</code> from the swatch rows, or use the per-variant
+      screenshots in <code>screenshots/</code>, which show the real footer.
+    </p>
+  </div>
+
   {
     variants.map((variant) => (
       <section class="variant" data-variant={variant.key} id={`variant-${variant.key}`}>
@@ -67,9 +80,7 @@ const variants = [
                   <span class="swatch__meta">
                     <span class="swatch__token">{swatch.token}</span>
                     <span class="swatch__hex">{swatch.hex}</span>
-                    <span class="swatch__ratio">
-                      {swatch.ratio}:1 on --paper {swatch.pass ? '✓ any size' : '✗ ≥24px only'}
-                    </span>
+                    <span class="swatch__ratio">{swatch.note}</span>
                   </span>
                 </li>
               ))}
@@ -84,6 +95,19 @@ const variants = [
 </Base>
 
 <style>
+  .variants__note {
+    position: relative;
+    z-index: 2;
+    padding-block: var(--s-6);
+    color: var(--ink-soft);
+  }
+
+  .variants__note code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    color: var(--clay-ink);
+  }
+
   .variant {
     position: relative;
     z-index: 2;

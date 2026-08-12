@@ -21,8 +21,13 @@
       later swap back to a lighter accent will surface small-text failures
       that this variant was hiding.
    2. At 9.96 against paper this reads as a second ink rather than as an
-      accent — and it sits 1.23 from --plum #5B3B4E, the footer band, so
-      accent marks and the footer will look like the same colour.
+      accent. With the footer retuned below it is now literally the same
+      colour as the footer band — accent marks sitting on paper and the
+      whole footer band are one value, #44323F.
+
+   Dark band --surface-dark #44323F:
+     --paper   on it      9.96  ✓ footer copy
+     --coconut on it      7.40  ✓ footer secondary copy
 
    To adopt site-wide: set data-variant="b" on <html> in Base.astro.
    ============================================================ */
@@ -30,4 +35,5 @@
 [data-variant='b'] {
   --clay: #44323f;
   --clay-ink: #44323f;
+  --surface-dark: #44323f;
 }

@@ -10,10 +10,15 @@
      --clay-ink #8F4530   5.77  ✓ links, small labels, button labels
      --ink on --clay      3.44  ✗ large text only
 
+   Dark band --surface-dark #5B3B4E (unchanged):
+     --paper   on it      8.10  ✓ footer copy
+     --coconut on it      6.02  ✓ footer secondary copy
+
    To adopt site-wide: set data-variant="a" on <html> in Base.astro.
    ============================================================ */
 
 [data-variant='a'] {
   --clay: #af593e;
   --clay-ink: #8f4530;
+  --surface-dark: #5b3b4e;
 }
