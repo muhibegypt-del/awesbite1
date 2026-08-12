@@ -1,39 +1,39 @@
 /* ============================================================
-   Accent variant B — PLUM
+   Variant B — DEEP PLUM
 
-   Sampled from the client's photoshoot outfit.
+   A cooler, greyer paper with a mauve accent and a near-black plum ink.
 
-   Contrast on --paper #F7E9DE, computed not estimated:
-     --clay     #44323F   9.96  ✓ passes normal text at any size
-     --clay-ink #44323F   9.96  ✓ same colour — see below
-     --paper on --clay    9.96  ✓ button label
-     --ink   on --clay    1.41  ✗ unusable — ink must never sit on this fill
+   Computed contrast, all values measured not estimated:
+     --clay      #7D4A63  on --paper       5.97   ✓ any size
+     --clay-ink  #7D4A63  on --paper       5.97   ✓ same colour, see below
+     --clay-ink           on --paper-lift  6.45   ✓ placeholder chips
+     --paper     on --clay-ink             5.97   ✓ solid button labels
+     --ink       #2A1F27  on --paper      13.67   ✓ exceeds 7:1
+     --ink                on --coconut    10.16   ✓
+     --ink-soft  #5A4E48  on --paper       6.91   ✓
+     --paper     on --surface-dark        10.20   ✓ footer copy
+     --coconut   on --surface-dark         7.58   ✓ footer secondary
 
-   --clay-ink is not derived here because it does not need to be: at 9.96
-   the sampled colour already clears 4.5:1 with room to spare, so darkening
-   it would only push it further toward --ink for no accessibility gain.
+   --clay-ink is not derived: #7D4A63 already clears 4.5:1 at 5.97, so
+   darkening it would only muddy the accent for no accessibility gain.
+   The two tokens therefore hold the same value and the system's
+   "--clay for fills, --clay-ink for small text" split is unenforceable
+   in this variant — worth remembering if the accent is ever retuned
+   lighter, because small-text failures would surface at that point.
 
-   Two consequences worth reading before approving this one:
-
-   1. The two-token split stops meaning anything. The system's rule is
-      "--clay for fills and large type, --clay-ink for anything under 24px".
-      Here both are the same colour, so the rule is unenforceable, and a
-      later swap back to a lighter accent will surface small-text failures
-      that this variant was hiding.
-   2. At 9.96 against paper this reads as a second ink rather than as an
-      accent. With the footer retuned below it is now literally the same
-      colour as the footer band — accent marks sitting on paper and the
-      whole footer band are one value, #44323F.
-
-   Dark band --surface-dark #44323F:
-     --paper   on it      9.96  ✓ footer copy
-     --coconut on it      7.40  ✓ footer secondary copy
+   This is a real accent rather than a second ink, which is what the
+   earlier #44323F attempt at plum was. The footer keeps that darker
+   plum, so band and accent now read as distinct values.
 
    To adopt site-wide: set data-variant="b" on <html> in Base.astro.
    ============================================================ */
 
 [data-variant='b'] {
-  --clay: #44323f;
-  --clay-ink: #44323f;
+  --paper: #f3ede9;
+  --paper-lift: #faf6f3;
+  --coconut: #d8ccce;
+  --ink: #2a1f27;
+  --clay: #7d4a63;
+  --clay-ink: #7d4a63;
   --surface-dark: #44323f;
 }

@@ -1,23 +1,34 @@
 /* ============================================================
-   Accent variant A — TERRACOTTA (current)
+   Variant A — WARM CLAY (current)
 
-   Sampled from the client's earth-tone strip, moodboard page 5.
-   This is what tokens.css already ships in :root; the block below
-   only exists so /variants can show all three side by side.
+   The palette tokens.css already ships in :root. The block below only
+   exists so /variants can show all three side by side.
 
-   Contrast on --paper #F7E9DE, computed not estimated:
-     --clay     #AF593E   4.09  ✗ fails normal text — large only (≥24px)
-     --clay-ink #8F4530   5.77  ✓ links, small labels, button labels
-     --ink on --clay      3.44  ✗ large text only
+   Computed contrast, all values measured not estimated:
+     --clay      #AF593E  on --paper       4.09   ✗ large only (≥24px)
+     --clay-ink  #8F4530  on --paper       5.77   ✓ any size
+     --clay-ink           on --paper-lift  6.30   ✓ placeholder chips
+     --paper     on --clay-ink             5.77   ✓ solid button labels
+     --ink       #241C1A  on --paper      14.06   ✓ exceeds 7:1
+     --ink                on --coconut    10.46   ✓
+     --ink-soft  #5A4E48  on --paper       6.75   ✓
+     --paper     on --surface-dark         8.10   ✓ footer copy
+     --coconut   on --surface-dark         6.02   ✓ footer secondary
 
-   Dark band --surface-dark #5B3B4E (unchanged):
-     --paper   on it      8.10  ✓ footer copy
-     --coconut on it      6.02  ✓ footer secondary copy
+   --clay-ink is kept at the established #8F4530 rather than re-derived.
+   Mechanically darkening #AF593E until it first clears 4.5 would yield
+   #A2533A at 4.61 — a lighter, weaker value than the brand already uses.
+   #8F4530 is from brief §2.2, passes with more room, and A is meant to
+   be the unchanged reference.
 
    To adopt site-wide: set data-variant="a" on <html> in Base.astro.
    ============================================================ */
 
 [data-variant='a'] {
+  --paper: #f7e9de;
+  --paper-lift: #fcf4ec;
+  --coconut: #d5cbc0;
+  --ink: #241c1a;
   --clay: #af593e;
   --clay-ink: #8f4530;
   --surface-dark: #5b3b4e;

@@ -2,9 +2,10 @@
 /**
  * COLOUR VARIANT DEMO — for client approval, not a public page.
  *
- * Renders the home page three times under three accent palettes. Only
- * --clay and --clay-ink change between them; surfaces, ink, the type scale,
- * spacing and every layout value are identical across all three.
+ * Renders the home page three times under three palettes. Each variant sets
+ * its own surfaces (--paper, --paper-lift, --coconut), its own --ink, its own
+ * accent pair and its own dark band. The type scale, spacing, structure and
+ * every layout value are identical across all three.
  *
  * Routed noindex and never linked from nav or the footer.
  */
@@ -18,9 +19,12 @@ const variants = [
   {
     key: 'a',
     label: 'A',
-    name: 'Terracotta',
-    note: 'Current. Sampled from the moodboard earth-tone strip.',
+    name: 'Warm clay',
+    note: 'Current. Warm clay paper, terracotta accent, plum footer.',
     swatches: [
+      { token: '--paper', hex: '#F7E9DE', note: 'page surface' },
+      { token: '--coconut', hex: '#D5CBC0', note: 'bands · --ink on it 10.46 ✓' },
+      { token: '--ink', hex: '#241C1A', note: '14.06:1 on --paper ✓ exceeds 7' },
       { token: '--clay', hex: '#AF593E', note: '4.09:1 on --paper ✗ ≥24px only' },
       { token: '--clay-ink', hex: '#8F4530', note: '5.77:1 on --paper ✓ any size' },
       { token: '--surface-dark', hex: '#5B3B4E', note: '--paper on it 8.10 ✓ · --coconut 6.02 ✓' },
@@ -29,23 +33,29 @@ const variants = [
   {
     key: 'b',
     label: 'B',
-    name: 'Plum',
-    note: 'Sampled from the photoshoot outfit. Accent already clears 4.5:1, so both tokens are the same colour.',
+    name: 'Deep plum',
+    note: 'Cooler grey-pink paper, mauve accent, deep plum footer. The accent clears 4.5:1 unaided, so both accent tokens are one colour.',
     swatches: [
-      { token: '--clay', hex: '#44323F', note: '9.96:1 on --paper ✓ any size' },
-      { token: '--clay-ink', hex: '#44323F', note: '9.96:1 on --paper ✓ any size' },
-      { token: '--surface-dark', hex: '#44323F', note: '--paper on it 9.96 ✓ · --coconut 7.40 ✓' },
+      { token: '--paper', hex: '#F3EDE9', note: 'page surface' },
+      { token: '--coconut', hex: '#D8CCCE', note: 'bands · --ink on it 10.16 ✓' },
+      { token: '--ink', hex: '#2A1F27', note: '13.67:1 on --paper ✓ exceeds 7' },
+      { token: '--clay', hex: '#7D4A63', note: '5.97:1 on --paper ✓ any size' },
+      { token: '--clay-ink', hex: '#7D4A63', note: '5.97:1 on --paper ✓ same as --clay' },
+      { token: '--surface-dark', hex: '#44323F', note: '--paper on it 10.20 ✓ · --coconut 7.58 ✓' },
     ],
   },
   {
     key: 'c',
     label: 'C',
-    name: 'Sage',
-    note: 'Sampled from the photoshoot outfit. --clay-ink darkened from the sample until it cleared 4.5:1 with margin.',
+    name: 'Sage study',
+    note: 'Warmer yellow-green paper, sage accent, dark olive footer. --clay-ink darkened from the accent until it cleared 4.5:1 with margin.',
     swatches: [
-      { token: '--clay', hex: '#6D7454', note: '4.13:1 on --paper ✗ ≥24px only' },
-      { token: '--clay-ink', hex: '#666C4F', note: '4.62:1 on --paper ✓ any size' },
-      { token: '--surface-dark', hex: '#4A4E3A', note: '--paper on it 7.23 ✓ · --coconut 5.38 ✓' },
+      { token: '--paper', hex: '#F4F1E4', note: 'page surface' },
+      { token: '--coconut', hex: '#D9D6C4', note: 'bands · --ink on it 10.52 ✓' },
+      { token: '--ink', hex: '#23261C', note: '13.58:1 on --paper ✓ exceeds 7' },
+      { token: '--clay', hex: '#6D7454', note: '4.34:1 on --paper ✗ ≥24px only' },
+      { token: '--clay-ink', hex: '#696F51', note: '4.65:1 on --paper ✓ any size' },
+      { token: '--surface-dark', hex: '#4A4E3A', note: '--paper on it 7.60 ✓ · --coconut 5.88 ✓' },
     ],
   },
 ];
@@ -108,9 +118,13 @@ const variants = [
     color: var(--clay-ink);
   }
 
+  /* Each block paints its own surface. html carries variant A's --paper, so
+     without this B and C would sit on A's background and only their accents
+     would differ — which is the whole thing being compared. */
   .variant {
     position: relative;
     z-index: 2;
+    background: var(--paper);
     border-top: var(--border);
   }
 
