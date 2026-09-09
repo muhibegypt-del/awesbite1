@@ -30,7 +30,7 @@
         "heading": "services",
         "links": [
           { "label": "English tuition", "href": "/tuition" },
-          { "label": "Narration and voice", "href": "/narration" },
+          { "label": "Narration and voice work", "href": "/narration" },
           { "label": "Writing", "href": "/writing" }
         ]
       },
@@ -47,7 +47,7 @@
 
   "social": {
     "_comment": "G-04. Never render a dead link — the column only appears once at least one URL exists.",
-    "heading": "elsewhere",
+    "heading": "follow",
     "links": [
       { "label": "Instagram", "url": null },
       { "label": "Substack", "url": null },
@@ -61,7 +61,7 @@
   "meta": {
     "titleSuffix": "a textured word",
     "title": "a textured word · English tuition, audiobook narration and writing",
-    "description": "One to one English tuition for ages 6 to 60, audiobook narration for authors, and writing that still sounds like you. Book a free 20-minute call.",
+    "description": "One-to-one English tuition for children and adults, professional audiobook narration and voice work, and writing that sounds like you. Book a free 20-minute call.",
     "locale": "en_GB",
     "themeColor": "#F7E9DE",
     "ogImage": null
