@@ -1,0 +1,71 @@
+{
+  "brand": { "wordmark": "a textured word" },
+
+  "nav": {
+    "_comment": "Plain, searchable labels. The pillar names (The Taught Word etc.) are display names on the hub; nav uses the word a buyer would actually search.",
+    "items": [
+      { "label": "tuition", "href": "/tuition" },
+      { "label": "narration", "href": "/narration" },
+      { "label": "writing", "href": "/writing" },
+      { "label": "about", "href": "/about" }
+    ],
+    "cta": { "label": "Book a free call", "href": "/contact" }
+  },
+
+  "banner": {
+    "_comment": "Temporary. Set showPreviewBanner={false} in Base.astro at launch.",
+    "text": "This is a site preview"
+  },
+
+  "footer": {
+    "tagline": "the taught word. the spoken word. the written word.",
+    "legal": "© 2026 a textured word · United Kingdom",
+    "_comment_legal": "G-07. Privacy and Terms block launch — a UK site running a contact form that collects a name and an email needs a privacy notice. Until the pages exist the hrefs stay null and nothing renders, per the same rule as social.",
+    "legalLinks": [
+      { "label": "privacy", "href": null },
+      { "label": "terms", "href": null }
+    ],
+    "columns": [
+      {
+        "heading": "services",
+        "links": [
+          { "label": "English tuition", "href": "/tuition" },
+          { "label": "Narration and voice work", "href": "/narration" },
+          { "label": "Writing", "href": "/writing" }
+        ]
+      },
+      {
+        "heading": "get in touch",
+        "links": [
+          { "label": "atexturedword@gmail.com", "href": "mailto:atexturedword@gmail.com" },
+          { "label": "Book a free call", "href": "/contact" },
+          { "label": "About Aneesa", "href": "/about" }
+        ]
+      }
+    ]
+  },
+
+  "social": {
+    "_comment": "G-04. Never render a dead link — the column only appears once at least one URL exists.",
+    "heading": "follow",
+    "links": [
+      { "label": "Instagram", "url": null },
+      { "label": "Substack", "url": null },
+      { "label": "YouTube", "url": null },
+      { "label": "TikTok", "url": null }
+    ]
+  },
+
+  "contact": { "email": "atexturedword@gmail.com" },
+
+  "meta": {
+    "titleSuffix": "a textured word",
+    "title": "a textured word · English tuition, audiobook narration and writing",
+    "description": "One-to-one English tuition for children and adults, professional audiobook narration and voice work, and writing that sounds like you. Book a free 20-minute call.",
+    "locale": "en_GB",
+    "themeColor": "#F7E9DE",
+    "ogImage": null
+  },
+
+  "skipLink": "skip to content"
+}

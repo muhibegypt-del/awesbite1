@@ -1,0 +1,221 @@
+---
+/**
+ * COLOUR VARIANT DEMO — for client approval, not a public page.
+ *
+ * Renders the home page three times under three palettes. Each variant sets
+ * its own surfaces (--paper, --paper-lift, --coconut), its own --ink, its own
+ * accent pair and its own dark band. The type scale, spacing, structure and
+ * every layout value are identical across all three.
+ *
+ * Routed noindex and never linked from nav or the footer.
+ */
+import Base from '../layouts/Base.astro';
+import HomeSections from '../components/HomeSections.astro';
+import '../styles/variants/accent-a-terracotta.css';
+import '../styles/variants/accent-b-plum.css';
+import '../styles/variants/accent-c-sage.css';
+
+const variants = [
+  {
+    key: 'a',
+    label: 'A',
+    name: 'Warm clay',
+    note: 'Current. Warm clay paper, terracotta accent, plum footer.',
+    swatches: [
+      { token: '--paper', hex: '#F7E9DE', note: 'page surface' },
+      { token: '--coconut', hex: '#D5CBC0', note: 'bands · --ink on it 10.46 ✓' },
+      { token: '--ink', hex: '#241C1A', note: '14.06:1 on --paper ✓ exceeds 7' },
+      { token: '--clay', hex: '#AF593E', note: '4.09:1 on --paper ✗ ≥24px only' },
+      { token: '--clay-ink', hex: '#8F4530', note: '5.77:1 on --paper ✓ any size' },
+      { token: '--surface-dark', hex: '#5B3B4E', note: '--paper on it 8.10 ✓ · --coconut 6.02 ✓' },
+    ],
+  },
+  {
+    key: 'b',
+    label: 'B',
+    name: 'Deep plum',
+    note: 'Cooler grey-pink paper, mauve accent, deep plum footer. The accent clears 4.5:1 unaided, so both accent tokens are one colour.',
+    swatches: [
+      { token: '--paper', hex: '#F3EDE9', note: 'page surface' },
+      { token: '--coconut', hex: '#D8CCCE', note: 'bands · --ink on it 10.16 ✓' },
+      { token: '--ink', hex: '#2A1F27', note: '13.67:1 on --paper ✓ exceeds 7' },
+      { token: '--clay', hex: '#7D4A63', note: '5.97:1 on --paper ✓ any size' },
+      { token: '--clay-ink', hex: '#7D4A63', note: '5.97:1 on --paper ✓ same as --clay' },
+      { token: '--surface-dark', hex: '#44323F', note: '--paper on it 10.20 ✓ · --coconut 7.58 ✓' },
+    ],
+  },
+  {
+    key: 'c',
+    label: 'C',
+    name: 'Sage study',
+    note: 'Warmer yellow-green paper, sage accent, dark olive footer. --clay-ink darkened from the accent until it cleared 4.5:1 with margin.',
+    swatches: [
+      { token: '--paper', hex: '#F4F1E4', note: 'page surface' },
+      { token: '--coconut', hex: '#D9D6C4', note: 'bands · --ink on it 10.52 ✓' },
+      { token: '--ink', hex: '#23261C', note: '13.58:1 on --paper ✓ exceeds 7' },
+      { token: '--clay', hex: '#6D7454', note: '4.34:1 on --paper ✗ ≥24px only' },
+      { token: '--clay-ink', hex: '#696F51', note: '4.65:1 on --paper ✓ any size' },
+      { token: '--surface-dark', hex: '#4A4E3A', note: '--paper on it 7.60 ✓ · --coconut 5.88 ✓' },
+    ],
+  },
+];
+---
+
+<Base title="colour variants" description="Internal accent palette comparison." noindex>
+  <div class="container variants__note">
+    <p class="t-small">
+      Each block below is the same home page markup under a different accent
+      palette. The page footer is part of the layout, not of any one block, so
+      it renders in variant A throughout — compare
+      <code>--surface-dark</code> from the swatch rows, or use the per-variant
+      screenshots in <code>screenshots/</code>, which show the real footer.
+    </p>
+  </div>
+
+  {
+    variants.map((variant) => (
+      <section class="variant" data-variant={variant.key} id={`variant-${variant.key}`}>
+        <header class="variant__head">
+          <div class="container">
+            <p class="variant__label">
+              <span class="variant__letter">{variant.label}</span>
+              <span class="variant__name">{variant.name}</span>
+            </p>
+            <p class="variant__note">{variant.note}</p>
+
+            <ul class="swatches" role="list">
+              {variant.swatches.map((swatch) => (
+                <li class="swatch">
+                  <span class="swatch__chip" style={`background:${swatch.hex}`} aria-hidden="true" />
+                  <span class="swatch__meta">
+                    <span class="swatch__token">{swatch.token}</span>
+                    <span class="swatch__hex">{swatch.hex}</span>
+                    <span class="swatch__ratio">{swatch.note}</span>
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </header>
+
+        <HomeSections idPrefix={`${variant.key}-`} />
+      </section>
+    ))
+  }
+</Base>
+
+<style>
+  .variants__note {
+    position: relative;
+    z-index: 2;
+    padding-block: var(--s-6);
+    color: var(--ink-soft);
+  }
+
+  .variants__note code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    color: var(--clay-ink);
+  }
+
+  /* Each block paints its own surface. html carries variant A's --paper, so
+     without this B and C would sit on A's background and only their accents
+     would differ — which is the whole thing being compared. */
+  .variant {
+    position: relative;
+    z-index: 2;
+    background: var(--paper);
+    border-top: var(--border);
+  }
+
+  .variant:first-child {
+    border-top: none;
+  }
+
+  .variant__head {
+    padding-block: var(--s-8) var(--s-6);
+    background: var(--paper-lift);
+    border-bottom: var(--border);
+  }
+
+  .variant__label {
+    display: grid;
+    justify-items: start;
+    gap: var(--s-2);
+    margin: 0 0 var(--s-2);
+    max-inline-size: none;
+  }
+
+  .variant__letter {
+    font-family: var(--font-mono);
+    font-size: var(--t-mono-lg);
+    font-weight: 500;
+    letter-spacing: var(--track-mono-lg);
+    color: var(--clay-ink);
+  }
+
+  .variant__name {
+    font-family: var(--font-display);
+    font-size: var(--t-h2);
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+
+  .variant__note {
+    font-size: var(--t-small);
+    color: var(--ink-soft);
+    margin: 0 0 var(--s-5);
+  }
+
+  .swatches {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-6);
+  }
+
+  .swatch {
+    display: flex;
+    align-items: center;
+    gap: var(--s-3);
+  }
+
+  .swatch__chip {
+    inline-size: 48px;
+    block-size: 48px;
+    border-radius: var(--radius-none);
+    border: var(--border);
+    flex: none;
+  }
+
+  .swatch__meta {
+    display: grid;
+    gap: var(--s-1);
+    font-family: var(--font-mono);
+    font-size: var(--t-mono);
+    line-height: 1.3;
+    letter-spacing: var(--track-mono);
+    text-transform: uppercase;
+  }
+
+  .swatch__token {
+    color: var(--ink);
+  }
+
+  .swatch__hex {
+    color: var(--ink-soft);
+  }
+
+  .swatch__ratio {
+    color: var(--ink-soft);
+    text-transform: none;
+    letter-spacing: 0.04em;
+  }
+
+  /* The demo stacks three full pages, so drop the hero's 88vh floor —
+     otherwise two thirds of the comparison is empty paper. */
+  .variant :global(.hero) {
+    min-height: 0;
+  }
+</style>

@@ -28,7 +28,8 @@ src/
 - **Two accent tokens, and they are not interchangeable.** `--clay` `#AF593E` fails WCAG at small sizes (4.09:1). Use it only for fills, marks, and text ≥24px. Anything smaller uses `--clay-ink` `#8F4530` (5.77:1).
 - **No `box-shadow` anywhere.** Depth comes from tone and 1px `var(--rule)` hairlines.
 - **One primary button per viewport**, per page.
-- Spacing only from the scale: 4 8 12 16 24 32 48 64 96 128 160.
+- Spacing only from the scale: 4 8 12 16 24 32 48 64 96 128 160. Two deliberate exceptions, both from the brief and nowhere else: the header logo's 18px lockup offset (§1.4), and selector tab padding of 14px 20px (§6.1.2).
+- Tablet section rhythm is 96px, not the 80px in brief §4.2 — 80 is not on the spacing scale, and the brief says err upward.
 - Radii: 0 for structure, 2px for inputs/buttons, 10px for cards and the player.
 - Body copy capped at 68 characters. Never full-width paragraphs.
 - Mono (JetBrains Mono) is for labels, metadata, prices, section markers only. Never body copy, buttons or nav.
@@ -69,4 +70,5 @@ Character limits in the slot map are layout constraints. Do not exceed them.
 - Match the existing page's structure when building a new one rather than inventing a second pattern.
 - Prefer editing an existing component over adding a new one.
 - Don't add dependencies without asking. The site should build with Astro and nothing else.
+- No TypeScript. `astro check` is unavailable — do not add `@astrojs/check` or `typescript`, and don't add a `check` script. (`interface Props` and inline annotations inside `.astro` files are fine; Astro strips them at build with no dependency. Nothing type-checks them.)
 - Don't create README or docs files unless asked.

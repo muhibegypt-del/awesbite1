@@ -1,0 +1,706 @@
+/* ============================================================
+   a textured word — global stylesheet
+   Load order: tokens.css → global.css. Never hardcode a value
+   that exists as a token in tokens.css.
+   ============================================================ */
+
+/* ---- 1. Reset ---- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Nothing inherits the browser default near-black. Brief §2.2. */
+  color: var(--ink);
+  background-color: var(--paper);
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--t-body);
+  font-weight: 400;
+  line-height: 1.7;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, h4, h5, h6,
+p, figure, blockquote, dl, dd {
+  margin: 0;
+}
+
+ul, ol {
+  margin: 0;
+  padding: 0;
+}
+
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+img, picture, svg, video, canvas {
+  display: block;
+  max-width: 100%;
+}
+
+img, video {
+  height: auto;
+}
+
+input, button, textarea, select {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+a {
+  color: var(--clay-ink);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  transition: color var(--dur-fast) var(--ease);
+}
+
+a:hover {
+  color: var(--ink);
+}
+
+hr {
+  border: none;
+  border-top: var(--border);
+  margin: 0;
+}
+
+/* --clay-ink, not --clay: --paper on --clay is 4.09:1, so selecting a
+   paragraph used to drop it below AA. --clay-ink is 5.77:1. */
+::selection {
+  background: var(--clay-ink);
+  color: var(--paper);
+}
+
+/* ---- 2. Focus ---- */
+/* Visible focus on everything. Never remove without a replacement. */
+
+:focus-visible {
+  outline: 2px solid var(--clay-ink);
+  outline-offset: 3px;
+}
+
+/* An engine without :focus-visible support drops this rule as an invalid
+   selector and keeps its own default ring, which is the outcome we want. */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Skip-link target. The one legitimate outline:none on the site — a ring
+   around the whole page body helps nobody. */
+.site-main:focus {
+  outline: none;
+}
+
+.skip-link {
+  position: absolute;
+  top: var(--s-2);
+  left: var(--s-2);
+  z-index: 100;
+  transform: translateY(-200%);
+  padding: var(--s-2) var(--s-4);
+  background: var(--paper-lift);
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: var(--track-mono);
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--clay-ink);
+  transition: transform var(--dur-fast) var(--ease);
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+}
+
+/* ---- 3. Typography scale ---- */
+/* Sizes come from tokens.css. Weight, leading and tracking live here
+   because they are style, not scale. Brief §3.3. */
+
+.t-hero,
+.t-h1,
+.t-h2,
+.t-quote {
+  font-family: var(--font-display);
+  text-wrap: balance;
+}
+
+.t-hero {
+  font-size: var(--t-hero);
+  font-weight: 300;
+  line-height: 0.94;
+  letter-spacing: -0.02em;
+}
+
+.t-h1 {
+  font-size: var(--t-h1);
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+}
+
+.t-h2 {
+  font-size: var(--t-h2);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.t-h3 {
+  font-family: var(--font-body);
+  font-size: var(--t-h3);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+.t-quote {
+  font-size: var(--t-quote);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.28;
+  letter-spacing: -0.01em;
+}
+
+.t-lead {
+  font-size: var(--t-lead);
+  line-height: 1.6;
+  max-inline-size: var(--measure-lead);
+  text-wrap: pretty;
+}
+
+.t-body {
+  font-size: var(--t-body);
+  line-height: 1.7;
+  max-inline-size: var(--measure);
+  text-wrap: pretty;
+}
+
+.t-small {
+  font-size: var(--t-small);
+  line-height: 1.55;
+  max-inline-size: var(--measure);
+}
+
+/* Mono is structural, not decorative. Labels, markers, metadata,
+   form labels and the footer legal line only. Brief §3.4. */
+.t-mono {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: var(--track-mono);
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.t-mono-lg {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono-lg);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: var(--track-mono-lg);
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* Default element styling so an unclassed heading is never unstyled.
+   The .t-* classes stay available for when an element needs a size that
+   is not its semantic level. */
+h1 {
+  font-family: var(--font-display);
+  font-size: var(--t-h1);
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-size: var(--t-h2);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-family: var(--font-body);
+  font-size: var(--t-h3);
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+p {
+  max-inline-size: var(--measure);
+  text-wrap: pretty;
+}
+
+/* ---- 4. Layout ---- */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--gutter-x);
+}
+
+/* The editorial offset: body copy sits in columns 3–9 and the wide left
+   gutter carries the mono section markers. Brief §4.1. Below 1280px the
+   grid collapses to a single column and markers stack above content. */
+.editorial {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-4);
+}
+
+@media (min-width: 1280px) {
+  .editorial {
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: var(--s-5);
+  }
+
+  /* :where() keeps these at zero specificity so any page or component rule
+     overrides them without needing to out-specify a default. Previously these
+     only lost to page rules because Astro's scope hash inflated them, which
+     meant moving a rule into this file silently broke it. */
+  :where(.editorial) > :where(*) {
+    grid-column: 3 / 10;
+  }
+
+  :where(.editorial) > :where(.editorial-aside) {
+    grid-column: 1 / 3;
+  }
+
+  /* Content that runs from the marker gutter to the far edge. Note it does NOT
+     start at column 1: a 1 / -1 child cannot share row 1 with the aside, so
+     grid auto-placement pushed it to row 2 and stacked the marker on top of
+     it. That was the "margins all over the place" defect. */
+  :where(.editorial) > :where(.editorial-full) {
+    grid-column: 3 / -1;
+  }
+}
+
+/* Vertical rhythm between major sections: 128 / 80* / 64.
+   *80px is not on the spacing scale, so the tablet step uses 64px.
+   Brief §4.2 says err upward, so tablet holds 96px. */
+.section {
+  padding-block: var(--s-10);
+}
+
+@media (max-width: 1023px) {
+  .section { padding-block: var(--s-9); }
+}
+
+@media (max-width: 767px) {
+  .section { padding-block: var(--s-8); }
+}
+
+.band {
+  background: var(--coconut);
+  border-top: var(--border);
+}
+
+/* ---- 5. Content placeholders ---- */
+/* Unwritten copy ships as its literal slot-map placeholder so a walkthrough
+   of staging is also the content checklist. Never lorem ipsum. */
+
+.placeholder {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  line-height: 1.5;
+  letter-spacing: var(--track-mono);
+  color: var(--clay-ink);
+  background: var(--paper-lift);
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  padding: var(--s-2) var(--s-3);
+  display: inline-block;
+  max-inline-size: var(--measure);
+}
+
+/* ---- 7. Utilities ---- */
+
+.visually-hidden:not(:focus):not(:active) {
+  clip-path: inset(50%);
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+}
+
+/* ---- 9. Shared page primitives ---- */
+/* These were copy-pasted into five and six files respectively and had already
+   drifted — three hero rhythms, two credential margins, a .stack that was
+   full-width on one page and shrink-to-fit on five. One definition each. */
+
+/* A page's opening block. Same three-step ladder as .section. */
+.page-hero {
+  padding-block: var(--s-9) var(--s-8);
+}
+
+@media (max-width: 1023px) {
+  .page-hero { padding-block: var(--s-8) var(--s-7); }
+}
+
+@media (max-width: 767px) {
+  .page-hero { padding-block: var(--s-7) var(--s-6); }
+}
+
+.stack {
+  display: grid;
+  gap: var(--s-5);
+  justify-items: start;
+  width: 100%;
+}
+
+.stack--tight { gap: var(--s-4); }
+
+/* Portrait beside copy. Runs to the grid edge, not to column 9, or the two
+   share a 610px column and the heading breaks to three lines. */
+.split {
+  display: grid;
+  gap: var(--s-6);
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .split {
+    grid-template-columns: 5fr 7fr;
+    gap: var(--s-8);
+    align-items: start;
+  }
+}
+
+.frame--portrait {
+  aspect-ratio: 4 / 5;
+}
+
+/* ---- Equal columns ---- */
+/* Separation is a gap with a hairline hung in it, never padding on the items.
+   Padding-as-separator made the middle column 19% narrower than its
+   neighbours, so "equal weight" was not equal. */
+.columns {
+  list-style: none;
+  display: grid;
+  gap: var(--s-8);
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .columns {
+    grid-template-columns: repeat(var(--columns-count, 3), 1fr);
+    column-gap: var(--s-9);
+  }
+
+  .columns > * {
+    position: relative;
+  }
+
+  .columns > * + *::before {
+    content: '';
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: calc(var(--s-7) * -1);
+    border-inline-start: var(--border);
+  }
+}
+
+/* Subgrid locks every row across every column, so tags, headings, body and
+   links all sit on shared baselines even when the headings wrap to one, two
+   and three lines. Without it each column is its own formatting context and
+   nothing aligns. */
+@supports (grid-template-rows: subgrid) {
+  @media (min-width: 768px) {
+    .columns--aligned {
+      grid-template-rows: auto auto auto 1fr auto;
+    }
+
+    .columns--aligned > * {
+      display: grid;
+      grid-template-rows: subgrid;
+      grid-row: span 5;
+      gap: var(--s-3);
+    }
+  }
+}
+
+/* ---- Credential row ---- */
+
+.credentials {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-5) 0;
+  width: 100%;
+  margin-block-start: var(--s-8);
+}
+
+@media (min-width: 480px) {
+  .credentials { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .credentials { grid-template-columns: repeat(4, 1fr); }
+}
+
+.credentials__item {
+  display: grid;
+  gap: var(--s-1);
+  padding-inline: var(--s-4);
+}
+
+@media (max-width: 1023px) {
+  .credentials__item:nth-child(odd) { padding-inline-start: 0; }
+  .credentials__item:nth-child(even) { border-inline-start: var(--border); }
+}
+
+@media (max-width: 479px) {
+  .credentials__item { padding-inline: 0; border-inline-start: none; }
+}
+
+@media (min-width: 1024px) {
+  .credentials__item { border-inline-start: var(--border); }
+  .credentials__item:first-child { padding-inline-start: 0; border-inline-start: none; }
+}
+
+.credentials__qualification {
+  font-family: var(--font-body);
+  font-size: var(--t-small);
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--ink);
+}
+
+.credentials__body {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  line-height: 1.4;
+  letter-spacing: var(--track-mono);
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* ---- Mono slug, e.g. [01 // TEACH] ---- */
+
+.slug {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: var(--track-mono);
+  text-transform: uppercase;
+  color: var(--clay-ink);
+}
+
+/* ---- A link with a hairline under it ---- */
+
+.link-rule {
+  font-family: var(--font-body);
+  font-size: var(--t-small);
+  font-weight: 500;
+  text-decoration: none;
+  color: var(--clay-ink);
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: var(--s-1);
+  transition:
+    color var(--dur-fast) var(--ease),
+    border-color var(--dur-fast) var(--ease);
+}
+
+.link-rule:hover {
+  color: var(--ink);
+  border-bottom-color: var(--clay);
+}
+
+/* ---- Label/value rows, as a description list ---- */
+/* dt/dd rather than sibling spans: spans separated only by a CSS gap
+   concatenate in the accessibility tree, so a pricing row announced as
+   "One to one60 minutes£45". */
+
+.rows-dl {
+  width: 100%;
+  max-inline-size: var(--measure);
+}
+
+.rows-dl__row {
+  display: grid;
+  gap: var(--s-1);
+  padding-block: var(--s-4);
+  border-top: var(--border);
+}
+
+.rows-dl__row:last-child {
+  border-bottom: var(--border);
+}
+
+@media (min-width: 768px) {
+  .rows-dl__row {
+    grid-template-columns: var(--rows-label, 14rem) 1fr;
+    gap: var(--s-5);
+    align-items: baseline;
+  }
+
+  .rows-dl__row--priced {
+    grid-template-columns: var(--rows-label, 14rem) 1fr auto;
+  }
+}
+
+.rows-dl__label {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  line-height: 1.4;
+  letter-spacing: var(--track-mono);
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.rows-dl__body {
+  font-size: var(--t-body);
+  line-height: 1.6;
+  color: var(--ink-soft);
+  max-inline-size: none;
+  margin: 0;
+}
+
+.rows-dl__price {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: var(--track-mono);
+  text-transform: uppercase;
+  color: var(--clay-ink);
+  margin: 0;
+}
+
+/* ---- 10. Section patterns ---- */
+
+/* A prose list with a hairline dash instead of a bullet glyph. */
+.list-dash {
+  list-style: none;
+  display: grid;
+  gap: var(--s-4);
+  max-inline-size: var(--measure);
+}
+
+.list-dash > li {
+  display: grid;
+  grid-template-columns: var(--s-4) 1fr;
+  align-items: baseline;
+  gap: var(--s-3);
+  font-size: var(--t-lead);
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+
+.list-dash > li::before {
+  content: '';
+  inline-size: var(--s-4);
+  block-size: 1px;
+  background: var(--clay);
+  transform: translateY(-0.35em);
+}
+
+/* A secondary passage set off from the main column by a hairline. */
+.subblock {
+  border-inline-start: var(--border);
+  padding-inline-start: var(--s-5);
+  display: grid;
+  gap: var(--s-3);
+  max-inline-size: var(--measure);
+}
+
+.subblock__heading {
+  margin: 0;
+  max-inline-size: none;
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  line-height: 1.2;
+  letter-spacing: var(--track-mono);
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.subblock p {
+  margin: 0;
+  font-size: var(--t-body);
+  line-height: 1.7;
+}
+
+/* Numbered steps. */
+.steps {
+  list-style: none;
+  display: grid;
+  gap: var(--s-5);
+  width: 100%;
+  max-inline-size: var(--measure);
+}
+
+.steps > li {
+  display: grid;
+  grid-template-columns: var(--s-6) 1fr;
+  gap: var(--s-4);
+  align-items: baseline;
+  padding-block-start: var(--s-4);
+  border-top: var(--border);
+}
+
+.steps__number {
+  font-family: var(--font-mono);
+  font-size: var(--t-mono);
+  letter-spacing: var(--track-mono);
+  color: var(--clay-ink);
+}
+
+.steps__body {
+  font-size: var(--t-body);
+  line-height: 1.7;
+  max-inline-size: none;
+}
+
+.steps__body strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* An empty image frame: the 1px rule sits 8px inside the edge. */
+.frame {
+  position: relative;
+  width: 100%;
+  background: var(--coconut);
+  border-radius: var(--radius-none);
+}
+
+.frame::after {
+  content: '';
+  position: absolute;
+  inset: var(--s-2);
+  border: var(--border);
+  pointer-events: none;
+}

@@ -1,0 +1,122 @@
+---
+/**
+ * THE HUB.
+ *
+ * One job: establish authority, then get the visitor off this page and onto
+ * the spoke they came for. Signposts, not sales copy — the argument for each
+ * service lives on that service's own page, aimed at its own audience.
+ */
+import Base from '../layouts/Base.astro';
+import SectionMarker from '../components/SectionMarker.astro';
+import PillarCards from '../components/PillarCards.astro';
+import Button from '../components/Button.astro';
+import global from '../content/global.json';
+import site from '../content/site.json';
+
+const { hub, credentials } = site;
+---
+
+<Base title={global.meta.title} bare>
+  {/* ── Hero ── */}
+  <section class="page-hero hero">
+    <div class="container editorial">
+      <div class="editorial-full stack">
+        <p class="hero__eyebrow">{site.brand.triad}</p>
+        <h1 class="hero__headline">{hub.headline}</h1>
+        <p class="hero__sub">{hub.sub}</p>
+      </div>
+    </div>
+  </section>
+
+  {/* ── The three pillars. The whole point of the page. ── */}
+  <section class="section band" aria-labelledby="pillars-heading">
+    <div class="container editorial">
+      <SectionMarker label="Services" class="editorial-aside" />
+
+      <div class="editorial-full stack">
+        <h2 id="pillars-heading" class="pillars__heading">{hub.pillarsHeading}</h2>
+        <p class="t-lead">{hub.pillarsLine}</p>
+        <PillarCards full />
+      </div>
+    </div>
+  </section>
+
+  {/* ── Authority ── */}
+  <section class="section" aria-labelledby="authority-heading">
+    <div class="container editorial">
+      <SectionMarker label="Who" class="editorial-aside" />
+
+      <div class="editorial-full split">
+        <div>
+          {/* Photography not shot. Alt text is written and waiting in site.json. */}
+          <div class="frame frame--portrait"></div>
+        </div>
+
+        <div class="stack">
+          <h2 id="authority-heading">{hub.authorityHeading}</h2>
+          {hub.authorityParagraphs.map((line) => <p class="t-body">{line}</p>)}
+          <a class="link-rule" href={hub.authorityLink.href}>
+            {hub.authorityLink.label}&nbsp;<span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <ul class="credentials editorial-full" role="list">
+        {
+          credentials.map((credential) => (
+            <li class="credentials__item">
+              <span class="credentials__qualification">{credential.qualification}</span>
+              <span class="credentials__body">{credential.body}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  {/* ── Close ── */}
+  <section class="section band" aria-labelledby="hub-close">
+    <div class="container editorial">
+      <SectionMarker label="Contact" class="editorial-aside" />
+
+      <div class="editorial-full stack">
+        <h2 id="hub-close">{site.contact.heading}</h2>
+        <p class="t-lead">{site.contact.line}</p>
+        <Button variant="primary" href={global.nav.cta.href}>{global.nav.cta.label}</Button>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero__eyebrow {
+    font-family: var(--font-display);
+    font-size: var(--t-lead);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.3;
+    color: var(--ink-soft);
+    max-inline-size: none;
+  }
+
+  .hero__headline {
+    font-family: var(--font-display);
+    font-size: var(--t-hero);
+    font-weight: 300;
+    line-height: 0.94;
+    letter-spacing: -0.02em;
+    max-inline-size: 16ch;
+    text-wrap: balance;
+  }
+
+  .hero__sub {
+    font-size: var(--t-lead);
+    line-height: 1.6;
+    color: var(--ink-soft);
+    max-inline-size: var(--measure-lead);
+  }
+
+  .pillars__heading {
+    max-inline-size: 22ch;
+  }
+</style>

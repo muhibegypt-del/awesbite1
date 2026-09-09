@@ -1,0 +1,12 @@
+---
+/** Spoke: Audiobook narration and voice work. */
+import Base from '../layouts/Base.astro';
+import ServicePage from '../components/ServicePage.astro';
+import site from '../content/site.json';
+
+const service = site.services.find((s) => s.id === 'narration');
+---
+
+<Base title="Audiobook narration and voice work" description="Audiobook narration and voice work for authors, publishers and producers. I understand the text before I record it. Request a custom audition.">
+  <ServicePage service={service} />
+</Base>

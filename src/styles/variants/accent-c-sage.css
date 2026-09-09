@@ -1,0 +1,42 @@
+/* ============================================================
+   Variant C — SAGE STUDY
+
+   A warmer, more yellow paper with a sage accent and a green-black ink.
+
+   Computed contrast, all values measured not estimated:
+     --clay      #6D7454  on --paper       4.34   ✗ large only (≥24px)
+     --clay-ink  #696F51  on --paper       4.65   ✓ any size
+     --clay-ink           on --paper-lift  4.95   ✓ placeholder chips
+     --paper     on --clay-ink             4.65   ✓ solid button labels
+     --ink       #23261C  on --paper      13.58   ✓ exceeds 7:1
+     --ink                on --coconut    10.52   ✓
+     --ink-soft  #5A4E48  on --paper       7.09   ✓
+     --paper     on --surface-dark         7.60   ✓ footer copy
+     --coconut   on --surface-dark         5.88   ✓ footer secondary
+
+   --clay-ink was derived by holding the accent's hue and saturation and
+   lowering HSL lightness in 0.05% steps until it cleared the threshold
+   against this variant's paper. Two candidates:
+
+     #6B7152   4.5142   clears 4.5 by 0.014
+     #696F51   4.6451   clears 4.5 by 0.145    ← shipped
+
+   The first is a technical pass sitting on the boundary. The second is
+   one step darker, visually indistinguishable, and holds a real margin.
+
+   Note --clay #6D7454 is still within rounding distance of --olive
+   #6D7456. If sage is chosen, --olive stops being a distinct "quiet
+   support" token and the Reflection section needs another treatment.
+
+   To adopt site-wide: set data-variant="c" on <html> in Base.astro.
+   ============================================================ */
+
+[data-variant='c'] {
+  --paper: #f4f1e4;
+  --paper-lift: #faf8f0;
+  --coconut: #d9d6c4;
+  --ink: #23261c;
+  --clay: #6d7454;
+  --clay-ink: #696f51;
+  --surface-dark: #4a4e3a;
+}

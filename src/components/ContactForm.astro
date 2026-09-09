@@ -1,0 +1,264 @@
+---
+/**
+ * The enquiry form. One source, used by /contact.
+ *
+ * The topic can be pre-selected from the query string, so a producer arriving
+ * from /narration does not have to notice a dropdown. Previously the first
+ * option was pre-selected with a real value, which meant `required` could
+ * never fire and every untouched submission filed as "English tuition".
+ */
+import Button from './Button.astro';
+import site from '../content/site.json';
+
+const { contact } = site;
+const requested = Astro.url.searchParams.get('about') ?? '';
+const preselected = contact.topics.includes(requested) ? requested : '';
+---
+
+<form
+  class="form"
+  name="enquiry"
+  method="POST"
+  action="/thank-you"
+  data-netlify="true"
+  netlify-honeypot="company"
+  novalidate
+>
+  <input type="hidden" name="form-name" value="enquiry" />
+
+  {/* aria-hidden with tabindex="-1" is the sanctioned honeypot pattern. Without
+      it a screen reader user meets a field labelled "Do not fill this in", and
+      if they fill it Netlify discards the enquiry while telling them it sent. */}
+  <p class="form__honey" aria-hidden="true">
+    <label>
+      Do not fill this in
+      <input name="company" tabindex="-1" autocomplete="off" />
+    </label>
+  </p>
+
+  <p class="form__note">{contact.optionalNote}</p>
+
+  <div class="form__row">
+    <label class="form__field">
+      <span class="form__label">{contact.fields.name}</span>
+      <input
+        type="text"
+        name="name"
+        autocomplete="name"
+        required
+        aria-describedby="err-name"
+        data-error-missing={contact.errors.name}
+      />
+      <span class="form__error" id="err-name" role="alert"></span>
+    </label>
+
+    <label class="form__field">
+      <span class="form__label">{contact.fields.email}</span>
+      <input
+        type="email"
+        name="email"
+        autocomplete="email"
+        required
+        aria-describedby="err-email"
+        data-error-missing={contact.errors.email}
+        data-error-format={contact.errors.emailFormat}
+      />
+      <span class="form__error" id="err-email" role="alert"></span>
+    </label>
+  </div>
+
+  <div class="form__row">
+    <label class="form__field">
+      <span class="form__label">{contact.fields.topic}</span>
+      <select name="topic" required aria-describedby="err-topic" data-error-missing={contact.errors.topic}>
+        <option value="">{contact.topicPlaceholder}</option>
+        {
+          contact.topics.map((topic) => (
+            <option value={topic} selected={topic === preselected}>{topic}</option>
+          ))
+        }
+      </select>
+      <span class="form__error" id="err-topic" role="alert"></span>
+    </label>
+
+    <label class="form__field">
+      <span class="form__label">{contact.fields.deadline}</span>
+      <input type="text" name="deadline" />
+    </label>
+  </div>
+
+  <label class="form__field">
+    <span class="form__label">{contact.fields.message}</span>
+    <textarea
+      name="message"
+      rows="5"
+      placeholder={contact.placeholder}
+      required
+      aria-describedby="err-message"
+      data-error-missing={contact.errors.message}></textarea>
+    <span class="form__error" id="err-message" role="alert"></span>
+  </label>
+
+  <div class="form__actions">
+    <Button variant="primary" type="submit" data-submit data-sending={contact.submitting}>
+      {contact.submit}
+    </Button>
+    <p class="form__response">{contact.response}</p>
+  </div>
+</form>
+
+<style>
+  .form {
+    display: grid;
+    gap: var(--s-5);
+    width: 100%;
+    max-inline-size: var(--measure);
+  }
+
+  .form__honey {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  .form__note,
+  .form__response {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: var(--t-mono);
+    letter-spacing: var(--track-mono);
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .form__row {
+    display: grid;
+    gap: var(--s-5);
+  }
+
+  @media (min-width: 768px) {
+    .form__row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .form__field {
+    display: grid;
+    gap: var(--s-2);
+  }
+
+  /* Mono is permitted on form labels. Brief §3.4, item 4. */
+  .form__label {
+    font-family: var(--font-mono);
+    font-size: var(--t-mono);
+    letter-spacing: var(--track-mono);
+    text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .form input,
+  .form select,
+  .form textarea {
+    width: 100%;
+    padding: var(--s-3) var(--s-4);
+    font-size: var(--t-body);
+    line-height: 1.5;
+    color: var(--ink);
+    background: var(--paper-lift);
+    border: var(--border);
+    border-radius: var(--radius-sm);
+    transition: border-color var(--dur-fast) var(--ease);
+  }
+
+  .form textarea {
+    resize: vertical;
+  }
+
+  .form input:hover,
+  .form select:hover,
+  .form textarea:hover {
+    border-color: var(--clay);
+  }
+
+  .form [aria-invalid='true'] {
+    border-color: var(--clay-ink);
+  }
+
+  .form ::placeholder {
+    color: var(--ink-soft);
+    opacity: 1;
+  }
+
+  /* Persistent and associated, rather than a validation bubble that vanishes
+     on the next keystroke and is announced inconsistently or not at all. */
+  .form__error {
+    font-family: var(--font-mono);
+    font-size: var(--t-mono);
+    letter-spacing: var(--track-mono);
+    line-height: 1.4;
+    color: var(--clay-ink);
+  }
+
+  .form__error:empty {
+    display: none;
+  }
+
+  .form__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--s-5);
+  }
+</style>
+
+<script>
+  const form = document.querySelector<HTMLFormElement>('form[name="enquiry"]');
+
+  if (form) {
+    type Field = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
+    const fields = Array.from(form.querySelectorAll<Field>('[data-error-missing]'));
+
+    const messageFor = (field: Field) => {
+      if (field.validity.valueMissing) return field.dataset.errorMissing ?? '';
+      if (field.validity.typeMismatch) return field.dataset.errorFormat ?? '';
+      return '';
+    };
+
+    const show = (field: Field, message: string) => {
+      const id = field.getAttribute('aria-describedby');
+      const target = id ? document.getElementById(id) : null;
+      if (target) target.textContent = message;
+      field.setAttribute('aria-invalid', message ? 'true' : 'false');
+    };
+
+    for (const field of fields) {
+      field.addEventListener('input', () => show(field, ''));
+      field.addEventListener('change', () => show(field, ''));
+    }
+
+    form.addEventListener('submit', (event) => {
+      let firstInvalid: Field | null = null;
+
+      for (const field of fields) {
+        const message = field.checkValidity() ? '' : messageFor(field);
+        show(field, message);
+        if (message && !firstInvalid) firstInvalid = field;
+      }
+
+      if (firstInvalid) {
+        event.preventDefault();
+        firstInvalid.focus();
+        return;
+      }
+
+      const button = form.querySelector<HTMLElement>('[data-submit]');
+      if (button) {
+        const label = button.querySelector('.btn__label') ?? button;
+        label.textContent = button.dataset.sending ?? label.textContent;
+      }
+    });
+  }
+</script>

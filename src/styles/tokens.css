@@ -13,7 +13,10 @@
   /* ---- Type & structure ---- */
   --ink:        #241C1A;   /* headings + body. Never use #000 */
   --ink-soft:   #5A4E48;   /* captions, mono labels at rest */
-  --rule:       rgba(36, 28, 26, 0.14);
+  /* Derived from --ink so it retunes with the palette. It was a hardcoded
+     rgba of variant A's ink, which left every hairline on the site warm
+     terracotta under the plum and sage palettes. */
+  --rule:       color-mix(in srgb, var(--ink) 14%, transparent);
 
   /* ---- Accent (Terracotta family) ---- */
   --clay:       #AF593E;   /* fills, large type ≥24px, marks. NOT small text */
@@ -21,12 +24,22 @@
 
   /* ---- Quiet support ---- */
   --olive:      #6D7456;   /* Reflection only, large text only */
-  --plum:       #5B3B4E;   /* footer + one dark pull-quote band */
+  --plum:       #5B3B4E;   /* raw palette colour */
+
+  /* ---- Dark bands ---- */
+  /* Every dark surface — the footer, and the pull-quote band when it is
+     built — reads this, never --plum directly, so the accent variants can
+     retune it. Defaults to plum, which is variant A. */
+  --surface-dark: #5B3B4E;
   --teal:       #5F8A8B;   /* audio player scrubber ONLY */
 
   /* ---- Typefaces ---- */
   --font-display: "Maison", "Cormorant Garamond", "Instrument Serif", Georgia, serif;
-  --font-body:    "Avenir Next", "Jost", "Futura", -apple-system, "Segoe UI", sans-serif;
+  /* Jost leads. "Avenir Next" is deliberately absent: it is a macOS system
+     face, so listing it first would resolve locally on Mac and the
+     self-hosted Jost would never load. Reinstate it only when a licensed
+     Avenir webfont is self-hosted alongside the others. */
+  --font-body:    "Jost", "Futura", -apple-system, "Segoe UI", sans-serif;
   --font-mono:    "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
   /* ---- Type scale (fluid, 360px → 1440px) ---- */

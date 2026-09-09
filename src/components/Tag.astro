@@ -1,0 +1,59 @@
+---
+/**
+ * Tag — mono metadata chip. Durations, dates, prices, formats,
+ * exam boards, categories. Square corners (radius 0, brief §4.3).
+ *
+ * Non-interactive by default. Pass an href for a filter link.
+ */
+interface Props {
+  variant?: 'default' | 'accent';
+  href?: string;
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { variant = 'default', href, class: className, ...rest } = Astro.props;
+
+const Tag = href ? 'a' : 'span';
+const classes = ['tag', `tag--${variant}`, className].filter(Boolean).join(' ');
+---
+
+<Tag class={classes} {...(href ? { href } : {})} {...rest}>
+  <slot />
+</Tag>
+
+<style>
+  .tag {
+    display: inline-block;
+    padding: var(--s-1) var(--s-2);
+    font-family: var(--font-mono);
+    font-size: var(--t-mono);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: var(--track-mono);
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    border: var(--border);
+    border-radius: var(--radius-none);
+    transition:
+      color var(--dur-fast) var(--ease),
+      border-color var(--dur-fast) var(--ease);
+  }
+
+  .tag--default {
+    color: var(--ink-soft);
+    background: transparent;
+  }
+
+  .tag--accent {
+    color: var(--clay-ink);
+    border-color: var(--clay-ink);
+    background: transparent;
+  }
+
+  a.tag:hover {
+    color: var(--clay-ink);
+    border-color: var(--clay-ink);
+  }
+</style>

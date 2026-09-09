@@ -1,0 +1,17 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+import site from '../content/site.json';
+---
+
+<Base title="Thank you" noindex>
+  <section class="page-hero">
+    <div class="container editorial">
+      <div class="stack">
+        <h1>{site.thankYou.heading}</h1>
+        <p class="t-lead">{site.thankYou.body}</p>
+        <Button variant="secondary" href="/">Back to the site</Button>
+      </div>
+    </div>
+  </section>
+</Base>
