@@ -24,6 +24,35 @@ html {
   html { scroll-behavior: auto; }
 }
 
+/* Native cross-document transitions keep navigation feeling continuous while
+   preserving Astro's normal multi-page behaviour and near-zero JS footprint. */
+@view-transition {
+  navigation: auto;
+}
+
+@keyframes page-fade-out {
+  to { opacity: 0; }
+}
+
+@keyframes page-fade-in {
+  from { opacity: 0; }
+}
+
+::view-transition-old(root) {
+  animation: page-fade-out var(--dur-fast) var(--ease) both;
+}
+
+::view-transition-new(root) {
+  animation: page-fade-in var(--dur-mid) var(--ease) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.01ms !important;
+  }
+}
+
 body {
   margin: 0;
   font-family: var(--font-body);
@@ -384,6 +413,35 @@ p {
 
   .page-hero .editorial > :nth-child(2) { animation-delay: 90ms; }
   .page-hero .editorial > :nth-child(3) { animation-delay: 180ms; }
+}
+
+/* Editorial scroll reveals. The root class is added only when motion is
+   welcome and IntersectionObserver is available; content remains visible in
+   every fallback and a short fail-safe removes the class if setup ever fails. */
+.reveal-enabled .hero:not(.page-hero) .editorial > *,
+.reveal-enabled .section .editorial > * {
+  opacity: 0;
+  transform: translateY(var(--s-3));
+  transition:
+    opacity var(--dur-slow) var(--ease) var(--reveal-delay, 0ms),
+    transform var(--dur-slow) var(--ease) var(--reveal-delay, 0ms);
+}
+
+.reveal-enabled .hero:not(.page-hero) .editorial > *.is-revealed,
+.reveal-enabled .section .editorial > *.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-enabled .hero:not(.page-hero) .editorial > * img,
+.reveal-enabled .section .editorial > * img {
+  transform: scale(1.02);
+  transition: transform var(--dur-slow) var(--ease) var(--reveal-delay, 0ms);
+}
+
+.reveal-enabled .hero:not(.page-hero) .editorial > *.is-revealed img,
+.reveal-enabled .section .editorial > *.is-revealed img {
+  transform: scale(1);
 }
 
 @media (max-width: 1023px) {

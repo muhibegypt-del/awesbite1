@@ -43,6 +43,17 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      if (
+        window.matchMedia('(prefers-reduced-motion: no-preference)').matches &&
+        'IntersectionObserver' in window
+      ) {
+        document.documentElement.classList.add('reveal-enabled');
+        window.__atwRevealFallback = window.setTimeout(() => {
+          document.documentElement.classList.remove('reveal-enabled');
+        }, 3000);
+      }
+    </script>
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
 
@@ -431,3 +442,51 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
     text-decoration-color: var(--coconut);
   }
 </style>
+
+<script>
+  const revealSelector = [
+    '.hero:not(.page-hero) .editorial > *',
+    '.section .editorial > *',
+  ].join(',');
+
+  let revealObserver: IntersectionObserver | undefined;
+
+  function initialiseRevealMotion() {
+    revealObserver?.disconnect();
+
+    const root = document.documentElement;
+    const fallback = (window as typeof window & { __atwRevealFallback?: number })
+      .__atwRevealFallback;
+
+    if (!root.classList.contains('reveal-enabled')) return;
+
+    const targets = Array.from(document.querySelectorAll<HTMLElement>(revealSelector));
+    let previousParent: HTMLElement | null = null;
+    let siblingIndex = 0;
+
+    for (const target of targets) {
+      const parent = target.parentElement;
+      siblingIndex = parent === previousParent ? siblingIndex + 1 : 0;
+      previousParent = parent;
+      target.style.setProperty('--reveal-delay', `${Math.min(siblingIndex, 2) * 70}ms`);
+    }
+
+    revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          entry.target.classList.add('is-revealed');
+          observer.unobserve(entry.target);
+        }
+      },
+      { rootMargin: '0px 0px -8% 0px', threshold: 0.12 }
+    );
+
+    for (const target of targets) revealObserver.observe(target);
+
+    if (fallback) window.clearTimeout(fallback);
+  }
+
+  initialiseRevealMotion();
+  document.addEventListener('astro:page-load', initialiseRevealMotion);
+</script>
