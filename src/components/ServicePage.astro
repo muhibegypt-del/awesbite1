@@ -1,0 +1,321 @@
+---
+/**
+ * A spoke. One service, one audience, its own complete argument and its own
+ * call to action. The three share this template; the JSON decides which parts
+ * a given service has.
+ *
+ * Every section marker is a real heading, so heading navigation reaches the
+ * whole page rather than one h2.
+ */
+import SectionMarker from './SectionMarker.astro';
+import PillarCards from './PillarCards.astro';
+import Button from './Button.astro';
+import Tag from './Tag.astro';
+
+interface Props {
+  service: Record<string, any>;
+}
+
+const { service } = Astro.props;
+---
+
+{/* ── Hero ── */}
+<section class="page-hero hero">
+  <div class="container editorial">
+    <p class="slug editorial-aside" aria-hidden="true">[{service.number} // {service.tag}]</p>
+
+    <div class="stack">
+      <p class="hero__pillar">{service.pillar}</p>
+      <h1 class="hero__headline">{service.plain}</h1>
+      <p class="hero__audience">{service.audience}</p>
+      <p class="hero__line">{service.oneLiner}</p>
+      <Button variant="primary" href={service.cta.href}>{service.cta.label}</Button>
+    </div>
+  </div>
+</section>
+
+{/* ── Reels, when the service leads with sound ── */}
+{
+  service.reelsHeading && (
+    <section class="section band" aria-labelledby="reels-heading">
+      <div class="container editorial">
+        <SectionMarker as="h2" id="reels-heading" label={service.reelsHeading} class="editorial-aside" />
+        <div class="stack">
+          <p class="placeholder">{service.reelsPlaceholder}</p>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+{/* ── The problem ── */}
+<section class="section" aria-labelledby="problem-heading">
+  <div class="container editorial">
+    <SectionMarker as="h2" id="problem-heading" label="The problem" class="editorial-aside" />
+
+    <div class="stack">
+      {service.problem.map((line: string) => <p class="t-lead">{line}</p>)}
+
+      <div class="subblock">
+        <p class="subblock__heading">{service.aside.heading}</p>
+        <p>{service.aside.body}</p>
+      </div>
+
+      {
+        service.swap && (
+          <div class="swap">
+            <div class="swap__side">
+              <p class="subblock__heading">{service.swap.fromLabel}</p>
+              <p class="t-body">{service.swap.from}</p>
+            </div>
+            <div class="swap__side">
+              <p class="subblock__heading">{service.swap.toLabel}</p>
+              <p class="t-body">{service.swap.to}</p>
+            </div>
+          </div>
+        )
+      }
+
+      {
+        service.voiceHeading && (
+          <div class="stack stack--tight">
+            <h3>{service.voiceHeading}</h3>
+            <p class="t-body">{service.voiceBody}</p>
+            <ul class="tag-row" role="list">
+              {service.voiceTags.map((tag: string) => <li><Tag>{tag}</Tag></li>)}
+            </ul>
+          </div>
+        )
+      }
+    </div>
+  </div>
+</section>
+
+{/* ── Who / what ── */}
+{
+  service.tracks && (
+    <section class="section band" aria-labelledby="tracks-heading">
+      <div class="container editorial">
+        <SectionMarker as="h2" id="tracks-heading" label={service.tracksHeading} class="editorial-aside" />
+
+        <div class="stack">
+          <dl class="rows-dl">
+            {service.tracks.map((track: { label: string; body: string }) => (
+              <div class="rows-dl__row">
+                <dt class="rows-dl__label">{track.label}</dt>
+                <dd class="rows-dl__body">{track.body}</dd>
+              </div>
+            ))}
+          </dl>
+
+          {
+            service.note && (
+              <div class="subblock">
+                <p class="subblock__heading">{service.note.heading}</p>
+                <p>{service.note.body}</p>
+              </div>
+            )
+          }
+        </div>
+      </div>
+    </section>
+  )
+}
+
+{/* ── Method ── */}
+<section class="section" aria-labelledby="method-heading">
+  <div class="container editorial">
+    <SectionMarker as="h2" id="method-heading" label={service.methodHeading} class="editorial-aside" />
+
+    <div class="stack">
+      <ol class="steps" role="list">
+        {
+          service.method.map((step: { number: string; title: string; body: string }) => (
+            <li>
+              <span class="steps__number">{step.number}</span>
+              <span class="steps__body"><strong>{step.title}</strong> {step.body}</span>
+            </li>
+          ))
+        }
+      </ol>
+
+      {service.footnote && <p class="t-small footnote">{service.footnote}</p>}
+      <Button variant="secondary" href={service.cta.href}>{service.cta.label}</Button>
+    </div>
+  </div>
+</section>
+
+{/* ── Pricing, where the service has published tiers ── */}
+{
+  service.tiers && (
+    <section class="section band" aria-labelledby="pricing-heading">
+      <div class="container editorial">
+        <SectionMarker as="h2" id="pricing-heading" label={service.pricingHeading} class="editorial-aside" />
+
+        <div class="stack">
+          <p class="t-body">{service.pricingLine}</p>
+
+          <dl class="rows-dl">
+            {service.tiers.map((tier: { label: string; cadence: string; price: string }) => (
+              <div class="rows-dl__row rows-dl__row--priced">
+                <dt class="rows-dl__label">{tier.label}</dt>
+                <dd class="rows-dl__body">{tier.cadence}</dd>
+                <dd class="rows-dl__price">{tier.price}</dd>
+              </div>
+            ))}
+          </dl>
+
+          <h3>{service.agreementsHeading}</h3>
+          <div class="agreements">
+            {
+              service.agreements.map((agreement: { heading: string; body: string }) => (
+                <div class="agreement">
+                  <p class="agreement__heading">{agreement.heading}</p>
+                  <p class="t-body">{agreement.body}</p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+{/* ── Studio / examples / proof: slots that are declared, not faked ── */}
+{
+  (service.studioHeading || service.examplesHeading || service.proofHeading || service.background) && (
+    <section class="section" aria-labelledby="detail-heading">
+      <div class="container editorial">
+        <SectionMarker as="h2" id="detail-heading" label="Worth knowing" class="editorial-aside" />
+
+        <div class="stack">
+          {service.studioHeading && (
+            <div class="stack stack--tight">
+              <h3>{service.studioHeading}</h3>
+              <p class="placeholder">{service.studioPlaceholder}</p>
+            </div>
+          )}
+
+          {service.examplesHeading && (
+            <div class="stack stack--tight">
+              <h3>{service.examplesHeading}</h3>
+              <p class="placeholder">{service.examplesPlaceholder}</p>
+            </div>
+          )}
+
+          {service.proofHeading && (
+            <div class="stack stack--tight">
+              <h3>{service.proofHeading}</h3>
+              <p class="placeholder">{service.proofPlaceholder}</p>
+            </div>
+          )}
+
+          {service.background && (
+            <div class="subblock">
+              <p class="subblock__heading">{service.background.heading}</p>
+              <p>{service.background.body}</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+{/* ── The other two services always have an exit ── */}
+<section class="section band" aria-labelledby="other-heading">
+  <div class="container editorial">
+    <SectionMarker as="h2" id="other-heading" label="Also" class="editorial-aside" />
+    <div class="editorial-full">
+      <PillarCards current={service.route} />
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero__pillar {
+    font-family: var(--font-display);
+    font-size: var(--t-lead);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.2;
+    color: var(--ink-soft);
+  }
+
+  .hero__headline {
+    font-family: var(--font-display);
+    font-size: var(--t-h1);
+    font-weight: 300;
+    line-height: 1.02;
+    letter-spacing: -0.015em;
+    max-inline-size: 16ch;
+    text-wrap: balance;
+  }
+
+  .hero__audience {
+    font-family: var(--font-mono);
+    font-size: var(--t-mono);
+    letter-spacing: var(--track-mono);
+    text-transform: uppercase;
+    color: var(--clay-ink);
+  }
+
+  .hero__line {
+    font-size: var(--t-lead);
+    line-height: 1.5;
+    max-inline-size: var(--measure-lead);
+  }
+
+  .tag-row {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-2);
+  }
+
+  .footnote {
+    color: var(--ink-soft);
+  }
+
+  .swap {
+    display: grid;
+    gap: var(--s-6);
+    width: 100%;
+    max-inline-size: var(--measure);
+  }
+
+  @media (min-width: 768px) {
+    .swap {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--s-7);
+    }
+  }
+
+  .swap__side {
+    display: grid;
+    gap: var(--s-3);
+    align-content: start;
+    padding-block-start: var(--s-4);
+    border-top: var(--border);
+  }
+
+  .agreements {
+    display: grid;
+    gap: var(--s-6);
+    max-inline-size: var(--measure);
+  }
+
+  .agreement {
+    display: grid;
+    gap: var(--s-2);
+  }
+
+  .agreement__heading {
+    font-family: var(--font-display);
+    font-size: var(--t-h3);
+    font-weight: 400;
+    line-height: 1.3;
+    color: var(--ink);
+  }
+</style>

@@ -1,0 +1,12 @@
+---
+/** Spoke: Writing and repurposing. */
+import Base from '../layouts/Base.astro';
+import ServicePage from '../components/ServicePage.astro';
+import site from '../content/site.json';
+
+const service = site.services.find((s) => s.id === 'writing');
+---
+
+<Base title="Writing and repurposing" description="Send the voice notes; it comes back sounding like you, working in more than one place. For coaches, founders and podcasters.">
+  <ServicePage service={service} />
+</Base>

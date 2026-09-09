@@ -1,28 +1,25 @@
 ---
 /**
- * SectionMarker — the mono marker that lives in the wide left gutter,
- * e.g. § SERVICES. Brief §3.4, item 2.
+ * The mono marker in the wide left gutter, e.g. § SERVICES.
  *
- * Place it as a direct child of .editorial with class "editorial-aside"
- * and it sits in columns 1–2 on desktop, above the content below 1280px.
- * The § is decorative and hidden from assistive tech.
+ * Takes an `as` so a marker that titles an otherwise-unheaded section can be a
+ * real heading. As a <p> it was invisible to heading navigation, which left
+ * some pages with a single navigable heading below the h1.
  */
 interface Props {
   label: string;
-  /** Renders the marker sticky alongside a long content column. */
-  sticky?: boolean;
+  as?: 'p' | 'h2' | 'h3';
+  id?: string;
   class?: string;
 }
 
-const { label, sticky = false, class: className } = Astro.props;
-const classes = ['marker', sticky && 'marker--sticky', className]
-  .filter(Boolean)
-  .join(' ');
+const { label, as: Tag = 'p', id, class: className } = Astro.props;
+const classes = ['marker', className].filter(Boolean).join(' ');
 ---
 
-<p class={classes}>
+<Tag class={classes} id={id}>
   <span class="marker__sign" aria-hidden="true">§</span>{label}
-</p>
+</Tag>
 
 <style>
   .marker {
@@ -40,14 +37,9 @@ const classes = ['marker', sticky && 'marker--sticky', className]
     color: var(--ink-soft);
   }
 
+  /* --clay-ink, not --clay. --clay is 4.09:1 and CLAUDE.md forbids it below
+     24px; this glyph renders at 12px on every section of every page. */
   .marker__sign {
-    color: var(--clay);
-  }
-
-  @media (min-width: 1280px) {
-    .marker--sticky {
-      position: sticky;
-      top: var(--s-8);
-    }
+    color: var(--clay-ink);
   }
 </style>

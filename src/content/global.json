@@ -1,51 +1,69 @@
 {
-  "brand": {
-    "wordmark": "a textured word",
-    "comment_G01": "G-01. Fixed, lowercase always. OWNER: DEV."
-  },
+  "brand": { "wordmark": "a textured word" },
 
   "nav": {
-    "comment_G02": "G-02. Fixed. OWNER: DEV.",
+    "_comment": "Plain, searchable labels. The pillar names (The Taught Word etc.) are display names on the hub; nav uses the word a buyer would actually search.",
     "items": [
-      { "label": "about", "href": "/about" },
-      { "label": "services", "href": "/services" },
-      { "label": "reflection", "href": "/reflection" },
-      { "label": "work", "href": "/work" }
-    ]
+      { "label": "tuition", "href": "/tuition" },
+      { "label": "narration", "href": "/narration" },
+      { "label": "writing", "href": "/writing" },
+      { "label": "about", "href": "/about" }
+    ],
+    "cta": { "label": "Book a free call", "href": "/contact" }
+  },
+
+  "banner": {
+    "_comment": "Temporary. Set showPreviewBanner={false} in Base.astro at launch.",
+    "text": "This is a site preview"
   },
 
   "footer": {
-    "comment_G03": "G-03. OWNER: ANEESA. Draft available: 'words are not flat.' Fallback: omit the line, wordmark sits alone.",
-    "tagline": "[ FOOTER TAGLINE WILL GO HERE — one line, 6 words max ]",
-    "taglineDraft": "words are not flat.",
-    "legal": "© a textured word",
+    "tagline": "the taught word. the spoken word. the written word.",
+    "legal": "© 2026 a textured word · United Kingdom",
+    "_comment_legal": "G-07. Privacy and Terms block launch — a UK site running a contact form that collects a name and an email needs a privacy notice. Until the pages exist the hrefs stay null and nothing renders, per the same rule as social.",
     "legalLinks": [
-      { "label": "privacy", "href": "/privacy" },
-      { "label": "terms", "href": "/terms" }
+      { "label": "privacy", "href": null },
+      { "label": "terms", "href": null }
+    ],
+    "columns": [
+      {
+        "heading": "services",
+        "links": [
+          { "label": "English tuition", "href": "/tuition" },
+          { "label": "Narration and voice", "href": "/narration" },
+          { "label": "Writing", "href": "/writing" }
+        ]
+      },
+      {
+        "heading": "get in touch",
+        "links": [
+          { "label": "atexturedword@gmail.com", "href": "mailto:atexturedword@gmail.com" },
+          { "label": "Book a free call", "href": "/contact" },
+          { "label": "About Aneesa", "href": "/about" }
+        ]
+      }
     ]
   },
 
   "social": {
-    "comment_G04": "G-04. OWNER: ANEESA. Fallback: link hidden. Never render a dead icon — a null url renders nothing.",
+    "_comment": "G-04. Never render a dead link — the column only appears once at least one URL exists.",
+    "heading": "elsewhere",
     "links": [
-      { "label": "instagram", "url": null, "placeholder": "[ INSTAGRAM URL WILL GO HERE ]" },
-      { "label": "linkedin", "url": null, "placeholder": "[ LINKEDIN URL WILL GO HERE ]" },
-      { "label": "substack", "url": null, "placeholder": "[ SUBSTACK URL WILL GO HERE ]" },
-      { "label": "youtube", "url": null, "placeholder": "[ YOUTUBE URL WILL GO HERE — optional, phase two ]" },
-      { "label": "tiktok", "url": null, "placeholder": "[ TIKTOK URL WILL GO HERE — optional, phase two ]" }
+      { "label": "Instagram", "url": null },
+      { "label": "Substack", "url": null },
+      { "label": "YouTube", "url": null },
+      { "label": "TikTok", "url": null }
     ]
   },
 
-  "contact": {
-    "comment_G05": "G-05. Confirmed. ANEESA to confirm whether a domain address replaces this before launch.",
-    "email": "atexturedword@gmail.com"
-  },
+  "contact": { "email": "atexturedword@gmail.com" },
 
   "meta": {
-    "comment_G06": "G-06. OWNER: ANEESA, one description per page. Fallback: the page's H1 plus the brand name.",
     "titleSuffix": "a textured word",
-    "descriptionPlaceholder": "[ META DESCRIPTION WILL GO HERE — 150–160 characters, one per page ]",
+    "title": "a textured word · English tuition, audiobook narration and writing",
+    "description": "One to one English tuition for ages 6 to 60, audiobook narration for authors, and writing that still sounds like you. Book a free 20-minute call.",
     "locale": "en_GB",
+    "themeColor": "#F7E9DE",
     "ogImage": null
   },
 

@@ -1,0 +1,35 @@
+---
+/** The one destination for every CTA on the site. */
+import Base from '../layouts/Base.astro';
+import SectionMarker from '../components/SectionMarker.astro';
+import ContactForm from '../components/ContactForm.astro';
+import global from '../content/global.json';
+import site from '../content/site.json';
+---
+
+<Base
+  title="Book a free call"
+  description="Tell me what you need and by when. The first call is free, takes twenty minutes, and I will not try to sell you something you do not need."
+>
+  <section class="page-hero">
+    <div class="container editorial">
+      <SectionMarker label="Contact" class="editorial-aside" />
+
+      <div class="stack">
+        <h1>{site.contact.heading}</h1>
+        <p class="t-lead">{site.contact.line}</p>
+        <ContactForm />
+        <p class="t-small direct">
+          Or email directly: <a href={`mailto:${global.contact.email}`}>{global.contact.email}</a>
+        </p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .direct {
+    margin-top: var(--s-4);
+    color: var(--ink-soft);
+  }
+</style>

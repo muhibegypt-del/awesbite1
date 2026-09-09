@@ -13,7 +13,10 @@
   /* ---- Type & structure ---- */
   --ink:        #241C1A;   /* headings + body. Never use #000 */
   --ink-soft:   #5A4E48;   /* captions, mono labels at rest */
-  --rule:       rgba(36, 28, 26, 0.14);
+  /* Derived from --ink so it retunes with the palette. It was a hardcoded
+     rgba of variant A's ink, which left every hairline on the site warm
+     terracotta under the plum and sage palettes. */
+  --rule:       color-mix(in srgb, var(--ink) 14%, transparent);
 
   /* ---- Accent (Terracotta family) ---- */
   --clay:       #AF593E;   /* fills, large type ≥24px, marks. NOT small text */

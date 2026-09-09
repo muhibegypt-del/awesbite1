@@ -3,26 +3,19 @@ import '../styles/fonts.css';
 import '../styles/tokens.css';
 import '../styles/global.css';
 import global from '../content/global.json';
+import Button from '../components/Button.astro';
 
 interface Props {
-  /** Page title, sentence case. The brand name is appended and stays lowercase. */
+  /** Page title. The brand name is appended unless `bare`. */
   title: string;
-  /** G-06. Falls back to the placeholder until Aneesa supplies one. */
   description?: string;
-  /** Omit the suffix when the page title is already the brand name. */
   bare?: boolean;
-  /**
-   * Keep the page out of search results. Also the flag to filter on when a
-   * sitemap integration is added — there is none yet, so nothing generates
-   * a sitemap entry for these pages today.
-   */
   noindex?: boolean;
   /**
-   * Swaps global copy slots to their sanctioned draft wording. /preview sets
-   * it so nothing bracketed reaches a client presentation; the placeholder
-   * build leaves it off and keeps announcing what is outstanding.
+   * Temporary preview chrome. On by default while the site is being shown for
+   * approval; flip the default to false at launch and it disappears everywhere.
    */
-  draftCopy?: boolean;
+  showPreviewBanner?: boolean;
 }
 
 const {
@@ -30,18 +23,18 @@ const {
   description,
   bare = false,
   noindex = false,
-  draftCopy = false,
+  showPreviewBanner = true,
 } = Astro.props;
 
-/* G-03. Draft from the slot map; falls back to the placeholder. */
-const footerTagline = draftCopy ? global.footer.taglineDraft : global.footer.tagline;
-
 const pageTitle = bare ? title : `${title} — ${global.meta.titleSuffix}`;
-const pageDescription = description ?? global.meta.descriptionPlaceholder;
+const pageDescription = description ?? global.meta.description;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
 
+/* Never render a dead link. Both lists ship with null hrefs until the content
+   exists, and the whole column or list is dropped rather than emptied. */
 const socialLinks = global.social.links.filter((link) => link.url);
+const legalLinks = global.footer.legalLinks.filter((item) => item.href);
 ---
 
 <!doctype html>
@@ -50,26 +43,11 @@ const socialLinks = global.social.links.filter((link) => link.url);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
-    {!noindex && <link rel="canonical" href={canonical} />}
+    <link rel="canonical" href={canonical} />
 
-    {/* Only the two faces used above the fold, and only their latin subsets.
-        Brief §3.2. Cormorant is display-only and below the preload line;
-        latin-ext is fetched on demand by the unicode-range match.
-        crossorigin is required — font fetches are always CORS-mode. */}
-    <link
-      rel="preload"
-      href="/fonts/jost-latin.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="/fonts/jetbrains-mono-latin.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
+    {/* Only the two faces used above the fold, and only their latin subsets. */}
+    <link rel="preload" href="/fonts/jost-latin.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
 
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
@@ -82,11 +60,12 @@ const socialLinks = global.social.links.filter((link) => link.url);
     <meta property="og:url" content={canonical} />
     {global.meta.ogImage && <meta property="og:image" content={global.meta.ogImage} />}
 
-    <meta name="twitter:card" content="summary_large_image" />
+    {/* summary_large_image with no image renders as a broken card. */}
+    <meta name="twitter:card" content={global.meta.ogImage ? 'summary_large_image' : 'summary'} />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={pageDescription} />
 
-    <meta name="theme-color" content="#F7E9DE" />
+    <meta name="theme-color" content={global.meta.themeColor} />
     <slot name="head" />
   </head>
 
@@ -97,7 +76,7 @@ const socialLinks = global.social.links.filter((link) => link.url);
 
     <header class="site-header">
       <div class="site-header__inner">
-        <a class="wordmark" href="/" aria-label={`${global.brand.wordmark} — home`}>
+        <a class="wordmark" href="/" aria-label={`${global.brand.wordmark}, home`}>
           {global.brand.wordmark}
         </a>
 
@@ -106,7 +85,9 @@ const socialLinks = global.social.links.filter((link) => link.url);
             {
               global.nav.items.map((item) => {
                 const isCurrent =
-                  currentPath === item.href || currentPath.startsWith(`${item.href}/`);
+                  item.href === '/'
+                    ? currentPath === '/'
+                    : currentPath === item.href || currentPath.startsWith(`${item.href}/`);
                 return (
                   <li>
                     <a
@@ -122,10 +103,23 @@ const socialLinks = global.social.links.filter((link) => link.url);
             }
           </ul>
         </nav>
+
+        {/* Secondary, so the page's own hero keeps the one primary button. */}
+        <Button variant="secondary" href={global.nav.cta.href}>{global.nav.cta.label}</Button>
       </div>
     </header>
 
-    <main id="main" class="site-main">
+    {/* An aside, not role="status": this text never changes, so a live region
+        was wrong, and outside a landmark it was unreachable by landmark nav. */}
+    {
+      showPreviewBanner && (
+        <aside class="preview-banner" aria-label="Site status">
+          <p>{global.banner.text}</p>
+        </aside>
+      )
+    }
+
+    <main id="main" class="site-main" tabindex="-1">
       <slot />
     </main>
 
@@ -133,56 +127,30 @@ const socialLinks = global.social.links.filter((link) => link.url);
       <div class="site-footer__inner">
         <div class="site-footer__brand">
           <p class="site-footer__wordmark">{global.brand.wordmark}</p>
-          {/* G-03. Fallback if empty: omit the line, wordmark sits alone. */}
-          {
-            footerTagline && (
-              <p
-                class={
-                  draftCopy
-                    ? 'site-footer__tagline site-footer__tagline--draft'
-                    : 'site-footer__tagline placeholder'
-                }
-              >
-                {footerTagline}
-              </p>
-            )
-          }
+          <p class="site-footer__tagline">{global.footer.tagline}</p>
         </div>
 
         <div class="site-footer__cols">
-          <nav class="site-footer__col" aria-label="Footer">
-            <p class="site-footer__heading">pages</p>
-            <ul role="list">
-              {
-                global.nav.items.map((item) => (
-                  <li>
-                    <a href={item.href}>{item.label}</a>
-                  </li>
-                ))
-              }
-              <li><a href="/contact">contact</a></li>
-            </ul>
-          </nav>
+          {
+            global.footer.columns.map((column) => (
+              <div class="site-footer__col">
+                <p class="site-footer__heading">{column.heading}</p>
+                <ul role="list">
+                  {column.links.map((link) => (
+                    <li><a href={link.href}>{link.label}</a></li>
+                  ))}
+                </ul>
+              </div>
+            ))
+          }
 
-          <div class="site-footer__col">
-            <p class="site-footer__heading">contact</p>
-            <ul role="list">
-              <li><a href={`mailto:${global.contact.email}`}>{global.contact.email}</a></li>
-            </ul>
-          </div>
-
-          {/* G-04. Never render a dead icon — a null url is dropped above. */}
           {
             socialLinks.length > 0 && (
               <div class="site-footer__col">
-                <p class="site-footer__heading">elsewhere</p>
+                <p class="site-footer__heading">{global.social.heading}</p>
                 <ul role="list">
                   {socialLinks.map((link) => (
-                    <li>
-                      <a href={link.url} rel="me noopener">
-                        {link.label}
-                      </a>
-                    </li>
+                    <li><a href={link.url} rel="me noopener">{link.label}</a></li>
                   ))}
                 </ul>
               </div>
@@ -192,15 +160,15 @@ const socialLinks = global.social.links.filter((link) => link.url);
 
         <div class="site-footer__legal">
           <p>{global.footer.legal}</p>
-          <ul role="list">
-            {
-              global.footer.legalLinks.map((item) => (
-                <li>
-                  <a href={item.href}>{item.label}</a>
-                </li>
-              ))
-            }
-          </ul>
+          {
+            legalLinks.length > 0 && (
+              <ul role="list">
+                {legalLinks.map((item) => (
+                  <li><a href={item.href}>{item.label}</a></li>
+                ))}
+              </ul>
+            )
+          }
         </div>
       </div>
     </footer>
@@ -211,13 +179,34 @@ const socialLinks = global.social.links.filter((link) => link.url);
   /* Content sits above the fixed grain layer (z-index 1 in tokens.css). */
   .site-header,
   .site-main,
-  .site-footer {
+  .site-footer,
+  .preview-banner {
     position: relative;
     z-index: 2;
   }
 
   .site-main {
     flex: 1;
+  }
+
+  /* ---- Preview banner ---- */
+
+  .preview-banner {
+    background: var(--clay-ink);
+    color: var(--paper);
+    text-align: center;
+    padding-block: var(--s-3);
+    padding-inline: var(--gutter-x-sm);
+  }
+
+  .preview-banner p {
+    margin: 0;
+    max-inline-size: none;
+    font-family: var(--font-mono);
+    font-size: var(--t-mono);
+    line-height: 1.3;
+    letter-spacing: var(--track-mono);
+    text-transform: uppercase;
   }
 
   /* ---- Header ---- */
@@ -239,13 +228,12 @@ const socialLinks = global.social.links.filter((link) => link.url);
     flex-wrap: wrap;
   }
 
-  /* Logo sits 18px in from the header's left gutter. 18px is not on the
-     spacing scale, so this is the one place it appears — as a lockup
-     offset from brief §1.4, not as layout spacing. */
+  /* 18px lockup offset, from brief §1.4. One of the two sanctioned off-scale
+     values on the site. */
   .wordmark {
     margin-left: 18px;
     font-family: var(--font-display);
-    font-size: 1.375rem;
+    font-size: var(--t-h3);
     font-weight: 400;
     line-height: 1;
     letter-spacing: -0.01em;
@@ -259,14 +247,19 @@ const socialLinks = global.social.links.filter((link) => link.url);
     color: var(--clay-ink);
   }
 
+  /* Wordmark left, nav and CTA grouped right. */
+  .site-nav {
+    margin-left: auto;
+  }
+
   .site-nav__list {
     display: flex;
     align-items: baseline;
+    flex-wrap: wrap;
     gap: var(--s-5);
     list-style: none;
   }
 
-  /* Nav is body face, never mono. Brief §3.4. */
   .site-nav__link {
     font-family: var(--font-body);
     font-size: var(--t-small);
@@ -282,12 +275,20 @@ const socialLinks = global.social.links.filter((link) => link.url);
 
   .site-nav__link:hover {
     color: var(--clay-ink);
+  }
+
+  /* Current page is heavier as well as coloured, so hover and current are not
+     the same state wearing the same clothes. */
+  .site-nav__link[aria-current='page'] {
+    color: var(--clay-ink);
+    font-weight: 500;
     border-bottom-color: var(--clay);
   }
 
-  .site-nav__link[aria-current='page'] {
-    color: var(--clay-ink);
-    border-bottom-color: var(--clay);
+  @media (max-width: 1023px) {
+    .site-nav {
+      margin-left: 0;
+    }
   }
 
   @media (max-width: 767px) {
@@ -307,10 +308,16 @@ const socialLinks = global.social.links.filter((link) => link.url);
 
   /* ---- Footer ---- */
 
+  /* clay-ink is near-invisible on the dark band and on the banner, so the
+     focus ring swaps to paper in both. */
+  .site-footer :focus-visible,
+  .preview-banner :focus-visible {
+    outline-color: var(--paper);
+  }
+
   .site-footer {
     background: var(--surface-dark);
     color: var(--paper);
-    margin-top: var(--s-10);
   }
 
   .site-footer__inner {
@@ -335,19 +342,17 @@ const socialLinks = global.social.links.filter((link) => link.url);
 
   .site-footer__tagline {
     margin-top: var(--s-4);
-  }
-
-  .site-footer__tagline--draft {
     font-family: var(--font-display);
     font-size: var(--t-lead);
     font-weight: 300;
     font-style: italic;
+    line-height: 1.4;
     color: var(--coconut);
   }
 
   .site-footer__cols {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(var(--s-11), 1fr));
     gap: var(--s-6);
   }
 
@@ -363,20 +368,23 @@ const socialLinks = global.social.links.filter((link) => link.url);
   .site-footer__col ul {
     list-style: none;
     display: grid;
-    gap: var(--s-2);
+    gap: var(--s-3);
   }
 
+  /* Underlined. These were paper text on a paper-coloured run of prose with no
+     underline and no weight change — no channel distinguished a link at all. */
   .site-footer__col a {
     font-size: var(--t-small);
-    text-decoration: none;
     color: var(--paper);
-    border-bottom: 1px solid transparent;
-    transition: border-color var(--dur-fast) var(--ease);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.22em;
+    text-decoration-color: color-mix(in srgb, var(--paper) 45%, transparent);
+    transition: text-decoration-color var(--dur-fast) var(--ease);
   }
 
   .site-footer__col a:hover {
-    color: var(--paper);
-    border-bottom-color: var(--coconut);
+    text-decoration-color: var(--paper);
   }
 
   .site-footer__legal {
@@ -386,7 +394,7 @@ const socialLinks = global.social.links.filter((link) => link.url);
     justify-content: space-between;
     gap: var(--s-4);
     padding-top: var(--s-5);
-    border-top: 1px solid rgba(247, 233, 222, 0.18);
+    border-top: 1px solid color-mix(in srgb, var(--paper) 18%, transparent);
   }
 
   /* Mono is permitted on the footer legal line. Brief §3.4, item 5. */
@@ -410,25 +418,14 @@ const socialLinks = global.social.links.filter((link) => link.url);
   }
 
   .site-footer__legal a {
-    text-decoration: none;
-    border-bottom: 1px solid transparent;
-    transition: border-color var(--dur-fast) var(--ease);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.22em;
+    text-decoration-color: color-mix(in srgb, var(--coconut) 45%, transparent);
+    transition: text-decoration-color var(--dur-fast) var(--ease);
   }
 
   .site-footer__legal a:hover {
-    border-bottom-color: var(--coconut);
-  }
-
-  /* clay-ink is near-invisible on plum, so the footer swaps the ring to
-     paper — 8.10:1 — rather than losing the focus indicator. */
-  .site-footer :focus-visible {
-    outline-color: var(--paper);
-  }
-
-  /* The placeholder chip needs a light ground against the plum footer. */
-  .site-footer :global(.placeholder) {
-    background: rgba(247, 233, 222, 0.06);
-    border-color: rgba(247, 233, 222, 0.24);
-    color: var(--coconut);
+    text-decoration-color: var(--coconut);
   }
 </style>
