@@ -38,6 +38,16 @@ html {
   from { opacity: 0; }
 }
 
+@keyframes page-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes image-settle {
+  from { transform: scale(1.025); }
+  to { transform: scale(1); }
+}
+
 ::view-transition-old(root) {
   animation: page-fade-out var(--dur-fast) var(--ease) both;
 }
@@ -50,6 +60,19 @@ html {
   ::view-transition-old(root),
   ::view-transition-new(root) {
     animation-duration: 0.01ms !important;
+  }
+}
+
+/* A dependable entry fade for browsers without cross-document View
+   Transitions. Supporting browsers still enhance navigation with the
+   old/new-page crossfade above. */
+@media (prefers-reduced-motion: no-preference) {
+  body {
+    animation: page-enter var(--dur-mid) var(--ease) both;
+  }
+
+  .page-hero img {
+    animation: image-settle var(--dur-slow) var(--ease) 120ms both;
   }
 }
 

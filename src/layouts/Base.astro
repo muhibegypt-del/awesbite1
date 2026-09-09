@@ -44,10 +44,7 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script is:inline>
-      if (
-        window.matchMedia('(prefers-reduced-motion: no-preference)').matches &&
-        'IntersectionObserver' in window
-      ) {
+      if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
         document.documentElement.classList.add('reveal-enabled');
         window.__atwRevealFallback = window.setTimeout(() => {
           document.documentElement.classList.remove('reveal-enabled');
@@ -450,9 +447,11 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
   ].join(',');
 
   let revealObserver: IntersectionObserver | undefined;
+  let removeScrollFallback: (() => void) | undefined;
 
   function initialiseRevealMotion() {
     revealObserver?.disconnect();
+    removeScrollFallback?.();
 
     const root = document.documentElement;
     const fallback = (window as typeof window & { __atwRevealFallback?: number })
@@ -471,18 +470,46 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
       target.style.setProperty('--reveal-delay', `${Math.min(siblingIndex, 2) * 70}ms`);
     }
 
-    revealObserver = new IntersectionObserver(
-      (entries, observer) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          entry.target.classList.add('is-revealed');
-          observer.unobserve(entry.target);
-        }
-      },
-      { rootMargin: '0px 0px -8% 0px', threshold: 0.12 }
-    );
+    if ('IntersectionObserver' in window) {
+      revealObserver = new IntersectionObserver(
+        (entries, observer) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            entry.target.classList.add('is-revealed');
+            observer.unobserve(entry.target);
+          }
+        },
+        { rootMargin: '0px 0px -8% 0px', threshold: 0.12 }
+      );
 
-    for (const target of targets) revealObserver.observe(target);
+      for (const target of targets) revealObserver.observe(target);
+    } else {
+      /* Some embedded preview browsers omit IntersectionObserver. A small,
+         passive scroll fallback keeps the reveal behaviour functional there. */
+      const revealVisible = () => {
+        const revealLine = window.innerHeight * 0.92;
+        for (const target of targets) {
+          if (target.classList.contains('is-revealed')) continue;
+          if (target.getBoundingClientRect().top <= revealLine) {
+            target.classList.add('is-revealed');
+          }
+        }
+
+        if (targets.every((target) => target.classList.contains('is-revealed'))) {
+          removeScrollFallback?.();
+        }
+      };
+
+      const removeListeners = () => {
+        window.removeEventListener('scroll', revealVisible);
+        window.removeEventListener('resize', revealVisible);
+      };
+
+      removeScrollFallback = removeListeners;
+      window.addEventListener('scroll', revealVisible, { passive: true });
+      window.addEventListener('resize', revealVisible);
+      requestAnimationFrame(revealVisible);
+    }
 
     if (fallback) window.clearTimeout(fallback);
   }
