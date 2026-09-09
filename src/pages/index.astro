@@ -13,7 +13,7 @@ import Button from '../components/Button.astro';
 import global from '../content/global.json';
 import site from '../content/site.json';
 
-const { hub, credentials } = site;
+const { hub, about, credentials } = site;
 ---
 
 <Base title={global.meta.title} bare>
@@ -44,12 +44,20 @@ const { hub, credentials } = site;
   {/* ── Authority ── */}
   <section class="section" aria-labelledby="authority-heading">
     <div class="container editorial">
-      <SectionMarker label="Who" class="editorial-aside" />
+      <SectionMarker label="About Aneesa" class="editorial-aside" />
 
       <div class="editorial-full split">
         <div>
-          {/* Photography not shot. Alt text is written and waiting in site.json. */}
-          <div class="frame frame--portrait"></div>
+          <div class="frame frame--portrait">
+            <img
+              src={about.portrait}
+              alt={about.portraitAlt}
+              width="2200"
+              height="1466"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
         </div>
 
         <div class="stack">
@@ -77,7 +85,7 @@ const { hub, credentials } = site;
   {/* ── Close ── */}
   <section class="section band" aria-labelledby="hub-close">
     <div class="container editorial">
-      <SectionMarker label="Contact" class="editorial-aside" />
+      <SectionMarker label="Next step" class="editorial-aside" />
 
       <div class="editorial-full stack">
         <h2 id="hub-close">{site.contact.heading}</h2>

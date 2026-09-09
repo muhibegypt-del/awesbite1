@@ -22,7 +22,19 @@ const { about, credentials } = site;
       <SectionMarker label="About" class="editorial-aside" />
 
       <div class="editorial-full split">
-        <div><div class="frame frame--portrait"></div></div>
+        <div>
+          <div class="frame frame--portrait">
+            <img
+              src={about.portrait}
+              alt={about.portraitAlt}
+              width="2200"
+              height="1466"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+            />
+          </div>
+        </div>
 
         <div class="stack">
           <h1>{about.heading}</h1>
@@ -45,7 +57,7 @@ const { about, credentials } = site;
 
   <section class="section band" aria-labelledby="empathy-heading">
     <div class="container editorial">
-      <SectionMarker as="h2" id="empathy-heading" label="Why one to one" class="editorial-aside" />
+      <SectionMarker as="h2" id="empathy-heading" label="Approach" class="editorial-aside" />
 
       <div class="stack">
         <p class="t-lead">{about.empathy}</p>
@@ -61,23 +73,23 @@ const { about, credentials } = site;
 
   <section class="section" aria-labelledby="reflection-heading">
     <div class="container editorial">
-      <SectionMarker as="h2" id="reflection-heading" label="Reflection" class="editorial-aside" />
+      <SectionMarker as="h2" id="reflection-heading" label="Reading project" class="editorial-aside" />
 
       <div class="stack">
-        <p class="reflection__flag">{about.reflectionFlag}</p>
+        {about.reflectionFlag && <p class="reflection__flag">{about.reflectionFlag}</p>}
         <h3>{about.reflectionHeading}</h3>
         <p class="t-body">{about.reflectionBody}</p>
         <ul class="tag-row" role="list">
           {about.reflectionTags.map((tag) => <li><Tag>{tag}</Tag></li>)}
         </ul>
-        <p class="t-small platforms">{about.reflectionPlatforms}</p>
+        {about.reflectionPlatforms && <p class="t-small platforms">{about.reflectionPlatforms}</p>}
       </div>
     </div>
   </section>
 
   <section class="section band" aria-labelledby="open-to-heading">
     <div class="container editorial">
-      <SectionMarker as="h2" id="open-to-heading" label="Open to" class="editorial-aside" />
+      <SectionMarker as="h2" id="open-to-heading" label="Selected collaborations" class="editorial-aside" />
 
       <div class="stack">
         <ul class="list-dash" role="list">

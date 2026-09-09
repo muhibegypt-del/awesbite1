@@ -101,7 +101,7 @@ const isPlaceholder = (value: string) => value.trimStart().startsWith('[');
                 data-number={service.number}
                 data-completion={service.completion}
               >
-                [{service.number} // {service.name}]
+                {service.number} — {service.name}
               </button>
             ))
           }
@@ -215,7 +215,7 @@ const isPlaceholder = (value: string) => value.trimStart().startsWith('[');
         {
           grid.items.map((item) => (
             <article class="service">
-              <p class="service__tag">[{item.number} // {item.name}]</p>
+              <p class="service__tag">{item.number} — {item.name}</p>
 
               <h3 class="service__title">{item.title}</h3>
 

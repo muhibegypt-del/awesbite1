@@ -22,7 +22,7 @@ const { service } = Astro.props;
 {/* ── Hero ── */}
 <section class="page-hero hero">
   <div class="container editorial">
-    <p class="slug editorial-aside" aria-hidden="true">[{service.number} // {service.tag}]</p>
+    <p class="slug editorial-aside" aria-hidden="true">{service.number} — {service.tag}</p>
 
     <div class="stack">
       <p class="hero__pillar">{service.pillar}</p>
@@ -31,17 +31,38 @@ const { service } = Astro.props;
       <p class="hero__line">{service.oneLiner}</p>
       <Button variant="primary" href={service.cta.href}>{service.cta.label}</Button>
     </div>
+
+    {
+      service.image && (
+        <figure class="hero__media" style={`--image-position: ${service.imagePosition ?? 'center'}`}>
+          <img
+            src={service.image}
+            alt={service.imageAlt}
+            width="2200"
+            height="1466"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+          />
+        </figure>
+      )
+    }
   </div>
 </section>
 
 {/* ── Reels, when the service leads with sound ── */}
 {
-  service.reelsHeading && (
+  service.reelsHeading && service.reels?.length > 0 && (
     <section class="section band" aria-labelledby="reels-heading">
       <div class="container editorial">
         <SectionMarker as="h2" id="reels-heading" label={service.reelsHeading} class="editorial-aside" />
         <div class="stack">
-          <p class="placeholder">{service.reelsPlaceholder}</p>
+          {service.reels.map((reel: { title: string; src: string }) => (
+            <div class="stack stack--tight">
+              <p class="subblock__heading">{reel.title}</p>
+              <audio controls preload="metadata" src={reel.src}></audio>
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -51,7 +72,7 @@ const { service } = Astro.props;
 {/* ── The problem ── */}
 <section class="section" aria-labelledby="problem-heading">
   <div class="container editorial">
-    <SectionMarker as="h2" id="problem-heading" label="The challenge" class="editorial-aside" />
+    <SectionMarker as="h2" id="problem-heading" label={service.problemLabel ?? 'The challenge'} class="editorial-aside" />
 
     <div class="stack">
       {service.problem.map((line: string) => <p class="t-lead">{line}</p>)}
@@ -157,10 +178,10 @@ const { service } = Astro.props;
 
           <dl class="rows-dl">
             {service.tiers.map((tier: { label: string; cadence: string; price: string }) => (
-              <div class="rows-dl__row rows-dl__row--priced">
+              <div class={`rows-dl__row${tier.price ? ' rows-dl__row--priced' : ''}`}>
                 <dt class="rows-dl__label">{tier.label}</dt>
                 <dd class="rows-dl__body">{tier.cadence}</dd>
-                <dd class="rows-dl__price">{tier.price}</dd>
+                {tier.price && <dd class="rows-dl__price">{tier.price}</dd>}
               </div>
             ))}
           </dl>
@@ -184,30 +205,30 @@ const { service } = Astro.props;
 
 {/* ── Studio / examples / proof: slots that are declared, not faked ── */}
 {
-  (service.studioHeading || service.examplesHeading || service.proofHeading || service.background) && (
+  (service.studio || service.examples?.length > 0 || service.proof?.length > 0 || service.background) && (
     <section class="section" aria-labelledby="detail-heading">
       <div class="container editorial">
-        <SectionMarker as="h2" id="detail-heading" label="Worth knowing" class="editorial-aside" />
+        <SectionMarker as="h2" id="detail-heading" label="Further details" class="editorial-aside" />
 
         <div class="stack">
-          {service.studioHeading && (
+          {service.studioHeading && service.studio && (
             <div class="stack stack--tight">
               <h3>{service.studioHeading}</h3>
-              <p class="placeholder">{service.studioPlaceholder}</p>
+              <p class="t-body">{service.studio}</p>
             </div>
           )}
 
-          {service.examplesHeading && (
+          {service.examplesHeading && service.examples?.length > 0 && (
             <div class="stack stack--tight">
               <h3>{service.examplesHeading}</h3>
-              <p class="placeholder">{service.examplesPlaceholder}</p>
+              {service.examples.map((example: string) => <p class="t-body">{example}</p>)}
             </div>
           )}
 
-          {service.proofHeading && (
+          {service.proofHeading && service.proof?.length > 0 && (
             <div class="stack stack--tight">
               <h3>{service.proofHeading}</h3>
-              <p class="placeholder">{service.proofPlaceholder}</p>
+              {service.proof.map((quote: string) => <blockquote class="t-lead">{quote}</blockquote>)}
             </div>
           )}
 
@@ -226,7 +247,7 @@ const { service } = Astro.props;
 {/* ── The other two services always have an exit ── */}
 <section class="section band" aria-labelledby="other-heading">
   <div class="container editorial">
-    <SectionMarker as="h2" id="other-heading" label="Also" class="editorial-aside" />
+    <SectionMarker as="h2" id="other-heading" label="Other services" class="editorial-aside" />
     <div class="editorial-full">
       <PillarCards current={service.route} />
     </div>
@@ -265,6 +286,53 @@ const { service } = Astro.props;
     font-size: var(--t-lead);
     line-height: 1.5;
     max-inline-size: var(--measure-lead);
+  }
+
+  .hero__media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--coconut);
+  }
+
+  .hero__media::after {
+    content: '';
+    position: absolute;
+    inset: var(--s-2);
+    border: var(--border);
+    pointer-events: none;
+  }
+
+  .hero__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--image-position);
+    filter: contrast(1.02);
+  }
+
+  audio {
+    width: 100%;
+    max-inline-size: var(--measure);
+  }
+
+  @media (min-width: 1280px) {
+    .hero .stack {
+      grid-column: 3 / 9;
+      grid-row: 1;
+      align-self: center;
+    }
+
+    .hero .slug {
+      grid-row: 1;
+    }
+
+    .hero__media {
+      grid-column: 9 / -1;
+      grid-row: 1;
+      aspect-ratio: 4 / 5;
+    }
   }
 
   .tag-row {

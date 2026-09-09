@@ -9,12 +9,12 @@
       { "label": "writing", "href": "/writing" },
       { "label": "about", "href": "/about" }
     ],
-    "cta": { "label": "Book a free call", "href": "/contact" }
+    "cta": { "label": "Start an enquiry", "href": "/contact" }
   },
 
   "banner": {
     "_comment": "Temporary. Set showPreviewBanner={false} in Base.astro at launch.",
-    "text": "This is a site preview"
+    "text": "Private preview · selected content and booking links are still being finalised"
   },
 
   "footer": {
@@ -38,7 +38,7 @@
         "heading": "get in touch",
         "links": [
           { "label": "atexturedword@gmail.com", "href": "mailto:atexturedword@gmail.com" },
-          { "label": "Book a free call", "href": "/contact" },
+          { "label": "Start an enquiry", "href": "/contact" },
           { "label": "About Aneesa", "href": "/about" }
         ]
       }
@@ -61,10 +61,10 @@
   "meta": {
     "titleSuffix": "a textured word",
     "title": "a textured word · English tuition, audiobook narration and writing",
-    "description": "One-to-one English tuition for children and adults, professional audiobook narration and voice work, and writing that sounds like you. Book a free 20-minute call.",
+    "description": "One-to-one English tuition for children and adults, professional audiobook narration and voice work, and writing that sounds like you. Start an enquiry.",
     "locale": "en_GB",
     "themeColor": "#F7E9DE",
-    "ogImage": null
+    "ogImage": "/images/aneesa-with-poetry-anthology.webp"
   },
 
   "skipLink": "skip to content"

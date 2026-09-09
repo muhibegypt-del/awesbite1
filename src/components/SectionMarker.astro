@@ -1,6 +1,6 @@
 ---
 /**
- * The mono marker in the wide left gutter, e.g. § SERVICES.
+ * The mono section label in the wide left gutter.
  *
  * Takes an `as` so a marker that titles an otherwise-unheaded section can be a
  * real heading. As a <p> it was invisible to heading navigation, which left
@@ -17,15 +17,11 @@ const { label, as: Tag = 'p', id, class: className } = Astro.props;
 const classes = ['marker', className].filter(Boolean).join(' ');
 ---
 
-<Tag class={classes} id={id}>
-  <span class="marker__sign" aria-hidden="true">§</span>{label}
-</Tag>
+<Tag class={classes} id={id}>{label}</Tag>
 
 <style>
   .marker {
-    display: flex;
-    align-items: baseline;
-    gap: var(--s-2);
+    display: block;
     margin: 0;
     max-inline-size: none;
     font-family: var(--font-mono);
@@ -35,11 +31,5 @@ const classes = ['marker', className].filter(Boolean).join(' ');
     letter-spacing: var(--track-mono);
     text-transform: uppercase;
     color: var(--ink-soft);
-  }
-
-  /* --clay-ink, not --clay. --clay is 4.09:1 and CLAUDE.md forbids it below
-     24px; this glyph renders at 12px on every section of every page. */
-  .marker__sign {
-    color: var(--clay-ink);
   }
 </style>

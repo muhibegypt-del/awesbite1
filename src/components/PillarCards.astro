@@ -29,7 +29,7 @@ const { services } = site;
         <li class="pillar">
           {isCurrent ? (
             <div class="pillar__inner pillar__inner--current" aria-current="page">
-              <p class="slug" aria-hidden="true">[{service.number} // {service.tag}]</p>
+              <p class="slug" aria-hidden="true">{service.number} — {service.tag}</p>
               <p class="pillar__name">{service.pillar}</p>
               <p class="pillar__plain">{service.plain}</p>
               {full && <p class="pillar__line">{service.oneLiner}</p>}
@@ -37,7 +37,7 @@ const { services } = site;
             </div>
           ) : (
             <a class="pillar__inner" href={service.route} aria-label={label}>
-              <span class="slug" aria-hidden="true">[{service.number} // {service.tag}]</span>
+              <span class="slug" aria-hidden="true">{service.number} — {service.tag}</span>
               <span class="pillar__name">{service.pillar}</span>
               <span class="pillar__plain">{service.plain}</span>
               {full && <span class="pillar__line">{service.oneLiner}</span>}

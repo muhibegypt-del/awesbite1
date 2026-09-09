@@ -29,6 +29,7 @@ const {
 const pageTitle = bare ? title : `${title} — ${global.meta.titleSuffix}`;
 const pageDescription = description ?? global.meta.description;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
+const socialImage = global.meta.ogImage ? new URL(global.meta.ogImage, Astro.site).href : null;
 const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
 
 /* Never render a dead link. Both lists ship with null hrefs until the content
@@ -58,12 +59,13 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={pageDescription} />
     <meta property="og:url" content={canonical} />
-    {global.meta.ogImage && <meta property="og:image" content={global.meta.ogImage} />}
+    {socialImage && <meta property="og:image" content={socialImage} />}
 
     {/* summary_large_image with no image renders as a broken card. */}
-    <meta name="twitter:card" content={global.meta.ogImage ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:card" content={socialImage ? 'summary_large_image' : 'summary'} />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={pageDescription} />
+    {socialImage && <meta name="twitter:image" content={socialImage} />}
 
     <meta name="theme-color" content={global.meta.themeColor} />
     <slot name="head" />

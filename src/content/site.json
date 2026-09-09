@@ -36,15 +36,19 @@
       "plain": "English tuition",
       "audience": "For students and parents",
       "oneLiner": "I identify the gaps holding a student back and build from there, helping them develop the skills and confidence to show what they know.",
-      "cta": { "label": "Book a free assessment", "href": "/contact?about=English+tuition" },
+      "cta": { "label": "Enquire about tuition", "href": "/contact?about=English+tuition" },
+      "image": "/images/aneesa-writing.webp",
+      "imageAlt": "Aneesa writing thoughtfully in a notebook",
+      "imagePosition": "68% center",
+      "problemLabel": "Individual support",
 
       "problem": [
         "In a busy classroom, lessons have to keep moving. When a student misses an important step, later work becomes harder and confidence can begin to fall.",
         "The difficulty is often specific: comprehension, exam technique, working within a time limit or knowing how to begin a piece of writing. One-to-one tuition gives us the time to identify it and work on it directly."
       ],
       "aside": {
-        "heading": "Why previous support may not have worked",
-        "body": "Online resources can be difficult to follow consistently. A tutor may move too quickly, while extra time at school can feel like more of the same. Completing every piece of homework does not always address the underlying gap."
+        "heading": "Why individual support can help",
+        "body": "Online resources and classroom support can be useful, but they cannot always respond to the precise gap in front of a student. Individual tuition makes it possible to slow down, try a different explanation and build from a secure foundation."
       },
 
       "tracksHeading": "Who I teach",
@@ -69,12 +73,12 @@
         "body": "Tuition is not only for students who are struggling. It can also challenge students who are working ahead of their class and need more stimulating material."
       },
 
-      "pricingHeading": "Straightforward pricing",
-      "pricingLine": "Lessons are booked in monthly blocks so that each session can build on the last and progress can be reviewed consistently.",
+      "pricingHeading": "Lesson options",
+      "pricingLine": "Lessons are booked in monthly blocks so that each session can build on the last and progress can be reviewed consistently. Rates are confirmed after the introductory call.",
       "tiers": [
-        { "label": "Four lessons", "cadence": "One a week", "price": "Pricing on enquiry" },
-        { "label": "Eight lessons", "cadence": "Twice a week", "price": "Pricing on enquiry" },
-        { "label": "Twelve lessons", "cadence": "Three times a week", "price": "Pricing on enquiry" }
+        { "label": "Four lessons", "cadence": "One a week", "price": null },
+        { "label": "Eight lessons", "cadence": "Twice a week", "price": null },
+        { "label": "Twelve lessons", "cadence": "Three times a week", "price": null }
       ],
 
       "agreementsHeading": "What you can expect",
@@ -108,6 +112,10 @@
       "audience": "For authors, publishers and producers",
       "oneLiner": "I take the time to understand the text and its intention, then deliver a thoughtful performance that holds the listener's attention.",
       "cta": { "label": "Request a custom audition", "href": "/contact?about=Audiobook+narration" },
+      "image": "/images/aneesa-portrait.webp",
+      "imageAlt": "Aneesa smiling in a softly lit black-and-white portrait",
+      "imagePosition": "65% center",
+      "problemLabel": "The performance",
 
       "reelsHeading": "Listen",
       "reels": null,
@@ -118,12 +126,12 @@
         "The right performance should feel true to the text, consistent from beginning to end and engaging for the listener."
       ],
       "aside": {
-        "heading": "What careful preparation prevents",
+        "heading": "Why preparation matters",
         "body": "An unsuitable tone, inconsistent character voices and avoidable re-recording can all weaken the finished production. Preparation helps the recording process run smoothly and protects the quality of the work."
       },
 
       "voiceHeading": "The voice",
-      "voiceBody": "Warm, rich and unhurried, with a clear English accent shaped in Leicester. Clients have described my voice as silky and reassuring, with a natural pace suited to sustained listening.",
+      "voiceBody": "My natural delivery is warm, rich and unhurried, with a clear English accent shaped in Leicester and a pace suited to sustained listening.",
       "voiceTags": ["Warm", "Rich", "Clear", "Reassuring", "Unhurried"],
 
       "tracksHeading": "What I narrate",
@@ -147,9 +155,9 @@
 
       "background": {
         "heading": "Training and experience",
-        "body": "I have trained with voice coach Gary Terzza and studied stage acting at the Television Workshop and Derby Academy. My performance experience also includes spoken word with Beatfreeks and university theatre in England and Canada. Further audiobook narration training with RADA is planned."
+        "body": "I have trained with voice coach Gary Terzza and studied stage acting at the Television Workshop and Derby Academy. My performance experience also includes spoken word with Beatfreeks and university theatre in England and Canada."
       },
-      "footnote": "Producing a finished audiobook typically takes 30 to 40 hours of work for every 10 hours of completed audio. Each project is quoted individually."
+      "footnote": "Audiobook projects are quoted individually according to length, preparation and production requirements."
     },
 
     {
@@ -161,7 +169,11 @@
       "plain": "Writing and repurposing",
       "audience": "For coaches, founders and podcasters",
       "oneLiner": "I turn voice notes, recordings and existing content into clear, useful writing that still sounds like you.",
-      "cta": { "label": "Book a discovery call", "href": "/contact?about=Writing" },
+      "cta": { "label": "Discuss a writing project", "href": "/contact?about=Writing" },
+      "image": "/images/aneesa-reviewing-a-manuscript.webp",
+      "imageAlt": "Aneesa reviewing and annotating a manuscript",
+      "imagePosition": "72% center",
+      "problemLabel": "The raw material",
 
       "problem": [
         "You have the expertise and the ideas, but turning them into consistent, well-structured content takes time away from the work only you can do.",
@@ -200,8 +212,8 @@
       "examplesPlaceholder": "[ BEFORE AND AFTER EXAMPLES WILL GO HERE — one source (voice note or podcast) shown beside what it became. Two or three, with client permission. ]",
 
       "background": {
-        "heading": "Current availability",
-        "body": "I currently work with one or two writing clients at a time. This allows for close attention, a collaborative process and introductory rates while I continue to develop the service."
+        "heading": "A focused working relationship",
+        "body": "I work with a small number of writing clients at a time, allowing for close attention and a genuinely collaborative process. Each project is quoted according to its scope."
       }
     }
   ],
@@ -214,21 +226,20 @@
     ],
     "empathy": "As a child, I found time pressure difficult even when I understood the subject. Years later, I needed a teacher to help me learn Arabic despite having access to countless free resources. Both experiences showed me that the right individual support can make all the difference.",
     "authority": "I have spent 12 years teaching English: in primary classrooms in England, with the British Council in Egypt, at a women's college in Saudi Arabia and at a British secondary school in Doha. I have taught learners from age six to adult, from beginner level through to A-Level.",
-    "portrait": null,
+    "portrait": "/images/aneesa-with-poetry-anthology.webp",
     "portraitAlt": "Aneesa resting her chin on her hands beside an anthology of poetry",
 
     "whyHeading": "The value of individual attention",
     "why": [
       "Classrooms, production schedules and content platforms are designed to serve many people efficiently. That can leave limited space for the needs of one student, the intention behind one book or the individual voice behind an idea.",
-      "This is not a failure of the people involved. It is a natural limitation of work designed for a group rather than an individual.",
-      "My approach creates that individual space: close attention, thoughtful questions and work shaped around the person or project in front of me."
+      "Working individually creates that space: time to listen, ask thoughtful questions and shape the work around the person or project in front of me."
     ],
 
-    "reflectionFlag": "A personal project · not a service",
-    "reflectionHeading": "Reading and reflection",
-    "reflectionBody": "Books are central to how I think and work, so I also write about them outside my professional services. This is a personal space for close reading, thoughtful interpretation and the passages that reward a little more attention.",
+    "reflectionFlag": null,
+    "reflectionHeading": "Notes on books and language",
+    "reflectionBody": "Outside my client work, I share reading notes, close analysis and reflections on the books and passages that stay with me.",
     "reflectionTags": ["Words of the week", "Close reading", "Adaptations", "Literary devices", "Narrated extracts", "Three takeaways"],
-    "reflectionPlatforms": "Instagram · TikTok · YouTube · Substack",
+    "reflectionPlatforms": null,
 
     "openToHeading": "Open to",
     "openTo": [

@@ -218,6 +218,14 @@ const preselected = contact.topics.includes(requested) ? requested : '';
   const form = document.querySelector<HTMLFormElement>('form[name="enquiry"]');
 
   if (form) {
+    const topic = form.elements.namedItem('topic');
+    const requestedTopic = new URLSearchParams(window.location.search).get('about');
+
+    if (topic instanceof HTMLSelectElement && requestedTopic) {
+      const isKnownTopic = Array.from(topic.options).some((option) => option.value === requestedTopic);
+      if (isKnownTopic) topic.value = requestedTopic;
+    }
+
     type Field = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
     const fields = Array.from(form.querySelectorAll<Field>('[data-error-missing]'));
 
