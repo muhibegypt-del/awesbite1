@@ -43,7 +43,7 @@ without being necessary for the requested navigation, audio, content or layout.
 | 5 | Teaching, Repurposing, Narration and accessible audio portfolio | Complete |
 | 6 | Content literary ecosystem and Library placeholders | Complete |
 | 7 | Visual system, responsive behaviour, motion and accessibility | Complete |
-| 8 | Build validation, browser QA, public Vercel preview and handoff | In progress |
+| 8 | Build validation, browser QA, public Vercel preview and handoff | Complete |
 
 ## Phase 1 completed
 
@@ -76,3 +76,18 @@ without being necessary for the requested navigation, audio, content or layout.
 - Confirmed no Substack or Library destination links yet.
 - Asked whether existing price lists are held; no prices were supplied in the
   response, so none are published.
+
+## Phase 8 completed
+
+- Production build passes with 21 generated routes.
+- Dependency audit reports 0 vulnerabilities after upgrading Astro to 7.2.8.
+- Reviewed representative desktop and responsive layouts for Home, Content and
+  Narration; the shared navigation remains usable without JavaScript.
+- Verified the deployed Home, About, Teaching, Repurposing, Narration, Content
+  and brand-review routes return HTTP 200 to anonymous visitors.
+- Deployed a non-production Vercel preview and added a protection exception to
+  that preview only, so clients and responsive-testing services do not require
+  a Vercel account.
+- Public preview:
+  `https://awesbite1-cmp7rwhxc-muhibegypt-8034s-projects.vercel.app`
+- No production domain or production deployment was changed.

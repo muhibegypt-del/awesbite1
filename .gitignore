@@ -7,3 +7,6 @@ dist/
 docs/qa/
 .env
 .env.production
+
+.vercel
+.env*
