@@ -44,6 +44,7 @@ without being necessary for the requested navigation, audio, content or layout.
 | 6 | Content literary ecosystem and Library placeholders | Complete |
 | 7 | Visual system, responsive behaviour, motion and accessibility | Complete |
 | 8 | Build validation, browser QA, public Vercel preview and handoff | Complete |
+| 9 | Source-fidelity audit and three narration placeholders | Complete |
 
 ## Phase 1 completed
 
@@ -59,6 +60,8 @@ without being necessary for the requested navigation, audio, content or layout.
 - Final brand-name treatment and capitalisation.
 - Service-process copy sign-off.
 - Real narration audio files, titles and tags.
+- Confirmation that the proposed service packages, labels and prices are
+  approved for publication.
 - Substack, social and Library URLs.
 - Repurposing portfolio examples.
 - Narration and Repurposing testimonials for the later deferred phase.
@@ -74,8 +77,9 @@ without being necessary for the requested navigation, audio, content or layout.
 - Left hero wording/scale, final brand-name treatment/capitalisation and Library
   appearance unresolved for the project lead.
 - Confirmed no Substack or Library destination links yet.
-- Asked whether existing price lists are held; no prices were supplied in the
-  response, so none are published.
+- A service and pricing proposal was supplied on 20 September. It contains
+  suggested package labels and open questions, so none of its prices are
+  published until the proposal is explicitly approved.
 
 ## Phase 8 completed
 
@@ -91,3 +95,17 @@ without being necessary for the requested navigation, audio, content or layout.
 - Public preview:
   `https://awesbite1-cmp7rwhxc-muhibegypt-8034s-projects.vercel.app`
 - No production domain or production deployment was changed.
+
+## Phase 9 completed
+
+- Cross-checked all current factual claims against the original copy ledger,
+  action brief, sign-off answers and two newly supplied revision PDFs.
+- Confirmed that the biography, credentials, countries and experience claims
+  are sourced. Editorial bridging remains a sign-off draft, not client-verbatim
+  copy.
+- Replaced the old developer-only `founders` audience term with `creators` and
+  removed the unsupported `Reassuring` voice descriptor.
+- Added three honest narration placeholders without assigning any ambiguous
+  local audio file to the client.
+- Full evidence notes and deferred decisions are recorded in
+  `docs/phases/09-source-fidelity-audit.md`.

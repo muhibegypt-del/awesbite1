@@ -1,5 +1,5 @@
 {
-  "_comment": "Hub-and-spoke content. The hub signposts; each spoke sells one service to one audience. Wording is the revised editorial pass over Aneesa's approved Stage 2 material, except where marked OWNER — those are structural labels, or slots she has not filled. Nothing is invented: a slot with no source renders its bracketed placeholder so the gap is visible rather than papered over.",
+  "_comment": "Hub-and-spoke content. The hub signposts; each spoke sells one service to one audience. Factual claims are grounded in Aneesa's supplied material. Connective and conversion copy is an editorial draft for sign-off; unfilled assets render as visible placeholders rather than being invented.",
 
   "brand": {
     "triad": "learn the words. shape the words. bring the words to life."
@@ -133,7 +133,7 @@
 
       "voiceHeading": "The voice",
       "voiceBody": "My voice has a clear, neutral British accent, with a gentle Midlands warmth in everyday speech.",
-      "voiceTags": ["Warm", "Rich", "Clear", "Reassuring", "Unhurried"],
+      "voiceTags": ["Warm", "Rich", "Clear", "Unhurried"],
 
       "tracksHeading": "Voice work",
       "tracks": [
@@ -172,7 +172,7 @@
       "tag": "REPURPOSE",
       "pillar": "The Written Word",
       "plain": "Content repurposing",
-      "audience": "For coaches, founders and podcasters",
+      "audience": "For coaches, creators and podcasters",
       "oneLiner": "I turn voice notes, recordings and existing content into clear long-form and short-form writing that still sounds like you.",
       "cta": { "label": "Discuss a repurposing project", "href": "/contact?about=Content+repurposing" },
       "image": "/images/aneesa-reviewing-a-manuscript.webp",
