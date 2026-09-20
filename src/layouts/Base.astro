@@ -1,9 +1,13 @@
 ---
-import '../styles/fonts.css';
+import '@fontsource-variable/fraunces/wght.css';
+import '@fontsource-variable/fraunces/wght-italic.css';
+import '@fontsource-variable/inter/wght.css';
 import '../styles/tokens.css';
 import '../styles/global.css';
+import { ClientRouter } from 'astro:transitions';
 import global from '../content/global.json';
 import Button from '../components/Button.astro';
+import NavMenu from '../components/NavMenu.astro';
 
 interface Props {
   /** Page title. The brand name is appended unless `bare`. */
@@ -54,10 +58,6 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
 
-    {/* Only the two faces used above the fold, and only their latin subsets. */}
-    <link rel="preload" href="/fonts/jost-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
-
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
 
@@ -76,6 +76,7 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
     {socialImage && <meta name="twitter:image" content={socialImage} />}
 
     <meta name="theme-color" content={global.meta.themeColor} />
+    <ClientRouter fallback="animate" />
     <slot name="head" />
   </head>
 
@@ -90,31 +91,10 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
           {global.brand.wordmark}
         </a>
 
-        <nav class="site-nav" aria-label="Primary">
-          <ul class="site-nav__list" role="list">
-            {
-              global.nav.items.map((item) => {
-                const isCurrent =
-                  item.href === '/'
-                    ? currentPath === '/'
-                    : currentPath === item.href || currentPath.startsWith(`${item.href}/`);
-                return (
-                  <li>
-                    <a
-                      class="site-nav__link"
-                      href={item.href}
-                      aria-current={isCurrent ? 'page' : undefined}
-                    >
-                      {item.label}
-                    </a>
-                  </li>
-                );
-              })
-            }
-          </ul>
-        </nav>
+        <NavMenu items={global.nav.items} currentPath={currentPath} />
 
-        {/* Secondary, so the page's own hero keeps the one primary button. */}
+        {/* A conversion action, not one of the five navigation items. Keep it
+            visible; it becomes the booking entry point once Calendly is ready. */}
         <Button variant="secondary" href={global.nav.cta.href}>{global.nav.cta.label}</Button>
       </div>
     </header>
@@ -257,50 +237,6 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
     color: var(--clay-ink);
   }
 
-  /* Wordmark left, nav and CTA grouped right. */
-  .site-nav {
-    margin-left: auto;
-  }
-
-  .site-nav__list {
-    display: flex;
-    align-items: baseline;
-    flex-wrap: wrap;
-    gap: var(--s-5);
-    list-style: none;
-  }
-
-  .site-nav__link {
-    font-family: var(--font-body);
-    font-size: var(--t-small);
-    text-transform: lowercase;
-    text-decoration: none;
-    color: var(--ink);
-    padding-bottom: var(--s-1);
-    border-bottom: 1px solid transparent;
-    transition:
-      color var(--dur-fast) var(--ease),
-      border-color var(--dur-fast) var(--ease);
-  }
-
-  .site-nav__link:hover {
-    color: var(--clay-ink);
-  }
-
-  /* Current page is heavier as well as coloured, so hover and current are not
-     the same state wearing the same clothes. */
-  .site-nav__link[aria-current='page'] {
-    color: var(--clay-ink);
-    font-weight: 500;
-    border-bottom-color: var(--clay);
-  }
-
-  @media (max-width: 1023px) {
-    .site-nav {
-      margin-left: 0;
-    }
-  }
-
   @media (max-width: 767px) {
     .site-header__inner {
       padding-block: var(--s-4);
@@ -309,10 +245,6 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
 
     .wordmark {
       margin-left: 0;
-    }
-
-    .site-nav__list {
-      gap: var(--s-4);
     }
   }
 

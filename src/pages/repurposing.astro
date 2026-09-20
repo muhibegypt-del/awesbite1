@@ -1,0 +1,9 @@
+---
+import Base from '../layouts/Base.astro';
+import ServicePage from '../components/ServicePage.astro';
+import site from '../content/site.json';
+const service = site.services.find((s) => s.id === 'repurposing')!;
+---
+<Base title="Content repurposing" description="Long-form and short-form writing developed from your voice notes, podcasts and existing content, in a voice that remains yours.">
+  <ServicePage service={service} />
+</Base>

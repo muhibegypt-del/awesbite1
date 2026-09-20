@@ -1,0 +1,14 @@
+---
+import ContentLayout from '../../components/ContentLayout.astro';
+import links from '../../content/content-links.json';
+---
+<ContentLayout title="YouTube" description="Long-form breakdowns of novels, plays and poems from a textured word.">
+  <section class="page-hero"><div class="container stack">
+    <h1>YouTube</h1>
+    <p class="t-lead">Long-form breakdowns of novels, plays and poems — with time to explore the language, context and choices behind a story.</p>
+    {links.youtube
+      ? <a class="link-rule" href={links.youtube} target="_blank" rel="noopener noreferrer">Watch on YouTube<span class="visually-hidden"> (opens in a new tab)</span></a>
+      : <p class="t-body">Videos and the channel link will be added here when ready.</p>}
+    <a class="link-rule" href="/content">Back to Content</a>
+  </div></section>
+</ContentLayout>

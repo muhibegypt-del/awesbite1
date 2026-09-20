@@ -1,0 +1,14 @@
+---
+import ContentLayout from '../../components/ContentLayout.astro';
+import links from '../../content/content-links.json';
+---
+<ContentLayout title="Substack" description="Reading notes and literary reflections from a textured word.">
+  <section class="page-hero"><div class="container stack">
+    <h1>Substack</h1>
+    <p class="t-lead">Reading notes and reflections on books and language.</p>
+    {links.substack
+      ? <a class="link-rule" href={links.substack} target="_blank" rel="noopener noreferrer">Read on Substack<span class="visually-hidden"> (opens in a new tab)</span></a>
+      : <p class="t-body">The publication link will be added here when ready.</p>}
+    <a class="link-rule" href="/content">Back to Content</a>
+  </div></section>
+</ContentLayout>

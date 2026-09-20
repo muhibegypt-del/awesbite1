@@ -11,6 +11,8 @@ import SectionMarker from './SectionMarker.astro';
 import PillarCards from './PillarCards.astro';
 import Button from './Button.astro';
 import Tag from './Tag.astro';
+import AudioPlayer from './AudioPlayer.astro';
+import narrationTracks from '../content/narration-tracks.json';
 
 interface Props {
   service: Record<string, any>;
@@ -52,17 +54,12 @@ const { service } = Astro.props;
 
 {/* ── Reels, when the service leads with sound ── */}
 {
-  service.reelsHeading && service.reels?.length > 0 && (
-    <section class="section band" aria-labelledby="reels-heading">
+  service.id === 'narration' && (
+    <section id="portfolio" class="section band" aria-labelledby="reels-heading">
       <div class="container editorial">
-        <SectionMarker as="h2" id="reels-heading" label={service.reelsHeading} class="editorial-aside" />
+        <SectionMarker as="h2" id="reels-heading" label="Voice portfolio" class="editorial-aside" />
         <div class="stack">
-          {service.reels.map((reel: { title: string; src: string }) => (
-            <div class="stack stack--tight">
-              <p class="subblock__heading">{reel.title}</p>
-              <audio controls preload="metadata" src={reel.src}></audio>
-            </div>
-          ))}
+          {narrationTracks.map((track) => <AudioPlayer {...track} />)}
         </div>
       </div>
     </section>
@@ -120,6 +117,7 @@ const { service } = Astro.props;
         <SectionMarker as="h2" id="tracks-heading" label={service.tracksHeading} class="editorial-aside" />
 
         <div class="stack">
+          {service.rangeLine && <p class="t-lead">{service.rangeLine}</p>}
           <dl class="rows-dl">
             {service.tracks.map((track: { label: string; body: string }) => (
               <div class="rows-dl__row">
@@ -168,7 +166,7 @@ const { service } = Astro.props;
 
 {/* ── Pricing, where the service has published tiers ── */}
 {
-  service.tiers && (
+  service.publishPricing === true && service.tiers && (
     <section class="section band" aria-labelledby="pricing-heading">
       <div class="container editorial">
         <SectionMarker as="h2" id="pricing-heading" label={service.pricingHeading} class="editorial-aside" />
@@ -225,17 +223,16 @@ const { service } = Astro.props;
             </div>
           )}
 
-          {service.proofHeading && service.proof?.length > 0 && (
-            <div class="stack stack--tight">
-              <h3>{service.proofHeading}</h3>
-              {service.proof.map((quote: string) => <blockquote class="t-lead">{quote}</blockquote>)}
-            </div>
-          )}
 
           {service.background && (
             <div class="subblock">
               <p class="subblock__heading">{service.background.heading}</p>
-              <p>{service.background.body}</p>
+              {service.id === 'narration' ? (
+                <p>{service.background.body.split('The Television Workshop')[0]}
+                  <a href="https://www.thetelevisionworkshop.co.uk/" target="_blank" rel="noopener noreferrer">The Television Workshop<span class="visually-hidden"> (opens in a new tab)</span></a>
+                  {service.background.body.split('The Television Workshop')[1]}
+                </p>
+              ) : <p>{service.background.body}</p>}
             </div>
           )}
         </div>
@@ -243,6 +240,20 @@ const { service } = Astro.props;
     </section>
   )
 }
+
+{service.id === 'repurposing' && (
+  <section id="portfolio" class="section" aria-labelledby="portfolio-heading">
+    <div class="container editorial">
+      <SectionMarker as="h2" id="portfolio-heading" label="Portfolio" class="editorial-aside" />
+      <div class="stack">
+        {service.examples?.length > 0
+          ? service.examples.map((example: string) => <p class="t-body">{example}</p>)
+          : <p class="t-lead">Selected long-form and short-form examples will be shared here.</p>}
+        <a class="link-rule" href={service.cta.href}>Discuss your source material <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+)}
 
 {/* ── The other two services always have an exit ── */}
 <section class="section band" aria-labelledby="other-heading">
