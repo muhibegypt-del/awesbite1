@@ -105,6 +105,8 @@ without being necessary for the requested navigation, audio, content or layout.
   copy.
 - Replaced the old developer-only `founders` audience term with `creators` and
   removed the unsupported `Reassuring` voice descriptor.
+- Removed the dormant 4/8/12-lesson tier draft; no pricing structure is stored
+  as approved content while the new 5/10-lesson proposal remains unsigned.
 - Added three honest narration placeholders without assigning any ambiguous
   local audio file to the client.
 - Full evidence notes and deferred decisions are recorded in

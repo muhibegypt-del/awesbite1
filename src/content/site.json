@@ -74,14 +74,6 @@
         "body": "Tuition is not only for students who are struggling. It can also challenge students who are working ahead of their class and need more stimulating material."
       },
 
-      "pricingHeading": "Lesson options",
-      "pricingLine": "Lessons are booked in monthly blocks so that each session can build on the last and progress can be reviewed consistently. Rates are confirmed after the introductory call.",
-      "tiers": [
-        { "label": "Four lessons", "cadence": "One a week", "price": null },
-        { "label": "Eight lessons", "cadence": "Twice a week", "price": null },
-        { "label": "Twelve lessons", "cadence": "Three times a week", "price": null }
-      ],
-
       "agreementsHeading": "What you can expect",
       "agreements": [
         {

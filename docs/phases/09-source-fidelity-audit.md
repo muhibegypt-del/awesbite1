@@ -40,6 +40,9 @@ as a sign-off draft, not as evidence of her untouched authorial voice.
   correction and the new service material.
 - Removed `Reassuring` from the voice descriptors because it was not supplied
   as a descriptor. The remaining words are supported by the source set.
+- Removed a dormant, non-rendered 4/8/12-lesson tier draft. It conflicted with
+  the newly supplied 5/10-lesson proposal and could otherwise be published by
+  mistake later.
 - Added three plainly labelled narration player placeholders. No real audio is
   attached and no file in Downloads was assumed to belong to the client.
 
