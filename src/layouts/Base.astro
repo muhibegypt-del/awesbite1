@@ -352,25 +352,16 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
 </style>
 
 <script>
-  /* ---- Progressive reveal: the fallback path only ----
-     Section 6 of global.css explains the split. Where the browser supports
-     `animation-timeline: view()` it drives the whole thing itself and this
-     file does nothing at all. This is here for the browsers that do not —
-     today, Firefox.
+  /* ---- Scroll-in fade ----
+     Textbook version: find the blocks, hide the ones still below the fold,
+     and let an IntersectionObserver switch them on as they arrive. The CSS is
+     at the bottom of global.css.
 
-     The rule that keeps it safe: only an element BELOW the fold is ever
-     hidden. Nothing on screen is touched, so a failure here costs the
-     animation and never the content. There is no class on <html>, no
-     fail-safe timer and nothing to restore after a navigation. */
+     The one rule worth keeping: only an element BELOW the fold is ever
+     hidden. Nothing on screen is touched, so if this fails or never runs, the
+     page is whole and just does not animate. */
 
-  const REVEAL_SCOPES = [
-    '.hero:not(.page-hero)',
-    '.section',
-    '.library',
-    '.site-footer',
-  ];
-
-  const REVEAL_PARTS = [
+  const BLOCKS = [
     '.editorial > *',
     '.stack > *',
     '.split > *',
@@ -383,10 +374,10 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
     '.agreements > *',
     '.site-footer__col',
     '.site-footer__brand',
-  ];
+  ].join(',');
 
-  /* A layout container lays out targets; it is never a target itself. */
-  const REVEAL_CONTAINERS = [
+  /* These lay other blocks out; their children fade, not them. */
+  const CONTAINERS = [
     '.stack',
     '.split',
     '.meaning-layout',
@@ -396,84 +387,75 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
     '.rows-dl',
     '.content-grid',
     '.agreements',
-  ];
+  ].join(',');
 
-  const NOT_RENDERED = new Set(['SCRIPT', 'STYLE', 'TEMPLATE', 'NOSCRIPT', 'LINK', 'META']);
+  const SKIP = new Set(['SCRIPT', 'STYLE', 'TEMPLATE', 'NOSCRIPT', 'LINK', 'META']);
 
-  const revealSelector = REVEAL_SCOPES.flatMap((scope) =>
-    REVEAL_PARTS.map((part) => `${scope} ${part}`)
-  ).join(',');
-  const containerSelector = REVEAL_CONTAINERS.join(',');
+  let observer: IntersectionObserver | undefined;
 
-  /* Eight steps of 70ms is just over half a second across a group. Past that
-     the last card in a row arrives after the reader has reached it. */
-  const MAX_STEPS = 7;
+  function setupFade() {
+    observer?.disconnect();
+    observer = undefined;
 
-  let revealObserver: IntersectionObserver | undefined;
-
-  function initialiseRevealMotion() {
-    revealObserver?.disconnect();
-    revealObserver = undefined;
-
-    /* Nothing to do: the stylesheet is driving it from scroll position. */
-    if (window.CSS?.supports?.('animation-timeline: view()')) return;
     if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
     if (!('IntersectionObserver' in window)) return;
 
-    const targets = Array.from(
-      document.querySelectorAll<HTMLElement>(revealSelector)
-    ).filter(
-      (element) =>
-        !element.matches(containerSelector) && !NOT_RENDERED.has(element.tagName)
-    );
-
-    /* The whole safety of this path: an element already on screen is left
-       exactly as it is. Only what the reader has not reached yet is hidden. */
     const line = window.innerHeight * 0.9;
-    const pending = targets.filter(
-      (element) => element.getBoundingClientRect().top > line
+
+    /* Blocks not yet seen, and still below the fold, get hidden and queued. */
+    const fresh = Array.from(document.querySelectorAll<HTMLElement>(BLOCKS)).filter(
+      (el) =>
+        !el.matches(CONTAINERS) &&
+        !SKIP.has(el.tagName) &&
+        !el.classList.contains('fade-in') &&
+        el.getBoundingClientRect().top > line
     );
 
-    const seen = new Map<Element | null, number>();
+    /* Items in a row arrive one after another rather than all together. */
+    const counts = new Map<Element | null, number>();
 
-    for (const element of pending) {
-      const group = element.parentElement;
-      const index = seen.get(group) ?? 0;
-      seen.set(group, index + 1);
-      element.style.setProperty(
+    for (const el of fresh) {
+      const index = counts.get(el.parentElement) ?? 0;
+      counts.set(el.parentElement, index + 1);
+      el.style.setProperty(
         '--reveal-delay',
-        `calc(${Math.min(index, MAX_STEPS)} * var(--reveal-step))`
+        `calc(${Math.min(index, 7)} * var(--reveal-step))`
       );
-      element.classList.add('is-pending');
+      el.classList.add('fade-in');
     }
 
-    revealObserver = new IntersectionObserver(
-      (entries, observer) => {
+    observer = new IntersectionObserver(
+      (entries, obs) => {
         for (const entry of entries) {
           if (!entry.isIntersecting) continue;
-          entry.target.classList.remove('is-pending');
-          entry.target.classList.add('is-revealed');
-          observer.unobserve(entry.target);
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
         }
       },
       { rootMargin: '0px 0px -10% 0px', threshold: 0 }
     );
 
-    for (const element of pending) revealObserver.observe(element);
+    /* Everything still waiting, not just what this run hid. astro:page-load
+       fires on the FIRST load as well, so this runs twice on every page: the
+       second run disconnects the first observer, and if it only watched what
+       it had just hidden it would watch nothing and leave the whole page
+       stuck at opacity 0. */
+    document
+      .querySelectorAll<HTMLElement>('.fade-in:not(.is-visible)')
+      .forEach((el) => observer!.observe(el));
   }
 
-  /* A failure here must never leave the page hidden. */
-  function startRevealMotion() {
+  function start() {
     try {
-      initialiseRevealMotion();
+      setupFade();
     } catch (error) {
       document
-        .querySelectorAll('.is-pending')
-        .forEach((element) => element.classList.remove('is-pending'));
-      console.error('Reveal motion failed to initialise; content shown.', error);
+        .querySelectorAll('.fade-in')
+        .forEach((el) => el.classList.add('is-visible'));
+      console.error('Scroll fade failed to start; content shown.', error);
     }
   }
 
-  startRevealMotion();
-  document.addEventListener('astro:page-load', startRevealMotion);
+  start();
+  document.addEventListener('astro:page-load', start);
 </script>
