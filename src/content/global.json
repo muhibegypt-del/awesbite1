@@ -2,23 +2,43 @@
   "brand": { "wordmark": "a textured word" },
 
   "nav": {
-    "_comment": "Plain, searchable labels. The pillar names (The Taught Word etc.) are display names on the hub; nav uses the word a buyer would actually search.",
+    "_comment": "Five top-level navigation links. The enquiry CTA is a separate conversion action and is intentionally retained.",
     "items": [
-      { "label": "tuition", "href": "/tuition" },
-      { "label": "narration", "href": "/narration" },
-      { "label": "writing", "href": "/writing" },
-      { "label": "about", "href": "/about" }
+      { "label": "about", "href": "/about" },
+      { "label": "teach", "href": "/teaching" },
+      {
+        "label": "repurpose",
+        "href": "/repurposing",
+        "children": [
+          { "label": "portfolio", "href": "/repurposing#portfolio" },
+          { "label": "testimonials", "href": "/repurposing#testimonials" }
+        ]
+      },
+      {
+        "label": "narrate",
+        "href": "/narration",
+        "children": [
+          { "label": "portfolio", "href": "/narration#portfolio" },
+          { "label": "testimonials", "href": "/narration#testimonials" }
+        ]
+      },
+      {
+        "label": "content",
+        "href": "/content",
+        "children": [
+          { "label": "introduction", "href": "/content/introduction" },
+          { "label": "Substack", "href": "/content/substack" },
+          { "label": "YouTube", "href": "/content/youtube" },
+          { "label": "socials", "href": "/content/socials" },
+          { "label": "collaborations", "href": "/content/collaborations" }
+        ]
+      }
     ],
-    "cta": { "label": "Book a free call", "href": "/contact" }
-  },
-
-  "banner": {
-    "_comment": "Temporary. Set showPreviewBanner={false} in Base.astro at launch.",
-    "text": "This is a site preview"
+    "cta": { "label": "Start an enquiry", "href": "/contact" }
   },
 
   "footer": {
-    "tagline": "the taught word. the spoken word. the written word.",
+    "tagline": "learn the words. shape the words. bring the words to life.",
     "legal": "© 2026 a textured word · United Kingdom",
     "_comment_legal": "G-07. Privacy and Terms block launch — a UK site running a contact form that collects a name and an email needs a privacy notice. Until the pages exist the hrefs stay null and nothing renders, per the same rule as social.",
     "legalLinks": [
@@ -29,16 +49,17 @@
       {
         "heading": "services",
         "links": [
-          { "label": "English tuition", "href": "/tuition" },
+          { "label": "Teaching", "href": "/teaching" },
+          { "label": "Content repurposing", "href": "/repurposing" },
           { "label": "Narration and voice work", "href": "/narration" },
-          { "label": "Writing", "href": "/writing" }
+          { "label": "Content", "href": "/content" }
         ]
       },
       {
         "heading": "get in touch",
         "links": [
           { "label": "atexturedword@gmail.com", "href": "mailto:atexturedword@gmail.com" },
-          { "label": "Book a free call", "href": "/contact" },
+          { "label": "Start an enquiry", "href": "/contact" },
           { "label": "About Aneesa", "href": "/about" }
         ]
       }
@@ -49,6 +70,7 @@
     "_comment": "G-04. Never render a dead link — the column only appears once at least one URL exists.",
     "heading": "follow",
     "links": [
+      { "label": "LinkedIn", "url": null },
       { "label": "Instagram", "url": null },
       { "label": "Substack", "url": null },
       { "label": "YouTube", "url": null },
@@ -60,11 +82,11 @@
 
   "meta": {
     "titleSuffix": "a textured word",
-    "title": "a textured word · English tuition, audiobook narration and writing",
-    "description": "One-to-one English tuition for children and adults, professional audiobook narration and voice work, and writing that sounds like you. Book a free 20-minute call.",
+    "title": "a textured word · teaching, content repurposing and narration",
+    "description": "Thoughtful English teaching, content repurposing, narration and voice work from Aneesa. Start an enquiry.",
     "locale": "en_GB",
-    "themeColor": "#F7E9DE",
-    "ogImage": null
+    "themeColor": "#FFFAF6",
+    "ogImage": "/images/aneesa-with-poetry-anthology.webp"
   },
 
   "skipLink": "skip to content"

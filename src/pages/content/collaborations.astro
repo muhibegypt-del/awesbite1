@@ -1,0 +1,13 @@
+---
+import ContentLayout from '../../components/ContentLayout.astro';
+import site from '../../content/site.json';
+import global from '../../content/global.json';
+---
+<ContentLayout title="Collaborations" description="Enquiries for literary conversations, panel moderation, author interviews and events.">
+  <section class="page-hero"><div class="container stack">
+    <h1>Collaborations</h1>
+    <p class="t-lead">Open to conversations and projects that bring books, language and people together.</p>
+    <ul class="list-dash" role="list">{site.about.openTo.map((item) => <li>{item}</li>)}</ul>
+    <a class="link-rule" href={`mailto:${global.contact.email}`}>Enquire about a collaboration</a>
+  </div></section>
+</ContentLayout>

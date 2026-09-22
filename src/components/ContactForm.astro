@@ -9,6 +9,7 @@
  */
 import Button from './Button.astro';
 import site from '../content/site.json';
+import global from '../content/global.json';
 
 const { contact } = site;
 const requested = Astro.url.searchParams.get('about') ?? '';
@@ -18,24 +19,13 @@ const preselected = contact.topics.includes(requested) ? requested : '';
 <form
   class="form"
   name="enquiry"
-  method="POST"
-  action="/thank-you"
-  data-netlify="true"
-  netlify-honeypot="company"
+  method="GET"
+  action={`mailto:${global.contact.email}`}
+  enctype="text/plain"
+  data-email={global.contact.email}
+  data-astro-reload
   novalidate
 >
-  <input type="hidden" name="form-name" value="enquiry" />
-
-  {/* aria-hidden with tabindex="-1" is the sanctioned honeypot pattern. Without
-      it a screen reader user meets a field labelled "Do not fill this in", and
-      if they fill it Netlify discards the enquiry while telling them it sent. */}
-  <p class="form__honey" aria-hidden="true">
-    <label>
-      Do not fill this in
-      <input name="company" tabindex="-1" autocomplete="off" />
-    </label>
-  </p>
-
   <p class="form__note">{contact.optionalNote}</p>
 
   <div class="form__row">
@@ -113,15 +103,6 @@ const preselected = contact.topics.includes(requested) ? requested : '';
     gap: var(--s-5);
     width: 100%;
     max-inline-size: var(--measure);
-  }
-
-  .form__honey {
-    position: absolute;
-    inline-size: 1px;
-    block-size: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
   }
 
   .form__note,
@@ -215,9 +196,18 @@ const preselected = contact.topics.includes(requested) ? requested : '';
 </style>
 
 <script>
-  const form = document.querySelector<HTMLFormElement>('form[name="enquiry"]');
+  function initialiseEnquiryForm() {
+    const form = document.querySelector<HTMLFormElement>('form[name="enquiry"]');
+    if (!form || form.dataset.ready) return;
+    form.dataset.ready = 'true';
+    const topic = form.elements.namedItem('topic');
+    const requestedTopic = new URLSearchParams(window.location.search).get('about');
 
-  if (form) {
+    if (topic instanceof HTMLSelectElement && requestedTopic) {
+      const isKnownTopic = Array.from(topic.options).some((option) => option.value === requestedTopic);
+      if (isKnownTopic) topic.value = requestedTopic;
+    }
+
     type Field = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
     const fields = Array.from(form.querySelectorAll<Field>('[data-error-missing]'));
 
@@ -254,11 +244,28 @@ const preselected = contact.topics.includes(requested) ? requested : '';
         return;
       }
 
+      event.preventDefault();
       const button = form.querySelector<HTMLElement>('[data-submit]');
       if (button) {
         const label = button.querySelector('.btn__label') ?? button;
         label.textContent = button.dataset.sending ?? label.textContent;
       }
+      const value = (name: string) => {
+        const field = form.elements.namedItem(name);
+        return field instanceof HTMLInputElement || field instanceof HTMLSelectElement || field instanceof HTMLTextAreaElement ? field.value : '';
+      };
+      const subject = `Website enquiry: ${value('topic')}`;
+      const body = [
+        `Name: ${value('name')}`,
+        `Email: ${value('email')}`,
+        `Topic: ${value('topic')}`,
+        `Deadline: ${value('deadline') || 'Not specified'}`,
+        '',
+        value('message'),
+      ].join('\n');
+      window.location.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     });
   }
+  initialiseEnquiryForm();
+  document.addEventListener('astro:page-load', initialiseEnquiryForm);
 </script>

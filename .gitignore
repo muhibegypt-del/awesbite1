@@ -4,5 +4,10 @@ dist/
 .netlify/
 .DS_Store
 *.log
+docs/qa/
 .env
 .env.production
+
+.vercel
+.env*
+artifacts/

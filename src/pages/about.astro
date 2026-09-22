@@ -1,114 +1,75 @@
 ---
-/**
- * About: who she is, why the practice works the way it does, and the two
- * things that are hers rather than a service — the reading project and what
- * she is open to.
- */
 import Base from '../layouts/Base.astro';
 import SectionMarker from '../components/SectionMarker.astro';
-import Tag from '../components/Tag.astro';
-import global from '../content/global.json';
 import site from '../content/site.json';
-
 const { about, credentials } = site;
 ---
-
-<Base
-  title="About Aneesa"
-  description="English teacher, voice artist and writer with 12 years of classroom experience across three countries, grounded in listening closely and responding with care."
->
+<Base title="About Aneesa" description="English teacher, voice artist and writer with 12 years of classroom experience across England, Egypt, Saudi and Qatar.">
   <section class="page-hero">
     <div class="container editorial">
       <SectionMarker label="About" class="editorial-aside" />
-
       <div class="editorial-full split">
-        <div><div class="frame frame--portrait"></div></div>
-
+        <div class="frame frame--portrait">
+          <img src={about.portrait} alt={about.portraitAlt} width="2200" height="1466"
+            loading="eager" fetchpriority="high" decoding="async" />
+        </div>
         <div class="stack">
           <h1>{about.heading}</h1>
-          {about.paragraphs.map((line) => <p class="t-lead">{line}</p>)}
+          <p class="t-lead">{about.empathy}</p>
+          {about.paragraphs.map((line) => <p class="t-body">{line}</p>)}
         </div>
       </div>
-
       <ul class="credentials editorial-full" role="list">
-        {
-          credentials.map((c) => (
-            <li class="credentials__item">
-              <span class="credentials__qualification">{c.qualification}</span>
-              <span class="credentials__body">{c.body}</span>
-            </li>
-          ))
-        }
+        {credentials.map((c) => <li class="credentials__item">
+          <span class="credentials__qualification">{c.qualification}</span>
+          <span class="credentials__body">{c.body}</span>
+        </li>)}
       </ul>
     </div>
   </section>
-
-  <section class="section band" aria-labelledby="empathy-heading">
+  <section class="section band" aria-labelledby="experience-heading">
     <div class="container editorial">
-      <SectionMarker as="h2" id="empathy-heading" label="Why one to one" class="editorial-aside" />
-
-      <div class="stack">
-        <p class="t-lead">{about.empathy}</p>
-        <p class="t-body">{about.authority}</p>
-
-        <div class="stack stack--tight">
-          <h3>{about.whyHeading}</h3>
-          {about.why.map((line) => <p class="t-body">{line}</p>)}
-        </div>
+      <SectionMarker as="h2" id="experience-heading" label="Experience" class="editorial-aside" />
+      <div class="stack experience-panel">
+        <p class="t-lead">{about.authority}</p>
+        <p class="t-body">{about.teachingBodies}</p>
+        <h3>{about.whyHeading}</h3>
+        {about.why.map((line) => <p class="t-body">{line}</p>)}
+        <a class="link-rule" href="/teaching">Explore teaching <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </section>
-
-  <section class="section" aria-labelledby="reflection-heading">
+  <section class="section">
     <div class="container editorial">
-      <SectionMarker as="h2" id="reflection-heading" label="Reflection" class="editorial-aside" />
-
-      <div class="stack">
-        <p class="reflection__flag">{about.reflectionFlag}</p>
-        <h3>{about.reflectionHeading}</h3>
-        <p class="t-body">{about.reflectionBody}</p>
-        <ul class="tag-row" role="list">
-          {about.reflectionTags.map((tag) => <li><Tag>{tag}</Tag></li>)}
-        </ul>
-        <p class="t-small platforms">{about.reflectionPlatforms}</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="section band" aria-labelledby="open-to-heading">
-    <div class="container editorial">
-      <SectionMarker as="h2" id="open-to-heading" label="Open to" class="editorial-aside" />
-
-      <div class="stack">
-        <ul class="list-dash" role="list">
-          {about.openTo.map((item) => <li>{item}</li>)}
-        </ul>
-        <a class="link-rule" href={`mailto:${global.contact.email}`}>
-          Enquiries: {global.contact.email}
-        </a>
+      <SectionMarker label="Beyond client work" class="editorial-aside" />
+      <div class="stack editorial-card">
+        <h2>Books, language and community</h2>
+        <p class="t-lead">{about.reflectionBody}</p>
+        <a class="link-rule" href="/content">Explore Content <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </section>
 </Base>
 
 <style>
-  /* --clay-ink, not --olive. --olive is 4.12:1 on paper and lower on the
-     coconut band, and this flag renders at 12px, which WCAG counts as normal
-     text. The old comment claiming a mono flag was exempt was wrong. */
-  .reflection__flag {
-    font-family: var(--font-mono);
-    font-size: var(--t-mono);
-    letter-spacing: var(--track-mono);
-    text-transform: uppercase;
-    color: var(--clay-ink);
+  .experience-panel,
+  .editorial-card {
+    width: 100%;
+    max-inline-size: var(--measure);
+    padding: var(--s-6);
+    background: color-mix(in srgb, var(--paper-lift) 72%, transparent);
+    border: var(--border);
+    border-inline-start: 3px solid var(--clay);
   }
 
-  .platforms { color: var(--ink-soft); }
+  .band .experience-panel {
+    background: color-mix(in srgb, var(--paper) 72%, transparent);
+  }
 
-  .tag-row {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--s-2);
+  @media (max-width: 479px) {
+    .experience-panel,
+    .editorial-card {
+      padding: var(--s-5);
+    }
   }
 </style>

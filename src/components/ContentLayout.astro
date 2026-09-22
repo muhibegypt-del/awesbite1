@@ -1,0 +1,34 @@
+---
+import Base from '../layouts/Base.astro';
+interface Props { title: string; description: string }
+const { title, description } = Astro.props;
+const pages = [
+  { label: 'Intro', href: '/content/introduction' },
+  { label: 'Substack', href: '/content/substack' },
+  { label: 'YouTube', href: '/content/youtube' },
+  { label: 'Socials', href: '/content/socials' },
+  { label: 'Collaborations', href: '/content/collaborations' },
+];
+---
+<Base title={title === 'Content' ? 'Content' : `${title} · Content`} description={description}>
+  <section class="content-navigation">
+    <div class="container">
+      <a class="content-home" href="/content" aria-current={Astro.url.pathname.replace(/\/$/, '') === '/content' ? 'page' : undefined}>Content</a>
+      <nav aria-label="Content section">
+        <ul role="list">
+          {pages.map((page) => <li><a href={page.href}
+            aria-current={Astro.url.pathname.replace(/\/$/, '') === page.href ? 'page' : undefined}>{page.label}</a></li>)}
+        </ul>
+      </nav>
+    </div>
+  </section>
+  <slot />
+</Base>
+<style>
+  .content-navigation { border-bottom: var(--border); }
+  .content-navigation > div { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3) var(--s-7); padding-block: var(--s-3); }
+  .content-home { font-weight: 500; }
+  ul { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-5); }
+  a { min-height: 44px; display: inline-flex; align-items: center; font-size: var(--t-small); text-decoration: none; }
+  a[aria-current='page'] { text-decoration: underline; text-underline-offset: .3em; }
+</style>

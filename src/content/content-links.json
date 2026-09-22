@@ -1,0 +1,13 @@
+{
+  "substack": null,
+  "youtube": null,
+  "socials": [
+    { "label": "LinkedIn", "url": null },
+    { "label": "Instagram", "url": null },
+    { "label": "TikTok", "url": null }
+  ],
+  "library": [
+    { "label": "Substack", "url": null },
+    { "label": "YouTube", "url": null }
+  ]
+}

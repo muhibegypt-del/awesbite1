@@ -1,0 +1,9 @@
+---
+import Base from '../layouts/Base.astro';
+import ServicePage from '../components/ServicePage.astro';
+import site from '../content/site.json';
+const service = site.services.find((s) => s.id === 'teaching')!;
+---
+<Base title="Teaching" description="Individual English teaching: primary, KS3, GCSE, International GCSE, A-Level and International A-Level, ESL and IELTS.">
+  <ServicePage service={service} />
+</Base>

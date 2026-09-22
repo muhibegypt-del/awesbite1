@@ -24,6 +24,58 @@ html {
   html { scroll-behavior: auto; }
 }
 
+/* Native cross-document transitions keep navigation feeling continuous while
+   preserving Astro's normal multi-page behaviour and near-zero JS footprint. */
+@view-transition {
+  navigation: auto;
+}
+
+@keyframes page-fade-out {
+  to { opacity: 0; }
+}
+
+@keyframes page-fade-in {
+  from { opacity: 0; }
+}
+
+@keyframes page-enter {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes image-settle {
+  from { transform: scale(1.025); }
+  to { transform: scale(1); }
+}
+
+::view-transition-old(root) {
+  animation: page-fade-out var(--dur-fast) var(--ease) both;
+}
+
+::view-transition-new(root) {
+  animation: page-fade-in var(--dur-mid) var(--ease) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.01ms !important;
+  }
+}
+
+/* A dependable entry fade for browsers without cross-document View
+   Transitions. Supporting browsers still enhance navigation with the
+   old/new-page crossfade above. */
+@media (prefers-reduced-motion: no-preference) {
+  body {
+    animation: page-enter var(--dur-mid) var(--ease) both;
+  }
+
+  .page-hero img {
+    animation: image-settle var(--dur-slow) var(--ease) 120ms both;
+  }
+}
+
 body {
   margin: 0;
   font-family: var(--font-body);
@@ -366,6 +418,55 @@ p {
   padding-block: var(--s-9) var(--s-8);
 }
 
+@keyframes enter-softly {
+  from {
+    opacity: 0;
+    transform: translateY(var(--s-3));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .page-hero .editorial > * {
+    animation: enter-softly var(--dur-slow) var(--ease) both;
+  }
+
+  .page-hero .editorial > :nth-child(2) { animation-delay: 90ms; }
+  .page-hero .editorial > :nth-child(3) { animation-delay: 180ms; }
+}
+
+/* Editorial scroll reveals. The root class is added only when motion is
+   welcome and IntersectionObserver is available; content remains visible in
+   every fallback and a short fail-safe removes the class if setup ever fails. */
+.reveal-enabled .hero:not(.page-hero) .editorial > *,
+.reveal-enabled .section .editorial > * {
+  opacity: 0;
+  transform: translateY(var(--s-3));
+  transition:
+    opacity var(--dur-slow) var(--ease) var(--reveal-delay, 0ms),
+    transform var(--dur-slow) var(--ease) var(--reveal-delay, 0ms);
+}
+
+.reveal-enabled .hero:not(.page-hero) .editorial > *.is-revealed,
+.reveal-enabled .section .editorial > *.is-revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-enabled .hero:not(.page-hero) .editorial > * img,
+.reveal-enabled .section .editorial > * img {
+  transform: scale(1.02);
+  transition: transform var(--dur-slow) var(--ease) var(--reveal-delay, 0ms);
+}
+
+.reveal-enabled .hero:not(.page-hero) .editorial > *.is-revealed img,
+.reveal-enabled .section .editorial > *.is-revealed img {
+  transform: scale(1);
+}
+
 @media (max-width: 1023px) {
   .page-hero { padding-block: var(--s-8) var(--s-7); }
 }
@@ -508,7 +609,7 @@ p {
   color: var(--ink-soft);
 }
 
-/* ---- Mono slug, e.g. [01 // TEACH] ---- */
+/* ---- Mono service label, e.g. 01 — TEACH ---- */
 
 .slug {
   font-family: var(--font-mono);
@@ -695,6 +796,14 @@ p {
   width: 100%;
   background: var(--coconut);
   border-radius: var(--radius-none);
+}
+
+.frame > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 69% center;
 }
 
 .frame::after {

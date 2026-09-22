@@ -17,29 +17,36 @@ interface Props {
 }
 
 const { current = '', full = false } = Astro.props;
-const { services } = site;
+const order = ['teaching', 'repurposing', 'narration'];
+const services = [...site.services].sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
+const treatments: Record<string, {tag: string; title: string; line: string}> = {
+  teaching: { tag: 'TEACH', title: 'learn the words.', line: 'Teaching — KS3, GCSE, International GCSE, A-Level, International A-Level, ESL & IELTS' },
+  repurposing: { tag: 'REPURPOSE', title: 'shape the words.', line: 'Content repurposing' },
+  narration: { tag: 'NARRATE', title: 'bring the words to life.', line: 'Voiceover & narration' },
+};
 ---
 
 <ul class={`pillars columns columns--aligned ${full ? 'pillars--full' : ''}`} role="list">
   {
     services.map((service) => {
       const isCurrent = service.route === current;
-      const label = `${service.pillar}: ${service.plain}`;
+      const treatment = treatments[service.id];
+      const label = `${treatment.title} ${treatment.line}`;
       return (
         <li class="pillar">
           {isCurrent ? (
             <div class="pillar__inner pillar__inner--current" aria-current="page">
-              <p class="slug" aria-hidden="true">[{service.number} // {service.tag}]</p>
-              <p class="pillar__name">{service.pillar}</p>
-              <p class="pillar__plain">{service.plain}</p>
+              <p class="slug" aria-hidden="true">{treatment.tag}</p>
+              <p class="pillar__name">{treatment.title}</p>
+              <p class="pillar__plain">{treatment.line}</p>
               {full && <p class="pillar__line">{service.oneLiner}</p>}
               <p class="pillar__state">You are here</p>
             </div>
           ) : (
             <a class="pillar__inner" href={service.route} aria-label={label}>
-              <span class="slug" aria-hidden="true">[{service.number} // {service.tag}]</span>
-              <span class="pillar__name">{service.pillar}</span>
-              <span class="pillar__plain">{service.plain}</span>
+              <span class="slug" aria-hidden="true">{treatment.tag}</span>
+              <span class="pillar__name">{treatment.title}</span>
+              <span class="pillar__plain">{treatment.line}</span>
               {full && <span class="pillar__line">{service.oneLiner}</span>}
               <span class="pillar__state" aria-hidden="true">{service.audience} →</span>
             </a>
@@ -125,5 +132,29 @@ const { services } = site;
 
   .pillar__inner--current .pillar__name {
     color: var(--ink);
+  }
+
+  .pillars--full {
+    gap: var(--s-4);
+  }
+
+  .pillars--full > .pillar {
+    min-width: 0;
+    background: color-mix(in srgb, var(--paper-lift) 68%, transparent);
+    border: var(--border);
+  }
+
+  .pillars--full > .pillar::before {
+    display: none;
+  }
+
+  .pillars--full .pillar__inner {
+    padding: var(--s-5);
+  }
+
+  @media (min-width: 768px) {
+    .pillars--full {
+      column-gap: var(--s-4);
+    }
   }
 </style>

@@ -6,9 +6,9 @@
 
 :root {
   /* ---- Surfaces ---- */
-  --paper:      #F7E9DE;   /* Albescent White — page background */
-  --paper-lift: #FCF4EC;   /* cards, inputs, modal body */
-  --coconut:    #D5CBC0;   /* alternating bands, image placeholders */
+  --paper:      #FFFAF6;   /* warm white — page background */
+  --paper-lift: #FFFFFF;   /* cards and inputs */
+  --coconut:    #F6E9DF;   /* client-approved subtle orange tint */
 
   /* ---- Type & structure ---- */
   --ink:        #241C1A;   /* headings + body. Never use #000 */
@@ -34,12 +34,8 @@
   --teal:       #5F8A8B;   /* audio player scrubber ONLY */
 
   /* ---- Typefaces ---- */
-  --font-display: "Maison", "Cormorant Garamond", "Instrument Serif", Georgia, serif;
-  /* Jost leads. "Avenir Next" is deliberately absent: it is a macOS system
-     face, so listing it first would resolve locally on Mac and the
-     self-hosted Jost would never load. Reinstate it only when a licensed
-     Avenir webfont is self-hosted alongside the others. */
-  --font-body:    "Jost", "Futura", -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Fraunces Variable", Georgia, serif;
+  --font-body:    "Inter Variable", -apple-system, "Segoe UI", sans-serif;
   --font-mono:    "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
   /* ---- Type scale (fluid, 360px → 1440px) ---- */

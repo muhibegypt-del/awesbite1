@@ -1,81 +1,91 @@
 {
-  "_comment": "Hub-and-spoke content. The hub signposts; each spoke sells one service to one audience. Wording is the revised editorial pass over Aneesa's approved Stage 2 material, except where marked OWNER — those are structural labels, or slots she has not filled. Nothing is invented: a slot with no source renders its bracketed placeholder so the gap is visible rather than papered over.",
+  "_comment": "Hub-and-spoke content. The hub signposts; each spoke sells one service to one audience. Factual claims are grounded in Aneesa's supplied material. Connective and conversion copy is an editorial draft for sign-off; unfilled assets render as visible placeholders rather than being invented.",
 
   "brand": {
-    "triad": "the taught word. the spoken word. the written word."
+    "triad": "learn the words. shape the words. bring the words to life."
   },
 
   "hub": {
     "_comment": "OWNER: headline and sub supplied by the client, not traceable to Aneesa's transcripts. Everything else on the hub is her wording.",
-    "headline": "English tuition, narration and writing, delivered with care.",
-    "sub": "Thoughtful, professional support for students, authors and businesses.",
+    "headline": "English teaching, content repurposing and narration, delivered with care.",
+    "sub": "Thoughtful, professional support for students, authors and creators.",
     "pillarsHeading": "Three ways to work with me",
     "pillarsLine": "Each service begins with careful attention—to the student, the text or the voice behind the idea.",
     "authorityHeading": "Aneesa",
     "authorityParagraphs": [
-      "I am an English teacher, voice artist and writer with 12 years of classroom experience across three countries. My work is grounded in listening closely, identifying what is needed and responding with care.",
+      "I am an English teacher, voice artist and writer with 12 years of classroom experience across four countries. My work is grounded in listening closely, identifying what is needed and responding with care.",
       "Before teaching, I acted, performed spoken word and read novels aloud in a care home. Each experience taught me something about language, interpretation and connecting with an audience."
     ],
     "authorityLink": { "label": "More about Aneesa", "href": "/about" }
   },
 
   "credentials": [
-    { "qualification": "First-class BA (Hons)", "body": "English and American Literature" },
-    { "qualification": "Trinity CertTESOL", "body": "Trinity College London" },
+    { "qualification": "First-class BA (Hons)", "body": "English with a minor in American Literature and Film." },
+    { "qualification": "CertTESOL (Trinity College London)", "body": "Teaching English to speakers of other languages" },
     { "qualification": "PGCE and QTS", "body": "Qualified Teacher Status" },
-    { "qualification": "British Council", "body": "Former teacher in Egypt and Saudi Arabia" }
+    { "qualification": "British Council", "body": "Former teacher in Egypt" }
   ],
 
   "services": [
     {
-      "id": "tuition",
-      "route": "/tuition",
+      "id": "teaching",
+      "route": "/teaching",
       "number": "01",
       "tag": "TEACH",
       "pillar": "The Taught Word",
-      "plain": "English tuition",
+      "plain": "English teaching",
       "audience": "For students and parents",
       "oneLiner": "I identify the gaps holding a student back and build from there, helping them develop the skills and confidence to show what they know.",
-      "cta": { "label": "Book a free assessment", "href": "/contact?about=English+tuition" },
+      "cta": { "label": "Enquire about tuition", "href": "/contact?about=English+tuition" },
+      "image": "/images/aneesa-writing.webp",
+      "imageAlt": "Aneesa writing thoughtfully in a notebook",
+      "imagePosition": "68% center",
+      "problemLabel": "Individual support",
 
       "problem": [
         "In a busy classroom, lessons have to keep moving. When a student misses an important step, later work becomes harder and confidence can begin to fall.",
         "The difficulty is often specific: comprehension, exam technique, working within a time limit or knowing how to begin a piece of writing. One-to-one tuition gives us the time to identify it and work on it directly."
       ],
       "aside": {
-        "heading": "Why previous support may not have worked",
-        "body": "Online resources can be difficult to follow consistently. A tutor may move too quickly, while extra time at school can feel like more of the same. Completing every piece of homework does not always address the underlying gap."
+        "heading": "Why individual support can help",
+        "body": "Online resources and classroom support can be useful, but they cannot always respond to the precise gap in front of a student. Individual tuition makes it possible to slow down, try a different explanation and build from a secure foundation."
       },
 
       "tracksHeading": "Who I teach",
+      "rangeLine": "From blending sounds together through to A-Level and its international equivalent, with individual support shaped around the learner.",
       "tracks": [
         { "label": "Primary, 6 to 11", "body": "Phonics, reading, comprehension and confident writing" },
         { "label": "Key Stage 3", "body": "Building the core reading and writing skills needed for GCSE" },
-        { "label": "GCSE and iGCSE", "body": "Exam technique, time management and writing under pressure" },
-        { "label": "A-Level", "body": "Close analysis, inference and authorial intention" },
+        { "label": "GCSE and International GCSE", "body": "Exam technique, time management and writing under pressure, aligned with the student's qualification" },
+        { "label": "A-Level and International A-Level", "body": "Close analysis, inference and authorial intention, with preparation for the relevant qualification" },
         { "label": "IELTS", "body": "Focused preparation across reading, writing, listening and speaking" },
-        { "label": "Adults", "body": "General English from beginner to advanced, taught at a pace that suits you" }
+        { "label": "ESL and adult learners", "body": "General English from beginner to advanced, taught at a pace that suits you" }
       ],
 
       "methodHeading": "How it works",
       "method": [
-        { "number": "01", "title": "A free 20-minute call.", "body": "We discuss what support is needed, the timescale and any current concerns." },
-        { "number": "02", "title": "A first session to identify the gaps.", "body": "I assess where the student is now, rather than relying only on where the syllabus says they should be." },
-        { "number": "03", "title": "Weekly lessons, booked in blocks.", "body": "Work can be set between sessions and reviewed before the next lesson." }
+        { "number": "01", "title": "Tell me what you need", "body": "" },
+        { "number": "02", "title": "Build your learning plan", "body": "" },
+        { "number": "03", "title": "Learn together", "body": "" },
+        { "number": "04", "title": "Practise & refine", "body": "" },
+        { "number": "05", "title": "Track your progress", "body": "" }
+      ],
+
+      "publishPricing": true,
+      "pricingHeading": "Teaching prices",
+      "pricingLine": "All teaching lessons are 60-minute online lessons. British Curriculum is separated from ESL and IELTS.",
+      "tiers": [
+        { "label": "KS3 English", "cadence": "60-minute online lesson", "price": "£40 / hour · 5 lessons £200 · 10 lessons £400" },
+        { "label": "GCSE English", "cadence": "60-minute online lesson", "price": "£50 / hour · 5 lessons £250 · 10 lessons £500" },
+        { "label": "A Level English", "cadence": "60-minute online lesson", "price": "£60 / hour · 5 lessons £300 · 10 lessons £600" },
+        { "label": "ESL / General English", "cadence": "60-minute online lesson", "price": "£40 / hour · 5 lessons £200 · 10 lessons £400" },
+        { "label": "IELTS", "cadence": "60-minute online lesson", "price": "£60 / hour · 5 lessons £300 · 10 lessons £600" }
       ],
 
       "note": {
         "heading": "Support at every level",
         "body": "Tuition is not only for students who are struggling. It can also challenge students who are working ahead of their class and need more stimulating material."
       },
-
-      "pricingHeading": "Straightforward pricing",
-      "pricingLine": "Lessons are booked in monthly blocks so that each session can build on the last and progress can be reviewed consistently.",
-      "tiers": [
-        { "label": "Four lessons", "cadence": "One a week", "price": "Pricing on enquiry" },
-        { "label": "Eight lessons", "cadence": "Twice a week", "price": "Pricing on enquiry" },
-        { "label": "Twelve lessons", "cadence": "Three times a week", "price": "Pricing on enquiry" }
-      ],
 
       "agreementsHeading": "What you can expect",
       "agreements": [
@@ -101,13 +111,17 @@
     {
       "id": "narration",
       "route": "/narration",
-      "number": "02",
-      "tag": "SPEAK",
+      "number": "03",
+      "tag": "NARRATE",
       "pillar": "The Spoken Word",
       "plain": "Audiobook narration and voice work",
       "audience": "For authors, publishers and producers",
       "oneLiner": "I take the time to understand the text and its intention, then deliver a thoughtful performance that holds the listener's attention.",
       "cta": { "label": "Request a custom audition", "href": "/contact?about=Audiobook+narration" },
+      "image": "/images/aneesa-portrait.webp",
+      "imageAlt": "Aneesa smiling in a softly lit black-and-white portrait",
+      "imagePosition": "65% center",
+      "problemLabel": "The performance",
 
       "reelsHeading": "Listen",
       "reels": null,
@@ -118,27 +132,58 @@
         "The right performance should feel true to the text, consistent from beginning to end and engaging for the listener."
       ],
       "aside": {
-        "heading": "What careful preparation prevents",
+        "heading": "Why preparation matters",
         "body": "An unsuitable tone, inconsistent character voices and avoidable re-recording can all weaken the finished production. Preparation helps the recording process run smoothly and protects the quality of the work."
       },
 
       "voiceHeading": "The voice",
-      "voiceBody": "Warm, rich and unhurried, with a clear English accent shaped in Leicester. Clients have described my voice as silky and reassuring, with a natural pace suited to sustained listening.",
-      "voiceTags": ["Warm", "Rich", "Clear", "Reassuring", "Unhurried"],
+      "voiceBody": "My voice has a clear, neutral British accent, with a gentle Midlands warmth in everyday speech.",
+      "voiceTags": ["Warm", "Rich", "Clear", "Unhurried"],
 
-      "tracksHeading": "What I narrate",
+      "tracksHeading": "Voice work",
       "tracks": [
-        { "label": "Audiobooks", "body": "Fiction and non-fiction" },
+        { "label": "Commercials", "body": "Advertising and campaign voiceovers" },
+        { "label": "Corporate", "body": "Company and internal communications" },
+        { "label": "IVR", "body": "Phone systems and continuity messaging" },
+        { "label": "Explainer videos", "body": "Clear delivery for products, services and ideas" },
         { "label": "E-learning", "body": "Training and course material" },
-        { "label": "Video", "body": "Explainer and corporate content" },
-        { "label": "IVR", "body": "Phone systems and continuity messaging" }
+        { "label": "Audiobook", "body": "Fiction and non-fiction narration" },
+        { "label": "Video games", "body": "Character and narrative voice work" },
+        { "label": "Animation", "body": "Voices for animated characters and stories" }
       ],
 
       "methodHeading": "How it works",
       "method": [
-        { "number": "01", "title": "A free initial call.", "body": "We discuss the project, the deadline, the audience and the voice you have in mind." },
-        { "number": "02", "title": "Preparation before recording.", "body": "I read the material closely, clarify the intention and make the necessary performance choices." },
-        { "number": "03", "title": "Recording and delivery.", "body": "Your finished audio is supplied to the agreed technical specification and deadline." }
+        { "number": "01", "title": "Tell me about the project", "body": "" },
+        { "number": "02", "title": "Find the voice", "body": "" },
+        { "number": "03", "title": "Prepare the performance", "body": "" },
+        { "number": "04", "title": "Record", "body": "" },
+        { "number": "05", "title": "Refine", "body": "" },
+        { "number": "06", "title": "Receive your final audio", "body": "" }
+      ],
+
+      "publishPricing": true,
+      "pricingHeading": "Narration prices",
+      "pricingLine": "Choose the level of support that fits the recording. Larger projects are quoted by word count, finished audio length, usage and project requirements.",
+      "tiers": [
+        {
+          "label": "Short-form voice work",
+          "cadence": "Short-form work: social, short video, e-learning snippets, podcast intros and outros, and short promotional audio.",
+          "price": "From £200",
+          "includes": ["Script review", "Professional recording", "Basic editing", "One round of minor revisions", "High-quality audio file"]
+        },
+        {
+          "label": "Delivery-led voice work",
+          "cadence": "Delivery-led work: audiobook samples, poetry, literary, film or theatre, longer video and brand storytelling.",
+          "price": "From £350",
+          "includes": ["Script analysis", "Performance preparation", "Professional recording", "Basic editing", "One round of revisions", "High-quality final audio"]
+        },
+        {
+          "label": "Long-form and larger projects",
+          "cadence": "Larger projects: audiobooks, long-form work, e-learning courses, documentary, multi-part and character work.",
+          "price": "£250 per finished hour",
+          "includes": ["Full briefing", "Script preparation", "Recording", "Editing", "Pick-ups and revisions", "Final delivery"]
+        }
       ],
 
       "studioHeading": "Studio and turnaround",
@@ -147,21 +192,28 @@
 
       "background": {
         "heading": "Training and experience",
-        "body": "I have trained with voice coach Gary Terzza and studied stage acting at the Television Workshop and Derby Academy. My performance experience also includes spoken word with Beatfreeks and university theatre in England and Canada. Further audiobook narration training with RADA is planned."
+        "body": "My voice-work experience includes my former business, Stylish Voice. I was a student at The Television Workshop. I have also trained with voice coach Gary Terzza and at Derby Academy. My performance experience also includes spoken word with Beatfreeks and university theatre in England and Canada."
       },
-      "footnote": "Producing a finished audiobook typically takes 30 to 40 hours of work for every 10 hours of completed audio. Each project is quoted individually."
+      "footnote": "Larger projects are priced per finished hour and quoted according to word count, finished audio length, usage and project requirements.",
+      "proofHeading": "Testimonials",
+      "proof": null,
+      "proofPlaceholder": "Testimonials will be added here when they are available."
     },
 
     {
-      "id": "writing",
-      "route": "/writing",
-      "number": "03",
-      "tag": "WRITE",
+      "id": "repurposing",
+      "route": "/repurposing",
+      "number": "02",
+      "tag": "REPURPOSE",
       "pillar": "The Written Word",
-      "plain": "Writing and repurposing",
-      "audience": "For coaches, founders and podcasters",
-      "oneLiner": "I turn voice notes, recordings and existing content into clear, useful writing that still sounds like you.",
-      "cta": { "label": "Book a discovery call", "href": "/contact?about=Writing" },
+      "plain": "Content repurposing",
+      "audience": "For coaches, creators and podcasters",
+      "oneLiner": "I turn voice notes, recordings and existing content into clear long-form and short-form writing that still sounds like you.",
+      "cta": { "label": "Discuss a repurposing project", "href": "/contact?about=Content+repurposing" },
+      "image": "/images/aneesa-reviewing-a-manuscript.webp",
+      "imageAlt": "Aneesa reviewing and annotating a manuscript",
+      "imagePosition": "72% center",
+      "problemLabel": "The raw material",
 
       "problem": [
         "You have the expertise and the ideas, but turning them into consistent, well-structured content takes time away from the work only you can do.",
@@ -177,21 +229,53 @@
         "fromLabel": "You send",
         "from": "A voice note, podcast episode, old newsletter or any other material in which your thinking already exists.",
         "toLabel": "You get back",
-        "to": "Clear, purposeful content adapted for more than one platform and written in a voice that remains recognisably yours."
+        "to": "Long-form and short-form content adapted for more than one platform and written in a voice that remains recognisably yours."
       },
 
       "methodHeading": "How it works",
       "method": [
-        { "number": "01", "title": "A call to agree the purpose.", "body": "We clarify what the content needs to achieve, who it is for and where it will be used." },
-        { "number": "02", "title": "You share what already exists.", "body": "Send voice notes, podcast recordings, previous newsletters or other source material." },
-        { "number": "03", "title": "You receive polished, ready-to-use writing.", "body": "The structure is mine; the voice remains yours." }
+        { "number": "01", "title": "Share your content", "body": "" },
+        { "number": "02", "title": "Find the texture", "body": "" },
+        { "number": "03", "title": "Shape the story", "body": "" },
+        { "number": "04", "title": "Repurpose with purpose", "body": "" },
+        { "number": "05", "title": "Review & refine", "body": "" },
+        { "number": "06", "title": "Publish more, create less", "body": "" }
+      ],
+
+      "publishPricing": true,
+      "pricingHeading": "Repurposing prices",
+      "pricingLine": "Each package develops existing source material into long-form and short-form content in the client's voice.",
+      "tiers": [
+        {
+          "label": "One-source package",
+          "cadence": "One long-form source.",
+          "price": "From £500",
+          "includes": ["Content analysis", "Key ideas and quotes identified", "One long-form written piece", "Three to five short-form pieces", "Written in the client's voice", "One round of revisions"]
+        },
+        {
+          "label": "Two-source package",
+          "cadence": "Up to two long-form sources.",
+          "price": "From £750",
+          "includes": ["Content analysis", "Two long-form written pieces", "Six to ten short-form pieces", "LinkedIn or social posts and captions", "Key quotes and hooks", "One round of revisions", "Delivered ready to edit or publish"]
+        },
+        {
+          "label": "Four-source package",
+          "cadence": "Up to four long-form sources.",
+          "price": "From £1,200",
+          "includes": ["Four long-form written pieces", "Twelve to twenty short-form pieces", "Quote and hook extraction", "One round of revisions"]
+        },
+        {
+          "label": "Short-form video editing",
+          "cadence": "Available as an add-on rather than as part of a core package.",
+          "price": "Quoted separately"
+        }
       ],
 
       "tracksHeading": "What I take on",
       "tracks": [
-        { "label": "Carousels", "body": "One idea developed into a clear, engaging sequence" },
+        { "label": "Carousels and short-form posts", "body": "One idea developed into concise, clear content for social platforms" },
         { "label": "Newsletters", "body": "Structured writing developed from your existing ideas" },
-        { "label": "Articles", "body": "Thoughtful long-form writing in your voice" },
+        { "label": "Articles and long-form writing", "body": "Thoughtful, structured writing in your voice" },
         { "label": "Repurposing systems", "body": "A practical way to make each idea work across several formats" }
       ],
 
@@ -200,35 +284,38 @@
       "examplesPlaceholder": "[ BEFORE AND AFTER EXAMPLES WILL GO HERE — one source (voice note or podcast) shown beside what it became. Two or three, with client permission. ]",
 
       "background": {
-        "heading": "Current availability",
-        "body": "I currently work with one or two writing clients at a time. This allows for close attention, a collaborative process and introductory rates while I continue to develop the service."
-      }
+        "heading": "A focused working relationship",
+        "body": "I work with a small number of writing clients at a time, allowing for close attention and a genuinely collaborative process. Each project is quoted according to its scope."
+      },
+      "proofHeading": "Testimonials",
+      "proof": null,
+      "proofPlaceholder": "Testimonials will be added here when they are available."
     }
   ],
 
   "about": {
     "heading": "Aneesa",
     "paragraphs": [
-      "I am an English teacher, voice artist and writer with 12 years of classroom experience across three countries. My work is grounded in listening closely, identifying what is needed and responding with care.",
+      "I am an English teacher, voice artist and writer with 12 years of classroom experience across four countries. My work is grounded in listening closely, identifying what is needed and responding with care.",
       "Before teaching, I acted, performed spoken word and read novels aloud in a care home. Each experience taught me something about language, interpretation and connecting with an audience."
     ],
     "empathy": "As a child, I found time pressure difficult even when I understood the subject. Years later, I needed a teacher to help me learn Arabic despite having access to countless free resources. Both experiences showed me that the right individual support can make all the difference.",
-    "authority": "I have spent 12 years teaching English: in primary classrooms in England, with the British Council in Egypt, at a women's college in Saudi Arabia and at a British secondary school in Doha. I have taught learners from age six to adult, from beginner level through to A-Level.",
-    "portrait": null,
+    "authority": "I have spent 12 years teaching English across England, Egypt, Saudi and Qatar, working with learners from age six to adult.",
+    "teachingBodies": "I've taught with the British Council in Egypt, and with The Oxford Partnership in Saudi Arabia — one of several schools under the Colleges of Excellence programme.",
+    "portrait": "/images/aneesa-with-poetry-anthology.webp",
     "portraitAlt": "Aneesa resting her chin on her hands beside an anthology of poetry",
 
     "whyHeading": "The value of individual attention",
     "why": [
       "Classrooms, production schedules and content platforms are designed to serve many people efficiently. That can leave limited space for the needs of one student, the intention behind one book or the individual voice behind an idea.",
-      "This is not a failure of the people involved. It is a natural limitation of work designed for a group rather than an individual.",
-      "My approach creates that individual space: close attention, thoughtful questions and work shaped around the person or project in front of me."
+      "Working individually creates that space: time to listen, ask thoughtful questions and shape the work around the person or project in front of me."
     ],
 
-    "reflectionFlag": "A personal project · not a service",
-    "reflectionHeading": "Reading and reflection",
-    "reflectionBody": "Books are central to how I think and work, so I also write about them outside my professional services. This is a personal space for close reading, thoughtful interpretation and the passages that reward a little more attention.",
-    "reflectionTags": ["Words of the week", "Close reading", "Adaptations", "Literary devices", "Narrated extracts", "Three takeaways"],
-    "reflectionPlatforms": "Instagram · TikTok · YouTube · Substack",
+    "reflectionFlag": null,
+    "reflectionHeading": "Notes on books and language",
+    "reflectionBody": "Outside my client work, I share reading notes, close analysis and reflections on the books and passages that stay with me.",
+    "reflectionTags": ["Words of the week", "Close reading", "Adaptations", "Literary devices", "Narrated extracts", "Takeaways"],
+    "reflectionPlatforms": null,
 
     "openToHeading": "Open to",
     "openTo": [
@@ -256,14 +343,14 @@
       "IELTS preparation",
       "Audiobook narration",
       "Voice work",
-      "Writing",
+      "Content repurposing",
       "Speaking or hosting",
       "Something else"
     ],
     "placeholder": "A couple of lines is enough to get started.",
-    "optionalNote": "Every field except the deadline is required.",
-    "submit": "Send enquiry",
-    "submitting": "Sending…",
+    "optionalNote": "Every field except the deadline is required. Submitting opens a ready-to-send email in your email app.",
+    "submit": "Prepare enquiry email",
+    "submitting": "Opening email…",
     "errors": {
       "name": "Please add your name so I know who I am replying to.",
       "email": "Please add an email address so I can reply.",
@@ -271,7 +358,7 @@
       "topic": "Please choose the option that fits best.",
       "message": "Please add a line or two about what you need."
     },
-    "response": "I reply within two working days."
+    "response": "No details are stored by this preview. I reply within two working days."
   },
 
   "thankYou": {
