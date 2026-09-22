@@ -1,6 +1,6 @@
 # A Textured Word — implementation status
 
-Last updated: 20 September 2026
+Last updated: 22 September 2026
 Branch: `implementation/atw-action-brief`
 
 This file is the continuity record for the approved developer action brief. It
@@ -12,10 +12,8 @@ conversation history.
 - Keep the header enquiry CTA. The five-item limit applies to navigation links,
   not the separate conversion button. The CTA can become the Calendly entry
   point when the client supplies and approves that link.
-- Testimonials are deferred, not cancelled. Do not build them in this phase.
-  Preserve the future information architecture: Narration and Repurposing may
-  each gain a Testimonials dropdown item when approved content exists; Teaching
-  will not.
+- Testimonials are designed into Narration and Repurposing now and populated
+  later. Teaching has no Testimonials or Portfolio item.
 - The British Council / Oxford Partnership sentence is draft copy assembled
   from client-supplied facts. It requires copy sign-off and is not verbatim.
 - The Repurposing page must explicitly cover both long-form and short-form work.
@@ -45,6 +43,7 @@ without being necessary for the requested navigation, audio, content or layout.
 | 7 | Visual system, responsive behaviour, motion and accessibility | Complete |
 | 8 | Build validation, browser QA, public Vercel preview and handoff | Complete |
 | 9 | Source-fidelity audit and three narration placeholders | Complete |
+| 10 | Clear-cut SSOT corrections: terminology, processes, pricing and testimonials | Complete |
 
 ## Phase 1 completed
 
@@ -64,7 +63,8 @@ without being necessary for the requested navigation, audio, content or layout.
   approved for publication.
 - Substack, social and Library URLs.
 - Repurposing portfolio examples.
-- Narration and Repurposing testimonials for the later deferred phase.
+- Narration and Repurposing testimonial content; the sections and dropdown
+  entries are already present.
 - Approval and source assets for optional texture imagery.
 - Privacy and terms copy before final production launch.
 
@@ -78,8 +78,9 @@ without being necessary for the requested navigation, audio, content or layout.
   appearance unresolved for the project lead.
 - Confirmed no Substack or Library destination links yet.
 - A service and pricing proposal was supplied on 20 September. It contains
-  suggested package labels and open questions, so none of its prices are
-  published until the proposal is explicitly approved.
+  package labels and open questions. The later SSOT confirms the prices and
+  inclusions for publication, so they now appear under neutral descriptive
+  labels. Branded package names and the separate intensive ideas remain open.
 
 ## Phase 8 completed
 
@@ -111,3 +112,19 @@ without being necessary for the requested navigation, audio, content or layout.
   local audio file to the client.
 - Full evidence notes and deferred decisions are recorded in
   `docs/phases/09-source-fidelity-audit.md`.
+
+## Phase 10 completed
+
+- Replaced the outdated homepage service line with Teaching → Content
+  repurposing → Narration terminology and order.
+- Replaced the three abbreviated service processes with the exact SSOT process
+  titles: five Teaching steps, six Repurposing steps and six Narration steps.
+  Descriptions remain empty because their wording still requires approval.
+- Published every confirmed Teaching, Repurposing and Narration price and
+  inclusion from the SSOT under neutral descriptive labels. The unresolved
+  branded package names and Teaching intensive ideas were not added.
+- Corrected The Television Workshop wording to state plainly that Aneesa was a
+  student there while preserving the existing external link.
+- Added Testimonials dropdown entries and honest empty-state sections to
+  Repurposing and Narration only.
+- Production build passes with all 21 static routes.

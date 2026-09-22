@@ -7,7 +7,7 @@
 
   "hub": {
     "_comment": "OWNER: headline and sub supplied by the client, not traceable to Aneesa's transcripts. Everything else on the hub is her wording.",
-    "headline": "English tuition, narration and writing, delivered with care.",
+    "headline": "English teaching, content repurposing and narration, delivered with care.",
     "sub": "Thoughtful, professional support for students, authors and creators.",
     "pillarsHeading": "Three ways to work with me",
     "pillarsLine": "Each service begins with careful attention—to the student, the text or the voice behind the idea.",
@@ -64,9 +64,22 @@
 
       "methodHeading": "How it works",
       "method": [
-        { "number": "01", "title": "A free 20-minute call.", "body": "We discuss what support is needed, the timescale and any current concerns." },
-        { "number": "02", "title": "A first session to identify the gaps.", "body": "I assess where the student is now, rather than relying only on where the syllabus says they should be." },
-        { "number": "03", "title": "Weekly lessons, booked in blocks.", "body": "Work can be set between sessions and reviewed before the next lesson." }
+        { "number": "01", "title": "Tell me what you need", "body": "" },
+        { "number": "02", "title": "Build your learning plan", "body": "" },
+        { "number": "03", "title": "Learn together", "body": "" },
+        { "number": "04", "title": "Practise & refine", "body": "" },
+        { "number": "05", "title": "Track your progress", "body": "" }
+      ],
+
+      "publishPricing": true,
+      "pricingHeading": "Teaching prices",
+      "pricingLine": "All teaching lessons are 60-minute online lessons. British Curriculum is separated from ESL and IELTS.",
+      "tiers": [
+        { "label": "KS3 English", "cadence": "60-minute online lesson", "price": "£40 / hour · 5 lessons £200 · 10 lessons £400" },
+        { "label": "GCSE English", "cadence": "60-minute online lesson", "price": "£50 / hour · 5 lessons £250 · 10 lessons £500" },
+        { "label": "A Level English", "cadence": "60-minute online lesson", "price": "£60 / hour · 5 lessons £300 · 10 lessons £600" },
+        { "label": "ESL / General English", "cadence": "60-minute online lesson", "price": "£40 / hour · 5 lessons £200 · 10 lessons £400" },
+        { "label": "IELTS", "cadence": "60-minute online lesson", "price": "£60 / hour · 5 lessons £300 · 10 lessons £600" }
       ],
 
       "note": {
@@ -141,9 +154,36 @@
 
       "methodHeading": "How it works",
       "method": [
-        { "number": "01", "title": "A free initial call.", "body": "We discuss the project, the deadline, the audience and the voice you have in mind." },
-        { "number": "02", "title": "Preparation before recording.", "body": "I read the material closely, clarify the intention and make the necessary performance choices." },
-        { "number": "03", "title": "Recording and delivery.", "body": "Your finished audio is supplied to the agreed technical specification and deadline." }
+        { "number": "01", "title": "Tell me about the project", "body": "" },
+        { "number": "02", "title": "Find the voice", "body": "" },
+        { "number": "03", "title": "Prepare the performance", "body": "" },
+        { "number": "04", "title": "Record", "body": "" },
+        { "number": "05", "title": "Refine", "body": "" },
+        { "number": "06", "title": "Receive your final audio", "body": "" }
+      ],
+
+      "publishPricing": true,
+      "pricingHeading": "Narration prices",
+      "pricingLine": "Choose the level of support that fits the recording. Larger projects are quoted by word count, finished audio length, usage and project requirements.",
+      "tiers": [
+        {
+          "label": "Short-form voice work",
+          "cadence": "Short-form work: social, short video, e-learning snippets, podcast intros and outros, and short promotional audio.",
+          "price": "From £200",
+          "includes": ["Script review", "Professional recording", "Basic editing", "One round of minor revisions", "High-quality audio file"]
+        },
+        {
+          "label": "Delivery-led voice work",
+          "cadence": "Delivery-led work: audiobook samples, poetry, literary, film or theatre, longer video and brand storytelling.",
+          "price": "From £350",
+          "includes": ["Script analysis", "Performance preparation", "Professional recording", "Basic editing", "One round of revisions", "High-quality final audio"]
+        },
+        {
+          "label": "Long-form and larger projects",
+          "cadence": "Larger projects: audiobooks, long-form work, e-learning courses, documentary, multi-part and character work.",
+          "price": "£250 per finished hour",
+          "includes": ["Full briefing", "Script preparation", "Recording", "Editing", "Pick-ups and revisions", "Final delivery"]
+        }
       ],
 
       "studioHeading": "Studio and turnaround",
@@ -152,9 +192,12 @@
 
       "background": {
         "heading": "Training and experience",
-        "body": "My voice-work experience includes my former business, Stylish Voice. I have trained with voice coach Gary Terzza and studied stage acting at The Television Workshop and Derby Academy. My performance experience also includes spoken word with Beatfreeks and university theatre in England and Canada."
+        "body": "My voice-work experience includes my former business, Stylish Voice. I was a student at The Television Workshop. I have also trained with voice coach Gary Terzza and at Derby Academy. My performance experience also includes spoken word with Beatfreeks and university theatre in England and Canada."
       },
-      "footnote": "Audiobook projects are quoted individually according to length, preparation and production requirements."
+      "footnote": "Larger projects are priced per finished hour and quoted according to word count, finished audio length, usage and project requirements.",
+      "proofHeading": "Testimonials",
+      "proof": null,
+      "proofPlaceholder": "Testimonials will be added here when they are available."
     },
 
     {
@@ -191,9 +234,41 @@
 
       "methodHeading": "How it works",
       "method": [
-        { "number": "01", "title": "A call to agree the purpose.", "body": "We clarify what the content needs to achieve, who it is for and where it will be used." },
-        { "number": "02", "title": "You share what already exists.", "body": "Send voice notes, podcast recordings, previous newsletters or other source material." },
-        { "number": "03", "title": "You receive polished, ready-to-use writing.", "body": "The structure is mine; the voice remains yours." }
+        { "number": "01", "title": "Share your content", "body": "" },
+        { "number": "02", "title": "Find the texture", "body": "" },
+        { "number": "03", "title": "Shape the story", "body": "" },
+        { "number": "04", "title": "Repurpose with purpose", "body": "" },
+        { "number": "05", "title": "Review & refine", "body": "" },
+        { "number": "06", "title": "Publish more, create less", "body": "" }
+      ],
+
+      "publishPricing": true,
+      "pricingHeading": "Repurposing prices",
+      "pricingLine": "Each package develops existing source material into long-form and short-form content in the client's voice.",
+      "tiers": [
+        {
+          "label": "One-source package",
+          "cadence": "One long-form source.",
+          "price": "From £500",
+          "includes": ["Content analysis", "Key ideas and quotes identified", "One long-form written piece", "Three to five short-form pieces", "Written in the client's voice", "One round of revisions"]
+        },
+        {
+          "label": "Two-source package",
+          "cadence": "Up to two long-form sources.",
+          "price": "From £750",
+          "includes": ["Content analysis", "Two long-form written pieces", "Six to ten short-form pieces", "LinkedIn or social posts and captions", "Key quotes and hooks", "One round of revisions", "Delivered ready to edit or publish"]
+        },
+        {
+          "label": "Four-source package",
+          "cadence": "Up to four long-form sources.",
+          "price": "From £1,200",
+          "includes": ["Four long-form written pieces", "Twelve to twenty short-form pieces", "Quote and hook extraction", "One round of revisions"]
+        },
+        {
+          "label": "Short-form video editing",
+          "cadence": "Available as an add-on rather than as part of a core package.",
+          "price": "Quoted separately"
+        }
       ],
 
       "tracksHeading": "What I take on",
@@ -211,7 +286,10 @@
       "background": {
         "heading": "A focused working relationship",
         "body": "I work with a small number of writing clients at a time, allowing for close attention and a genuinely collaborative process. Each project is quoted according to its scope."
-      }
+      },
+      "proofHeading": "Testimonials",
+      "proof": null,
+      "proofPlaceholder": "Testimonials will be added here when they are available."
     }
   ],
 

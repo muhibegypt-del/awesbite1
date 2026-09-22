@@ -152,7 +152,9 @@ const { service } = Astro.props;
           service.method.map((step: { number: string; title: string; body: string }) => (
             <li>
               <span class="steps__number">{step.number}</span>
-              <span class="steps__body"><strong>{step.title}</strong> {step.body}</span>
+              <span class="steps__body">
+                <strong>{step.title}</strong>{step.body && <> {step.body}</>}
+              </span>
             </li>
           ))
         }
@@ -175,26 +177,35 @@ const { service } = Astro.props;
           <p class="t-body">{service.pricingLine}</p>
 
           <dl class="rows-dl">
-            {service.tiers.map((tier: { label: string; cadence: string; price: string }) => (
+            {service.tiers.map((tier: { label: string; cadence: string; price: string; includes?: string[] }) => (
               <div class={`rows-dl__row${tier.price ? ' rows-dl__row--priced' : ''}`}>
                 <dt class="rows-dl__label">{tier.label}</dt>
-                <dd class="rows-dl__body">{tier.cadence}</dd>
+                <dd class="rows-dl__body">
+                  <p>{tier.cadence}</p>
+                  {tier.includes?.length > 0 && (
+                    <ul class="tier-inclusions">
+                      {tier.includes.map((item: string) => <li>{item}</li>)}
+                    </ul>
+                  )}
+                </dd>
                 {tier.price && <dd class="rows-dl__price">{tier.price}</dd>}
               </div>
             ))}
           </dl>
 
-          <h3>{service.agreementsHeading}</h3>
-          <div class="agreements">
-            {
-              service.agreements.map((agreement: { heading: string; body: string }) => (
-                <div class="agreement">
-                  <p class="agreement__heading">{agreement.heading}</p>
-                  <p class="t-body">{agreement.body}</p>
-                </div>
-              ))
-            }
-          </div>
+          {service.agreements?.length > 0 && (
+            <>
+              <h3>{service.agreementsHeading}</h3>
+              <div class="agreements">
+                {service.agreements.map((agreement: { heading: string; body: string }) => (
+                  <div class="agreement">
+                    <p class="agreement__heading">{agreement.heading}</p>
+                    <p class="t-body">{agreement.body}</p>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </section>
@@ -250,6 +261,25 @@ const { service } = Astro.props;
           ? service.examples.map((example: string) => <p class="t-body">{example}</p>)
           : <p class="t-lead">Selected long-form and short-form examples will be shared here.</p>}
         <a class="link-rule" href={service.cta.href}>Discuss your source material <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+)}
+
+{/* Testimonials are part of the agreed page architecture and will be populated later. */}
+{['repurposing', 'narration'].includes(service.id) && service.proofHeading && (
+  <section id="testimonials" class="section band" aria-labelledby="testimonials-heading">
+    <div class="container editorial">
+      <SectionMarker as="h2" id="testimonials-heading" label={service.proofHeading} class="editorial-aside" />
+      <div class="stack">
+        {service.proof?.length > 0
+          ? service.proof.map((item: { quote: string; attribution?: string }) => (
+              <blockquote class="testimonial">
+                <p>{item.quote}</p>
+                {item.attribution && <footer>{item.attribution}</footer>}
+              </blockquote>
+            ))
+          : <div class="subblock"><p>{service.proofPlaceholder}</p></div>}
       </div>
     </div>
   </section>
@@ -383,6 +413,39 @@ const { service } = Astro.props;
     display: grid;
     gap: var(--s-6);
     max-inline-size: var(--measure);
+  }
+
+  .tier-inclusions {
+    display: grid;
+    gap: var(--s-1);
+    margin-block-start: var(--s-3);
+    padding-inline-start: var(--s-5);
+  }
+
+  .tier-inclusions li {
+    padding-inline-start: var(--s-1);
+  }
+
+  .testimonial {
+    margin: 0;
+    max-inline-size: var(--measure);
+    padding-inline-start: var(--s-5);
+    border-inline-start: var(--border);
+  }
+
+  .testimonial p {
+    font-family: var(--font-display);
+    font-size: var(--t-lead);
+    line-height: 1.5;
+  }
+
+  .testimonial footer {
+    margin-block-start: var(--s-3);
+    font-family: var(--font-mono);
+    font-size: var(--t-mono);
+    letter-spacing: var(--track-mono);
+    text-transform: uppercase;
+    color: var(--ink-soft);
   }
 
   .agreement {

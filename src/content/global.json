@@ -10,14 +10,16 @@
         "label": "repurpose",
         "href": "/repurposing",
         "children": [
-          { "label": "portfolio", "href": "/repurposing#portfolio" }
+          { "label": "portfolio", "href": "/repurposing#portfolio" },
+          { "label": "testimonials", "href": "/repurposing#testimonials" }
         ]
       },
       {
         "label": "narrate",
         "href": "/narration",
         "children": [
-          { "label": "portfolio", "href": "/narration#portfolio" }
+          { "label": "portfolio", "href": "/narration#portfolio" },
+          { "label": "testimonials", "href": "/narration#testimonials" }
         ]
       },
       {
