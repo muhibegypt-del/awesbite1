@@ -29,9 +29,12 @@ const classes = ['tag', `tag--${variant}`, className].filter(Boolean).join(' ');
     font-family: var(--font-mono);
     font-size: var(--t-mono);
     font-weight: 400;
-    line-height: 1.2;
+    line-height: var(--lh-tight);
     letter-spacing: var(--track-mono);
+    /* Tracking adds a trailing space the padding then doubles. */
+    padding-inline-end: calc(var(--s-2) - 0.14em);
     text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
     text-decoration: none;
     white-space: nowrap;
     border: var(--border);

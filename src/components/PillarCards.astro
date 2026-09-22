@@ -33,7 +33,7 @@ const treatments: Record<string, {tag: string; title: string; line: string}> = {
       const treatment = treatments[service.id];
       const label = `${treatment.title} ${treatment.line}`;
       return (
-        <li class="pillar">
+        <li class={`pillar${full ? ' card' : ''}`}>
           {isCurrent ? (
             <div class="pillar__inner pillar__inner--current" aria-current="page">
               <p class="slug" aria-hidden="true">{treatment.tag}</p>
@@ -82,8 +82,8 @@ const treatments: Record<string, {tag: string; title: string; line: string}> = {
   .pillar__name {
     font-family: var(--font-display);
     font-weight: 400;
-    line-height: 1.1;
-    letter-spacing: -0.01em;
+    line-height: var(--lh-h2);
+    letter-spacing: var(--track-h2);
     /* --t-h3 on a card, not --t-h2. At --t-h2 a three-word service name in a
        one-third column ran to three lines while its neighbour ran to one. */
     font-size: var(--t-h3);
@@ -99,24 +99,33 @@ const treatments: Record<string, {tag: string; title: string; line: string}> = {
     font-size: var(--t-body);
     font-style: italic;
     font-weight: 300;
-    line-height: 1.3;
+    line-height: 1.35;
+    letter-spacing: var(--track-body);
     color: var(--ink-soft);
     margin: 0;
   }
 
   .pillar__line {
     font-size: var(--t-body);
-    line-height: 1.6;
+    line-height: var(--lh-lead);
+    letter-spacing: var(--track-body);
     margin: 0;
     max-inline-size: none;
   }
 
+  /* Set off from the card body by a hairline, so the exit route reads as
+     metadata rather than as another line of the description. */
   .pillar__state {
     align-self: end;
+    width: 100%;
+    max-inline-size: none;
     margin: 0;
+    margin-block-start: var(--s-3);
     padding-block-start: var(--s-4);
+    border-top: var(--border);
     font-family: var(--font-mono);
     font-size: var(--t-mono);
+    line-height: 1.5;
     letter-spacing: var(--track-mono);
     text-transform: uppercase;
     color: var(--clay-ink);
@@ -138,18 +147,14 @@ const treatments: Record<string, {tag: string; title: string; line: string}> = {
     gap: var(--s-4);
   }
 
-  .pillars--full > .pillar {
-    min-width: 0;
-    background: color-mix(in srgb, var(--paper-lift) 68%, transparent);
-    border: var(--border);
-  }
-
+  /* The card's own hairline replaces the divider the .columns gap hangs
+     between plain items. */
   .pillars--full > .pillar::before {
     display: none;
   }
 
   .pillars--full .pillar__inner {
-    padding: var(--s-5);
+    padding: var(--s-6) var(--s-5) var(--s-5);
   }
 
   @media (min-width: 768px) {

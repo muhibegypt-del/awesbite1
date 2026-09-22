@@ -1,6 +1,19 @@
 ---
-import '@fontsource-variable/fraunces/wght.css';
-import '@fontsource-variable/fraunces/wght-italic.css';
+/* Fraunces ships with its optical-size axis; Inter does not.
+
+   Fraunces runs from 17px on a pillar card to 62px in the masthead, and the
+   weight-only file collapses that whole range onto one 14pt master — which is
+   why the big type looked loosely fitted and the small italic looked coarse.
+   The opsz cut costs ~67KB and `font-optical-sizing: auto` in global.css
+   spends it.
+
+   Inter is set between 15px and 24px here, and its opsz axis only spans
+   14–32, so the same swap would buy a difference almost nobody could see for
+   another 23KB on the mobile critical path. Not worth it: the tracking ladder
+   in tokens.css does that job instead. `font-optical-sizing: auto` simply has
+   no axis to act on and no-ops. */
+import '@fontsource-variable/fraunces/opsz.css';
+import '@fontsource-variable/fraunces/opsz-italic.css';
 import '@fontsource-variable/inter/wght.css';
 import '../styles/tokens.css';
 import '../styles/global.css';
@@ -190,11 +203,12 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
     font-size: var(--t-h3);
     font-weight: 400;
     line-height: 1;
-    letter-spacing: -0.01em;
+    letter-spacing: var(--track-h3);
     text-transform: lowercase;
     text-decoration: none;
     color: var(--ink);
     white-space: nowrap;
+    transition: color var(--dur-fast) var(--ease);
   }
 
   .wordmark:hover {
@@ -238,8 +252,8 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
     font-family: var(--font-display);
     font-size: var(--t-h2);
     font-weight: 300;
-    line-height: 1.1;
-    letter-spacing: -0.01em;
+    line-height: var(--lh-h2);
+    letter-spacing: var(--track-h2);
     color: var(--paper);
     margin: 0;
   }
@@ -251,6 +265,7 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
     font-weight: 300;
     font-style: italic;
     line-height: 1.4;
+    letter-spacing: var(--track-lead);
     color: var(--coconut);
   }
 
@@ -264,9 +279,12 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
     font-family: var(--font-mono);
     font-size: var(--t-mono);
     letter-spacing: var(--track-mono);
+    margin: 0 0 var(--s-4);
+    margin-inline-end: calc(var(--track-mono) * -1);
+    padding-block-end: var(--s-3);
+    border-bottom: 1px solid color-mix(in srgb, var(--paper) 16%, transparent);
     text-transform: uppercase;
     color: var(--coconut);
-    margin: 0 0 var(--s-3);
   }
 
   .site-footer__col ul {
@@ -279,6 +297,7 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
      underline and no weight change — no channel distinguished a link at all. */
   .site-footer__col a {
     font-size: var(--t-small);
+    letter-spacing: var(--track-small);
     color: var(--paper);
     text-decoration: underline;
     text-decoration-thickness: 1px;
@@ -308,11 +327,17 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
     font-size: var(--t-mono);
     letter-spacing: var(--track-mono);
     text-transform: uppercase;
+    font-variant-numeric: tabular-nums;
     color: var(--coconut);
   }
 
   .site-footer__legal p {
     margin: 0;
+    margin-inline-end: calc(var(--track-mono) * -1);
+  }
+
+  .site-footer__legal a {
+    margin-inline-end: calc(var(--track-mono) * -1);
   }
 
   .site-footer__legal ul {
@@ -335,10 +360,60 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
 </style>
 
 <script>
-  const revealSelector = [
-    '.hero:not(.page-hero) .editorial > *',
-    '.section .editorial > *',
-  ].join(',');
+  /* ---- Progressive reveal ----
+     The stylesheet decides WHAT fades (section 6 of global.css); this decides
+     WHEN. Keep REVEAL_PARTS and NESTED_PARTS in step with the two selector
+     lists there.
+
+     Targets are leaf blocks — a heading, a paragraph, one card, one credential
+     — not section wrappers, so a section resolves top to bottom. A wrapper that
+     contains targets of its own is skipped here for the same reason the
+     stylesheet skips it: its own fade would sit on top of the children's and
+     flatten the stagger. */
+
+  const REVEAL_SCOPES = [
+    '.hero:not(.page-hero)',
+    '.section',
+    '.library',
+    '.site-footer',
+  ];
+
+  const REVEAL_PARTS = [
+    '.editorial > *',
+    '.stack > *',
+    '.split > *',
+    '.meaning-layout > *',
+    '.columns > li',
+    '.credentials__item',
+    '.steps > li',
+    '.rows-dl__row',
+    '.content-grid > li',
+    '.agreements > *',
+    '.site-footer__col',
+    '.site-footer__brand',
+  ];
+
+  /* A layout container lays out targets; it is never a target itself. */
+  const REVEAL_CONTAINERS = [
+    '.stack',
+    '.split',
+    '.meaning-layout',
+    '.columns',
+    '.credentials',
+    '.steps',
+    '.rows-dl',
+    '.content-grid',
+    '.agreements',
+  ];
+
+  const revealSelector = REVEAL_SCOPES.flatMap((scope) =>
+    REVEAL_PARTS.map((part) => `${scope} ${part}`)
+  ).join(',');
+  const containerSelector = REVEAL_CONTAINERS.join(',');
+
+  /* Eight steps of 70ms is just over half a second across a group. Past that
+     the last card in a long row arrives after the reader has reached it. */
+  const MAX_STEPS = 7;
 
   let revealObserver: IntersectionObserver | undefined;
   let removeScrollFallback: (() => void) | undefined;
@@ -346,6 +421,8 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
   function initialiseRevealMotion() {
     revealObserver?.disconnect();
     removeScrollFallback?.();
+    revealObserver = undefined;
+    removeScrollFallback = undefined;
 
     const root = document.documentElement;
     const fallback = (window as typeof window & { __atwRevealFallback?: number })
@@ -353,15 +430,30 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
 
     if (!root.classList.contains('reveal-enabled')) return;
 
-    const targets = Array.from(document.querySelectorAll<HTMLElement>(revealSelector));
-    let previousParent: HTMLElement | null = null;
-    let siblingIndex = 0;
+    /* A component that ships a <script> renders it as a child of whatever
+       wrapper it sits in, so it matched `.stack > *` and consumed a step —
+       every sibling after it arrived one beat late for nothing. */
+    const NOT_RENDERED = new Set(['SCRIPT', 'STYLE', 'TEMPLATE', 'NOSCRIPT', 'LINK', 'META']);
+
+    const targets = Array.from(
+      document.querySelectorAll<HTMLElement>(revealSelector)
+    ).filter(
+      (element) =>
+        !element.matches(containerSelector) && !NOT_RENDERED.has(element.tagName)
+    );
+
+    /* Delays run per group, so each cluster cascades from its own first item
+       rather than inheriting a delay from whatever preceded it on the page. */
+    const seen = new Map<Element | null, number>();
 
     for (const target of targets) {
-      const parent = target.parentElement;
-      siblingIndex = parent === previousParent ? siblingIndex + 1 : 0;
-      previousParent = parent;
-      target.style.setProperty('--reveal-delay', `${Math.min(siblingIndex, 2) * 70}ms`);
+      const group = target.parentElement;
+      const index = seen.get(group) ?? 0;
+      seen.set(group, index + 1);
+      target.style.setProperty(
+        '--reveal-delay',
+        `calc(${Math.min(index, MAX_STEPS)} * var(--reveal-step))`
+      );
     }
 
     if ('IntersectionObserver' in window) {
@@ -373,7 +465,10 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
             observer.unobserve(entry.target);
           }
         },
-        { rootMargin: '0px 0px -8% 0px', threshold: 0.12 }
+        /* Any part of the block crossing 90% of the viewport is enough.
+           A threshold measured as a fraction of the element never fires
+           reliably for a block taller than the viewport. */
+        { rootMargin: '0px 0px -10% 0px', threshold: 0 }
       );
 
       for (const target of targets) revealObserver.observe(target);

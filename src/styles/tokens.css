@@ -2,6 +2,10 @@
    a textured word — design tokens
    Companion to: a-textured-word-master-web-brief.md
    All values extracted from or derived from the client moodboard.
+
+   This file is the single source of truth. Nothing downstream may
+   hardcode a colour, a space, a tracking value, a leading value or a
+   surface tint that exists here.
    ============================================================ */
 
 :root {
@@ -17,6 +21,8 @@
      rgba of variant A's ink, which left every hairline on the site warm
      terracotta under the plum and sage palettes. */
   --rule:       color-mix(in srgb, var(--ink) 14%, transparent);
+  /* A hairline that has to carry a section, not just divide a row. */
+  --rule-strong: color-mix(in srgb, var(--ink) 22%, transparent);
 
   /* ---- Accent (Terracotta family) ---- */
   --clay:       #AF593E;   /* fills, large type ≥24px, marks. NOT small text */
@@ -33,6 +39,15 @@
   --surface-dark: #5B3B4E;
   --teal:       #5F8A8B;   /* audio player scrubber ONLY */
 
+  /* ---- Derived surfaces ---- */
+  /* Six components had each invented their own colour-mix percentage for
+     "a card" and "a card on a band", so the same component read a different
+     weight depending on which section it landed in. Two tints, named. */
+  --surface-card:      color-mix(in srgb, var(--paper-lift) 64%, transparent);
+  --surface-card-band: color-mix(in srgb, var(--paper) 66%, transparent);
+  /* The faintest wash, for a card that is being hovered or is current. */
+  --surface-wash:      color-mix(in srgb, var(--coconut) 40%, transparent);
+
   /* ---- Typefaces ---- */
   --font-display: "Fraunces Variable", Georgia, serif;
   --font-body:    "Inter Variable", -apple-system, "Segoe UI", sans-serif;
@@ -40,6 +55,10 @@
 
   /* ---- Type scale (fluid, 360px → 1440px) ---- */
   --t-hero:    clamp(2.75rem, 7vw, 6rem);
+  /* The hero size for a headline that shares its row with a photograph.
+     A 96px line in a six-column well breaks every four or five characters;
+     this is the display size that still reads as a masthead at that width. */
+  --t-display: clamp(2.5rem, 4.4vw, 3.9rem);
   --t-h1:      clamp(2.25rem, 5vw, 4rem);
   --t-h2:      clamp(1.75rem, 3.2vw, 2.75rem);
   --t-h3:      clamp(1.25rem, 2vw, 1.5rem);
@@ -50,10 +69,53 @@
   --t-mono:    0.75rem;     /* 12px, tracking 0.14em */
   --t-mono-lg: 0.875rem;    /* 14px, tracking 0.12em */
 
+  /* ---- Optical size ----
+     Fraunces carries a 9–144 opsz axis and Inter a 14–32 one, and Base.astro
+     loads the cuts that carry them. There is no token here on purpose:
+     `font-optical-sizing: auto` in global.css reads the rendered size and
+     picks the master, which is the whole point of the axis. Pinning it with
+     `font-variation-settings` overrides that and draws every size from one
+     master — which at the display end thins the strokes until they drop out.
+
+     So: no opsz literals anywhere downstream. Set the size; the axis follows. */
+
+  /* ---- Tracking ----
+     One ladder, tied to size. Display type is set tight because the fitting
+     at 60px+ is already loose; text sizes sit near zero; only uppercase runs
+     open up, because caps need the air that lowercase does not. */
+  --track-hero:    -0.028em;
+  --track-display: -0.024em;
+  --track-h1:      -0.021em;
+  --track-h2:      -0.016em;
+  --track-h3:      -0.008em;
+  --track-quote:   -0.014em;
+  --track-lead:    -0.008em;
+  --track-body:    -0.004em;
+  --track-small:   -0.002em;
   --track-mono:    0.14em;
   --track-mono-lg: 0.12em;
+
+  /* ---- Leading ---- */
+  --lh-hero:  0.94;
+  --lh-h1:    1.02;
+  --lh-h2:    1.1;
+  --lh-h3:    1.25;
+  --lh-quote: 1.28;
+  --lh-lead:  1.6;
+  --lh-body:  1.7;
+  --lh-tight: 1.2;
+
+  /* ---- Measure ---- */
   --measure:       68ch;
   --measure-lead:  58ch;
+  --measure-hero:  16ch;   /* a masthead headline, four or five lines */
+  --measure-title: 20ch;   /* a section heading against a body column */
+
+  /* ---- Optical alignment ----
+     A capital set at display size carries a left side bearing wide enough to
+     read as an indent against the body column beneath it. Pulling the line
+     back by this much puts the stem, not the glyph box, on the grid. */
+  --optical-hang: 0.045em;
 
   /* ---- Spacing (8px base — use no other values) ---- */
   --s-1: 4px;   --s-2: 8px;   --s-3: 12px;  --s-4: 16px;
@@ -65,6 +127,10 @@
   --radius-sm:   2px;   /* inputs, buttons */
   --radius-md:   10px;  /* cards, modal, audio player */
   --border:      1px solid var(--rule);
+  /* The printed rule-mark that opens an editorial aside: a short clay
+     segment laid over the hairline, in place of the filled callout box. */
+  --mark-length: var(--s-6);
+  --mark-weight: 2px;
   /* No box-shadows anywhere on this site. */
 
   /* ---- Layout ---- */
@@ -75,16 +141,32 @@
 
   /* ---- Motion ---- */
   --ease:      cubic-bezier(0.65, 0, 0.35, 1);
+  /* Reveals decelerate into place rather than easing in and out: an element
+     that is already on screen should never look like it is still arriving. */
+  --ease-out:  cubic-bezier(0.16, 1, 0.3, 1);
   --dur-fast:  180ms;
   --dur-mid:   320ms;
   --dur-slow:  640ms;
+  --dur-reveal: 760ms;
+
+  /* ---- Progressive reveal ----
+     Each block in a group starts one step after the one above it, so a
+     section resolves top to bottom instead of appearing all at once. The cap
+     keeps the last item in a long group from arriving a second late. */
+  --reveal-step:  70ms;
+  --reveal-steps: 7;
+  --reveal-shift: var(--s-3);
+  --reveal-scale: 1.03;
 }
 
 @media (max-width: 1023px) { :root { --gutter-x: var(--gutter-x-md); } }
 @media (max-width: 767px)  { :root { --gutter-x: var(--gutter-x-sm); } }
 
 @media (prefers-reduced-motion: reduce) {
-  :root { --dur-fast: 120ms; --dur-mid: 120ms; --dur-slow: 120ms; }
+  :root {
+    --dur-fast: 120ms; --dur-mid: 120ms; --dur-slow: 120ms; --dur-reveal: 120ms;
+    --reveal-step: 0ms; --reveal-shift: 0px; --reveal-scale: 1;
+  }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;

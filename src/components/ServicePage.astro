@@ -129,7 +129,7 @@ const { service } = Astro.props;
 
           {
             service.note && (
-              <div class="subblock note-card">
+              <div class="subblock">
                 <p class="subblock__heading">{service.note.heading}</p>
                 <p>{service.note.body}</p>
               </div>
@@ -221,14 +221,14 @@ const { service } = Astro.props;
 
         <div class="stack">
           {service.studioHeading && service.studio && (
-            <div class="stack stack--tight detail-card">
+            <div class="stack stack--tight panel">
               <h3>{service.studioHeading}</h3>
               <p class="t-body">{service.studio}</p>
             </div>
           )}
 
           {service.examplesHeading && service.examples?.length > 0 && (
-            <div class="stack stack--tight detail-card">
+            <div class="stack stack--tight panel">
               <h3>{service.examplesHeading}</h3>
               {service.examples.map((example: string) => <p class="t-body">{example}</p>)}
             </div>
@@ -256,7 +256,7 @@ const { service } = Astro.props;
   <section id="portfolio" class="section" aria-labelledby="portfolio-heading">
     <div class="container editorial">
       <SectionMarker as="h2" id="portfolio-heading" label="Portfolio" class="editorial-aside" />
-      <div class="stack portfolio-panel">
+      <div class="stack panel">
         {service.examples?.length > 0
           ? service.examples.map((example: string) => <p class="t-body">{example}</p>)
           : <p class="t-lead">Selected long-form and short-form examples will be shared here.</p>}
@@ -279,7 +279,7 @@ const { service } = Astro.props;
                 {item.attribution && <footer>{item.attribution}</footer>}
               </blockquote>
             ))
-          : <div class="subblock testimonial-placeholder"><p>{service.proofPlaceholder}</p></div>}
+          : <div class="subblock"><p>{service.proofPlaceholder}</p></div>}
       </div>
     </div>
   </section>
@@ -296,12 +296,19 @@ const { service } = Astro.props;
 </section>
 
 <style>
+  /* Same masthead device as the hub: an italic display line on a hairline,
+     so a spoke opens the way the hub does. */
   .hero__pillar {
+    width: 100%;
+    max-inline-size: none;
+    padding-block-end: var(--s-4);
+    border-bottom: 1px solid var(--rule-strong);
     font-family: var(--font-display);
     font-size: var(--t-lead);
-    font-weight: 300;
+    font-weight: 400;
     font-style: italic;
-    line-height: 1.2;
+    line-height: 1.3;
+    letter-spacing: var(--track-lead);
     color: var(--ink-soft);
   }
 
@@ -309,23 +316,27 @@ const { service } = Astro.props;
     font-family: var(--font-display);
     font-size: var(--t-h1);
     font-weight: 300;
-    line-height: 1.02;
-    letter-spacing: -0.015em;
-    max-inline-size: 16ch;
+    line-height: var(--lh-h1);
+    letter-spacing: var(--track-h1);
+    max-inline-size: var(--measure-hero);
+    margin-inline-start: calc(var(--optical-hang) * -1em);
     text-wrap: balance;
   }
 
   .hero__audience {
     font-family: var(--font-mono);
     font-size: var(--t-mono);
+    line-height: 1.5;
     letter-spacing: var(--track-mono);
+    margin-inline-end: calc(var(--track-mono) * -1);
     text-transform: uppercase;
     color: var(--clay-ink);
   }
 
   .hero__line {
     font-size: var(--t-lead);
-    line-height: 1.5;
+    line-height: var(--lh-lead);
+    letter-spacing: var(--track-lead);
     max-inline-size: var(--measure-lead);
   }
 
@@ -356,6 +367,23 @@ const { service } = Astro.props;
   audio {
     width: 100%;
     max-inline-size: var(--measure);
+  }
+
+  /* Same tablet pairing as the hub, for the same reason. */
+  @media (min-width: 768px) and (max-width: 1279px) {
+    .hero .editorial {
+      grid-template-columns: 7fr 5fr;
+      column-gap: var(--s-7);
+      align-items: start;
+    }
+
+    .hero .editorial-aside { grid-column: 1 / -1; }
+    .hero .stack { grid-column: 1; }
+
+    .hero__media {
+      grid-column: 2;
+      aspect-ratio: 4 / 5;
+    }
   }
 
   @media (min-width: 1280px) {
@@ -396,46 +424,38 @@ const { service } = Astro.props;
     gap: var(--s-6);
   }
 
-  .service-copy > .subblock,
-  .note-card,
-  .testimonial-placeholder,
-  .detail-card,
-  .portfolio-panel {
-    width: 100%;
-    max-inline-size: var(--measure);
-    padding: var(--s-5);
-    background: color-mix(in srgb, var(--paper-lift) 72%, transparent);
-    border: var(--border);
-    border-inline-start: 3px solid var(--clay);
-  }
-
-  .band .note-card,
-  .band .testimonial-placeholder {
-    background: color-mix(in srgb, var(--paper) 72%, transparent);
-  }
+  /* ---- Parallel item grids ----
+     These were six or nine filled rectangles in a row, each with a full
+     hairline border, which is what made a page of prose read as a page of
+     boxes. A column of items only needs one rule to say where it starts.
+     Brief §4.3: depth comes from tone and 1px hairlines, and a box on this
+     site now means something you can click. */
 
   .service-grid,
   .pricing-grid,
-  .steps--cards {
+  .steps--cards,
+  .agreements {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: var(--s-4);
+    gap: var(--s-6) var(--s-7);
     width: 100%;
     max-inline-size: none;
   }
 
   .service-grid .rows-dl__row,
   .pricing-grid .rows-dl__row,
-  .steps--cards > li {
+  .steps--cards > li,
+  .agreements > .agreement {
     min-width: 0;
-    padding: var(--s-5);
-    background: color-mix(in srgb, var(--paper-lift) 68%, transparent);
-    border: var(--border);
+    padding: var(--s-5) 0 0;
+    background: none;
+    border: none;
+    border-top: 1px solid var(--rule-strong);
   }
 
   .service-grid .rows-dl__row:last-child,
   .pricing-grid .rows-dl__row:last-child {
-    border-bottom: var(--border);
+    border-bottom: none;
   }
 
   .service-grid .rows-dl__row,
@@ -492,14 +512,6 @@ const { service } = Astro.props;
     border-top: var(--border);
   }
 
-  .agreements {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: var(--s-4);
-    width: 100%;
-    max-inline-size: none;
-  }
-
   @media (min-width: 768px) {
     .agreements {
       grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -526,15 +538,20 @@ const { service } = Astro.props;
 
   .testimonial p {
     font-family: var(--font-display);
-    font-size: var(--t-lead);
-    line-height: 1.5;
+    font-size: var(--t-quote);
+    font-style: italic;
+    font-weight: 300;
+    line-height: var(--lh-quote);
+    letter-spacing: var(--track-quote);
+    hanging-punctuation: first last;
   }
 
   .testimonial footer {
-    margin-block-start: var(--s-3);
+    margin-block-start: var(--s-4);
     font-family: var(--font-mono);
     font-size: var(--t-mono);
     letter-spacing: var(--track-mono);
+    margin-inline-end: calc(var(--track-mono) * -1);
     text-transform: uppercase;
     color: var(--ink-soft);
   }
@@ -543,16 +560,14 @@ const { service } = Astro.props;
     display: grid;
     gap: var(--s-3);
     align-content: start;
-    padding: var(--s-5);
-    background: color-mix(in srgb, var(--paper) 72%, transparent);
-    border: var(--border);
   }
 
   .agreement__heading {
     font-family: var(--font-display);
     font-size: var(--t-h3);
     font-weight: 400;
-    line-height: 1.3;
+    line-height: var(--lh-h3);
+    letter-spacing: var(--track-h3);
     color: var(--ink);
   }
 </style>

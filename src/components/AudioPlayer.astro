@@ -101,16 +101,22 @@ const { id, title, tag, src } = Astro.props;
 </script>
 
 <style>
-  .audio-player { width: 100%; padding: var(--s-4); background: var(--coconut); border: var(--border); }
+  /* 10px is the player's radius in the brief, alongside cards and the modal;
+     it was shipping square, on the structure radius. */
+  .audio-player { width: 100%; padding: var(--s-5); background: var(--coconut); border: var(--border); border-radius: var(--radius-md); }
+  .band .audio-player { background: var(--surface-card-band); }
   .audio-player__heading { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s-2); margin-bottom: var(--s-3); }
   .audio-player__heading p { font-weight: 500; }
-  .audio-player__heading span { font-size: var(--t-small); color: var(--ink-soft); }
+  .audio-player__heading span { font-family: var(--font-mono); font-size: var(--t-mono); letter-spacing: var(--track-mono); margin-inline-end: calc(var(--track-mono) * -1); text-transform: uppercase; font-variant-numeric: tabular-nums; color: var(--ink-soft); }
   .audio-player__controls { display: flex; align-items: center; gap: var(--s-3); min-height: var(--s-7); }
   .audio-player__controls[hidden] { display: none; }
   .audio-player__play { min-width: 44px; height: 44px; display: grid; place-items: center; color: var(--clay-ink); }
-  input { flex: 1; width: 100%; min-width: 0; accent-color: var(--clay-ink); min-height: 44px; }
-  .audio-player__time { font-size: var(--t-small); font-variant-numeric: tabular-nums; white-space: nowrap; }
-  .audio-player__status { font-size: var(--t-small); color: var(--ink-soft); margin-top: var(--s-2); }
+  /* --teal is the scrubber fill and is used nowhere else on the site; it was
+     drawing in --clay-ink, which is the link and button colour. 3.21:1 on
+     coconut, above the 3:1 WCAG 2.2 floor for a UI component. */
+  input { flex: 1; width: 100%; min-width: 0; accent-color: var(--teal); min-height: 44px; }
+  .audio-player__time { font-family: var(--font-mono); font-size: var(--t-mono); letter-spacing: var(--track-mono); font-variant-numeric: tabular-nums lining-nums; white-space: nowrap; color: var(--ink-soft); }
+  .audio-player__status { font-size: var(--t-small); letter-spacing: var(--track-small); color: var(--ink-soft); margin-top: var(--s-3); }
   .audio-player__status:empty { display: none; }
   button:disabled, input:disabled { opacity: .45; cursor: not-allowed; }
   audio { width: 100%; }
