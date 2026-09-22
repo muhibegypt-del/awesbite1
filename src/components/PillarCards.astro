@@ -133,4 +133,28 @@ const treatments: Record<string, {tag: string; title: string; line: string}> = {
   .pillar__inner--current .pillar__name {
     color: var(--ink);
   }
+
+  .pillars--full {
+    gap: var(--s-4);
+  }
+
+  .pillars--full > .pillar {
+    min-width: 0;
+    background: color-mix(in srgb, var(--paper-lift) 68%, transparent);
+    border: var(--border);
+  }
+
+  .pillars--full > .pillar::before {
+    display: none;
+  }
+
+  .pillars--full .pillar__inner {
+    padding: var(--s-5);
+  }
+
+  @media (min-width: 768px) {
+    .pillars--full {
+      column-gap: var(--s-4);
+    }
+  }
 </style>

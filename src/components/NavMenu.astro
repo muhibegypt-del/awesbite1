@@ -8,7 +8,7 @@ const isCurrent = (href: string) =>
   href === '/' ? currentPath === '/' : currentPath === href || currentPath.startsWith(`${href}/`);
 ---
 
-<nav class="site-nav" aria-label="Primary" data-nav>
+<nav class="site-nav" aria-label="Primary" data-nav data-ready="true">
   <button class="menu-toggle" type="button" aria-expanded="false"
     aria-controls="primary-navigation" data-menu-toggle>
     <span>Menu</span><span class="chevron" aria-hidden="true"></span>
@@ -38,10 +38,20 @@ const isCurrent = (href: string) =>
   </ul>
 </nav>
 
+<noscript>
+  <style>
+    @media (max-width: 1023px) {
+      .site-nav .menu-toggle { display: none !important; }
+      .site-nav .nav-list { display: grid !important; }
+    }
+  </style>
+</noscript>
+
 <script>
   function initialiseNavigation() {
     document.querySelectorAll<HTMLElement>('[data-nav]').forEach((nav) => {
-      if (nav.dataset.ready === 'true') return;
+      if (nav.dataset.bound === 'true') return;
+      nav.dataset.bound = 'true';
       nav.dataset.ready = 'true';
       const menu = nav.querySelector<HTMLButtonElement>('[data-menu-toggle]');
       const toggles = nav.querySelectorAll<HTMLButtonElement>('[data-submenu-toggle]');

@@ -70,6 +70,7 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
     {socialImage && <meta name="twitter:image" content={socialImage} />}
 
     <meta name="theme-color" content={global.meta.themeColor} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <ClientRouter fallback="animate" />
     <slot name="head" />
   </head>

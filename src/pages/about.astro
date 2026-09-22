@@ -30,7 +30,7 @@ const { about, credentials } = site;
   <section class="section band" aria-labelledby="experience-heading">
     <div class="container editorial">
       <SectionMarker as="h2" id="experience-heading" label="Experience" class="editorial-aside" />
-      <div class="stack">
+      <div class="stack experience-panel">
         <p class="t-lead">{about.authority}</p>
         <p class="t-body">{about.teachingBodies}</p>
         <h3>{about.whyHeading}</h3>
@@ -42,7 +42,7 @@ const { about, credentials } = site;
   <section class="section">
     <div class="container editorial">
       <SectionMarker label="Beyond client work" class="editorial-aside" />
-      <div class="stack">
+      <div class="stack editorial-card">
         <h2>Books, language and community</h2>
         <p class="t-lead">{about.reflectionBody}</p>
         <a class="link-rule" href="/content">Explore Content <span aria-hidden="true">→</span></a>
@@ -50,3 +50,26 @@ const { about, credentials } = site;
     </div>
   </section>
 </Base>
+
+<style>
+  .experience-panel,
+  .editorial-card {
+    width: 100%;
+    max-inline-size: var(--measure);
+    padding: var(--s-6);
+    background: color-mix(in srgb, var(--paper-lift) 72%, transparent);
+    border: var(--border);
+    border-inline-start: 3px solid var(--clay);
+  }
+
+  .band .experience-panel {
+    background: color-mix(in srgb, var(--paper) 72%, transparent);
+  }
+
+  @media (max-width: 479px) {
+    .experience-panel,
+    .editorial-card {
+      padding: var(--s-5);
+    }
+  }
+</style>

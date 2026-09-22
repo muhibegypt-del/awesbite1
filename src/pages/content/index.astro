@@ -41,9 +41,12 @@ const routes = [
 </ContentLayout>
 <style>
   .tag-row { display: flex; flex-wrap: wrap; gap: var(--s-2); }
-  .content-grid { display: grid; gap: var(--s-6); width: 100%; }
-  .content-grid a { display: grid; gap: var(--s-3); height: 100%; padding-top: var(--s-5); border-top: var(--border); text-decoration: none; color: var(--ink); }
+  .content-grid { display: grid; gap: var(--s-4); width: 100%; }
+  .content-grid li { min-width: 0; }
+  .content-grid a { display: grid; grid-template-rows: auto 1fr auto; gap: var(--s-3); height: 100%; padding: var(--s-5); background: color-mix(in srgb, var(--paper) 72%, transparent); border: var(--border); text-decoration: none; color: var(--ink); transition: border-color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease); }
+  .content-grid a:hover { border-color: var(--clay); }
   .content-grid p { font-size: var(--t-body); color: var(--ink-soft); }
   .content-grid span { font-size: var(--t-small); color: var(--clay-ink); }
-  @media (min-width: 768px) { .content-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-7); } }
+  @media (min-width: 768px) { .content-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (prefers-reduced-motion: no-preference) { .content-grid a:hover { transform: translateY(calc(var(--s-1) * -1)); } }
 </style>

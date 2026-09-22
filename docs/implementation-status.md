@@ -45,6 +45,7 @@ without being necessary for the requested navigation, audio, content or layout.
 | 9 | Source-fidelity audit and three narration placeholders | Complete |
 | 10 | Clear-cut SSOT corrections: terminology, processes, pricing and testimonials | Complete |
 | 11 | Remove preview banner and audit UX/UI best practices | Audit complete |
+| 12 | Screenshot-led visual hierarchy, responsive QA and audit fixes | Complete |
 
 ## Phase 1 completed
 
@@ -143,3 +144,25 @@ without being necessary for the requested navigation, audio, content or layout.
 - Identified the `mailto:` enquiry hand-off as the main conversion-flow risk.
 - Recorded all findings and their safe implementation order in
   `docs/phases/11-banner-and-ux-ui-audit.md`.
+
+## Phase 12 completed
+
+- Reviewed full-page desktop and narrow-screen renders of Home, Teaching,
+  Narration and Content using the frontend design review framework. The native
+  computer-use connection failed before page access because of a Windows ACL
+  error, so the same pages were rendered through controlled local Chrome
+  screenshots and inspected visually before and after the changes.
+- Preserved the approved colour tokens, typography, spacing scale, page order,
+  StoryBrand copy and editorial section-marker system.
+- Added a restrained editorial-card pattern to the home service choices,
+  service audiences, process steps, published prices, expectation statements,
+  content routes and selected supporting copy. Cards use the existing paper,
+  coconut, clay and hairline tokens and add no shadows or new visual language.
+- Stabilised the mobile menu before first paint while retaining a usable
+  no-JavaScript navigation fallback. Mobile CLS fell from 0.225 to 0.023.
+- Added a brand-colour SVG favicon, removing the prior missing-icon request.
+- Rebuilt all 21 routes and inspected fresh desktop and narrow-screen renders.
+- Production Lighthouse results: Performance 98, Accessibility 100, Best
+  Practices 100, SEO 100, LCP 2.0 s, CLS 0.023 and TBT 0 ms.
+- Full rationale and remaining external inputs are recorded in
+  `docs/phases/12-visual-composition-redesign.md`.

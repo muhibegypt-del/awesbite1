@@ -10,3 +10,4 @@ docs/qa/
 
 .vercel
 .env*
+artifacts/
