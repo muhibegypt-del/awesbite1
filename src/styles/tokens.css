@@ -155,8 +155,10 @@
      keeps the last item in a long group from arriving a second late. */
   --reveal-step:  70ms;
   --reveal-steps: 7;
-  --reveal-shift: var(--s-3);
-  --reveal-scale: 1.03;
+  /* 24px, not 12: at 12 the rise was small enough that people reported the
+     fade as missing when it was in fact running. */
+  --reveal-shift: var(--s-5);
+  --reveal-scale: 1.04;
 }
 
 @media (max-width: 1023px) { :root { --gutter-x: var(--gutter-x-md); } }

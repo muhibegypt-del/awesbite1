@@ -453,36 +453,36 @@ p {
 }
 
 /* ---- 6. Progressive reveal ---- */
-/* The root class is added only when motion is welcome; content remains
-   visible in every fallback and a short fail-safe removes the class if setup
-   ever fails.
+/*
+   Rebuilt to remove the thing that kept breaking it: content used to start at
+   opacity 0 and depend on a script to bring it back. Every failure — a blocked
+   bundle, a slow network, a class wiped by the router — therefore looked
+   identical, and looked like the fade was simply gone.
 
-   Four things make this work:
+   It is now the browser's job wherever the browser can do it.
 
-   1. The target list reaches down to individual blocks — a heading, a
-      paragraph, one card, one credential — instead of stopping at the section
-      wrapper, which used to fade a whole screen of content as a single sheet.
-      That is what makes the cascade progressive rather than sectional.
-   2. A layout container does not fade: its children do, or its own fade would
-      sit on top of theirs and flatten the stagger back out. Containers are
-      named by class, not detected with :has(), because a relative selector
-      inside :has() is scoped to DESCENDANTS — :has(.stack > *) is false for
-      the .stack itself, which is the one element it needs to catch.
-   3. Everything below the root class is wrapped in :where(), so the whole
-      selector weighs exactly one class. A plain :is() chain scores (0,5,1)
-      and beats the revealed state, and the content never appears.
-   4. The entrance is an animation, not a transition, and it is the same
-      keyframe the hero cascade uses. `transition` is a shorthand: any
-      component that declares one — .card does, for its hover — resets every
-      transition on that element, including the reveal, and the block snaps in
-      with no fade at all. Nothing on this site animates these elements, so
-      the animation cannot be reset the same way.
+   Path A is pure CSS. `animation-timeline: view()` scrubs the animation from
+   the element's own position in the scrollport, so there is no script, no
+   observer, no class to lose on navigation and nothing to race. Chrome and
+   Edge have shipped it since 115, Safari since 26. An element that is already
+   on screen sits past the end of its range and is therefore fully visible,
+   which is what makes this safe on a short page that never scrolls.
 
-   Keep the two lists in step with REVEAL_PARTS and REVEAL_CONTAINERS in
-   src/layouts/Base.astro — the stylesheet decides what fades, the script
-   decides when. */
+   Path B covers the rest — today that is Firefox, where the feature is still
+   behind a flag. It is the same animation driven by IntersectionObserver, with
+   one rule: the script only ever hides an element that is BELOW the fold. It
+   cannot hide something a reader is already looking at, so if it fails
+   halfway, or never runs at all, the page is still whole. That is the
+   difference from the old version.
 
-.reveal-enabled
+   Both paths sit inside prefers-reduced-motion: no-preference, so the
+   accessibility gate is CSS rather than a class a script has to set. */
+
+@media (prefers-reduced-motion: no-preference) {
+
+  /* ---- Path A: driven by scroll position, no JavaScript ---- */
+
+  @supports (animation-timeline: view()) {
   :where(.hero:not(.page-hero), .section, .library, .site-footer)
   :where(
     .editorial > *,
@@ -507,11 +507,115 @@ p {
     .rows-dl,
     .content-grid,
     .agreements
-  )):not(.is-revealed) {
-  opacity: 0;
-}
+  )) {
+      /* Longhands, not the `animation` shorthand: the shorthand sets
+         animation-duration to 0s when it is omitted, and a scroll-driven
+         animation with a zero duration is over before it starts — every block
+         sat at its end state and nothing ever faded. `auto` is the value that
+         means "span the range below". */
+      animation-name: enter-softly;
+      animation-fill-mode: both;
+      animation-timing-function: linear;
+      animation-duration: auto;
+      animation-timeline: view();
+      animation-range: entry 0% entry 55%;
+    }
 
-.reveal-enabled
+    /* Items in a row resolve one after another rather than together: each
+       starts its range a little later than the one before it. */
+    :where(.section, .site-footer)
+  :where(
+    .columns > li,
+    .credentials__item,
+    .steps > li,
+    .rows-dl__row,
+    .content-grid > li,
+    .agreements > *,
+    .site-footer__col
+  ):nth-child(2) {
+      animation-range: entry 7% entry 62%;
+    }
+    :where(.section, .site-footer)
+  :where(
+    .columns > li,
+    .credentials__item,
+    .steps > li,
+    .rows-dl__row,
+    .content-grid > li,
+    .agreements > *,
+    .site-footer__col
+  ):nth-child(3) {
+      animation-range: entry 14% entry 69%;
+    }
+    :where(.section, .site-footer)
+  :where(
+    .columns > li,
+    .credentials__item,
+    .steps > li,
+    .rows-dl__row,
+    .content-grid > li,
+    .agreements > *,
+    .site-footer__col
+  ):nth-child(4) {
+      animation-range: entry 21% entry 76%;
+    }
+    :where(.section, .site-footer)
+  :where(
+    .columns > li,
+    .credentials__item,
+    .steps > li,
+    .rows-dl__row,
+    .content-grid > li,
+    .agreements > *,
+    .site-footer__col
+  ):nth-child(5) {
+      animation-range: entry 28% entry 83%;
+    }
+    :where(.section, .site-footer)
+  :where(
+    .columns > li,
+    .credentials__item,
+    .steps > li,
+    .rows-dl__row,
+    .content-grid > li,
+    .agreements > *,
+    .site-footer__col
+  ):nth-child(6) {
+      animation-range: entry 35% entry 90%;
+    }
+  }
+
+  /* ---- Path B: observer-driven, only where Path A is unavailable ---- */
+
+  @supports not (animation-timeline: view()) {
+  :where(.hero:not(.page-hero), .section, .library, .site-footer)
+  :where(
+    .editorial > *,
+    .stack > *,
+    .split > *,
+    .meaning-layout > *,
+    .columns > li,
+    .credentials__item,
+    .steps > li,
+    .rows-dl__row,
+    .content-grid > li,
+    .agreements > *,
+    .site-footer__col,
+    .site-footer__brand
+  ):not(:where(
+    .stack,
+    .split,
+    .meaning-layout,
+    .columns,
+    .credentials,
+    .steps,
+    .rows-dl,
+    .content-grid,
+    .agreements
+  )).is-pending {
+      opacity: 0;
+    }
+
   :where(.hero:not(.page-hero), .section, .library, .site-footer)
   :where(
     .editorial > *,
@@ -537,22 +641,37 @@ p {
     .content-grid,
     .agreements
   )).is-revealed {
-  animation: enter-softly var(--dur-reveal) var(--ease-out) var(--reveal-delay, 0ms) both;
+      animation: enter-softly var(--dur-reveal) var(--ease-out) var(--reveal-delay, 0ms) both;
+    }
+  }
 }
 
-/* A photograph resolves out of a slight oversize as its block arrives, so the
-   image settles rather than switching on. --reveal-delay is set on the frame
-   and inherits, so the picture and its block move together. */
-.reveal-enabled
-  :where(.hero:not(.page-hero), .section)
-  :where(.frame, .hero__media, .band-media):not(.is-revealed) img {
-  transform: scale(var(--reveal-scale));
-}
+/* A photograph resolves out of a slight oversize as its block arrives. Same
+   two paths, same reasoning. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    :where(.hero:not(.page-hero), .section)
+    :where(.frame, .hero__media, .band-media) img {
+      animation-name: image-settle;
+      animation-fill-mode: both;
+      animation-timing-function: linear;
+      animation-duration: auto;
+      animation-timeline: view();
+      animation-range: entry 0% cover 40%;
+    }
+  }
 
-.reveal-enabled
-  :where(.hero:not(.page-hero), .section)
-  :where(.frame, .hero__media, .band-media).is-revealed img {
-  animation: image-settle calc(var(--dur-reveal) * 1.4) var(--ease-out) var(--reveal-delay, 0ms) both;
+  @supports not (animation-timeline: view()) {
+    :where(.hero:not(.page-hero), .section)
+    :where(.frame, .hero__media, .band-media).is-pending img {
+      transform: scale(var(--reveal-scale));
+    }
+
+    :where(.hero:not(.page-hero), .section)
+    :where(.frame, .hero__media, .band-media).is-revealed img {
+      animation: image-settle calc(var(--dur-reveal) * 1.4) var(--ease-out) var(--reveal-delay, 0ms) both;
+    }
+  }
 }
 
 /* ---- 7. Utilities ---- */

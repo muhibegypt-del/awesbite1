@@ -54,23 +54,6 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script is:inline>
-      /* Set before first paint so reveal targets are already hidden when the
-         page renders; the module below takes over from here.
-
-         The timer is the backstop for the module never arriving at all — a
-         failed request, a blocked bundle. It is deliberately long: at three
-         seconds it was losing a race with the module on slow connections and
-         un-hiding the whole page, which looked exactly like the reveals being
-         broken. The module clears it as its first action, so the only thing
-         this can still catch is genuine absence. */
-      if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
-        document.documentElement.classList.add('reveal-enabled');
-        window.__atwRevealFallback = window.setTimeout(() => {
-          document.documentElement.classList.remove('reveal-enabled');
-        }, 10000);
-      }
-    </script>
     {noindex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonical} />
 
@@ -369,16 +352,16 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
 </style>
 
 <script>
-  /* ---- Progressive reveal ----
-     The stylesheet decides WHAT fades (section 6 of global.css); this decides
-     WHEN. Keep REVEAL_PARTS and NESTED_PARTS in step with the two selector
-     lists there.
+  /* ---- Progressive reveal: the fallback path only ----
+     Section 6 of global.css explains the split. Where the browser supports
+     `animation-timeline: view()` it drives the whole thing itself and this
+     file does nothing at all. This is here for the browsers that do not —
+     today, Firefox.
 
-     Targets are leaf blocks — a heading, a paragraph, one card, one credential
-     — not section wrappers, so a section resolves top to bottom. A wrapper that
-     contains targets of its own is skipped here for the same reason the
-     stylesheet skips it: its own fade would sit on top of the children's and
-     flatten the stagger. */
+     The rule that keeps it safe: only an element BELOW the fold is ever
+     hidden. Nothing on screen is touched, so a failure here costs the
+     animation and never the content. There is no class on <html>, no
+     fail-safe timer and nothing to restore after a navigation. */
 
   const REVEAL_SCOPES = [
     '.hero:not(.page-hero)',
@@ -415,54 +398,27 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
     '.agreements',
   ];
 
+  const NOT_RENDERED = new Set(['SCRIPT', 'STYLE', 'TEMPLATE', 'NOSCRIPT', 'LINK', 'META']);
+
   const revealSelector = REVEAL_SCOPES.flatMap((scope) =>
     REVEAL_PARTS.map((part) => `${scope} ${part}`)
   ).join(',');
   const containerSelector = REVEAL_CONTAINERS.join(',');
 
   /* Eight steps of 70ms is just over half a second across a group. Past that
-     the last card in a long row arrives after the reader has reached it. */
+     the last card in a row arrives after the reader has reached it. */
   const MAX_STEPS = 7;
 
   let revealObserver: IntersectionObserver | undefined;
-  let removeScrollFallback: (() => void) | undefined;
-
-  const motionWelcome = () =>
-    window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
-
-  /* The ClientRouter replaces the <html> element's attributes on every
-     client-side navigation, which wipes the class the head script added at
-     runtime. Nothing put it back, so from the second page onward the reveal
-     rules stopped matching, every target sat at its resting state, and the
-     site simply stopped fading for the rest of the session. The head script
-     cannot fix this — Astro does not re-run it on swap — so the flag is the
-     module's to own. */
-  function enableReveal() {
-    if (motionWelcome()) document.documentElement.classList.add('reveal-enabled');
-  }
 
   function initialiseRevealMotion() {
     revealObserver?.disconnect();
-    removeScrollFallback?.();
     revealObserver = undefined;
-    removeScrollFallback = undefined;
 
-    const root = document.documentElement;
-    const store = window as typeof window & { __atwRevealFallback?: number };
-
-    /* Cleared first, not last: while it was cleared at the end of this
-       function it was racing the work below, and a slow enough device lost. */
-    if (store.__atwRevealFallback) {
-      window.clearTimeout(store.__atwRevealFallback);
-      store.__atwRevealFallback = undefined;
-    }
-
-    if (!root.classList.contains('reveal-enabled')) return;
-
-    /* A component that ships a <script> renders it as a child of whatever
-       wrapper it sits in, so it matched `.stack > *` and consumed a step —
-       every sibling after it arrived one beat late for nothing. */
-    const NOT_RENDERED = new Set(['SCRIPT', 'STYLE', 'TEMPLATE', 'NOSCRIPT', 'LINK', 'META']);
+    /* Nothing to do: the stylesheet is driving it from scroll position. */
+    if (window.CSS?.supports?.('animation-timeline: view()')) return;
+    if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
+    if (!('IntersectionObserver' in window)) return;
 
     const targets = Array.from(
       document.querySelectorAll<HTMLElement>(revealSelector)
@@ -471,81 +427,53 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
         !element.matches(containerSelector) && !NOT_RENDERED.has(element.tagName)
     );
 
-    /* Delays run per group, so each cluster cascades from its own first item
-       rather than inheriting a delay from whatever preceded it on the page. */
+    /* The whole safety of this path: an element already on screen is left
+       exactly as it is. Only what the reader has not reached yet is hidden. */
+    const line = window.innerHeight * 0.9;
+    const pending = targets.filter(
+      (element) => element.getBoundingClientRect().top > line
+    );
+
     const seen = new Map<Element | null, number>();
 
-    for (const target of targets) {
-      const group = target.parentElement;
+    for (const element of pending) {
+      const group = element.parentElement;
       const index = seen.get(group) ?? 0;
       seen.set(group, index + 1);
-      target.style.setProperty(
+      element.style.setProperty(
         '--reveal-delay',
         `calc(${Math.min(index, MAX_STEPS)} * var(--reveal-step))`
       );
+      element.classList.add('is-pending');
     }
 
-    if ('IntersectionObserver' in window) {
-      revealObserver = new IntersectionObserver(
-        (entries, observer) => {
-          for (const entry of entries) {
-            if (!entry.isIntersecting) continue;
-            entry.target.classList.add('is-revealed');
-            observer.unobserve(entry.target);
-          }
-        },
-        /* Any part of the block crossing 90% of the viewport is enough.
-           A threshold measured as a fraction of the element never fires
-           reliably for a block taller than the viewport. */
-        { rootMargin: '0px 0px -10% 0px', threshold: 0 }
-      );
-
-      for (const target of targets) revealObserver.observe(target);
-    } else {
-      /* Some embedded preview browsers omit IntersectionObserver. A small,
-         passive scroll fallback keeps the reveal behaviour functional there. */
-      const revealVisible = () => {
-        const revealLine = window.innerHeight * 0.92;
-        for (const target of targets) {
-          if (target.classList.contains('is-revealed')) continue;
-          if (target.getBoundingClientRect().top <= revealLine) {
-            target.classList.add('is-revealed');
-          }
+    revealObserver = new IntersectionObserver(
+      (entries, observer) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          entry.target.classList.remove('is-pending');
+          entry.target.classList.add('is-revealed');
+          observer.unobserve(entry.target);
         }
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0 }
+    );
 
-        if (targets.every((target) => target.classList.contains('is-revealed'))) {
-          removeScrollFallback?.();
-        }
-      };
-
-      const removeListeners = () => {
-        window.removeEventListener('scroll', revealVisible);
-        window.removeEventListener('resize', revealVisible);
-      };
-
-      removeScrollFallback = removeListeners;
-      window.addEventListener('scroll', revealVisible, { passive: true });
-      window.addEventListener('resize', revealVisible);
-      requestAnimationFrame(revealVisible);
-    }
+    for (const element of pending) revealObserver.observe(element);
   }
 
-  /* Nothing below may leave the page hidden. If setting up the reveals throws,
-     the content has to come back, so the failure costs an animation and not
-     the page. */
+  /* A failure here must never leave the page hidden. */
   function startRevealMotion() {
     try {
       initialiseRevealMotion();
     } catch (error) {
-      document.documentElement.classList.remove('reveal-enabled');
+      document
+        .querySelectorAll('.is-pending')
+        .forEach((element) => element.classList.remove('is-pending'));
       console.error('Reveal motion failed to initialise; content shown.', error);
     }
   }
 
   startRevealMotion();
-
-  /* after-swap runs once the new document is in place and before page-load,
-     so the flag is restored before anything reads it. */
-  document.addEventListener('astro:after-swap', enableReveal);
   document.addEventListener('astro:page-load', startRevealMotion);
 </script>
