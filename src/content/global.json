@@ -37,11 +37,6 @@
     "cta": { "label": "Start an enquiry", "href": "/contact" }
   },
 
-  "banner": {
-    "_comment": "Temporary. Set showPreviewBanner={false} in Base.astro at launch.",
-    "text": "Private preview · selected content and booking links are still being finalised"
-  },
-
   "footer": {
     "tagline": "learn the words. shape the words. bring the words to life.",
     "legal": "© 2026 a textured word · United Kingdom",

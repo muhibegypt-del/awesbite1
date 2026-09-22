@@ -44,6 +44,7 @@ without being necessary for the requested navigation, audio, content or layout.
 | 8 | Build validation, browser QA, public Vercel preview and handoff | Complete |
 | 9 | Source-fidelity audit and three narration placeholders | Complete |
 | 10 | Clear-cut SSOT corrections: terminology, processes, pricing and testimonials | Complete |
+| 11 | Remove preview banner and audit UX/UI best practices | Audit complete |
 
 ## Phase 1 completed
 
@@ -128,3 +129,17 @@ without being necessary for the requested navigation, audio, content or layout.
 - Added Testimonials dropdown entries and honest empty-state sections to
   Repurposing and Narration only.
 - Production build passes with all 21 static routes.
+
+## Phase 11 completed
+
+- Removed the private-preview banner, its component API, styling and content
+  data from the shared layout.
+- Installed Vercel's `react-best-practices` and `web-design-guidelines` Codex
+  skills. The latter governed this Astro UI/UX audit.
+- Lighthouse scored the mobile production build 100 for accessibility, 100 for
+  SEO, 96 for best practices and 87 for performance.
+- Identified one major measurable UI defect: the mobile navigation collapses
+  after first paint, producing a CLS of 0.225.
+- Identified the `mailto:` enquiry hand-off as the main conversion-flow risk.
+- Recorded all findings and their safe implementation order in
+  `docs/phases/11-banner-and-ux-ui-audit.md`.
