@@ -55,11 +55,20 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script is:inline>
+      /* Set before first paint so reveal targets are already hidden when the
+         page renders; the module below takes over from here.
+
+         The timer is the backstop for the module never arriving at all — a
+         failed request, a blocked bundle. It is deliberately long: at three
+         seconds it was losing a race with the module on slow connections and
+         un-hiding the whole page, which looked exactly like the reveals being
+         broken. The module clears it as its first action, so the only thing
+         this can still catch is genuine absence. */
       if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
         document.documentElement.classList.add('reveal-enabled');
         window.__atwRevealFallback = window.setTimeout(() => {
           document.documentElement.classList.remove('reveal-enabled');
-        }, 3000);
+        }, 10000);
       }
     </script>
     {noindex && <meta name="robots" content="noindex, nofollow" />}
@@ -418,6 +427,20 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
   let revealObserver: IntersectionObserver | undefined;
   let removeScrollFallback: (() => void) | undefined;
 
+  const motionWelcome = () =>
+    window.matchMedia('(prefers-reduced-motion: no-preference)').matches;
+
+  /* The ClientRouter replaces the <html> element's attributes on every
+     client-side navigation, which wipes the class the head script added at
+     runtime. Nothing put it back, so from the second page onward the reveal
+     rules stopped matching, every target sat at its resting state, and the
+     site simply stopped fading for the rest of the session. The head script
+     cannot fix this — Astro does not re-run it on swap — so the flag is the
+     module's to own. */
+  function enableReveal() {
+    if (motionWelcome()) document.documentElement.classList.add('reveal-enabled');
+  }
+
   function initialiseRevealMotion() {
     revealObserver?.disconnect();
     removeScrollFallback?.();
@@ -425,8 +448,14 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
     removeScrollFallback = undefined;
 
     const root = document.documentElement;
-    const fallback = (window as typeof window & { __atwRevealFallback?: number })
-      .__atwRevealFallback;
+    const store = window as typeof window & { __atwRevealFallback?: number };
+
+    /* Cleared first, not last: while it was cleared at the end of this
+       function it was racing the work below, and a slow enough device lost. */
+    if (store.__atwRevealFallback) {
+      window.clearTimeout(store.__atwRevealFallback);
+      store.__atwRevealFallback = undefined;
+    }
 
     if (!root.classList.contains('reveal-enabled')) return;
 
@@ -499,10 +528,24 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
       window.addEventListener('resize', revealVisible);
       requestAnimationFrame(revealVisible);
     }
-
-    if (fallback) window.clearTimeout(fallback);
   }
 
-  initialiseRevealMotion();
-  document.addEventListener('astro:page-load', initialiseRevealMotion);
+  /* Nothing below may leave the page hidden. If setting up the reveals throws,
+     the content has to come back, so the failure costs an animation and not
+     the page. */
+  function startRevealMotion() {
+    try {
+      initialiseRevealMotion();
+    } catch (error) {
+      document.documentElement.classList.remove('reveal-enabled');
+      console.error('Reveal motion failed to initialise; content shown.', error);
+    }
+  }
+
+  startRevealMotion();
+
+  /* after-swap runs once the new document is in place and before page-load,
+     so the flag is restored before anything reads it. */
+  document.addEventListener('astro:after-swap', enableReveal);
+  document.addEventListener('astro:page-load', startRevealMotion);
 </script>
