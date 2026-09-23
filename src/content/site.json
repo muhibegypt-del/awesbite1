@@ -151,6 +151,10 @@
 
       "reelsHeading": "Listen",
       "reels": null,
+      "_comment_portfolio": "Voice portfolio labels. Moved verbatim from ServicePage.astro and AudioPlayer.astro.",
+      "portfolioHeading": "Voice portfolio",
+      "samplesPending": "Samples will be added here shortly.",
+      "samplePendingLabel": "Voice sample not yet available",
       "reelsPlaceholder": "[ VOICE REELS WILL GO HERE — three separate demos: fiction narration, corporate explainer, e-learning. MP3, 60 to 90 seconds each. This block sits at the top of the page because producers listen before they read. ]",
 
       "problem": [

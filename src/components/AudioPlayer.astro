@@ -1,6 +1,8 @@
 ---
+import site from '../content/site.json';
 interface Props { id: string; title: string; tag?: string; src?: string | null }
 const { id, title, tag, src } = Astro.props;
+const narration = site.services.find((service) => service.id === 'narration')!;
 ---
 <div class="audio-player" data-audio-player>
   <div class="audio-player__heading">
@@ -25,13 +27,13 @@ const { id, title, tag, src } = Astro.props;
   ) : (
     <>
       <div class="audio-player__controls">
-        <button class="audio-player__play" type="button" disabled aria-label="Voice sample not yet available">
+        <button class="audio-player__play" type="button" disabled aria-label={narration.samplePendingLabel}>
           <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M7 4v16l14-8z" fill="currentColor"/></svg>
         </button>
-        <input type="range" value="0" disabled aria-label="Voice sample not yet available" />
+        <input type="range" value="0" disabled aria-label={narration.samplePendingLabel} />
         <span class="audio-player__time">— / —</span>
       </div>
-      <p class="audio-player__status">Samples will be added here shortly.</p>
+      <p class="audio-player__status">{narration.samplesPending}</p>
     </>
   )}
 </div>

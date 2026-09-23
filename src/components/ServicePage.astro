@@ -57,7 +57,7 @@ const { service } = Astro.props;
   service.id === 'narration' && (
     <section id="portfolio" class="section band" aria-labelledby="reels-heading">
       <div class="container editorial">
-        <SectionMarker as="h2" id="reels-heading" label="Voice portfolio" class="editorial-aside" />
+        <SectionMarker as="h2" id="reels-heading" label={service.portfolioHeading} class="editorial-aside" />
         <div class="stack media-stack">
           {narrationTracks.map((track) => <AudioPlayer {...track} />)}
         </div>
