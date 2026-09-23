@@ -1,0 +1,179 @@
+---
+/**
+ * ELEMENT COLLAGE: one design direction, shown as real pieces in the
+ * browser rather than as a full-page comp. After Dan Mall's element
+ * collages and Samantha Warren's style tiles: enough to choose a direction
+ * from, not so much that the choice becomes a debate about one page.
+ *
+ * Internal, noindex, never linked. Delete once a direction is chosen.
+ */
+import Direction from '../../../layouts/Direction.astro';
+import Header from '../../../components/direction/Header.astro';
+import Hero from '../../../components/direction/Hero.astro';
+import Contents from '../../../components/direction/Contents.astro';
+import Honours from '../../../components/direction/Honours.astro';
+import Essay from '../../../components/direction/Essay.astro';
+import Prices from '../../../components/direction/Prices.astro';
+import Tracks from '../../../components/direction/Tracks.astro';
+import Footer from '../../../components/direction/Footer.astro';
+import directions from '../../../content/directions.json';
+import site from '../../../content/site.json';
+import global from '../../../content/global.json';
+import { smartQuotes as q } from '../../../components/direction/typeset.js';
+
+export function getStaticPaths() {
+  return [{ params: { d: 'a' } }, { params: { d: 'b' } }];
+}
+
+const key = Astro.params.d as 'a' | 'b';
+const d = directions[key];
+const other = directions[key === 'a' ? 'b' : 'a'];
+const p = d.palette;
+
+/* WCAG 2.2 contrast, computed from the palette at build time so the numbers
+   on the board can never drift from the colours beside them. */
+const lum = (hex: string) => {
+  const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255)
+    .map((v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));
+  return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+};
+const ratio = (a: string, b: string) => {
+  const [x, y] = [lum(a), lum(b)];
+  return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05);
+};
+const pairs = [
+  { fg: 'ink', bg: 'paper', use: 'body text', min: 4.5 },
+  { fg: 'inkSoft', bg: 'paper', use: 'secondary text', min: 4.5 },
+  { fg: 'clayInk', bg: 'paper', use: 'links, small accents', min: 4.5 },
+  { fg: 'clay', bg: 'paper', use: 'display text ≥24px, marks', min: 3 },
+  { fg: 'ink', bg: 'band', use: 'body text on band', min: 4.5 },
+  { fg: 'inkSoft', bg: 'band', use: 'secondary on band', min: 4.5 },
+  { fg: 'clayInk', bg: 'band', use: 'links on band', min: 4.5 },
+  { fg: 'paper', bg: 'clayInk', use: 'button label', min: 4.5 },
+  { fg: 'onDark', bg: 'dark', use: 'text on the dark close', min: 4.5 },
+  { fg: 'onDarkSoft', bg: 'dark', use: 'secondary on dark', min: 4.5 },
+].map((pair) => {
+  const value = ratio(p[pair.fg as keyof typeof p], p[pair.bg as keyof typeof p]);
+  return { ...pair, value: value.toFixed(2), pass: value >= pair.min };
+});
+const swatches = ['paper', 'band', 'lift', 'ink', 'inkSoft', 'clay', 'clayInk', 'dark'] as const;
+const step = ratio(p.paper, p.band).toFixed(2);
+
+const { hub, contact } = site;
+const type = [
+  { role: 'Display', cls: 'hero__display', sample: q(hub.name.line), spec: key === 'a' ? 'serif 300 · 48 → 92px · 0.95' : 'serif 300 · 36 → 92px · 0.95' },
+  { role: 'Heading', cls: 'shead__heading', sample: hub.pillarsHeading, spec: 'serif 300 · 32 → 52px · 1.08' },
+  { role: 'Subheading', cls: 'entry__title', sample: site.services[0].pillarCard.title, spec: 'serif 300 · 26 → 36px · 1.1' },
+  { role: 'Lead', cls: 'shead__lead', sample: hub.pillarsLine, spec: 'serif 300 · 20 → 26px · 1.45' },
+  { role: 'Body', cls: 'body-sample', sample: hub.authorityParagraphs[0], spec: 'sans 400 · 17 → 19px · 1.65' },
+  { role: 'Label', cls: 'label', sample: hub.markers.authority, spec: key === 'a' ? 'sans 500 caps · 12px · +0.1em' : 'serif small caps · 15px · +0.04em' },
+];
+---
+
+<Direction direction={key} title={`${d.label}: ${d.name}`}>
+  <div class="board">
+    <header class="board__intro bleed">
+      <p class="label">{d.label} · element collage</p>
+      <h1 class="board__title">{d.name}</h1>
+      <p class="board__summary">{d.summary}</p>
+      <ul class="board__keys" role="list">{d.keywords.map((k) => <li>{k}</li>)}</ul>
+      <p class="board__other"><a class="textlink" href={`/direction/${other.key}/`}>See {other.label}: {other.name}</a> · <a class="textlink" href={`/direction/${key}/home/`}>Open this direction as a full home page</a></p>
+    </header>
+
+    <section class="tile tile--flush" aria-labelledby="t1">
+      <div class="tile__head bleed"><span class="tile__num">01</span><h2 id="t1">The first screen, desktop</h2><p class="tile__note">{d.notes.hero}</p></div>
+      <div class="stage">
+        <Header />
+        <Hero direction={key} headingTag="p" />
+      </div>
+    </section>
+
+    <section class="tile" aria-labelledby="t2">
+      <div class="tile__head bleed"><span class="tile__num">02</span><h2 id="t2">The same page on a phone and a tablet</h2><p class="tile__note">Live frames of the full home page in this direction. Scroll inside them.</p></div>
+      <div class="bleed">
+        <div class="devices">
+          <iframe class="device device--phone" src={`/direction/${key}/home/`} title={`${d.label} home page at 390 pixels wide`} width="390" height="844" loading="lazy"></iframe>
+          <iframe class="device device--tablet" src={`/direction/${key}/home/`} title={`${d.label} home page at 768 pixels wide`} width="768" height="1024" loading="lazy"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="tile" aria-labelledby="t3">
+      <div class="tile__head bleed"><span class="tile__num">03</span><h2 id="t3">Type</h2><p class="tile__note">{d.notes.type}</p></div>
+      <div class="bleed">
+        <dl class="typeset">
+          {type.map((t) => (
+            <div class="typeset__row">
+              <dt><span class="typeset__role">{t.role}</span><span class="typeset__spec">{t.spec}</span></dt>
+              <dd class={t.cls}>{t.sample}</dd>
+            </div>
+          ))}
+        </dl>
+        <div class="fontnotes">
+          <p>{d.fonts.serif.note}</p>
+          <p>{d.fonts.sans.note}</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="tile" aria-labelledby="t4">
+      <div class="tile__head bleed"><span class="tile__num">04</span><h2 id="t4">Colour</h2><p class="tile__note">{d.paletteNotes.paper} {d.paletteNotes.band.replace('1.25', step)} {d.paletteNotes.dark}</p></div>
+      <div class="bleed">
+        <ul class="swatches" role="list">
+          {swatches.map((s) => <li><span class="swatch" style={`background:${p[s]}`}></span><span class="swatch__name">{s}</span><span class="swatch__hex">{p[s]}</span></li>)}
+        </ul>
+        <table class="ratios">
+          <caption class="visually-hidden">Contrast ratios</caption>
+          <tbody>
+            {pairs.map((r) => (
+              <tr><th scope="row"><span class="chip" style={`color:${p[r.fg as keyof typeof p]};background:${p[r.bg as keyof typeof p]}`}>Aa</span> {r.fg} on {r.bg}</th><td>{r.use}</td><td class="ratios__n">{r.value}:1</td><td>{r.pass ? '✓ passes' : '✗ fails'} {r.min}:1</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="tile tile--flush" aria-labelledby="t5">
+      <div class="tile__head bleed"><span class="tile__num">05</span><h2 id="t5">Services, as a contents page</h2><p class="tile__note">{d.notes.contents}</p></div>
+      <Contents />
+    </section>
+
+    <section class="tile tile--flush" aria-labelledby="t6">
+      <div class="tile__head bleed"><span class="tile__num">06</span><h2 id="t6">Prices, as a price list</h2><p class="tile__note">{d.notes.prices}</p></div>
+      <Prices />
+    </section>
+
+    <section class="tile tile--flush" aria-labelledby="t7">
+      <div class="tile__head bleed"><span class="tile__num">07</span><h2 id="t7">Credentials, as honours</h2><p class="tile__note">{d.notes.honours}</p></div>
+      <Honours />
+    </section>
+
+    <section class="tile tile--flush" aria-labelledby="t8">
+      <div class="tile__head bleed"><span class="tile__num">08</span><h2 id="t8">The voice portfolio, before the audio arrives</h2><p class="tile__note">{d.notes.tracks}</p></div>
+      <Tracks />
+    </section>
+
+    <section class="tile tile--flush" aria-labelledby="t9">
+      <div class="tile__head bleed"><span class="tile__num">09</span><h2 id="t9">The name, as the essay moment</h2><p class="tile__note">{d.notes.essay}</p></div>
+      <Essay />
+    </section>
+
+    <section class="tile" aria-labelledby="t10">
+      <div class="tile__head bleed"><span class="tile__num">10</span><h2 id="t10">Controls</h2><p class="tile__note">{d.notes.controls}</p></div>
+      <div class="bleed">
+        <div class="controls">
+          <div><p class="controls__cap">Primary, once per screen</p><a class="btn" href={global.nav.cta.href}>{global.nav.cta.label}</a></div>
+          <div><p class="controls__cap">Text link</p><a class="textlink" href={hub.authorityLink.href}>{hub.authorityLink.label}</a></div>
+          <div><p class="controls__cap">Keyboard focus</p><a class="btn is-focus" href={global.nav.cta.href} tabindex="-1">{global.nav.cta.label}</a></div>
+          <label class="field"><span class="field__label">{contact.fields.email}</span><input type="email" name="email" autocomplete="email" /></label>
+          <label class="field"><span class="field__label">{contact.fields.topic}</span><select name="topic"><option>{contact.topicPlaceholder}</option>{contact.topics.map((t) => <option>{t}</option>)}</select></label>
+        </div>
+      </div>
+    </section>
+
+    <section class="tile tile--flush" aria-labelledby="t11">
+      <div class="tile__head bleed"><span class="tile__num">11</span><h2 id="t11">The close</h2><p class="tile__note">{d.notes.close}</p></div>
+      <Footer />
+    </section>
+  </div>
+</Direction>

@@ -1,0 +1,20 @@
+---
+import SectionHead from './SectionHead.astro';
+import site from '../../content/site.json';
+const { hub, credentials } = site;
+---
+
+<section class="sec honours" aria-labelledby="honours-heading">
+  <div class="bleed">
+    <SectionHead label={hub.markers.authority} heading={hub.authorityHeading} id="honours-heading" />
+    <div class="honours__body">
+      {hub.authorityParagraphs.map((line) => <p>{line}</p>)}
+      <a class="textlink" href={hub.authorityLink.href}>{hub.authorityLink.label}</a>
+    </div>
+    <ul class="honours__list" role="list">
+      {credentials.map((c) => (
+        <li><span class="honours__q">{c.qualification}</span> <span class="honours__b">{c.body}</span></li>
+      ))}
+    </ul>
+  </div>
+</section>

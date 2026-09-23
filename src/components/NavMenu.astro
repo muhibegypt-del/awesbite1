@@ -1,9 +1,9 @@
 ---
 interface NavChild { label: string; href: string }
 interface NavItem { label: string; href: string; children?: NavChild[] }
-interface Props { items: NavItem[]; currentPath: string }
+interface Props { items: NavItem[]; currentPath: string; menuLabel: string }
 
-const { items, currentPath } = Astro.props;
+const { items, currentPath, menuLabel } = Astro.props;
 const isCurrent = (href: string) =>
   href === '/' ? currentPath === '/' : currentPath === href || currentPath.startsWith(`${href}/`);
 ---
@@ -11,7 +11,7 @@ const isCurrent = (href: string) =>
 <nav class="site-nav" aria-label="Primary" data-nav data-ready="true">
   <button class="menu-toggle" type="button" aria-expanded="false"
     aria-controls="primary-navigation" data-menu-toggle>
-    <span>Menu</span><span class="chevron" aria-hidden="true"></span>
+    <span>{menuLabel}</span><span class="chevron" aria-hidden="true"></span>
   </button>
 
   <ul class="nav-list" id="primary-navigation" role="list" data-nav-list>

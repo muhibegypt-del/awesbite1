@@ -1,0 +1,13 @@
+---
+/** The wordmark, with the brand's texture word set in the italic. */
+import global from '../../content/global.json';
+
+interface Props { class?: string; href?: string }
+const { class: className, href } = Astro.props;
+const [first, middle, ...rest] = global.brand.wordmark.split(' ');
+const Tag = href ? 'a' : 'span';
+---
+
+<Tag class:list={['wordmark', className]} href={href} aria-label={href ? `${global.brand.wordmark}, home` : undefined}>
+  {first}{' '}<em>{middle}</em>{' '}{rest.join(' ')}
+</Tag>

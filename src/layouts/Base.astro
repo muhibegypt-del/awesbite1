@@ -91,7 +91,7 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
           {global.brand.wordmark}
         </a>
 
-        <NavMenu items={global.nav.items} currentPath={currentPath} />
+        <NavMenu items={global.nav.items} currentPath={currentPath} menuLabel={global.nav.menuLabel} />
 
         {/* A conversion action, not one of the five navigation items. Keep it
             visible; it becomes the booking entry point once Calendly is ready. */}

@@ -1,0 +1,75 @@
+---
+/**
+ * Shell for the design-direction collages. Deliberately does NOT load the
+ * live site's tokens.css / global.css: each direction has to be seen on its
+ * own terms, not layered over the current system.
+ *
+ * Internal and noindex. Delete with /direction once a direction is chosen.
+ */
+import '../styles/directions.css';
+import directions from '../content/directions.json';
+import global from '../content/global.json';
+
+interface Props {
+  direction: 'a' | 'b';
+  title: string;
+}
+
+const { direction, title } = Astro.props;
+const d = directions[direction];
+const { serif, sans } = d.fonts;
+const p = d.palette;
+
+/* Duotone: every photograph is greyscale, so mapping luminance from one
+   colour to another is a two-point transfer per channel. */
+const channel = (hex: string, i: number) => (parseInt(hex.slice(1 + i * 2, 3 + i * 2), 16) / 255).toFixed(4);
+const duo = [0, 1, 2].map((i) => `${channel(p.duoShadow, i)} ${channel(p.duoLight, i)}`);
+
+const vars = [
+  `--paper:${p.paper}`, `--band:${p.band}`, `--lift:${p.lift}`,
+  `--ink:${p.ink}`, `--ink-soft:${p.inkSoft}`,
+  `--clay:${p.clay}`, `--clay-ink:${p.clayInk}`,
+  `--dark:${p.dark}`, `--on-dark:${p.onDark}`, `--on-dark-soft:${p.onDarkSoft}`,
+  `--grain:${d.grain}`,
+  `--serif:"${serif.family}", Georgia, "Times New Roman", serif`,
+  `--sans:"${sans.family}", -apple-system, "Segoe UI", sans-serif`,
+].join(';');
+
+const fontFaces = `
+@font-face{font-family:"${serif.family}";src:url("${serif.roman}") format("woff2");font-weight:300 400;font-style:normal;font-display:swap}
+@font-face{font-family:"${serif.family}";src:url("${serif.italic}") format("woff2");font-weight:300 400;font-style:italic;font-display:swap}
+@font-face{font-family:"${sans.family}";src:url("${sans.file}") format("woff2");font-weight:400 500;font-style:normal;font-display:swap}
+`;
+---
+
+<!doctype html>
+<html lang="en-GB" data-direction={direction} style={vars}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>{title} — {global.meta.titleSuffix}</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href={serif.roman} as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href={sans.file} as="font" type="font/woff2" crossorigin />
+    <style set:html={fontFaces}></style>
+  </head>
+  <body>
+    <svg class="defs" aria-hidden="true" focusable="false" width="0" height="0">
+      <filter id="duotone" color-interpolation-filters="sRGB">
+        <feColorMatrix type="saturate" values="0" />
+        <feComponentTransfer>
+          <feFuncR type="table" tableValues={duo[0]} />
+          <feFuncG type="table" tableValues={duo[1]} />
+          <feFuncB type="table" tableValues={duo[2]} />
+        </feComponentTransfer>
+      </filter>
+      {/* Roughens a stroke so it reads as graphite rather than a vector line. */}
+      <filter id="graphite" x="-5%" y="-50%" width="110%" height="200%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="4" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.4" />
+      </filter>
+    </svg>
+    <slot />
+  </body>
+</html>

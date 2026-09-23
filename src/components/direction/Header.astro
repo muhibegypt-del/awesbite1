@@ -1,0 +1,37 @@
+---
+/**
+ * One row at every width. Desktop: wordmark on the page edge, the five
+ * sections, and the enquiry as a quiet text link (the page keeps its one
+ * filled button for the real action). Phone: wordmark and a typographic
+ * "menu" built on <details>, so it opens with no JavaScript at all.
+ */
+import Wordmark from './Wordmark.astro';
+import global from '../../content/global.json';
+
+interface Props { current?: string }
+const { current = '/' } = Astro.props;
+const { items, cta, menuLabel } = global.nav;
+---
+
+<header class="hdr">
+  <div class="hdr__inner">
+    <Wordmark href="/" class="hdr__mark" />
+
+    <nav class="hdr__nav" aria-label="Primary">
+      <ul role="list">
+        {items.map((item) => (
+          <li><a href={item.href} aria-current={item.href === current ? 'page' : undefined}>{item.label}</a></li>
+        ))}
+      </ul>
+      <a class="hdr__cta textlink" href={cta.href}>{cta.label}</a>
+    </nav>
+
+    <details class="hdr__menu">
+      <summary>{menuLabel}</summary>
+      <ul role="list">
+        {items.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        <li><a href={cta.href}>{cta.label}</a></li>
+      </ul>
+    </details>
+  </div>
+</header>

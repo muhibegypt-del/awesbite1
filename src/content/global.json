@@ -34,7 +34,8 @@
         ]
       }
     ],
-    "cta": { "label": "Start an enquiry", "href": "/contact" }
+    "cta": { "label": "Start an enquiry", "href": "/contact" },
+    "menuLabel": "Menu"
   },
 
   "footer": {

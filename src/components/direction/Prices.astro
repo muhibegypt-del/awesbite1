@@ -1,0 +1,29 @@
+---
+/**
+ * Teaching prices as a price list. The price string is split at its own
+ * middle dots: the rate first, the bundles after. No words are added.
+ */
+import SectionHead from './SectionHead.astro';
+import site from '../../content/site.json';
+const teaching = site.services.find((s) => s.id === 'teaching')!;
+const tiers = teaching.tiers.map((tier) => {
+  const [rate, ...bundles] = tier.price.split(' · ');
+  return { ...tier, rate, bundles: bundles.join(' · ') };
+});
+---
+
+<section class="sec prices" aria-labelledby="prices-heading">
+  <div class="bleed">
+    <SectionHead label={`${teaching.number} — ${teaching.tag}`} heading={teaching.pricingHeading} lead={teaching.pricingLine} id="prices-heading" />
+    <ul class="prices__list" role="list">
+      {tiers.map((tier) => (
+        <li class="price">
+          <span class="price__label">{tier.label}</span>
+          <span class="price__cadence">{tier.cadence}</span>
+          <span class="price__rate">{tier.rate}</span>
+          <span class="price__bundles">{tier.bundles}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

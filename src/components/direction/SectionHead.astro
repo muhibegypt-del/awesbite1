@@ -1,0 +1,11 @@
+---
+/** Gutter label on the page edge, heading and lead on the text edge. */
+interface Props { label: string; heading?: string; lead?: string; id?: string; tag?: 'h2' | 'h3' }
+const { label, heading, lead, id, tag: Tag = 'h2' } = Astro.props;
+---
+
+<header class="shead">
+  <p class="label shead__label">{label}</p>
+  {heading && <Tag class="shead__heading" id={id}>{heading}</Tag>}
+  {lead && <p class="shead__lead">{lead}</p>}
+</header>
