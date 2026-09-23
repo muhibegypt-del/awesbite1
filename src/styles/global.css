@@ -53,9 +53,12 @@ html {
   scroll-padding-top: var(--s-7);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  html { scroll-behavior: smooth; }
-}
+/* Smooth scrolling is Lenis (Base.astro). Its required rules, from
+   lenis/dist/lenis.css, which the package does not export for import. */
+html.lenis, html.lenis body { height: auto; }
+.lenis:not(.lenis-autoToggle).lenis-stopped { overflow: clip; }
+.lenis [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-smooth iframe { pointer-events: none; }
 
 body, h1, h2, h3, h4, p, figure, blockquote, dl, dd, ol, ul { margin: 0; }
 ol, ul { padding: 0; }
@@ -834,14 +837,14 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 @view-transition { navigation: auto; }
 ::view-transition-old(root), ::view-transition-new(root) { animation-duration: var(--fast); }
 
-@media (prefers-reduced-motion: no-preference) {
-  .pencil__mark path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1100ms var(--ease-out) 500ms forwards; }
-}
+.pencil__mark path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1100ms var(--ease-out) 500ms forwards; }
 @keyframes draw { to { stroke-dashoffset: 0; } }
 
 /* Scroll reveals. The script only ever hides an element that is below the
    fold when the page loads, so nothing a reader can already see waits on
-   animation, and if the script never runs nothing is hidden at all. */
+   animation, and if the script never runs nothing is hidden at all.
+   The motion plays for every visitor: the owner chose not to honour
+   prefers-reduced-motion (September 2026). */
 .reveal-pending {
   opacity: 0;
   transform: translateY(var(--reveal-rise));
@@ -854,24 +857,10 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 /* The wordmark inks in, left to right, once per session (Base.astro sets
    .ink-in on the first page of a visit). Brief §1.4, as a wipe rather than
    a stroke: the clip is the only property that moves. */
-@media (prefers-reduced-motion: no-preference) {
-  .ink-in .hdr__mark { animation: ink 1400ms var(--ease-out) 150ms both; }
-}
+.ink-in .hdr__mark { animation: ink 1400ms var(--ease-out) 150ms both; }
 @keyframes ink {
   from { clip-path: inset(-20% 100% -20% 0); }
   to   { clip-path: inset(-20% 0 -20% 0); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 1ms !important;
-    animation-iteration-count: 1 !important;
-    transition-property: opacity, color, background-color, border-color, text-decoration-color !important;
-    transition-duration: 120ms !important;
-  }
-  /* Reveals stay a visible fade, with no movement (the rise token is 0). */
-  .reveal-pending { transition-duration: var(--reveal) !important; }
-  ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
 }
 
 /* ============================================================

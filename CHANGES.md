@@ -55,7 +55,7 @@ Every page was rebuilt on the new system. URLs and slugs are unchanged, and `/tu
 - **Hub (`/`):** portrait hero, the three services as chapters, the About teaser with credentials, the essay band ("The name") in plum with the reading photograph, the content teaser, and the close with the one filled button.
 - **Service pages** (`/teaching`, `/repurposing`, `/narration`) share one layout, `layouts/Service.astro`. The old template branched on the service id; the new one renders a section only when its content exists in `site.json`. Narration puts the voice portfolio first, because producers listen before they read.
 - **About, Contact, the content section (hub and five sub-pages), 404 and thank-you** use the same masthead, section heads and rules. The introduction is set as a printed essay: serif body, first-line indents, old-style figures.
-- **Removed:** the review/specimen/direction prototype pages and the retired components (HomePage, ServicePage, AudioPlayer, Button, Tag, NavMenu, PillarCards, SectionMarker, ContentLayout, LibraryStrip). The two Fontsource packages were uninstalled. `package.json` now depends on Astro alone.
+- **Removed:** the review/specimen/direction prototype pages and the retired components (HomePage, ServicePage, AudioPlayer, Button, Tag, NavMenu, PillarCards, SectionMarker, ContentLayout, LibraryStrip). The two Fontsource packages were uninstalled. `package.json` now depends on Astro and Lenis only.
 - **Retired, not deleted:** `src/content/home.json`, the pre-hub home page copy, kept as content.
 
 ## 6. Motion
@@ -67,7 +67,9 @@ The earlier complaint was "no fade-in". There were three causes:
 
 All three are fixed.
 
-- **Scroll reveals:** a 900ms fade with a 32px rise on a long, soft ease, staggered 90ms within a group, triggered once a block is about 12% up the screen rather than at the bottom edge, so it happens where the reader is looking. They apply only to blocks that start below the fold, so nothing on first screen ever waits to appear. With reduced motion they become a 400ms fade with no movement.
+- **Smooth scrolling (Lenis):** mouse-wheel and trackpad scrolling glide to a stop instead of stepping; phones keep their native touch scrolling. In-page links glide to their target. About 6KB of JavaScript in total, bundled with the site. Lenis is the one dependency besides Astro, added at the owner's request.
+- **Scroll reveals:** a 900ms fade with a 32px rise on a long, soft ease, staggered 90ms within a group, triggered once a block is about 12% up the screen rather than at the bottom edge, so it happens where the reader is looking. They apply only to blocks that start below the fold, so nothing on first screen ever waits to appear.
+- **Everyone gets the motion.** At the owner's request the site no longer tones animation down for visitors whose device asks for reduced motion (iPhone/Mac "Reduce motion", Windows "Animation effects" off). This departs from WCAG 2.2 guidance (2.3.3, a AAA criterion) and can be reversed by restoring the `prefers-reduced-motion` blocks removed in this change.
 - **The wordmark "inks in"** once per visit (a left-to-right wipe), and the pencil line under *textured* draws itself on the hub.
 - **Cross-document view transitions** give a soft cross-fade between pages in browsers that support them. No router script is needed.
 - **If JavaScript fails, nothing is hidden.** This was tested with JavaScript off: all 31 reveal blocks visible, and the phone menu opens (it is a `<details>` element).
@@ -90,7 +92,7 @@ Measured on the production build, phone viewport, throttled to slow 4G with a 4�
 | Largest contentful paint | < 2.0s | 0.9–1.1s measured; Lighthouse's simulated estimate 2.1–2.3s |
 | Cumulative layout shift | < 0.05 | 0.000–0.017 on every page |
 | Home page weight | < 900KB | ~245KB transferred, fonts and images included |
-| JavaScript | < 140KB gzipped | ~1KB gzipped, inline; no framework, no bundles |
+| JavaScript | < 140KB gzipped | ~6KB gzipped, Lenis included; no framework |
 
 Lighthouse (mobile), served with compression as Vercel serves it: **Performance 99, Accessibility 100, Best Practices 100, SEO 100** on the hub, all three services, About, Contact and the content pages.
 

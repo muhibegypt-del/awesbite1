@@ -116,6 +116,30 @@ const duoLift = [0, 1, 2].map((i) => {
 </html>
 
 <script>
+  import Lenis from 'lenis';
+
+  /* ---- Smooth scroll ----
+     Lenis glides mouse-wheel and trackpad scrolling; touch keeps the
+     phone's own scrolling. It moves the real page scroll, so the reveals
+     below and the browser's own scroll restoration are unaffected. */
+  try {
+    const lenis = new Lenis({ autoRaf: true, lerp: 0.1 });
+    const pad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+    // In-page links glide too. The skip link is left native so focus moves with it.
+    document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]:not(.skip)').forEach((link) => {
+      link.addEventListener('click', (event) => {
+        const target = document.getElementById(link.hash.slice(1));
+        if (!target) return;
+        event.preventDefault();
+        // Measured at click time, so it lands right however the page got here.
+        lenis.scrollTo(window.scrollY + target.getBoundingClientRect().top - pad);
+        history.pushState(null, '', link.hash);
+      });
+    });
+  } catch {
+    // Without Lenis the page scrolls natively; nothing else depends on it.
+  }
+
   /* ---- Menus ----
      <details> does the opening. This only closes the others when one opens,
      closes all on Escape or an outside click, and returns focus. */
@@ -140,8 +164,7 @@ const duoLift = [0, 1, 2].map((i) => {
      Only an element that is below the fold when the page loads is ever
      hidden, so nothing a reader can already see waits on animation, and if
      this never runs the page is simply whole. Siblings step in one after
-     another. Under reduced motion the tokens make this a plain fade with
-     no movement. */
+     another. */
   try {
     if ('IntersectionObserver' in window) {
       const fold = window.innerHeight * 0.92;

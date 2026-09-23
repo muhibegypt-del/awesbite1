@@ -62,8 +62,8 @@ Copy changes still need the client's approval. Typesetting (curly apostrophes vi
 
 ## Motion
 
-Only: the wordmark inking in (once per session, `sessionStorage` key `atw-inked`), the pencil line under *textured*, scroll reveals (`.reveal`; below the fold only, never the hero), hover states, menu open/close, cross-document view transitions. No parallax, no counters, no autoplay carousels.
-Every animation has a `prefers-reduced-motion: reduce` path (reveals become a 400ms fade with no movement). Transition specific properties, never `all`. If the script never runs, nothing is hidden.
+Only: Lenis smooth scrolling (mouse and trackpad; touch stays native), the wordmark inking in (once per session, `sessionStorage` key `atw-inked`), the pencil line under *textured*, scroll reveals (`.reveal`; below the fold only, never the hero), hover states, menu open/close, cross-document view transitions. No parallax, no counters, no autoplay carousels.
+**Owner's decision (September 2026): the motion plays for every visitor. `prefers-reduced-motion` is deliberately not honoured.** Do not add reduced-motion paths back without the owner asking. Transition specific properties, never `all`. If the script never runs, nothing is hidden and the page scrolls natively.
 
 ## Accessibility
 
@@ -92,6 +92,6 @@ Character limits in the slot map are layout constraints. Do not exceed them.
 
 - Match the existing page's structure when building a new one rather than inventing a second pattern.
 - Prefer editing an existing component over adding a new one.
-- Don't add dependencies without asking. The site builds with Astro and nothing else.
+- Don't add dependencies without asking. The site builds with Astro and Lenis (smooth scroll, approved by the owner) and nothing else.
 - No TypeScript. `astro check` is unavailable — do not add `@astrojs/check` or `typescript`, and don't add a `check` script. (`interface Props` and inline annotations inside `.astro` files are fine; Astro strips them at build with no dependency. Nothing type-checks them.)
 - Don't create README or docs files unless asked.

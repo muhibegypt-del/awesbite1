@@ -103,7 +103,3 @@
 @media (min-width: 1024px) {
   :root { --gutter: var(--s-8); --sec: var(--s-10); --sec-minor: var(--s-9); --hdr: 88px; }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  :root { --reveal: 400ms; --reveal-step: 0ms; --reveal-rise: 0px; }   /* a fade, no movement */
-}
