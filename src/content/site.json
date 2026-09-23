@@ -134,6 +134,8 @@
 
     {
       "id": "narration",
+      "showTestimonials": true,
+      "backgroundLink": { "text": "The Television Workshop", "href": "https://www.thetelevisionworkshop.co.uk/" },
       "_comment_pillar": "Service card treatment on the hub and on every spoke. Moved verbatim from PillarCards.astro.",
       "pillarCard": { "tag": "NARRATE", "title": "bring the words to life.", "line": "Voiceover & narration" },
       "route": "/narration",
@@ -232,6 +234,11 @@
 
     {
       "id": "repurposing",
+      "_comment_portfolio": "Portfolio slot and testimonials flag. Moved verbatim from ServicePage.astro, which branched on the service id.",
+      "portfolioHeading": "Portfolio",
+      "portfolioPending": "Selected long-form and short-form examples will be shared here.",
+      "portfolioLink": { "label": "Discuss your source material" },
+      "showTestimonials": true,
       "_comment_pillar": "Service card treatment on the hub and on every spoke. Moved verbatim from PillarCards.astro.",
       "pillarCard": { "tag": "REPURPOSE", "title": "shape the words.", "line": "Content repurposing" },
       "route": "/repurposing",

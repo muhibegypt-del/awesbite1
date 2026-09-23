@@ -90,5 +90,6 @@
     "ogImage": "/images/aneesa-with-poetry-anthology.webp"
   },
 
-  "skipLink": "skip to content"
+  "skipLink": "skip to content",
+  "newTab": " (opens in a new tab)"
 }
