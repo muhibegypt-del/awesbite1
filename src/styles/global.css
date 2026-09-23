@@ -24,6 +24,15 @@
   size-adjust: 102.7%; ascent-override: 94.45%; descent-override: 24.34%; line-gap-override: 0%;
 }
 
+/* Literata's true small caps run about 1.1x wider than the caps the
+   fallback synthesises, so small-caps text gets its own, larger fallback
+   and wraps the same way before and after the font arrives. */
+@font-face {
+  font-family: "Literata Caps Fallback";
+  src: local("Times New Roman"), local("Liberation Serif");
+  size-adjust: 126%; ascent-override: 93.4%; descent-override: 24.45%; line-gap-override: 0%;
+}
+
 /* ---- Reset ---- */
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -133,7 +142,7 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
    ============================================================ */
 
 .label {
-  font-family: var(--serif);
+  font-family: var(--serif-caps);
   font-size: var(--t-small);
   font-weight: 400;
   line-height: var(--lh-small);
@@ -505,7 +514,7 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 .entry:hover .entry__title a { color: var(--clay-ink); }
 .entry:focus-within { outline: 2px solid var(--clay-ink); outline-offset: var(--s-2); }
 .entry__title a:focus-visible { outline: none; }
-.entry__line { font-family: var(--serif); font-size: var(--t-body); letter-spacing: var(--track-caps); font-variant-caps: all-small-caps; color: var(--ink-soft); }
+.entry__line { font-family: var(--serif-caps); font-size: var(--t-body); letter-spacing: var(--track-caps); font-variant-caps: all-small-caps; color: var(--ink-soft); }
 .entry__one { max-width: var(--measure); }
 .entry__who { font-size: var(--t-small); font-weight: 500; color: var(--clay-ink); }
 .entry:hover .entry__who .arrow { transform: translateX(var(--s-1)); }
@@ -563,7 +572,7 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 .prose + .honours { margin-block-start: var(--s-8); }
 .honours { display: grid; gap: var(--s-5); grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
 .honours li { display: grid; gap: var(--s-1); align-content: start; padding-top: var(--s-4); border-top: 1px solid var(--rule); }
-.honours__q { font-family: var(--serif); font-size: var(--t-body); letter-spacing: var(--track-caps); font-variant-caps: all-small-caps; }
+.honours__q { font-family: var(--serif-caps); font-size: var(--t-body); letter-spacing: var(--track-caps); font-variant-caps: all-small-caps; }
 .honours__b { font-family: var(--serif); font-style: italic; font-weight: 300; }
 
 @media (min-width: 1024px) {
@@ -573,7 +582,7 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 /* Label and body pairs: who I teach, what I take on. */
 .pairs { display: grid; gap: 0 var(--s-7); }
 .pairs > div { display: grid; gap: var(--s-1); align-content: start; padding-block: var(--s-4); border-top: 1px solid var(--rule); }
-.pairs dt { font-family: var(--serif); font-size: var(--t-body); letter-spacing: var(--track-caps); font-variant-caps: all-small-caps; color: var(--ink); }
+.pairs dt { font-family: var(--serif-caps); font-size: var(--t-body); letter-spacing: var(--track-caps); font-variant-caps: all-small-caps; color: var(--ink); }
 .pairs dd { color: var(--ink-soft); }
 
 @media (min-width: 768px) {
@@ -709,7 +718,7 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 
 .subnav { border-bottom: 1px solid var(--rule); }
 .subnav ul { display: flex; flex-wrap: wrap; gap: 0 var(--s-6); }
-.subnav a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; font-family: var(--serif); letter-spacing: var(--track-caps); font-variant-caps: all-small-caps; font-size: var(--t-body); color: var(--ink-soft); transition: color var(--fast) var(--ease-out); }
+.subnav a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; font-family: var(--serif-caps); letter-spacing: var(--track-caps); font-variant-caps: all-small-caps; font-size: var(--t-body); color: var(--ink-soft); transition: color var(--fast) var(--ease-out); }
 .subnav a:hover { color: var(--clay-ink); }
 .subnav a[aria-current='page'] { color: var(--ink); text-decoration: underline; text-decoration-color: var(--clay); text-underline-offset: 0.4em; }
 
@@ -719,7 +728,7 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 
 /* A page set as a printed essay. */
 .essay-page { font-family: var(--serif); font-size: clamp(1.125rem, 1.05rem + 0.3vw, 1.3125rem); font-weight: 300; line-height: 1.66; font-variant-numeric: oldstyle-nums proportional-nums; }
-.essay-page p { max-width: 30em; }
+.essay-page p { max-width: 28em; }
 .essay-page p + p:not(.space-7) { text-indent: 1.5em; }
 .essay-page .lead { font-size: var(--t-lead); }
 

@@ -46,7 +46,7 @@ const duoLift = [0, 1, 2].map((i) => {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
-    <link rel="canonical" href={canonical} />
+    {!noindex && <link rel="canonical" href={canonical} />}
 
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />

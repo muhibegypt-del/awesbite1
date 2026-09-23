@@ -37,6 +37,7 @@
 
   /* ---- Typefaces ---- */
   --serif: "Literata", "Literata Fallback", Georgia, "Times New Roman", serif;
+  --serif-caps: "Literata", "Literata Caps Fallback", Georgia, "Times New Roman", serif;   /* small caps */
   --sans:  "Instrument Sans", "Instrument Sans Fallback", -apple-system, "Segoe UI", sans-serif;
 
   /* ---- Type roles (fluid 390 → 1440) ----
@@ -62,7 +63,7 @@
   --track-caps:     0.04em;   /* small caps want a little air */
 
   /* ---- Measure ---- */
-  --measure:      32em;   /* 62–66 characters of body text */
+  --measure:      30em;   /* 64–68 characters of body text in Instrument Sans */
   --measure-lead: 24em;
   --measure-head: 18em;
 
