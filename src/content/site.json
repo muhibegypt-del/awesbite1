@@ -37,6 +37,10 @@
       "mission": "a textured word exists to help people learn, shape and voice language with intention — because words aren't flat, they're textured."
     },
 
+    "_comment_image": "The hub hero photograph (chosen by the client). Moved here from the narration record, alt text verbatim; narration now uses the anthology portrait.",
+    "image": "/images/aneesa-portrait.webp",
+    "imageAlt": "Aneesa smiling in a softly lit black-and-white portrait",
+
     "contentHeading": "Notes on books and language",
     "contentLink": { "label": "Explore the literary ecosystem", "href": "/content" }
   },
@@ -146,8 +150,8 @@
       "audience": "For authors, publishers and producers",
       "oneLiner": "I take the time to understand the text and its intention, then deliver a thoughtful performance that holds the listener's attention.",
       "cta": { "label": "Request a custom audition", "href": "/contact?about=Audiobook+narration" },
-      "image": "/images/aneesa-portrait.webp",
-      "imageAlt": "Aneesa smiling in a softly lit black-and-white portrait",
+      "image": "/images/aneesa-with-poetry-anthology.webp",
+      "imageAlt": "Aneesa resting her chin on her hands beside an anthology of poetry",
       "imagePosition": "65% center",
       "problemLabel": "The performance",
 

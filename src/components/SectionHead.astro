@@ -1,0 +1,14 @@
+---
+/** Gutter label on the page edge; heading and lead on the text edge. */
+import { q } from '../lib/typeset.js';
+
+interface Props { label?: string; heading?: string; lead?: string; id?: string; as?: 'h2' | 'h3' }
+const { label, heading, lead, id, as: Tag = 'h2' } = Astro.props;
+---
+
+<header class="shead reveal">
+  {label && <p class="label">{q(label)}</p>}
+  {heading && <Tag class="h2" id={id}>{q(heading)}</Tag>}
+  {lead && <p class="lead">{q(lead)}</p>}
+  <slot />
+</header>

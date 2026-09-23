@@ -1,26 +1,13 @@
 ---
-/* Fraunces ships with its optical-size axis; Inter does not.
-
-   Fraunces runs from 17px on a pillar card to 62px in the masthead, and the
-   weight-only file collapses that whole range onto one 14pt master — which is
-   why the big type looked loosely fitted and the small italic looked coarse.
-   The opsz cut costs ~67KB and `font-optical-sizing: auto` in global.css
-   spends it.
-
-   Inter is set between 15px and 24px here, and its opsz axis only spans
-   14–32, so the same swap would buy a difference almost nobody could see for
-   another 23KB on the mobile critical path. Not worth it: the tracking ladder
-   in tokens.css does that job instead. `font-optical-sizing: auto` simply has
-   no axis to act on and no-ops. */
-import '@fontsource-variable/fraunces/opsz.css';
-import '@fontsource-variable/fraunces/opsz-italic.css';
-import '@fontsource-variable/inter/wght.css';
+/**
+ * Every page: head and meta, the header, the close, the photograph grades,
+ * the scroll reveals and the once-per-session wordmark. Direction B.
+ */
 import '../styles/tokens.css';
 import '../styles/global.css';
-import { ClientRouter } from 'astro:transitions';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 import global from '../content/global.json';
-import Button from '../components/Button.astro';
-import NavMenu from '../components/NavMenu.astro';
 
 interface Props {
   /** Page title. The brand name is appended unless `bare`. */
@@ -30,12 +17,7 @@ interface Props {
   noindex?: boolean;
 }
 
-const {
-  title,
-  description,
-  bare = false,
-  noindex = false,
-} = Astro.props;
+const { title, description, bare = false, noindex = false } = Astro.props;
 
 const pageTitle = bare ? title : `${title} — ${global.meta.titleSuffix}`;
 const pageDescription = description ?? global.meta.description;
@@ -43,10 +25,19 @@ const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const socialImage = global.meta.ogImage ? new URL(global.meta.ogImage, Astro.site).href : null;
 const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
 
-/* Never render a dead link. Both lists ship with null hrefs until the content
-   exists, and the whole column or list is dropped rather than emptied. */
-const socialLinks = global.social.links.filter((link) => link.url);
-const legalLinks = global.footer.legalLinks.filter((item) => item.href);
+/* The photograph grade. Mirrors --duo-shadow and --paper in tokens.css
+   (SVG filter tables need numbers, not custom properties). Every photo is
+   black and white, so luminance maps straight from one colour to the
+   other. The lifted variant pulls the mid-tones toward the paper for a
+   photograph that carries type; its two ends are the same. */
+const SHADOW = '#2E1F29';
+const PAPER = '#F1E6D9';
+const channel = (hex: string, i: number) => parseInt(hex.slice(1 + i * 2, 3 + i * 2), 16) / 255;
+const duo = [0, 1, 2].map((i) => `${channel(SHADOW, i).toFixed(4)} ${channel(PAPER, i).toFixed(4)}`);
+const duoLift = [0, 1, 2].map((i) => {
+  const [s, p] = [channel(SHADOW, i), channel(PAPER, i)];
+  return `${s.toFixed(4)} ${(s * 0.38 + p * 0.62).toFixed(4)} ${p.toFixed(4)}`;
+});
 ---
 
 <!doctype html>
@@ -67,8 +58,6 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
     <meta property="og:description" content={pageDescription} />
     <meta property="og:url" content={canonical} />
     {socialImage && <meta property="og:image" content={socialImage} />}
-
-    {/* summary_large_image with no image renders as a broken card. */}
     <meta name="twitter:card" content={socialImage ? 'summary_large_image' : 'summary'} />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={pageDescription} />
@@ -76,386 +65,106 @@ const legalLinks = global.footer.legalLinks.filter((item) => item.href);
 
     <meta name="theme-color" content={global.meta.themeColor} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <ClientRouter fallback="animate" />
+    <link rel="preload" href="/fonts/literata-roman.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin />
+
+    {/* The wordmark inks in on the first page of a visit only. Set before
+        first paint so it never flashes in finished and then animates. */}
+    <script is:inline>
+      try {
+        if (!sessionStorage.getItem('atw-inked')) {
+          document.documentElement.classList.add('ink-in');
+          sessionStorage.setItem('atw-inked', '1');
+        }
+      } catch (e) {}
+    </script>
     <slot name="head" />
   </head>
 
   <body>
-    <a class="skip-link" href="#main">{global.skipLink}</a>
+    <a class="skip" href="#main">{global.skipLink}</a>
 
-    <div class="grain" aria-hidden="true"></div>
+    <svg aria-hidden="true" focusable="false" width="0" height="0" style="position:absolute">
+      <filter id="duotone" color-interpolation-filters="sRGB">
+        <feColorMatrix type="saturate" values="0" />
+        <feComponentTransfer>
+          <feFuncR type="table" tableValues={duo[0]} />
+          <feFuncG type="table" tableValues={duo[1]} />
+          <feFuncB type="table" tableValues={duo[2]} />
+        </feComponentTransfer>
+      </filter>
+      <filter id="duotone-lift" color-interpolation-filters="sRGB">
+        <feColorMatrix type="saturate" values="0" />
+        <feComponentTransfer>
+          <feFuncR type="table" tableValues={duoLift[0]} />
+          <feFuncG type="table" tableValues={duoLift[1]} />
+          <feFuncB type="table" tableValues={duoLift[2]} />
+        </feComponentTransfer>
+      </filter>
+      <filter id="graphite" x="-5%" y="-50%" width="110%" height="200%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="4" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.4" />
+      </filter>
+    </svg>
 
-    <header class="site-header">
-      <div class="site-header__inner">
-        <a class="wordmark" href="/" aria-label={`${global.brand.wordmark}, home`}>
-          {global.brand.wordmark}
-        </a>
-
-        <NavMenu items={global.nav.items} currentPath={currentPath} menuLabel={global.nav.menuLabel} />
-
-        {/* A conversion action, not one of the five navigation items. Keep it
-            visible; it becomes the booking entry point once Calendly is ready. */}
-        <Button variant="secondary" href={global.nav.cta.href}>{global.nav.cta.label}</Button>
-      </div>
-    </header>
-
-    <main id="main" class="site-main" tabindex="-1">
+    <Header currentPath={currentPath} />
+    <main id="main" tabindex="-1">
       <slot />
     </main>
-
-    <footer class="site-footer">
-      <div class="site-footer__inner">
-        <div class="site-footer__brand">
-          <p class="site-footer__wordmark">{global.brand.wordmark}</p>
-          <p class="site-footer__tagline">{global.footer.tagline}</p>
-        </div>
-
-        <div class="site-footer__cols">
-          {
-            global.footer.columns.map((column) => (
-              <div class="site-footer__col">
-                <p class="site-footer__heading">{column.heading}</p>
-                <ul role="list">
-                  {column.links.map((link) => (
-                    <li><a href={link.href}>{link.label}</a></li>
-                  ))}
-                </ul>
-              </div>
-            ))
-          }
-
-          {
-            socialLinks.length > 0 && (
-              <div class="site-footer__col">
-                <p class="site-footer__heading">{global.social.heading}</p>
-                <ul role="list">
-                  {socialLinks.map((link) => (
-                    <li><a href={link.url} rel="me noopener">{link.label}</a></li>
-                  ))}
-                </ul>
-              </div>
-            )
-          }
-        </div>
-
-        <div class="site-footer__legal">
-          <p>{global.footer.legal}</p>
-          {
-            legalLinks.length > 0 && (
-              <ul role="list">
-                {legalLinks.map((item) => (
-                  <li><a href={item.href}>{item.label}</a></li>
-                ))}
-              </ul>
-            )
-          }
-        </div>
-      </div>
-    </footer>
+    <Footer />
   </body>
 </html>
 
-<style>
-  /* Content sits above the fixed grain layer (z-index 1 in tokens.css). */
-  .site-header,
-  .site-main,
-  .site-footer {
-    position: relative;
-    z-index: 2;
-  }
-
-  .site-main {
-    flex: 1;
-  }
-
-  /* ---- Header ---- */
-
-  .site-header {
-    border-bottom: var(--border);
-  }
-
-  .site-header__inner {
-    width: 100%;
-    max-width: var(--container);
-    margin-inline: auto;
-    padding-inline: var(--gutter-x);
-    padding-block: var(--s-5);
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: var(--s-5);
-    flex-wrap: wrap;
-  }
-
-  /* 18px lockup offset, from brief §1.4. One of the two sanctioned off-scale
-     values on the site. */
-  .wordmark {
-    margin-left: 18px;
-    font-family: var(--font-display);
-    font-size: var(--t-h3);
-    font-weight: 400;
-    line-height: 1;
-    letter-spacing: var(--track-h3);
-    text-transform: lowercase;
-    text-decoration: none;
-    color: var(--ink);
-    white-space: nowrap;
-    transition: color var(--dur-fast) var(--ease);
-  }
-
-  .wordmark:hover {
-    color: var(--clay-ink);
-  }
-
-  @media (max-width: 767px) {
-    .site-header__inner {
-      padding-block: var(--s-4);
-      gap: var(--s-3);
-    }
-
-    .wordmark {
-      margin-left: 0;
-    }
-  }
-
-  /* ---- Footer ---- */
-
-  /* clay-ink is near-invisible on the dark footer band. */
-  .site-footer :focus-visible {
-    outline-color: var(--paper);
-  }
-
-  .site-footer {
-    background: var(--surface-dark);
-    color: var(--paper);
-  }
-
-  .site-footer__inner {
-    width: 100%;
-    max-width: var(--container);
-    margin-inline: auto;
-    padding-inline: var(--gutter-x);
-    padding-block: var(--s-9) var(--s-6);
-    display: grid;
-    gap: var(--s-8);
-  }
-
-  .site-footer__wordmark {
-    font-family: var(--font-display);
-    font-size: var(--t-h2);
-    font-weight: 300;
-    line-height: var(--lh-h2);
-    letter-spacing: var(--track-h2);
-    color: var(--paper);
-    margin: 0;
-  }
-
-  .site-footer__tagline {
-    margin-top: var(--s-4);
-    font-family: var(--font-display);
-    font-size: var(--t-lead);
-    font-weight: 300;
-    font-style: italic;
-    line-height: 1.4;
-    letter-spacing: var(--track-lead);
-    color: var(--coconut);
-  }
-
-  .site-footer__cols {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(var(--s-11), 1fr));
-    gap: var(--s-6);
-  }
-
-  .site-footer__heading {
-    font-family: var(--font-mono);
-    font-size: var(--t-mono);
-    letter-spacing: var(--track-mono);
-    margin: 0 0 var(--s-4);
-    margin-inline-end: calc(var(--track-mono) * -1);
-    padding-block-end: var(--s-3);
-    border-bottom: 1px solid color-mix(in srgb, var(--paper) 16%, transparent);
-    text-transform: uppercase;
-    color: var(--coconut);
-  }
-
-  .site-footer__col ul {
-    list-style: none;
-    display: grid;
-    gap: var(--s-3);
-  }
-
-  /* Underlined. These were paper text on a paper-coloured run of prose with no
-     underline and no weight change — no channel distinguished a link at all. */
-  .site-footer__col a {
-    font-size: var(--t-small);
-    letter-spacing: var(--track-small);
-    color: var(--paper);
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.22em;
-    text-decoration-color: color-mix(in srgb, var(--paper) 45%, transparent);
-    transition: text-decoration-color var(--dur-fast) var(--ease);
-  }
-
-  .site-footer__col a:hover {
-    text-decoration-color: var(--paper);
-  }
-
-  .site-footer__legal {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--s-4);
-    padding-top: var(--s-5);
-    border-top: 1px solid color-mix(in srgb, var(--paper) 18%, transparent);
-  }
-
-  /* Mono is permitted on the footer legal line. Brief §3.4, item 5. */
-  .site-footer__legal,
-  .site-footer__legal a {
-    font-family: var(--font-mono);
-    font-size: var(--t-mono);
-    letter-spacing: var(--track-mono);
-    text-transform: uppercase;
-    font-variant-numeric: tabular-nums;
-    color: var(--coconut);
-  }
-
-  .site-footer__legal p {
-    margin: 0;
-    margin-inline-end: calc(var(--track-mono) * -1);
-  }
-
-  .site-footer__legal a {
-    margin-inline-end: calc(var(--track-mono) * -1);
-  }
-
-  .site-footer__legal ul {
-    list-style: none;
-    display: flex;
-    gap: var(--s-4);
-  }
-
-  .site-footer__legal a {
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 0.22em;
-    text-decoration-color: color-mix(in srgb, var(--coconut) 45%, transparent);
-    transition: text-decoration-color var(--dur-fast) var(--ease);
-  }
-
-  .site-footer__legal a:hover {
-    text-decoration-color: var(--coconut);
-  }
-</style>
-
 <script>
-  /* ---- Scroll-in fade ----
-     Textbook version: find the blocks, hide the ones still below the fold,
-     and let an IntersectionObserver switch them on as they arrive. The CSS is
-     at the bottom of global.css.
+  /* ---- Menus ----
+     <details> does the opening. This only closes the others when one opens,
+     closes all on Escape or an outside click, and returns focus. */
+  const menus = Array.from(document.querySelectorAll<HTMLDetailsElement>('[data-sub]'));
+  for (const menu of menus) {
+    menu.addEventListener('toggle', () => {
+      if (menu.open) menus.forEach((other) => { if (other !== menu && !other.contains(menu)) other.open = false; });
+    });
+  }
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    const open = menus.find((menu) => menu.open);
+    if (!open) return;
+    menus.forEach((menu) => { menu.open = false; });
+    open.querySelector('summary')?.focus();
+  });
+  document.addEventListener('click', (event) => {
+    menus.forEach((menu) => { if (menu.open && event.target instanceof Node && !menu.contains(event.target)) menu.open = false; });
+  });
 
-     The one rule worth keeping: only an element BELOW the fold is ever
-     hidden. Nothing on screen is touched, so if this fails or never runs, the
-     page is whole and just does not animate. */
-
-  const BLOCKS = [
-    '.editorial > *',
-    '.stack > *',
-    '.split > *',
-    '.meaning-layout > *',
-    '.columns > li',
-    '.credentials__item',
-    '.steps > li',
-    '.rows-dl__row',
-    '.content-grid > li',
-    '.agreements > *',
-    '.site-footer__col',
-    '.site-footer__brand',
-  ].join(',');
-
-  /* These lay other blocks out; their children fade, not them. */
-  const CONTAINERS = [
-    '.stack',
-    '.split',
-    '.meaning-layout',
-    '.columns',
-    '.credentials',
-    '.steps',
-    '.rows-dl',
-    '.content-grid',
-    '.agreements',
-  ].join(',');
-
-  const SKIP = new Set(['SCRIPT', 'STYLE', 'TEMPLATE', 'NOSCRIPT', 'LINK', 'META']);
-
-  let observer: IntersectionObserver | undefined;
-
-  function setupFade() {
-    observer?.disconnect();
-    observer = undefined;
-
-    if (!window.matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
-    if (!('IntersectionObserver' in window)) return;
-
-    const line = window.innerHeight * 0.9;
-
-    /* Blocks not yet seen, and still below the fold, get hidden and queued. */
-    const fresh = Array.from(document.querySelectorAll<HTMLElement>(BLOCKS)).filter(
-      (el) =>
-        !el.matches(CONTAINERS) &&
-        !SKIP.has(el.tagName) &&
-        !el.classList.contains('fade-in') &&
-        el.getBoundingClientRect().top > line
-    );
-
-    /* Items in a row arrive one after another rather than all together. */
-    const counts = new Map<Element | null, number>();
-
-    for (const el of fresh) {
-      const index = counts.get(el.parentElement) ?? 0;
-      counts.set(el.parentElement, index + 1);
-      el.style.setProperty(
-        '--reveal-delay',
-        `calc(${Math.min(index, 7)} * var(--reveal-step))`
+  /* ---- Scroll reveals ----
+     Only an element that is below the fold when the page loads is ever
+     hidden, so nothing a reader can already see waits on animation, and if
+     this never runs the page is simply whole. Siblings step in one after
+     another. Under reduced motion the tokens make this a short fade with
+     no movement. */
+  try {
+    if ('IntersectionObserver' in window) {
+      const fold = window.innerHeight * 0.92;
+      const pending = Array.from(document.querySelectorAll<HTMLElement>('.reveal')).filter(
+        (el) => el.getBoundingClientRect().top > fold
       );
-      el.classList.add('fade-in');
-    }
-
-    observer = new IntersectionObserver(
-      (entries, obs) => {
+      const index = new Map<Element | null, number>();
+      for (const el of pending) {
+        const i = index.get(el.parentElement) ?? 0;
+        index.set(el.parentElement, i + 1);
+        el.style.setProperty('--i', String(Math.min(i, 6)));
+        el.classList.add('reveal-pending');
+      }
+      const observer = new IntersectionObserver((entries) => {
         for (const entry of entries) {
           if (!entry.isIntersecting) continue;
-          entry.target.classList.add('is-visible');
-          obs.unobserve(entry.target);
+          entry.target.classList.add('is-in');
+          observer.unobserve(entry.target);
         }
-      },
-      { rootMargin: '0px 0px -10% 0px', threshold: 0 }
-    );
-
-    /* Everything still waiting, not just what this run hid. astro:page-load
-       fires on the FIRST load as well, so this runs twice on every page: the
-       second run disconnects the first observer, and if it only watched what
-       it had just hidden it would watch nothing and leave the whole page
-       stuck at opacity 0. */
-    document
-      .querySelectorAll<HTMLElement>('.fade-in:not(.is-visible)')
-      .forEach((el) => observer!.observe(el));
-  }
-
-  function start() {
-    try {
-      setupFade();
-    } catch (error) {
-      document
-        .querySelectorAll('.fade-in')
-        .forEach((el) => el.classList.add('is-visible'));
-      console.error('Scroll fade failed to start; content shown.', error);
+      }, { threshold: 0.12 });
+      pending.forEach((el) => observer.observe(el));
     }
+  } catch {
+    document.querySelectorAll('.reveal-pending').forEach((el) => el.classList.add('is-in'));
   }
-
-  start();
-  document.addEventListener('astro:page-load', start);
 </script>

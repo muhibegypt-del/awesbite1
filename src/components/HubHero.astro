@@ -1,0 +1,33 @@
+---
+/**
+ * The hub's first screen: her portrait whole, edge to edge, with the brand
+ * line set on the open wall to her left (desktop) or on paper above it
+ * (phone). The existing hub headline stays the page's <h1>, set as the lead.
+ */
+import PencilMark from './PencilMark.astro';
+import Photo from './Photo.astro';
+import { q } from '../lib/typeset.js';
+import site from '../content/site.json';
+import global from '../content/global.json';
+
+const { hub, brand } = site;
+---
+
+<section class="hero" aria-labelledby="hero-heading">
+  <p class="hero__runhead label">{brand.triad}</p>
+  <p class="hero__display display">
+    <span class="hero__line">{q(hub.name.line)}</span>
+    <span class="hero__line">{q(hub.name.lead)} <PencilMark><em>{hub.name.emphasis}</em></PencilMark></span>
+  </p>
+  <div class="hero__photo">
+    <Photo src={hub.image} alt={hub.imageAlt} eager />
+  </div>
+  <div class="hero__copy">
+    <h1 class="hero__h1" id="hero-heading">{q(hub.headline)}</h1>
+    <p class="hero__sub muted">{q(hub.sub)}</p>
+    <div class="hero__actions">
+      <a class="btn" href={global.nav.cta.href}>{global.nav.cta.label}</a>
+      <a class="textlink" href="#services">{hub.pillarsHeading}</a>
+    </div>
+  </div>
+</section>

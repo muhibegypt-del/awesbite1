@@ -1,0 +1,10 @@
+---
+/** Credentials set as a list of honours. */
+import site from '../content/site.json';
+---
+
+<ul class="honours" role="list">
+  {site.credentials.map((c) => (
+    <li class="reveal"><span class="honours__q">{c.qualification}</span> <span class="honours__b">{c.body}</span></li>
+  ))}
+</ul>

@@ -1,4 +1,55 @@
 ---
-import HomePage from '../components/HomePage.astro';
+/** The hub. Signposts the three services, introduces Aneesa, explains the
+    name, points to the content, and closes on the one action. */
+import Base from '../layouts/Base.astro';
+import HubHero from '../components/HubHero.astro';
+import SectionHead from '../components/SectionHead.astro';
+import ServiceList from '../components/ServiceList.astro';
+import Honours from '../components/Honours.astro';
+import EssayBand from '../components/EssayBand.astro';
+import { q } from '../lib/typeset.js';
+import site from '../content/site.json';
+import global from '../content/global.json';
+
+const { hub, about, contact } = site;
 ---
-<HomePage />
+
+<Base title={global.meta.title} bare>
+  <HubHero />
+
+  <section class="sec" id="services" aria-labelledby="services-heading">
+    <div class="bleed">
+      <SectionHead label={hub.markers.pillars} heading={hub.pillarsHeading} lead={hub.pillarsLine} id="services-heading" />
+      <ServiceList />
+    </div>
+  </section>
+
+  <section class="sec" aria-labelledby="about-heading">
+    <div class="bleed">
+      <SectionHead label={hub.markers.authority} heading={hub.authorityHeading} id="about-heading" />
+      <div class="prose col-text reveal">
+        {hub.authorityParagraphs.map((line) => <p>{q(line)}</p>)}
+        <a class="textlink" href={hub.authorityLink.href}>{hub.authorityLink.label} <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+      <Honours />
+    </div>
+  </section>
+
+  <EssayBand />
+
+  <section class="sec" aria-labelledby="content-heading">
+    <div class="bleed">
+      <SectionHead label={hub.markers.content} heading={hub.contentHeading} lead={about.reflectionBody} id="content-heading">
+        <a class="textlink" href={hub.contentLink.href}>{hub.contentLink.label} <span class="arrow" aria-hidden="true">→</span></a>
+      </SectionHead>
+    </div>
+  </section>
+
+  <section class="sec sec--band" aria-labelledby="close-heading">
+    <div class="bleed">
+      <SectionHead label={hub.markers.close} heading={contact.heading} lead={contact.line} id="close-heading">
+        <p><a class="btn" href={global.nav.cta.href}>{global.nav.cta.label}</a></p>
+      </SectionHead>
+    </div>
+  </section>
+</Base>
