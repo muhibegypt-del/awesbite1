@@ -426,7 +426,17 @@ em { font-style: italic; }
   [data-direction='b'] .hero__photo { grid-row: 1 / span 2; }
   [data-direction='b'] .hero__runhead { grid-column: col 1 / span 8; grid-row: 1; align-self: start; margin-block: 64px 16px; z-index: 1; color: var(--ink); font-size: var(--t-small); }
   [data-direction='b'] .hero__display { grid-column: col 1 / span 9; grid-row: 2; align-self: start; z-index: 1; }
-  [data-direction='b'] .hero__display em { color: var(--clay-ink); }
+  /* On the photograph the italic is set in ink: clay-ink on a mid-grey wall
+     falls under 3:1. The terracotta stays in the pencil line beneath it. */
+  [data-direction='b'] .hero__display em { color: var(--ink); }
+  /* The portrait's open wall is the left half of the frame. Size the line so
+     "Words aren't flat." (about 7.4em in Literata) always ends inside it,
+     measured from where the text actually starts, which moves inward once
+     the page is wider than --max. */
+  [data-direction='b'] .hero { --text-edge: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter))); }
+  [data-direction='b'] .hero__display { font-size: min(var(--t-display), calc((50vw - var(--text-edge)) / 7.4)); }
+  [data-direction='b'] .hero__runhead { max-width: calc(50vw - var(--text-edge) - 16px); }
+  [data-direction='b'] .hero__photo .graded { filter: url(#duotone-lift); }
   [data-direction='b'] .hero__copy { grid-row: 3; }
   [data-direction='b'] .hero__copy { grid-column: col 1 / -1; display: grid; grid-template-columns: subgrid; margin-block: 48px 0; align-items: end; }
   [data-direction='b'] .hero__h1 { grid-column: col 1 / span 7; }

@@ -37,7 +37,8 @@ public/fonts/                 self-hosted WOFF2 + OFL licences
 
 Agreed order: audit (done: `AUDIT.md`, `BRAND-AUDIT.md`) → choose a direction from the element collages at `/direction/a` and `/direction/b` → prepare only the code the build will touch → build the home page → roll out page by page with the system extracted as it goes → motion → QA.
 
-- The collages are internal, noindex and disallowed in `robots.txt`. Never link them. Delete `/direction`, `components/direction/`, `layouts/Direction.astro`, `styles/directions.css`, `content/directions.json` and the losing fonts once a direction is chosen.
+- **Chosen (client, September 2026): Direction B, Printed Matter, with Direction A's portrait (`aneesa-portrait.webp`) as the hub hero.** Literata + Instrument Sans, plum as the second key, the photographs graded into the palette.
+- The collages are internal, noindex and disallowed in `robots.txt`. Never link them. Keep `/direction/b` as the reference until the real home page is built in B, then delete `/direction`, `components/direction/`, `layouts/Direction.astro`, `styles/directions.css`, `content/directions.json` and the Newsreader and Hanken Grotesk files.
 - The typography rules below (Fraunces/Inter via Fontsource, JetBrains Mono for labels) describe the **live** site. The redesign drops the monospace and replaces the pair with the chosen direction's self-hosted serif and sans. Update these rules when the direction is chosen, not before.
 - Copy changes still need the client's approval. Typesetting (curly apostrophes, line breaks, case transforms) is not a copy change.
 

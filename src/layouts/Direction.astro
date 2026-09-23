@@ -24,6 +24,11 @@ const p = d.palette;
    colour to another is a two-point transfer per channel. */
 const channel = (hex: string, i: number) => (parseInt(hex.slice(1 + i * 2, 3 + i * 2), 16) / 255).toFixed(4);
 const duo = [0, 1, 2].map((i) => `${channel(p.duoShadow, i)} ${channel(p.duoLight, i)}`);
+/* A lifted variant for a photograph that carries type: the same two ends,
+   with the mid-tones pulled toward the paper so a mid-grey wall behind the
+   headline reads light enough for ink. Shadows and highlights are unchanged. */
+const mid = (i: number) => (Number(channel(p.duoShadow, i)) * 0.38 + Number(channel(p.duoLight, i)) * 0.62).toFixed(4);
+const duoLift = [0, 1, 2].map((i) => `${channel(p.duoShadow, i)} ${mid(i)} ${channel(p.duoLight, i)}`);
 
 const vars = [
   `--paper:${p.paper}`, `--band:${p.band}`, `--lift:${p.lift}`,
@@ -62,6 +67,14 @@ const fontFaces = `
           <feFuncR type="table" tableValues={duo[0]} />
           <feFuncG type="table" tableValues={duo[1]} />
           <feFuncB type="table" tableValues={duo[2]} />
+        </feComponentTransfer>
+      </filter>
+      <filter id="duotone-lift" color-interpolation-filters="sRGB">
+        <feColorMatrix type="saturate" values="0" />
+        <feComponentTransfer>
+          <feFuncR type="table" tableValues={duoLift[0]} />
+          <feFuncG type="table" tableValues={duoLift[1]} />
+          <feFuncB type="table" tableValues={duoLift[2]} />
         </feComponentTransfer>
       </filter>
       {/* Roughens a stroke so it reads as graphite rather than a vector line. */}
