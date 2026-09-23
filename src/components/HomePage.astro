@@ -56,7 +56,7 @@ const repurposing = site.services.find((service) => service.id === 'repurposing'
 
   <section class="section band" aria-labelledby="pillars-heading">
     <div class="container editorial">
-      <SectionMarker label="Services" class="editorial-aside" />
+      <SectionMarker label={hub.markers.pillars} class="editorial-aside" />
       <div class="editorial-full stack">
         <h2 id="pillars-heading">{hub.pillarsHeading}</h2>
         <p class="t-lead">{hub.pillarsLine}</p>
@@ -67,7 +67,7 @@ const repurposing = site.services.find((service) => service.id === 'repurposing'
 
   <section class="section" aria-labelledby="authority-heading">
     <div class="container editorial">
-      <SectionMarker label="About Aneesa" class="editorial-aside" />
+      <SectionMarker label={hub.markers.authority} class="editorial-aside" />
       <div class="editorial-full split">
         <div class="frame frame--portrait">
           <img src={about.portrait} alt={about.portraitAlt} width="2200" height="1466" loading="lazy" decoding="async" />
@@ -89,12 +89,12 @@ const repurposing = site.services.find((service) => service.id === 'repurposing'
 
   <section class="section band" aria-labelledby="meaning-heading">
     <div class="container editorial">
-      <SectionMarker label="The name" class="editorial-aside" />
+      <SectionMarker label={hub.markers.name} class="editorial-aside" />
       <div class="editorial-full meaning-layout">
-        <h2 id="meaning-heading">Words aren't flat.<br />They're <em>textured.</em></h2>
+        <h2 id="meaning-heading">{hub.name.line}<br />{hub.name.lead} <em>{hub.name.emphasis}</em></h2>
         <div class="stack">
-          <p class="t-lead">“Texture” was the word I kept coming back to. We already know how the texture of a fabric or a dish changes the way it makes us feel — yet we rarely talk about words that way, even though the right word, in the right place, lands differently on everyone who hears it.</p>
-          <p class="t-body">a textured word exists to help people learn, shape and voice language with intention — because words aren't flat, they're textured.</p>
+          <p class="t-lead">{hub.name.lede}</p>
+          <p class="t-body">{hub.name.mission}</p>
         </div>
       </div>
       <figure
@@ -115,18 +115,18 @@ const repurposing = site.services.find((service) => service.id === 'repurposing'
 
   <section class="section" aria-labelledby="content-heading">
     <div class="container editorial">
-      <SectionMarker label="Content" class="editorial-aside" />
+      <SectionMarker label={hub.markers.content} class="editorial-aside" />
       <div class="editorial-full stack">
-        <h2 id="content-heading">Notes on books and language</h2>
+        <h2 id="content-heading">{hub.contentHeading}</h2>
         <p class="t-lead">{about.reflectionBody}</p>
-        <a class="link-rule" href="/content">Explore the literary ecosystem <span aria-hidden="true">→</span></a>
+        <a class="link-rule" href={hub.contentLink.href}>{hub.contentLink.label} <span aria-hidden="true">→</span></a>
       </div>
     </div>
   </section>
 
   <section class="section band" aria-labelledby="hub-close">
     <div class="container editorial">
-      <SectionMarker label="Next step" class="editorial-aside" />
+      <SectionMarker label={hub.markers.close} class="editorial-aside" />
       <div class="editorial-full stack">
         <h2 id="hub-close">{site.contact.heading}</h2>
         <p class="t-lead">{site.contact.line}</p>

@@ -19,18 +19,13 @@ interface Props {
 const { current = '', full = false } = Astro.props;
 const order = ['teaching', 'repurposing', 'narration'];
 const services = [...site.services].sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
-const treatments: Record<string, {tag: string; title: string; line: string}> = {
-  teaching: { tag: 'TEACH', title: 'learn the words.', line: 'Teaching — KS3, GCSE, International GCSE, A-Level, International A-Level, ESL & IELTS' },
-  repurposing: { tag: 'REPURPOSE', title: 'shape the words.', line: 'Content repurposing' },
-  narration: { tag: 'NARRATE', title: 'bring the words to life.', line: 'Voiceover & narration' },
-};
 ---
 
 <ul class={`pillars columns columns--aligned ${full ? 'pillars--full' : ''}`} role="list">
   {
     services.map((service) => {
       const isCurrent = service.route === current;
-      const treatment = treatments[service.id];
+      const treatment = service.pillarCard;
       const label = `${treatment.title} ${treatment.line}`;
       return (
         <li class={`pillar${full ? ' card' : ''}`}>
@@ -40,7 +35,7 @@ const treatments: Record<string, {tag: string; title: string; line: string}> = {
               <p class="pillar__name">{treatment.title}</p>
               <p class="pillar__plain">{treatment.line}</p>
               {full && <p class="pillar__line">{service.oneLiner}</p>}
-              <p class="pillar__state">You are here</p>
+              <p class="pillar__state">{site.hub.pillarsCurrent}</p>
             </div>
           ) : (
             <a class="pillar__inner" href={service.route} aria-label={label}>

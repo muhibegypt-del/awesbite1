@@ -11,12 +11,34 @@
     "sub": "Thoughtful, professional support for students, authors and creators.",
     "pillarsHeading": "Three ways to work with me",
     "pillarsLine": "Each service begins with careful attention—to the student, the text or the voice behind the idea.",
+    "pillarsCurrent": "You are here",
     "authorityHeading": "Aneesa",
     "authorityParagraphs": [
       "I am an English teacher, voice artist and writer with 12 years of classroom experience across four countries. My work is grounded in listening closely, identifying what is needed and responding with care.",
       "Before teaching, I acted, performed spoken word and read novels aloud in a care home. Each experience taught me something about language, interpretation and connecting with an audience."
     ],
-    "authorityLink": { "label": "More about Aneesa", "href": "/about" }
+    "authorityLink": { "label": "More about Aneesa", "href": "/about" },
+
+    "_comment_markers": "Gutter labels for the hub sections. Moved verbatim from HomePage.astro.",
+    "markers": {
+      "pillars": "Services",
+      "authority": "About Aneesa",
+      "name": "The name",
+      "content": "Content",
+      "close": "Next step"
+    },
+
+    "_comment_name": "The brand line and the section that explains it. Moved verbatim from HomePage.astro; `emphasis` is the italic word.",
+    "name": {
+      "line": "Words aren't flat.",
+      "lead": "They're",
+      "emphasis": "textured.",
+      "lede": "“Texture” was the word I kept coming back to. We already know how the texture of a fabric or a dish changes the way it makes us feel — yet we rarely talk about words that way, even though the right word, in the right place, lands differently on everyone who hears it.",
+      "mission": "a textured word exists to help people learn, shape and voice language with intention — because words aren't flat, they're textured."
+    },
+
+    "contentHeading": "Notes on books and language",
+    "contentLink": { "label": "Explore the literary ecosystem", "href": "/content" }
   },
 
   "credentials": [
@@ -29,6 +51,8 @@
   "services": [
     {
       "id": "teaching",
+      "_comment_pillar": "Service card treatment on the hub and on every spoke. Moved verbatim from PillarCards.astro.",
+      "pillarCard": { "tag": "TEACH", "title": "learn the words.", "line": "Teaching — KS3, GCSE, International GCSE, A-Level, International A-Level, ESL & IELTS" },
       "route": "/teaching",
       "number": "01",
       "tag": "TEACH",
@@ -110,6 +134,8 @@
 
     {
       "id": "narration",
+      "_comment_pillar": "Service card treatment on the hub and on every spoke. Moved verbatim from PillarCards.astro.",
+      "pillarCard": { "tag": "NARRATE", "title": "bring the words to life.", "line": "Voiceover & narration" },
       "route": "/narration",
       "number": "03",
       "tag": "NARRATE",
@@ -202,6 +228,8 @@
 
     {
       "id": "repurposing",
+      "_comment_pillar": "Service card treatment on the hub and on every spoke. Moved verbatim from PillarCards.astro.",
+      "pillarCard": { "tag": "REPURPOSE", "title": "shape the words.", "line": "Content repurposing" },
       "route": "/repurposing",
       "number": "02",
       "tag": "REPURPOSE",
