@@ -1,202 +1,58 @@
 ---
 /**
- * The enquiry form. One source, used by /contact.
- *
- * The topic can be pre-selected from the query string, so a producer arriving
- * from /narration does not have to notice a dropdown. Previously the first
- * option was pre-selected with a real value, which meant `required` could
- * never fire and every untouched submission filed as "English tuition".
+ * The enquiry form. It builds a ready-to-send email (there is no form
+ * service on this host). The topic can be pre-selected from ?about=, so a
+ * producer arriving from /narration does not have to notice a dropdown.
+ * Errors are persistent and tied to their field, not a vanishing bubble.
  */
-import Button from './Button.astro';
 import site from '../content/site.json';
 import global from '../content/global.json';
 
 const { contact } = site;
-const requested = Astro.url.searchParams.get('about') ?? '';
-const preselected = contact.topics.includes(requested) ? requested : '';
 ---
 
-<form
-  class="form"
-  name="enquiry"
-  method="GET"
-  action={`mailto:${global.contact.email}`}
-  enctype="text/plain"
-  data-email={global.contact.email}
-  data-astro-reload
-  novalidate
->
-  <p class="form__note">{contact.optionalNote}</p>
+<form class="form" name="enquiry" method="GET" action={`mailto:${global.contact.email}`} enctype="text/plain" data-email={global.contact.email} novalidate>
+  <p class="small muted">{contact.optionalNote}</p>
 
   <div class="form__row">
-    <label class="form__field">
-      <span class="form__label">{contact.fields.name}</span>
-      <input
-        type="text"
-        name="name"
-        autocomplete="name"
-        required
-        aria-describedby="err-name"
-        data-error-missing={contact.errors.name}
-      />
-      <span class="form__error" id="err-name" role="alert"></span>
-    </label>
-
-    <label class="form__field">
-      <span class="form__label">{contact.fields.email}</span>
-      <input
-        type="email"
-        name="email"
-        autocomplete="email"
-        required
-        aria-describedby="err-email"
-        data-error-missing={contact.errors.email}
-        data-error-format={contact.errors.emailFormat}
-      />
-      <span class="form__error" id="err-email" role="alert"></span>
-    </label>
+    <div class="field">
+      <label class="field__label" for="f-name">{contact.fields.name}</label>
+      <input id="f-name" type="text" name="name" autocomplete="name" required aria-describedby="err-name" data-error-missing={contact.errors.name} />
+      <span class="field__error" id="err-name" role="alert"></span>
+    </div>
+    <div class="field">
+      <label class="field__label" for="f-email">{contact.fields.email}</label>
+      <input id="f-email" type="email" name="email" autocomplete="email" required aria-describedby="err-email" data-error-missing={contact.errors.email} data-error-format={contact.errors.emailFormat} />
+      <span class="field__error" id="err-email" role="alert"></span>
+    </div>
   </div>
 
   <div class="form__row">
-    <label class="form__field">
-      <span class="form__label">{contact.fields.topic}</span>
-      <select name="topic" required aria-describedby="err-topic" data-error-missing={contact.errors.topic}>
+    <div class="field">
+      <label class="field__label" for="f-topic">{contact.fields.topic}</label>
+      <select id="f-topic" name="topic" required aria-describedby="err-topic" data-error-missing={contact.errors.topic}>
         <option value="">{contact.topicPlaceholder}</option>
-        {
-          contact.topics.map((topic) => (
-            <option value={topic} selected={topic === preselected}>{topic}</option>
-          ))
-        }
+        {contact.topics.map((topic) => <option value={topic}>{topic}</option>)}
       </select>
-      <span class="form__error" id="err-topic" role="alert"></span>
-    </label>
-
-    <label class="form__field">
-      <span class="form__label">{contact.fields.deadline}</span>
-      <input type="text" name="deadline" />
-    </label>
+      <span class="field__error" id="err-topic" role="alert"></span>
+    </div>
+    <div class="field">
+      <label class="field__label" for="f-deadline">{contact.fields.deadline}</label>
+      <input id="f-deadline" type="text" name="deadline" />
+    </div>
   </div>
 
-  <label class="form__field">
-    <span class="form__label">{contact.fields.message}</span>
-    <textarea
-      name="message"
-      rows="5"
-      placeholder={contact.placeholder}
-      required
-      aria-describedby="err-message"
-      data-error-missing={contact.errors.message}></textarea>
-    <span class="form__error" id="err-message" role="alert"></span>
-  </label>
+  <div class="field">
+    <label class="field__label" for="f-message">{contact.fields.message}</label>
+    <textarea id="f-message" name="message" rows="5" placeholder={contact.placeholder} required aria-describedby="err-message" data-error-missing={contact.errors.message}></textarea>
+    <span class="field__error" id="err-message" role="alert"></span>
+  </div>
 
   <div class="form__actions">
-    <Button variant="primary" type="submit" data-submit data-sending={contact.submitting}>
-      {contact.submit}
-    </Button>
-    <p class="form__response">{contact.response}</p>
+    <button class="btn" type="submit" data-submit data-sending={contact.submitting}><span class="btn__label">{contact.submit}</span></button>
+    <p class="small muted">{contact.response}</p>
   </div>
 </form>
-
-<style>
-  .form {
-    display: grid;
-    gap: var(--s-5);
-    width: 100%;
-    max-inline-size: var(--measure);
-  }
-
-  .form__note,
-  .form__response {
-    margin: 0;
-    font-family: var(--font-mono);
-    font-size: var(--t-mono);
-    letter-spacing: var(--track-mono);
-    text-transform: uppercase;
-    color: var(--ink-soft);
-  }
-
-  .form__row {
-    display: grid;
-    gap: var(--s-5);
-  }
-
-  @media (min-width: 768px) {
-    .form__row {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  .form__field {
-    display: grid;
-    gap: var(--s-2);
-  }
-
-  /* Mono is permitted on form labels. Brief §3.4, item 4. */
-  .form__label {
-    font-family: var(--font-mono);
-    font-size: var(--t-mono);
-    letter-spacing: var(--track-mono);
-    text-transform: uppercase;
-    color: var(--ink-soft);
-  }
-
-  .form input,
-  .form select,
-  .form textarea {
-    width: 100%;
-    min-height: 44px;
-    padding: var(--s-3) var(--s-4);
-    font-size: var(--t-body);
-    line-height: 1.5;
-    letter-spacing: var(--track-body);
-    color: var(--ink);
-    background: var(--paper-lift);
-    border: var(--border);
-    border-radius: var(--radius-sm);
-    transition: border-color var(--dur-fast) var(--ease);
-  }
-
-  .form textarea {
-    resize: vertical;
-  }
-
-  .form input:hover,
-  .form select:hover,
-  .form textarea:hover {
-    border-color: var(--clay);
-  }
-
-  .form [aria-invalid='true'] {
-    border-color: var(--clay-ink);
-  }
-
-  .form ::placeholder {
-    color: var(--ink-soft);
-    opacity: 1;
-  }
-
-  /* Persistent and associated, rather than a validation bubble that vanishes
-     on the next keystroke and is announced inconsistently or not at all. */
-  .form__error {
-    font-family: var(--font-mono);
-    font-size: var(--t-mono);
-    letter-spacing: var(--track-mono);
-    margin-inline-end: calc(var(--track-mono) * -1);
-    line-height: 1.5;
-    color: var(--clay-ink);
-  }
-
-  .form__error:empty {
-    display: none;
-  }
-
-  .form__actions {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: var(--s-5);
-  }
-</style>
 
 <script>
   function initialiseEnquiryForm() {
@@ -270,5 +126,4 @@ const preselected = contact.topics.includes(requested) ? requested : '';
     });
   }
   initialiseEnquiryForm();
-  document.addEventListener('astro:page-load', initialiseEnquiryForm);
 </script>

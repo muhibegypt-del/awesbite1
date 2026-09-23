@@ -1,0 +1,18 @@
+---
+/** The content section's own contents line, under the header. */
+import pages from '../content/pages.json';
+
+const here = Astro.url.pathname.replace(/\/+$/, '');
+const { navHome, navLabel, nav } = pages.content;
+const links = [{ label: navHome, href: '/content' }, ...nav];
+---
+
+<nav class="subnav" aria-label={navLabel}>
+  <div class="bleed">
+    <ul role="list">
+      {links.map((link) => (
+        <li><a href={link.href} aria-current={here === link.href ? 'page' : undefined}>{link.label}</a></li>
+      ))}
+    </ul>
+  </div>
+</nav>

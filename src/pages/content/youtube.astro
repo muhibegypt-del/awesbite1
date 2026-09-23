@@ -1,14 +1,23 @@
 ---
-import ContentLayout from '../../components/ContentLayout.astro';
+import Content from '../../layouts/Content.astro';
+import Masthead from '../../components/Masthead.astro';
+import { q } from '../../lib/typeset.js';
+import pages from '../../content/pages.json';
 import links from '../../content/content-links.json';
+import global from '../../content/global.json';
+
+const p = pages.youtube;
+const url = links.youtube;
 ---
-<ContentLayout title="YouTube" description="Long-form breakdowns of novels, plays and poems from a textured word.">
-  <section class="page-hero"><div class="container stack">
-    <h1>YouTube</h1>
-    <p class="t-lead">Long-form breakdowns of novels, plays and poems — with time to explore the language, context and choices behind a story.</p>
-    {links.youtube
-      ? <a class="link-rule" href={links.youtube} target="_blank" rel="noopener noreferrer">Watch on YouTube<span class="visually-hidden"> (opens in a new tab)</span></a>
-      : <p class="t-body">Videos and the channel link will be added here when ready.</p>}
-    <a class="link-rule" href="/content">Back to Content</a>
-  </div></section>
-</ContentLayout>
+
+<Content page="youtube">
+  <Masthead title={p.heading}>
+    <Fragment slot="below">
+      <p class="lead">{q(p.lede)}</p>
+      {url
+        ? <a class="textlink" href={url} target="_blank" rel="noopener noreferrer">{p.linkLabel}<span class="visually-hidden">{global.newTab}</span></a>
+        : <p class="pending-quote">{p.pending}</p>}
+      <a class="textlink" href="/content">{pages.content.backLink}</a>
+    </Fragment>
+  </Masthead>
+</Content>

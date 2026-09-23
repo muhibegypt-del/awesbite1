@@ -1,13 +1,20 @@
 ---
-import ContentLayout from '../../components/ContentLayout.astro';
+import Content from '../../layouts/Content.astro';
+import Masthead from '../../components/Masthead.astro';
+import { q } from '../../lib/typeset.js';
 import site from '../../content/site.json';
+import pages from '../../content/pages.json';
 import global from '../../content/global.json';
+
+const p = pages.collaborations;
 ---
-<ContentLayout title="Collaborations" description="Enquiries for literary conversations, panel moderation, author interviews and events.">
-  <section class="page-hero"><div class="container stack">
-    <h1>Collaborations</h1>
-    <p class="t-lead">Open to conversations and projects that bring books, language and people together.</p>
-    <ul class="list-dash" role="list">{site.about.openTo.map((item) => <li>{item}</li>)}</ul>
-    <a class="link-rule" href={`mailto:${global.contact.email}`}>Enquire about a collaboration</a>
-  </div></section>
-</ContentLayout>
+
+<Content page="collaborations">
+  <Masthead title={p.heading}>
+    <Fragment slot="below">
+      <p class="lead">{q(p.lede)}</p>
+      <ul class="dash-list" role="list">{site.about.openTo.map((item) => <li>{q(item)}</li>)}</ul>
+      <a class="textlink" href={`mailto:${global.contact.email}`}>{p.linkLabel}</a>
+    </Fragment>
+  </Masthead>
+</Content>

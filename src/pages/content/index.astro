@@ -1,52 +1,50 @@
 ---
-import ContentLayout from '../../components/ContentLayout.astro';
-import SectionMarker from '../../components/SectionMarker.astro';
-import Tag from '../../components/Tag.astro';
-import LibraryStrip from '../../components/LibraryStrip.astro';
+import Content from '../../layouts/Content.astro';
+import Masthead from '../../components/Masthead.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import { q } from '../../lib/typeset.js';
 import site from '../../content/site.json';
-const routes = [
-  { title: 'Intro', body: 'Why I started this literary ecosystem, and who it is for.', href: '/content/introduction' },
-  { title: 'Substack', body: 'A home for reading notes and reflections. Publication link to follow.', href: '/content/substack' },
-  { title: 'YouTube', body: 'Long-form breakdowns of novels, plays and poems.', href: '/content/youtube' },
-  { title: 'Socials', body: 'Words, extracts and takeaways for everyday reading.', href: '/content/socials' },
-  { title: 'Collaborations', body: 'Conversations and events that connect books, language and people.', href: '/content/collaborations' },
-];
+import pages from '../../content/pages.json';
+import links from '../../content/content-links.json';
+import global from '../../content/global.json';
+
+const c = pages.content;
 ---
-<ContentLayout title="Content" description="A literary ecosystem: reading notes, close analysis, narrated extracts and conversations about books and language.">
-  <section class="page-hero">
-    <div class="container editorial">
-      <SectionMarker label="Content" class="editorial-aside" />
-      <div class="editorial-full stack">
-        <h1>A literary ecosystem</h1>
-        <p class="t-lead">{site.about.reflectionBody}</p>
-        <ul class="tag-row" role="list">{site.about.reflectionTags.map((tag) => <li><Tag>{tag}</Tag></li>)}</ul>
-        <a class="link-rule" href="/content/introduction">Why I started it <span aria-hidden="true">→</span></a>
-      </div>
+
+<Content page="content">
+  <Masthead runhead={c.marker} title={c.heading}>
+    <Fragment slot="below">
+      <p class="lead">{q(site.about.reflectionBody)}</p>
+      <ul class="tagline" role="list">{site.about.reflectionTags.map((tag) => <li>{tag}</li>)}</ul>
+      <a class="textlink" href={c.introLink.href}>{c.introLink.label} <span class="arrow" aria-hidden="true">→</span></a>
+    </Fragment>
+  </Masthead>
+
+  <section class="sec sec--band" aria-labelledby="explore-heading">
+    <div class="bleed">
+      <SectionHead label={c.exploreMarker} heading={c.exploreHeading} id="explore-heading" />
+      <ol class="contents routes" role="list">
+        {c.routes.map((route) => (
+          <li class="entry reveal">
+            <h3 class="entry__title"><a href={route.href}>{route.title}</a></h3>
+            <p class="entry__one">{q(route.body)}</p>
+            <p class="entry__who">{c.routeCue.replace(' →', '')} <span class="arrow" aria-hidden="true">→</span></p>
+          </li>
+        ))}
+      </ol>
     </div>
   </section>
-  <section class="section band" aria-labelledby="explore-heading">
-    <div class="container editorial">
-      <SectionMarker label="Explore" class="editorial-aside" />
-      <div class="editorial-full stack">
-        <h2 id="explore-heading">Meet words where you are</h2>
-        <ul class="content-grid" role="list">
-          {routes.map((route) => <li class="card"><a href={route.href}>
-            <h3>{route.title}</h3><p>{route.body}</p><span aria-hidden="true">Explore →</span>
-          </a></li>)}
-        </ul>
-      </div>
+
+  <section class="sec sec--minor" aria-labelledby="library-heading">
+    <div class="bleed">
+      <SectionHead label={c.libraryHeading} labelAs="h2" id="library-heading" />
+      <ul class="library col-text" role="list">
+        {links.library.map((link) => (
+          <li>{link.url
+            ? <a class="textlink" href={link.url} target="_blank" rel="noopener noreferrer">{link.label}<span class="visually-hidden">{global.newTab}</span></a>
+            : <>{link.label}<small>{c.libraryPending}</small></>}</li>
+        ))}
+      </ul>
     </div>
   </section>
-  <LibraryStrip />
-</ContentLayout>
-<style>
-  .tag-row { display: flex; flex-wrap: wrap; gap: var(--s-2); }
-  .content-grid { display: grid; gap: var(--s-4); width: 100%; }
-  .content-grid li { min-width: 0; }
-  /* The box and its hover belong to the shared .card primitive; a route card
-     only adds its own internal rhythm. */
-  .content-grid a { display: grid; grid-template-rows: auto 1fr auto; gap: var(--s-3); height: 100%; padding: var(--s-6) var(--s-5) var(--s-5); text-decoration: none; color: var(--ink); }
-  .content-grid p { font-size: var(--t-body); line-height: var(--lh-lead); letter-spacing: var(--track-body); color: var(--ink-soft); }
-  .content-grid span { align-self: end; margin-block-start: var(--s-3); padding-block-start: var(--s-4); border-top: var(--border); font-family: var(--font-mono); font-size: var(--t-mono); letter-spacing: var(--track-mono); text-transform: uppercase; color: var(--clay-ink); }
-  @media (min-width: 768px) { .content-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-</style>
+</Content>

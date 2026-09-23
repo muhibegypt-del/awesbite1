@@ -1,63 +1,53 @@
 ---
 import Base from '../layouts/Base.astro';
-import SectionMarker from '../components/SectionMarker.astro';
+import Masthead from '../components/Masthead.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Honours from '../components/Honours.astro';
+import Photo from '../components/Photo.astro';
+import { q } from '../lib/typeset.js';
 import site from '../content/site.json';
-const { about, credentials } = site;
+import pages from '../content/pages.json';
+
+const { about } = site;
+const labels = pages.about;
 ---
-<Base title="About Aneesa" description="English teacher, voice artist and writer with 12 years of classroom experience across England, Egypt, Saudi and Qatar.">
-  <section class="page-hero">
-    <div class="container editorial">
-      <SectionMarker label="About" class="editorial-aside" />
-      <div class="editorial-full split">
-        <div class="frame frame--portrait">
-          <img src={about.portrait} alt={about.portraitAlt} width="2200" height="1466"
-            loading="eager" fetchpriority="high" decoding="async" />
-        </div>
-        <div class="stack">
-          <h1>{about.heading}</h1>
-          <p class="t-lead">{about.empathy}</p>
-          {about.paragraphs.map((line) => <p class="t-body">{line}</p>)}
-        </div>
+
+<Base title={pages.meta.about.title} description={pages.meta.about.description}>
+  <Masthead runhead={labels.marker} title={about.heading}>
+    <p slot="below" class="lead">{q(about.empathy)}</p>
+  </Masthead>
+
+  <section class="sec" aria-label={about.heading}>
+    <div class="bleed about">
+      {/* The anthology portrait, cropped close and upright: Narration shows
+          the same frame whole and wide, so the two read as different. */}
+      <div class="about__photo reveal">
+        <Photo src={about.portrait} alt={about.portraitAlt} sizes="(min-width: 1024px) 40vw, 100vw" />
       </div>
-      <ul class="credentials editorial-full" role="list">
-        {credentials.map((c) => <li class="credentials__item">
-          <span class="credentials__qualification">{c.qualification}</span>
-          <span class="credentials__body">{c.body}</span>
-        </li>)}
-      </ul>
+      <div class="about__text prose reveal">
+        {about.paragraphs.map((line) => <p>{q(line)}</p>)}
+      </div>
+      <Honours />
     </div>
   </section>
-  <section class="section band" aria-labelledby="experience-heading">
-    <div class="container editorial">
-      <SectionMarker as="h2" id="experience-heading" label="Experience" class="editorial-aside" />
-      <div class="stack panel">
-        <p class="t-lead">{about.authority}</p>
-        <p class="t-body">{about.teachingBodies}</p>
-        <h3>{about.whyHeading}</h3>
-        {about.why.map((line) => <p class="t-body">{line}</p>)}
-        <a class="link-rule" href="/teaching">Explore teaching <span aria-hidden="true">→</span></a>
+
+  <section class="sec sec--band" aria-labelledby="experience-heading">
+    <div class="bleed">
+      <SectionHead label={labels.experienceMarker} labelAs="h2" lead={about.authority} id="experience-heading" />
+      <div class="prose col-text reveal">
+        <p>{q(about.teachingBodies)}</p>
+        <h3 class="h3 space-5">{about.whyHeading}</h3>
+        {about.why.map((line) => <p>{q(line)}</p>)}
+        <a class="textlink" href={labels.teachingLink.href}>{labels.teachingLink.label} <span class="arrow" aria-hidden="true">→</span></a>
       </div>
     </div>
   </section>
-  <section class="section">
-    <div class="container editorial">
-      <SectionMarker label="Beyond client work" class="editorial-aside" />
-      <div class="stack panel">
-        <h2>Books, language and community</h2>
-        <p class="t-lead">{about.reflectionBody}</p>
-        <a class="link-rule" href="/content">Explore Content <span aria-hidden="true">→</span></a>
-      </div>
+
+  <section class="sec" aria-labelledby="beyond-heading">
+    <div class="bleed">
+      <SectionHead label={labels.beyondMarker} heading={labels.beyondHeading} lead={about.reflectionBody} id="beyond-heading">
+        <a class="textlink" href={labels.contentLink.href}>{labels.contentLink.label} <span class="arrow" aria-hidden="true">→</span></a>
+      </SectionHead>
     </div>
   </section>
 </Base>
-
-<style>
-  /* Both passages used to be tinted rectangles with a 3px clay bar down one
-     edge, which read as a system alert rather than a sidebar. They now use
-     the shared .panel rule-and-mark in global.css; the only thing left to say
-     here is that a heading inside one sits on the mono ladder, not the
-     display one, so it does not compete with the section it belongs to. */
-  .panel h3 {
-    margin-block-start: var(--s-2);
-  }
-</style>
