@@ -846,8 +846,8 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
   opacity: 0;
   transform: translateY(var(--reveal-rise));
   transition:
-    opacity var(--reveal) var(--ease-out) calc(var(--i, 0) * var(--reveal-step)),
-    transform var(--reveal) var(--ease-out) calc(var(--i, 0) * var(--reveal-step));
+    opacity var(--reveal) var(--ease-reveal) calc(var(--i, 0) * var(--reveal-step)),
+    transform var(--reveal) var(--ease-reveal) calc(var(--i, 0) * var(--reveal-step));
 }
 .reveal-pending.is-in { opacity: 1; transform: none; }
 
@@ -869,6 +869,8 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
     transition-property: opacity, color, background-color, border-color, text-decoration-color !important;
     transition-duration: 120ms !important;
   }
+  /* Reveals stay a visible fade, with no movement (the rise token is 0). */
+  .reveal-pending { transition-duration: var(--reveal) !important; }
   ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
 }
 

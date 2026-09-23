@@ -140,7 +140,7 @@ const duoLift = [0, 1, 2].map((i) => {
      Only an element that is below the fold when the page loads is ever
      hidden, so nothing a reader can already see waits on animation, and if
      this never runs the page is simply whole. Siblings step in one after
-     another. Under reduced motion the tokens make this a short fade with
+     another. Under reduced motion the tokens make this a plain fade with
      no movement. */
   try {
     if ('IntersectionObserver' in window) {
@@ -161,8 +161,15 @@ const duoLift = [0, 1, 2].map((i) => {
           entry.target.classList.add('is-in');
           observer.unobserve(entry.target);
         }
-      }, { threshold: 0.12 });
+      }, { rootMargin: '0px 0px -12% 0px' });   // once it is a little way up the screen, where the eye is
       pending.forEach((el) => observer.observe(el));
+      // A block that can never scroll that far up still arrives at the bottom of the page.
+      const atEnd = () => {
+        if (window.innerHeight + window.scrollY < document.documentElement.scrollHeight - 2) return;
+        document.querySelectorAll('.reveal-pending:not(.is-in)').forEach((el) => el.classList.add('is-in'));
+        window.removeEventListener('scroll', atEnd);
+      };
+      if (pending.length) window.addEventListener('scroll', atEnd, { passive: true });
     }
   } catch {
     document.querySelectorAll('.reveal-pending').forEach((el) => el.classList.add('is-in'));

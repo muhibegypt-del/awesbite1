@@ -67,7 +67,7 @@ The earlier complaint was "no fade-in". There were three causes:
 
 All three are fixed.
 
-- **Scroll reveals:** a 640ms fade with a 16px rise, staggered 60ms within a group. They apply only to blocks that start below the fold, so nothing on first screen ever waits to appear. With reduced motion they become a 120ms fade with no movement.
+- **Scroll reveals:** a 900ms fade with a 32px rise on a long, soft ease, staggered 90ms within a group, triggered once a block is about 12% up the screen rather than at the bottom edge, so it happens where the reader is looking. They apply only to blocks that start below the fold, so nothing on first screen ever waits to appear. With reduced motion they become a 400ms fade with no movement.
 - **The wordmark "inks in"** once per visit (a left-to-right wipe), and the pencil line under *textured* draws itself on the hub.
 - **Cross-document view transitions** give a soft cross-fade between pages in browsers that support them. No router script is needed.
 - **If JavaScript fails, nothing is hidden.** This was tested with JavaScript off: all 31 reveal blocks visible, and the phone menu opens (it is a `<details>` element).

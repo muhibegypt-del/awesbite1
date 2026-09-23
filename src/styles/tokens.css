@@ -86,10 +86,11 @@
 
   /* ---- Motion ---- */
   --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);   /* long, soft landing */
   --fast:     180ms;
-  --reveal:   640ms;
-  --reveal-step: 60ms;
-  --reveal-rise: var(--s-4);
+  --reveal:   900ms;
+  --reveal-step: 90ms;
+  --reveal-rise: var(--s-6);
 
   /* ---- Texture ---- */
   --grain: 0.085;
@@ -104,5 +105,5 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  :root { --reveal: 120ms; --reveal-step: 0ms; --reveal-rise: 0px; }
+  :root { --reveal: 400ms; --reveal-step: 0ms; --reveal-rise: 0px; }   /* a fade, no movement */
 }

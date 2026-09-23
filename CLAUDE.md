@@ -63,7 +63,7 @@ Copy changes still need the client's approval. Typesetting (curly apostrophes vi
 ## Motion
 
 Only: the wordmark inking in (once per session, `sessionStorage` key `atw-inked`), the pencil line under *textured*, scroll reveals (`.reveal`; below the fold only, never the hero), hover states, menu open/close, cross-document view transitions. No parallax, no counters, no autoplay carousels.
-Every animation has a `prefers-reduced-motion: reduce` path (reveals become a 120ms fade with no movement). Transition specific properties, never `all`. If the script never runs, nothing is hidden.
+Every animation has a `prefers-reduced-motion: reduce` path (reveals become a 400ms fade with no movement). Transition specific properties, never `all`. If the script never runs, nothing is hidden.
 
 ## Accessibility
 
