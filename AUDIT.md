@@ -279,6 +279,21 @@ At 390 and 1440: 12, 15, 17, 18, 20, 21, 24, 28, 36, 40, 44, 62.4, 64 px, plus s
 4. **The type system is generic at text size.** Inter is capable but anonymous. A non-loaded mono means the most brand-specific voice (labels) is a system fallback.
 5. **The rhythm is uniform.** Identical section shells at identical spacing make long pages feel like a document rather than a composed sequence, and the placeholder sections (audio pending, testimonials pending) get full-weight treatment.
 
+### 3.11 The hub hero, looked at as a design director
+
+At 1440, the first thing anyone sees:
+
+- **The headline is a service list, not an idea.** "English teaching, content repurposing and narration, delivered with care." is an SEO descriptor set as a masthead. It breaks into **five ragged lines** at 62px/400. It's tall without being big: too heavy to whisper and too small to command. The brand's real idea, *"Words aren't flat. They're textured."*, is buried in the fourth section.
+- **Two serif voices fight at the top.** The italic eyebrow (the tagline, which the footer repeats word for word) sits on a rule directly above a roman display headline. There are four type voices in the first 300px: italic serif, display serif, grey sans lead, and lowercase sans nav.
+- **Nothing aligns.**
+  - The wordmark starts at x=206 and the headline at x=369.
+  - The photo's top lines up with the eyebrow, but its bottom (y=615) lines up with nothing; the sub-line ends at y=665.
+  - The copy block is vertically centred against a top-aligned photo.
+  - The two empty gutter columns on the left have no marker, so the composition looks shunted right rather than offset on purpose.
+- **The photograph is presented timidly.** It's a 339×423 crop of a 3:2 landscape, shown at about a quarter of the viewport, black and white and slightly soft, with a hairline frame 8px inside its own edge. A frame inside a frame is a placeholder idiom; it reads as "image goes here", not as a portrait.
+- **The hero's bottom edge is a mistake.** The hero ends at y=766 and the next band starts as a **blank pink stripe** at the fold, with no content in it. It looks like a rendering error rather than an invitation to scroll.
+- **There's no action in the hero.** The only CTA above the fold is the outlined header button. The page's one primary button is 3,000px down.
+
 ---
 
 ## 4. Typography
@@ -292,6 +307,9 @@ At 390 and 1440: 12, 15, 17, 18, 20, 21, 24, 28, 36, 40, 44, 62.4, 64 px, plus s
 | **Scale consistency** | Fluid `clamp()`s with no shared ratio. Two tokens are within 1.6px of each other (`--t-h1` / `--t-display`). `--t-hero` is unused. |
 | **Wrapping** | `text-wrap: balance` is on h1–h3 and `.t-*` display, and `pretty` is on `p`. It's already in place. `max-inline-size: 20ch` on every h2 is aggressive: "Words aren't flat. They're textured." is forced to 15ch. |
 | **Kerning / features** | Kerning, ligatures and optical sizing are set once on `body`. Good. |
+| **Too many voices** | The hub renders **nine distinct text styles** before the first section ends: italic-serif eyebrow, serif display H1, grey sans lead, lowercase sans nav, sans button, uppercase-mono marker, serif H2, italic-serif small (pillar sub-line) and uppercase-mono exit line. That's 3 families × 2 styles × 3 case systems (lowercase nav and card titles, sentence case headings, uppercase mono). A premium editorial system usually needs 5–6. |
+| **Weights chosen per component** | Fraunces 300 and 400 alternate with no rule: hub H1 400, spoke H1 300, H2 400, footer wordmark 300, card title 400, eyebrow 400 italic, pillar line 300 italic. Inter 400 and 500 alternate the same way. |
+| **Grey as hierarchy** | Hero sub-lines, pillar lines, row bodies and the footnote are all `--ink-soft`. Lead-size text in grey weakens exactly the lines meant to be read second. |
 | **Font loading** | Fontsource `@font-face` with `font-display: swap`. **No `<link rel="preload">`**, so fonts are discovered only after `Base.css` parses. **No fallback metric overrides** (`size-adjust`, `ascent-override`), so the swap from Georgia to Fraunces on a 5-line 62px headline can shift layout (measured CLS 0.02 on `/`: within budget, but that's the source). Fonts are **193 KB of the ~300 KB first load (64%)**: Inter latin 47 KB, Fraunces opsz 66 KB, Fraunces opsz italic 80 KB. Fontsource also emits cyrillic, greek and vietnamese subsets. `unicode-range` stops them downloading, but they're 12 extra files in `dist/`. |
 
 ---
@@ -336,6 +354,15 @@ At 390 and 1440: 12, 15, 17, 18, 20, 21, 24, 28, 36, 40, 44, 62.4, 64 px, plus s
 | **Horizontal overflow** | None at 390 or 1440. |
 | **Broken internal links** | None on live pages. `/variants` → `/services/*` and `/specimen` → `/work` are dead. |
 
+### 5.3 "There is no fade in": diagnosis
+
+In the **current local build** the scroll fade does run. In Chromium, 32 blocks on `/` are hidden below the fold and animate from 0 → 1 over 760ms when scrolled to, including after client-side navigation and Back. There are still four reasons you may see nothing:
+
+1. **The public Vercel preview is a stale build.** `awesbite1-cmp7rwhxc…vercel.app` serves an older hero ("English tuition, narration and writing, delivered with care.") and an **older reveal system** (`reveal-enabled` / `revealed`). The last four motion commits, ending in 60c3a94 "Replace the reveal system with a plain scroll-in fade", have not been deployed there. Whatever you're checking on that URL isn't this code.
+2. **Reduced motion turns it off entirely.** If macOS "Reduce motion", iOS "Reduce Motion" or Windows "Animation effects: off" is set (common on work laptops and remote desktops), the script returns early and **nothing** animates. The brief asks for a 120ms opacity-only fallback, not silence.
+3. **It fires where nobody is looking.** Blocks trigger when they reach the bottom 10% of the viewport. The `--ease-out` curve (0.16, 1, 0.3, 1) does about 70% of the change in the first 200ms. So by the time your eye moves down, the animation is over.
+4. **Nothing above the fold reveals on scroll**, and the hero's load cascade overlaps the whole-page `body` fade, so the entrance reads as a single blink rather than a sequence.
+
 ---
 
 ## 6. Prioritised problems
@@ -366,8 +393,38 @@ At 390 and 1440: 12, 15, 17, 18, 20, 21, 24, 28, 36, 40, 44, 62.4, 64 px, plus s
 19. The hub hero has no gutter anchor, content sub-pages break the grid, and the mobile header takes 16% of the viewport.
 20. Inter conflicts with your "no Inter-everywhere" rule, but the client approved it. **Needs your decision in Phase 3.**
 
+**Added after review**
+- **P0.** The public preview URL is a stale build, so the reported "no fade" is partly this.
+- **P0.** Reduced motion disables every reveal instead of falling back to a quick opacity change.
+- **P2.** The hero composition has no alignment, its headline is a service list at a timid scale, the photo is thumbnail-sized inside a frame, and the fold shows an empty stripe (§3.11).
+- **P2.** Nine text styles on the hub and weights chosen per component (§4).
+
 **P3: polish**
 21. The casing of nav, footer and sub-nav labels drifts, and each service goes by several names. That's content, so it's flagged, not changed.
 22. `.card` radius (0) contradicts the "10px cards" rule.
 23. The form's error-inside-label pattern, the six disabled audio controls, and `preload="metadata"` / JSON durations on the player.
 24. Four render-blocking stylesheets per page, no font preloads, and no fallback metric overrides.
+
+---
+
+## 7. What stops this from looking like a $10,000 site
+
+It isn't budget or effort; there are 20+ careful commits. The site was built as a series of **corrections** (each commit fixes a defect: a contrast ratio, an alignment, a kerning pair) and **never had an art direction**. The result is correct in every detail and generic as a whole. Premium studio work starts from the opposite end: one idea, pushed hard, and everything else held quiet.
+
+Seven specific gaps, in order of impact:
+
+1. **The concept isn't visible.** Top studio sites have one idea you can see from across the room. This brand's idea is *texture*, and the site is flat, smooth and near-white. Texture could come through:
+   - paper stock with real tooth;
+   - a warm printed-matter palette;
+   - photography treated as one set (warm-toned, grained, cropped with intent);
+   - one signature typographic moment, such as the pencil-in wordmark the brief specified.
+
+   Right now the idea only exists as a sentence in section 4.
+2. **No typographic confidence.** Expensive sites have **huge contrast in scale** (one enormous display moment, and everything else small and calm) and **very few styles**. This site has nine styles, all at medium sizes, so nothing leads. The fix is a strict scale with a real ratio, one serif weight for display, sans for text, and mono only as a rare seasoning rather than the most common text on the page.
+3. **No grid you can feel.** On a $10k page every edge lines up with something: the logo, the headline, the image and the column rule share lines. Here the logo, headline, photo and section content each have their own left edge, and the hero is vertically centred against a top-aligned photo.
+4. **Photography used as thumbnails.** The four portraits are the best asset, and they're shown small, cropped from landscape to portrait, in black and white against warm paper, with a hairline frame inside their own edge. Premium editorial work gives one photograph real scale (half the viewport or full bleed), sets crops deliberately, and grades every image into one world.
+5. **Too much chrome.** There are 342 rendered hairlines, bordered cards, framed images, uppercase mono labels on nearly every block, and arrows everywhere. Each is tasteful on its own; together they read as a wireframe. Luxury comes from **what's removed**: fewer rules, fewer labels, more space doing the work.
+6. **Monotone pacing.** Eleven sections on `/narration` share one shell (marker, heading, text) at one spacing. A premium page is paced like a magazine spread: a big quiet opening, a dense block, a full-bleed image, a single large line, then a close. Space should scale with importance, so a one-sentence placeholder section shouldn't get 256px of air.
+7. **Unfinished content shown at full weight.** Three disabled audio players reading "Audio pending", a "Testimonials will be added" section and a one-item "Further details" section all signal *unfinished*. Expensive sites show nothing rather than a placeholder. (Removing or collapsing sections is a structural change, so it needs your approval.)
+
+There's also one constraint design can only partly solve: **the hub headline is a service description, not a headline.** The line that would make a $10k hero, *"Words aren't flat. They're textured."*, already exists in the approved copy. Moving it into the hero keeps every word unchanged but changes the page structure, so it needs your approval.
