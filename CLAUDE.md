@@ -54,7 +54,7 @@ Copy changes still need the client's approval. Typesetting (curly apostrophes vi
 - Section rhythm `--sec` 64 / 96 / 128 (phone / tablet / desktop); `--sec-minor` 48 / 64 / 96 for a section holding a line or two.
 - Radii: 0 for structure, 2px for fields and buttons, 10px for the audio player.
 - Two families only. **Literata** for display, headings, leads, pull-quotes and labels (true small caps). **Instrument Sans** for body, UI, nav, buttons and figures. No monospace anywhere.
-- Body copy capped at `--measure` (32em, about 62–66 characters). Never full-width paragraphs.
+- Body copy capped at `--measure` (30em, at most 68 characters; essay pages 28em). Never full-width paragraphs.
 - Emphasis is italic, not bold.
 - Two left edges only: the page edge (grid column 1) and the text edge (column 3).
 - Brand name is always lowercase, including in `<title>` and OG tags.
