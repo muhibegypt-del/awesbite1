@@ -1,15 +1,26 @@
 ---
-import ContentLayout from '../../components/ContentLayout.astro';
+import Content from '../../layouts/Content.astro';
+import Masthead from '../../components/Masthead.astro';
+import { q } from '../../lib/typeset.js';
+import pages from '../../content/pages.json';
 import links from '../../content/content-links.json';
+import global from '../../content/global.json';
+
+const p = pages.socials;
 ---
-<ContentLayout title="Socials" description="Find a textured word on LinkedIn, Instagram and TikTok.">
-  <section class="page-hero"><div class="container stack">
-    <h1>Socials</h1>
-    <p class="t-lead">Words of the week, close readings, narrated extracts and takeaways.</p>
-    <ul class="social-list" role="list">{links.socials.map((link) => <li>{link.url
-      ? <a href={link.url} target="_blank" rel="noopener noreferrer">{link.label}<span class="visually-hidden"> (opens in a new tab)</span></a>
-      : <span>{link.label} <small>— link coming soon</small></span>}</li>)}</ul>
-    <a class="link-rule" href="/content">Back to Content</a>
-  </div></section>
-</ContentLayout>
-<style>.social-list { display: grid; gap: var(--s-4); } small { color: var(--ink-soft); }</style>
+
+<Content page="socials">
+  <Masthead title={p.heading}>
+    <Fragment slot="below">
+      <p class="lead">{q(p.lede)}</p>
+      <ul class="library" role="list">
+        {links.socials.map((link) => (
+          <li>{link.url
+            ? <a class="textlink" href={link.url} target="_blank" rel="noopener noreferrer">{link.label}<span class="visually-hidden">{global.newTab}</span></a>
+            : <>{link.label}<small>{p.pending}</small></>}</li>
+        ))}
+      </ul>
+      <a class="textlink" href="/content">{pages.content.backLink}</a>
+    </Fragment>
+  </Masthead>
+</Content>

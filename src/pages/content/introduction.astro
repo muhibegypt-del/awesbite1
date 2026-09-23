@@ -1,19 +1,22 @@
 ---
-import ContentLayout from '../../components/ContentLayout.astro';
-import SectionMarker from '../../components/SectionMarker.astro';
+/** Her essay on why the content exists, set as a printed essay. */
+import Content from '../../layouts/Content.astro';
+import Masthead from '../../components/Masthead.astro';
+import { q } from '../../lib/typeset.js';
+import pages from '../../content/pages.json';
+
+const i = pages.introduction;
 ---
-<ContentLayout title="Intro" description="Aneesa explains why a textured word extends beyond student and client work into a literary ecosystem.">
-  <section class="page-hero">
-    <div class="container editorial">
-      <SectionMarker label="Intro" class="editorial-aside" />
-      <article class="stack">
-        <h1>Why I started it</h1>
-        <p class="t-lead">I wanted a textured word to extend beyond my student and client work. Understanding and articulating ourselves in a way that we believe sets us up more accurately and confidently is a noble pursuit for anyone and everyone. As a former classroom teacher, naturally I believe that education is the right for all, and so whether it's somebody time-strapped but who may wish to learn a few new words a day, to a bonafide literary enthusiast who enjoys listening to a deeper analysis of one of their favourite stories — I set up this literary ecosystem in the hopes of meeting people wherever they are.</p>
-        <p class="t-body">As of late, with all the reports in the news of falling literacy rates and of nobody reading anymore — rather than adopting a fatalistic outlook, with a textured word, my aim across social platforms is to create a bridge; to simply meet people where they're at. Because being drawn in by a good story is a commonality we have shared with our ancestors since time immemorial. I do not believe that people no longer wish to read but, rather, that they may well have negative associations tied to or feel intimidated by various aspects of reading or writing. It may well be that, yes, they have succumbed to the mighty tech overlords and feel they have the concentration span of a gnat. But just like stories are put together — word by word — better habits are built — step by step. A textured word, a baby step, a day at a time; we can all work towards a better, more literate future.</p>
-        <p class="t-body">This ecosystem was a way to enable my work hopefully reaching a wider community of people who may no longer want the English classroom, but miss pursuing and understanding intentions and interpretations behind stories in a way that brings relevance and enriches their everyday life in one way or another.</p>
-        <p class="t-body">It sometimes sounds like a bit of a platitude to say that we must keep art, humanities and community alive in a world seemingly encroached by AI. But despite it coming off as a bit trite; well, it still seems to ring, quite simply, true? To have a place where the taught, written, and spoken word can reign triumphant, as inherently valuable as it is, is my small pursuit and contribution to where my own education has taken me so far.</p>
-        <a class="link-rule" href="/content">Explore Content <span aria-hidden="true">→</span></a>
+
+<Content page="introduction">
+  <Masthead runhead={i.marker} title={i.heading} />
+  <section class="sec" aria-label={i.heading}>
+    <div class="bleed">
+      <article class="essay-page col-text">
+        <p class="lead">{q(i.lede)}</p>
+        {i.paragraphs.map((line) => <p>{q(line)}</p>)}
+        <p class="space-7"><a class="textlink" href={i.link.href}>{i.link.label} <span class="arrow" aria-hidden="true">→</span></a></p>
       </article>
     </div>
   </section>
-</ContentLayout>
+</Content>

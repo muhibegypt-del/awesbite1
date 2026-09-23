@@ -1,0 +1,12 @@
+---
+/** An editorial aside: a hairline, a short clay mark, a small-caps heading. */
+import { q } from '../lib/typeset.js';
+interface Props { heading: string; body?: string }
+const { heading, body } = Astro.props;
+---
+
+<div class="note reveal">
+  <p class="label note__heading">{q(heading)}</p>
+  {body && <p>{q(body)}</p>}
+  <slot />
+</div>

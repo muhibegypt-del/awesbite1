@@ -1,0 +1,22 @@
+---
+/** The name, explained: the lede as a pull-quote on the plum band, then
+    the manuscript photograph edge to edge. The brief's one dark mid-page
+    moment. */
+import Photo from './Photo.astro';
+import { q } from '../lib/typeset.js';
+import site from '../content/site.json';
+
+const { hub } = site;
+const repurposing = site.services.find((s) => s.id === 'repurposing')!;
+---
+
+<section class="sec sec--dark essay" aria-labelledby="essay-label">
+  <div class="bleed">
+    <p class="label" id="essay-label">{hub.markers.name}</p>
+    <p class="essay__lede reveal">{q(hub.name.lede)}</p>
+    <p class="essay__mission reveal">{q(hub.name.mission)}</p>
+    <div class="essay__photo full reveal">
+      <Photo src={repurposing.image} alt={repurposing.imageAlt} />
+    </div>
+  </div>
+</section>

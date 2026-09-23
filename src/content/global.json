@@ -34,7 +34,8 @@
         ]
       }
     ],
-    "cta": { "label": "Start an enquiry", "href": "/contact" }
+    "cta": { "label": "Start an enquiry", "href": "/contact" },
+    "menuLabel": "Menu"
   },
 
   "footer": {
@@ -89,5 +90,6 @@
     "ogImage": "/images/aneesa-with-poetry-anthology.webp"
   },
 
-  "skipLink": "skip to content"
+  "skipLink": "skip to content",
+  "newTab": " (opens in a new tab)"
 }

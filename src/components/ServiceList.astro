@@ -1,0 +1,37 @@
+---
+/**
+ * The three services as chapter openings. One link per entry, on the title,
+ * stretched over the entry so the whole entry is the target while the
+ * accessible name stays short. Numerals are CSS counters, not copy.
+ *
+ * `current` marks the page you are on (used under "Other services").
+ */
+import { q } from '../lib/typeset.js';
+import site from '../content/site.json';
+
+interface Props { current?: string; compact?: boolean; headingTag?: 'h2' | 'h3' }
+const { current, compact = false, headingTag: Heading = 'h3' } = Astro.props;
+
+const order = ['teaching', 'repurposing', 'narration'];
+const services = [...site.services].sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
+---
+
+<ol class:list={['contents', { 'contents--compact': compact }]} role="list">
+  {services.map((service) => {
+    const here = service.route === current;
+    return (
+      <li class:list={['entry reveal', { 'entry--current': here }]}>
+        <Heading class="entry__title">
+          {here
+            ? <span aria-current="page">{service.pillarCard.title}</span>
+            : <a href={service.route}>{service.pillarCard.title}</a>}
+        </Heading>
+        <p class="entry__line">{service.pillarCard.line}</p>
+        <p class="entry__one">{q(service.oneLiner)}</p>
+        <p class="entry__who">
+          {here ? site.hub.pillarsCurrent : <>{service.audience} <span class="arrow" aria-hidden="true">→</span></>}
+        </p>
+      </li>
+    );
+  })}
+</ol>

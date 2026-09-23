@@ -1,0 +1,16 @@
+---
+/** The content section: the page, with its contents line under the header. */
+import Base from './Base.astro';
+import ContentNav from '../components/ContentNav.astro';
+import pages from '../content/pages.json';
+
+interface Props { page: 'content' | 'introduction' | 'substack' | 'youtube' | 'socials' | 'collaborations' }
+const { page } = Astro.props;
+const meta = pages.meta[page];
+const title = page === 'content' ? meta.title : `${meta.title} · ${pages.meta.content.title}`;
+---
+
+<Base title={title} description={meta.description}>
+  <ContentNav />
+  <slot />
+</Base>

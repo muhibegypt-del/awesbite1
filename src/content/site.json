@@ -11,12 +11,38 @@
     "sub": "Thoughtful, professional support for students, authors and creators.",
     "pillarsHeading": "Three ways to work with me",
     "pillarsLine": "Each service begins with careful attention—to the student, the text or the voice behind the idea.",
+    "pillarsCurrent": "You are here",
     "authorityHeading": "Aneesa",
     "authorityParagraphs": [
       "I am an English teacher, voice artist and writer with 12 years of classroom experience across four countries. My work is grounded in listening closely, identifying what is needed and responding with care.",
       "Before teaching, I acted, performed spoken word and read novels aloud in a care home. Each experience taught me something about language, interpretation and connecting with an audience."
     ],
-    "authorityLink": { "label": "More about Aneesa", "href": "/about" }
+    "authorityLink": { "label": "More about Aneesa", "href": "/about" },
+
+    "_comment_markers": "Gutter labels for the hub sections. Moved verbatim from HomePage.astro.",
+    "markers": {
+      "pillars": "Services",
+      "authority": "About Aneesa",
+      "name": "The name",
+      "content": "Content",
+      "close": "Next step"
+    },
+
+    "_comment_name": "The brand line and the section that explains it. Moved verbatim from HomePage.astro; `emphasis` is the italic word.",
+    "name": {
+      "line": "Words aren't flat.",
+      "lead": "They're",
+      "emphasis": "textured.",
+      "lede": "“Texture” was the word I kept coming back to. We already know how the texture of a fabric or a dish changes the way it makes us feel — yet we rarely talk about words that way, even though the right word, in the right place, lands differently on everyone who hears it.",
+      "mission": "a textured word exists to help people learn, shape and voice language with intention — because words aren't flat, they're textured."
+    },
+
+    "_comment_image": "The hub hero photograph (chosen by the client). Moved here from the narration record, alt text verbatim; narration now uses the anthology portrait.",
+    "image": "/images/aneesa-portrait.webp",
+    "imageAlt": "Aneesa smiling in a softly lit black-and-white portrait",
+
+    "contentHeading": "Notes on books and language",
+    "contentLink": { "label": "Explore the literary ecosystem", "href": "/content" }
   },
 
   "credentials": [
@@ -29,6 +55,8 @@
   "services": [
     {
       "id": "teaching",
+      "_comment_pillar": "Service card treatment on the hub and on every spoke. Moved verbatim from PillarCards.astro.",
+      "pillarCard": { "tag": "TEACH", "title": "learn the words.", "line": "Teaching — KS3, GCSE, International GCSE, A-Level, International A-Level, ESL & IELTS" },
       "route": "/teaching",
       "number": "01",
       "tag": "TEACH",
@@ -110,6 +138,10 @@
 
     {
       "id": "narration",
+      "showTestimonials": true,
+      "backgroundLink": { "text": "The Television Workshop", "href": "https://www.thetelevisionworkshop.co.uk/" },
+      "_comment_pillar": "Service card treatment on the hub and on every spoke. Moved verbatim from PillarCards.astro.",
+      "pillarCard": { "tag": "NARRATE", "title": "bring the words to life.", "line": "Voiceover & narration" },
       "route": "/narration",
       "number": "03",
       "tag": "NARRATE",
@@ -118,13 +150,17 @@
       "audience": "For authors, publishers and producers",
       "oneLiner": "I take the time to understand the text and its intention, then deliver a thoughtful performance that holds the listener's attention.",
       "cta": { "label": "Request a custom audition", "href": "/contact?about=Audiobook+narration" },
-      "image": "/images/aneesa-portrait.webp",
-      "imageAlt": "Aneesa smiling in a softly lit black-and-white portrait",
+      "image": "/images/aneesa-with-poetry-anthology.webp",
+      "imageAlt": "Aneesa resting her chin on her hands beside an anthology of poetry",
       "imagePosition": "65% center",
       "problemLabel": "The performance",
 
       "reelsHeading": "Listen",
       "reels": null,
+      "_comment_portfolio": "Voice portfolio labels. Moved verbatim from ServicePage.astro and AudioPlayer.astro.",
+      "portfolioHeading": "Voice portfolio",
+      "samplesPending": "Samples will be added here shortly.",
+      "samplePendingLabel": "Voice sample not yet available",
       "reelsPlaceholder": "[ VOICE REELS WILL GO HERE — three separate demos: fiction narration, corporate explainer, e-learning. MP3, 60 to 90 seconds each. This block sits at the top of the page because producers listen before they read. ]",
 
       "problem": [
@@ -202,6 +238,13 @@
 
     {
       "id": "repurposing",
+      "_comment_portfolio": "Portfolio slot and testimonials flag. Moved verbatim from ServicePage.astro, which branched on the service id.",
+      "portfolioHeading": "Portfolio",
+      "portfolioPending": "Selected long-form and short-form examples will be shared here.",
+      "portfolioLink": { "label": "Discuss your source material" },
+      "showTestimonials": true,
+      "_comment_pillar": "Service card treatment on the hub and on every spoke. Moved verbatim from PillarCards.astro.",
+      "pillarCard": { "tag": "REPURPOSE", "title": "shape the words.", "line": "Content repurposing" },
       "route": "/repurposing",
       "number": "02",
       "tag": "REPURPOSE",
