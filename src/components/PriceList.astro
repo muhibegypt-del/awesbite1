@@ -1,0 +1,32 @@
+---
+/**
+ * Prices as a price list. A price string is split at its own middle dots:
+ * the rate first, the bundles after. No words are added or changed.
+ */
+import { q } from '../lib/typeset.js';
+
+interface Tier { label: string; cadence: string; price?: string; includes?: string[] }
+interface Props { tiers: Tier[] }
+const { tiers } = Astro.props;
+
+const rows = tiers.map((tier) => {
+  const [rate = '', ...bundles] = (tier.price ?? '').split(' · ');
+  return { ...tier, rate, bundles: bundles.join(' · ') };
+});
+---
+
+<ul class="prices" role="list">
+  {rows.map((tier) => (
+    <li class:list={['price reveal', { 'price--no-rate': !tier.rate, 'price--no-bundles': tier.rate && !tier.bundles }]}>
+      <span class="price__label">{tier.label}</span>
+      <span class="price__cadence">
+        {q(tier.cadence)}
+        {tier.includes?.length ? (
+          <ul class="price__includes" role="list">{tier.includes.map((item) => <li>{item}</li>)}</ul>
+        ) : null}
+      </span>
+      {tier.rate && <span class="price__rate">{tier.rate}</span>}
+      {tier.bundles && <span class="price__bundles">{tier.bundles}</span>}
+    </li>
+  ))}
+</ul>

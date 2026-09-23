@@ -1,0 +1,195 @@
+---
+/**
+ * A service page (spoke). One service, one audience, its own argument and
+ * its own call to action. The three share this template; the JSON decides
+ * which parts a service has. There are no branches on the service id: a
+ * section renders when its content (or its flag) exists.
+ */
+import Base from './Base.astro';
+import Masthead from '../components/Masthead.astro';
+import SectionHead from '../components/SectionHead.astro';
+import Note from '../components/Note.astro';
+import PriceList from '../components/PriceList.astro';
+import TrackList from '../components/TrackList.astro';
+import ServiceList from '../components/ServiceList.astro';
+import { q } from '../lib/typeset.js';
+import site from '../content/site.json';
+import pages from '../content/pages.json';
+import global from '../content/global.json';
+
+interface Props { id: 'teaching' | 'repurposing' | 'narration' }
+const { id } = Astro.props;
+const service: Record<string, any> = site.services.find((s) => s.id === id)!;
+const meta = pages.meta[id];
+const labels = pages.services;
+
+/* A paragraph may carry one link, named in the JSON by its exact text. */
+const linkIn = (body: string, link?: { text: string; href: string }) => {
+  if (!link || !body.includes(link.text)) return null;
+  const [before, after] = body.split(link.text);
+  return { before, after, ...link };
+};
+const background = service.background && linkIn(service.background.body, service.backgroundLink);
+const hasDetails = service.studio || service.examples?.length || service.background;
+---
+
+<Base title={meta.title} description={meta.description}>
+  <Masthead
+    runhead={`${service.number} — ${service.tag}`}
+    runheadHidden
+    title={service.plain}
+    audience={service.audience}
+    image={service.image}
+    imageAlt={service.imageAlt}
+  >
+    <p slot="side" class="lead masthead__pillar"><em>{service.pillar}</em></p>
+    <Fragment slot="below">
+      <p class="lead">{q(service.oneLiner)}</p>
+      <p class="masthead__actions"><a class="btn" href={service.cta.href}>{service.cta.label}</a></p>
+    </Fragment>
+  </Masthead>
+
+  {/* Producers listen before they read: the portfolio comes first. */}
+  {service.portfolioHeading && service.samplesPending && (
+    <section id="portfolio" class="sec sec--band" aria-labelledby="portfolio-heading">
+      <div class="bleed">
+        <SectionHead label={`${service.number} — ${service.tag}`} heading={service.portfolioHeading} id="portfolio-heading" />
+        <TrackList />
+      </div>
+    </section>
+  )}
+
+  <section class="sec" aria-labelledby="problem-heading">
+    <div class="bleed">
+      <SectionHead label={service.problemLabel ?? labels.problemLabelDefault} labelAs="h2" id="problem-heading" />
+      <div class="prose col-text">
+        {service.problem.map((line: string) => <p class="lead reveal">{q(line)}</p>)}
+      </div>
+      <div class="col-text space-7">
+        <Note heading={service.aside.heading} body={service.aside.body} />
+      </div>
+      {service.swap && (
+        <div class="swap col-text reveal">
+          <div><p class="label">{service.swap.fromLabel}</p><p>{q(service.swap.from)}</p></div>
+          <div><p class="label">{service.swap.toLabel}</p><p>{q(service.swap.to)}</p></div>
+        </div>
+      )}
+      {service.voiceHeading && (
+        <div class="prose col-text voice reveal">
+          <h3 class="h3">{service.voiceHeading}</h3>
+          <p>{q(service.voiceBody)}</p>
+          <ul class="tagline" role="list">{service.voiceTags.map((tag: string) => <li>{tag}</li>)}</ul>
+        </div>
+      )}
+    </div>
+  </section>
+
+  {service.tracks && (
+    <section class="sec sec--band" aria-labelledby="tracks-heading">
+      <div class="bleed">
+        <SectionHead label={service.tracksHeading} labelAs="h2" lead={service.rangeLine} id="tracks-heading" />
+        <dl class="pairs col-wide">
+          {service.tracks.map((track: { label: string; body: string }) => (
+            <div class="reveal"><dt>{track.label}</dt><dd>{q(track.body)}</dd></div>
+          ))}
+        </dl>
+        {service.note && (
+          <div class="col-text space-7">
+            <Note heading={service.note.heading} body={service.note.body} />
+          </div>
+        )}
+      </div>
+    </section>
+  )}
+
+  <section class="sec" aria-labelledby="method-heading">
+    <div class="bleed">
+      <SectionHead label={service.methodHeading} labelAs="h2" id="method-heading" />
+      <ol class="steps" role="list">
+        {service.method.map((step: { title: string; body: string }) => (
+          <li class="reveal"><strong>{step.title}</strong>{step.body && <span>{q(step.body)}</span>}</li>
+        ))}
+      </ol>
+      <div class="prose col-text space-7">
+        {service.footnote && <p class="small muted">{q(service.footnote)}</p>}
+        <a class="textlink" href={service.cta.href}>{service.cta.label} <span class="arrow" aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </section>
+
+  {service.publishPricing === true && service.tiers && (
+    <section class="sec sec--band" aria-labelledby="pricing-heading">
+      <div class="bleed">
+        <SectionHead label={service.pricingHeading} labelAs="h2" lead={service.pricingLine} id="pricing-heading" />
+        <PriceList tiers={service.tiers} />
+        {service.agreements?.length > 0 && (
+          <>
+            <h3 class="h3 col-text space-8">{service.agreementsHeading}</h3>
+            <div class="agreements space-5">
+              {service.agreements.map((a: { heading: string; body: string }) => (
+                <div class="reveal"><p class="h3">{q(a.heading)}</p><p class="muted">{q(a.body)}</p></div>
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+    </section>
+  )}
+
+  {hasDetails && (
+    <section class="sec sec--minor" aria-labelledby="details-heading">
+      <div class="bleed">
+        <SectionHead label={labels.detailsMarker} labelAs="h2" id="details-heading" />
+        <div class="prose col-text">
+          {service.studioHeading && service.studio && <Note heading={service.studioHeading} body={service.studio} />}
+          {service.examplesHeading && service.examples?.length > 0 && (
+            <Note heading={service.examplesHeading}>{service.examples.map((e: string) => <p>{q(e)}</p>)}</Note>
+          )}
+          {service.background && (
+            <Note heading={service.background.heading}>
+              {background
+                ? <p>{q(background.before)}<a href={background.href} target="_blank" rel="noopener noreferrer">{background.text}<span class="visually-hidden">{global.newTab}</span></a>{q(background.after)}</p>
+                : <p>{q(service.background.body)}</p>}
+            </Note>
+          )}
+        </div>
+      </div>
+    </section>
+  )}
+
+  {service.portfolioHeading && service.portfolioPending && (
+    <section id="portfolio" class="sec sec--minor" aria-labelledby="work-heading">
+      <div class="bleed">
+        <SectionHead label={service.portfolioHeading} labelAs="h2" id="work-heading" />
+        <div class="prose col-text reveal">
+          {service.examples?.length > 0
+            ? service.examples.map((e: string) => <p>{q(e)}</p>)
+            : <p class="pending-quote">{service.portfolioPending}</p>}
+          <a class="textlink" href={service.cta.href}>{service.portfolioLink.label} <span class="arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {service.showTestimonials && service.proofHeading && (
+    <section id="testimonials" class="sec sec--minor" aria-labelledby="testimonials-heading">
+      <div class="bleed">
+        <SectionHead label={service.proofHeading} labelAs="h2" id="testimonials-heading" />
+        <div class="prose col-text reveal">
+          {service.proof?.length > 0
+            ? service.proof.map((item: { quote: string; attribution?: string }) => (
+                <blockquote><p class="lead">{q(item.quote)}</p>{item.attribution && <footer class="label">{item.attribution}</footer>}</blockquote>
+              ))
+            : <p class="pending-quote">{service.proofPlaceholder}</p>}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="sec sec--band" aria-labelledby="other-heading">
+    <div class="bleed">
+      <SectionHead label={labels.otherMarker} labelAs="h2" id="other-heading" />
+      <ServiceList current={service.route} compact />
+    </div>
+  </section>
+</Base>
