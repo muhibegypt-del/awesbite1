@@ -22,7 +22,7 @@ const labels = pages.about;
       {/* The anthology portrait, cropped close and upright: Narration shows
           the same frame whole and wide, so the two read as different. */}
       <div class="about__photo reveal">
-        <Photo src={about.portrait} alt={about.portraitAlt} sizes="(min-width: 1024px) 40vw, 100vw" />
+        <Photo src={about.portrait} alt={about.portraitAlt} sizes="(min-width: 1024px) 40vw, 100vw" eager />
       </div>
       <div class="about__text prose reveal">
         {about.paragraphs.map((line) => <p>{q(line)}</p>)}

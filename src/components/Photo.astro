@@ -23,6 +23,7 @@ const image = imageFor(src);
   src={image}
   alt={alt}
   formats={['avif', 'webp']}
+  fallbackFormat="webp"
   widths={[480, 800, 1200, 1600, 2200]}
   sizes={sizes}
   class:list={['graded', className]}
