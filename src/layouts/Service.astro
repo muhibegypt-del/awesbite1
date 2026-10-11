@@ -212,14 +212,13 @@ const hasDetails = service.studio || service.examples?.length || service.backgro
     </section>
   )}
 
-  {service.portfolioHeading && service.portfolioPending && (
+  {/* A portfolio only where real, approved examples exist: no placeholder. */}
+  {service.portfolioHeading && service.portfolioPending && service.examples?.length > 0 && (
     <section id="portfolio" class="sec sec--minor" aria-labelledby="work-heading">
       <div class="bleed">
         <SectionHead label={service.portfolioHeading} labelAs="h2" id="work-heading" />
         <div class="prose col-text reveal">
-          {service.examples?.length > 0
-            ? service.examples.map((e: string) => <p>{q(e)}</p>)
-            : <p class="pending-quote">{service.portfolioPending}</p>}
+          {service.examples.map((e: string) => <p>{q(e)}</p>)}
           <a class="textlink" href={service.cta.href}>{service.portfolioLink.label} <span class="arrow" aria-hidden="true">→</span></a>
         </div>
       </div>

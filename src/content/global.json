@@ -8,11 +8,7 @@
       { "label": "teach", "href": "/teaching" },
       {
         "label": "repurpose",
-        "href": "/repurposing",
-        "children": [
-          { "label": "portfolio", "href": "/repurposing#portfolio" },
-          { "label": "testimonials", "href": "/repurposing#testimonials" }
-        ]
+        "href": "/repurposing"
       },
       {
         "label": "voice",
