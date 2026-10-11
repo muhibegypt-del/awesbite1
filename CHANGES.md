@@ -102,19 +102,42 @@ Lighthouse (mobile), served with compression as Vercel serves it: **Performance 
 
 ---
 
-## 9. Waiting on the client
+## 9. Client review, October 2026
 
-These render as visible, deliberate placeholders. Nothing was invented to fill them.
+Changes from her approval PDF ("Website changes for your confirmation") and her notes, with her wording used verbatim (checked by script against her notes) and nothing written on her behalf.
 
-- **Audio samples** for the Narration portfolio (three rows marked "Audio pending"). The player is built and appears as soon as a file path is added to `narration-tracks.json`.
-- **Testimonials** for Narration and Repurposing.
-- **Repurposing portfolio** examples.
-- **Links:** Substack, YouTube, LinkedIn, Instagram, TikTok. Each appears in the footer and content pages automatically once its URL is added to `global.json`; until then there is no dead link.
-- **Privacy and terms pages.** The footer links appear once their pages exist and the paths are added. A privacy notice is advisable before the form or any analytics go live, since the site collects names and email addresses (even though only via the visitor's own email app).
+| Her request | What changed |
+|---|---|
+| Make it immediately clear what she offers, on a phone first (01, 02) | Home opens with her greeting "Hello, I'm Aneesa, founder of a textured word." as the h1, her offer sentence, then **Teach / Repurpose / Voice** with who each is for. On a 390×750 phone all of it is visible before scrolling. |
+| Use her Landing Page copy, spread through the page (02) | The rest follows in her order in short paragraphs, ending "Welcome.", with the qualifications beneath. |
+| Move "Words aren't flat. They're textured." below the opening (02) | It now heads the plum band with the name story; the pencil line draws as it scrolls into view. |
+| Don't repeat About and Content on Home (02) | Both sections removed from Home; they have their own pages. |
+| About: her copy, "Cert TESOL", British Council caption (03) | Her About copy in full, in paragraphs; "Cert TESOL (Trinity College London)"; British Council: "Teacher Training Programme". |
+| Teaching routes, packages only, training and DBS status (04) | Three routes, **KS3 - I/GCSE**, **I/A-Level**, **ESL / IELTS**, each with its descriptions and its 5- and 10-lesson packages; every hourly rate removed; jump links to each route on the first screen. "IELTS teacher training: In progress" and "Enhanced DBS: Application made". |
+| Repurpose: no empty placeholders (05) | Portfolio and testimonials render only when real items exist. |
+| Voice: label, further details, real samples, form (06) | "Voice" in the nav and labels; her "Back in 2015…" paragraph; the four supplied samples (Audiobook, Commercial, Explainer: health video, IVR) with their embedded name data removed; "Audiobook narration" removed from the enquiry form. |
+| Content as one page (07) | One /content page: introduction and collaborations, with Substack, YouTube and socials appearing once their links exist; the old sub-page addresses redirect. |
+| Simpler onward links and footer (08) | The three-service block at the foot of service pages became two clearly separate route links; header is services-first with no drop-downs and larger text; footer labels shortened. |
+| "Boxes and margins a bit wonky" | Measured every page at eight widths: section spacing ranged 48–176px on phones. Four causes fixed in shared CSS; now 64px between same-coloured sections and 128px across a colour change (96/192 tablet, 128 desktop). Also fixed: the audio play and pause icons both showing. |
 
-## 10. Recommended next, not done
+Checks after this round: 0 contrast, heading, overflow or console failures across 9 pages × 4 widths; every page passes the keyboard walk; 344 internal links, redirects and anchors, none broken; LCP 0.5–0.65s and CLS ≤ 0.013 on a throttled phone.
 
-- **Redeploy the Vercel preview** from this branch. The live preview still shows an old build, which is why the fades appeared to be missing. Not done without permission.
+## 10. Waiting on the client
+
+Nothing below is shown as a placeholder: each appears on the site once it exists.
+
+- **Two more voice samples**, if she has them (she mentioned about six; four arrived).
+- **Which alternate portrait** to use on About.
+- **Font options and her handwriting** for "textured" (approval PDF section 01).
+- **The highlighted passage** to move to the start of the Content introduction (section 07): not in the supplied material.
+- **Primary tuition (6 to 11):** not in her route list, so not shown; its text is kept. Is it still offered?
+- **Links:** Substack, YouTube, LinkedIn, Instagram, TikTok. Each appears on /content and in the footer once its URL is added.
+- **Testimonials and Repurpose portfolio examples**, once approved.
+- **Privacy and terms pages.** The footer links appear once their pages exist. A privacy notice is advisable before the form or any analytics go live.
+- **Her copy as written:** "my extensive travels have only ever deep-rooted love for words" (About) looks like it is missing a word; it is shown exactly as she wrote it.
+
+## 11. Recommended next, not done
+
 - **A real form endpoint.** The enquiry form opens the visitor's email app with a prepared message. This works everywhere with no backend, but some visitors have no email app configured. A hosted form service would remove that step; it is a new dependency, so it needs a decision.
 - **Scheduling on the contact page** (Calendly or similar), loaded only when someone clicks, as the brief requires.
 - **Open Graph image.** It is currently the anthology photograph. A designed 1200×630 card with the wordmark would present better when links are shared.

@@ -17,13 +17,15 @@ Full spec: `docs/brief.md`. Content slots: `docs/slot-map.md`. Read those only w
 src/
   layouts/Base.astro       head, meta, header, footer, grain, photo grades, reveals, menus
   layouts/Service.astro    the three service pages, driven by site.json (no id branches)
-  layouts/Content.astro    the content section (adds its contents line)
-  pages/                   index (hub), teaching, repurposing, narration, about, contact,
-                           content/*, thank-you, 404
-                           tuition, writing: redirects to teaching, repurposing
+  pages/                   index (hub), teaching, repurposing, narration (labelled Voice),
+                           about, contact, content (one page), thank-you, 404
+                           redirects: tuition, writing; content/introduction, substack,
+                           youtube, socials, collaborations (to /content sections)
   components/              Header, Footer, Wordmark, PencilMark, Photo, HubHero, Masthead,
                            SectionHead, ServiceList, Honours, EssayBand, Note, PriceList,
-                           TrackList, ContactForm, ContentNav
+                           TrackList, ContactForm
+                           (ServiceList = the Teach / Repurpose / Voice route rows, used on
+                           the home first screen and as onward links on service pages)
   content/                 all copy as JSON: site.json (hub, services, about, contact),
                            pages.json (page copy and meta), global.json (nav, footer, meta),
                            content-links.json, narration-tracks.json;
@@ -33,6 +35,7 @@ src/
   styles/tokens.css        design tokens — source of truth
   styles/global.css        everything else
 public/fonts/              self-hosted WOFF2 (Literata, Instrument Sans) + OFL licences
+public/audio/              voice samples: neutral filenames, ID3 tags stripped (they carried her surname)
 ```
 
 Photographs live in `src/assets/images` and always go through `components/Photo.astro` (astro:assets `<Picture>`, AVIF + WebP, graded). `public/images` keeps one copy for the OG image only.
@@ -42,6 +45,8 @@ Photographs live in `src/assets/images` and always go through `components/Photo.
 The client chose (September 2026) **Direction B, Printed Matter, with the portrait (`aneesa-portrait.webp`) as the hub hero**. Literata + Instrument Sans, plum as the second key, the photographs graded into the palette. `AUDIT.md` and `BRAND-AUDIT.md` record why; `CHANGES.md` records what changed.
 
 Copy changes still need the client's approval. Typesetting (curly apostrophes via `q()`, line breaks, case transforms) is not a copy change.
+
+**Client review, October 2026** (her approval PDF and notes): Home leads with her greeting, her plain offer sentence and the Teach / Repurpose / Voice routes; the poetic line sits on the plum band. Teaching is three routes (`KS3 - I/GCSE`, `I/A-Level`, `ESL / IELTS`), packages only, never an hourly rate. 'Voice' is the label for the narration service. Portfolios and testimonials appear only when real items exist; Content platforms only when their link exists. Her new copy is verbatim; earlier copy it replaced is kept in the JSON (`retired`, `*Retired`) and not shown.
 
 ## Design rules — do not violate these
 
