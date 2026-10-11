@@ -1,20 +1,4 @@
 ---
-import Content from '../../layouts/Content.astro';
-import Masthead from '../../components/Masthead.astro';
-import { q } from '../../lib/typeset.js';
-import site from '../../content/site.json';
-import pages from '../../content/pages.json';
-import global from '../../content/global.json';
-
-const p = pages.collaborations;
+/* Content is one page now (approval PDF section 07): this address goes to its section. */
+return Astro.redirect('/content#collaborations', 301);
 ---
-
-<Content page="collaborations">
-  <Masthead title={p.heading}>
-    <Fragment slot="below">
-      <p class="lead">{q(p.lede)}</p>
-      <ul class="dash-list" role="list">{site.about.openTo.map((item) => <li>{q(item)}</li>)}</ul>
-      <a class="textlink" href={`mailto:${global.contact.email}`}>{p.linkLabel}</a>
-    </Fragment>
-  </Masthead>
-</Content>

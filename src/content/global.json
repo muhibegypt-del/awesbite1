@@ -19,14 +19,7 @@
       },
       {
         "label": "content",
-        "href": "/content",
-        "children": [
-          { "label": "introduction", "href": "/content/introduction" },
-          { "label": "Substack", "href": "/content/substack" },
-          { "label": "YouTube", "href": "/content/youtube" },
-          { "label": "socials", "href": "/content/socials" },
-          { "label": "collaborations", "href": "/content/collaborations" }
-        ]
+        "href": "/content"
       }
     ],
     "cta": { "label": "Start an enquiry", "href": "/contact" },

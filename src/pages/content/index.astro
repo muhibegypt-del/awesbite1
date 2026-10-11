@@ -1,5 +1,12 @@
 ---
-import Content from '../../layouts/Content.astro';
+/**
+ * Content as one page (approval PDF section 07): the introduction and why
+ * this strand of work exists, then where to find it, then collaborations.
+ * A platform appears only once its link exists in content-links.json, so
+ * there is never an empty placeholder section. The old sub-page addresses
+ * redirect to the matching section here.
+ */
+import Base from '../../layouts/Base.astro';
 import Masthead from '../../components/Masthead.astro';
 import SectionHead from '../../components/SectionHead.astro';
 import { q } from '../../lib/typeset.js';
@@ -9,42 +16,67 @@ import links from '../../content/content-links.json';
 import global from '../../content/global.json';
 
 const c = pages.content;
+const intro = pages.introduction;
+const platforms = [
+  { id: 'substack', ...pages.substack, url: links.substack },
+  { id: 'youtube', ...pages.youtube, url: links.youtube },
+].filter((platform) => platform.url);
+const socials = links.socials.filter((link) => link.url);
+const collab = pages.collaborations;
 ---
 
-<Content page="content">
+<Base title={pages.meta.content.title} description={pages.meta.content.description}>
   <Masthead runhead={c.marker} title={c.heading}>
     <Fragment slot="below">
       <p class="lead">{q(site.about.reflectionBody)}</p>
       <ul class="tagline" role="list">{site.about.reflectionTags.map((tag) => <li>{tag}</li>)}</ul>
-      <a class="textlink" href={c.introLink.href}>{c.introLink.label} <span class="arrow" aria-hidden="true">→</span></a>
     </Fragment>
   </Masthead>
 
-  <section class="sec sec--band" aria-labelledby="explore-heading">
+  <section class="sec" id="introduction" aria-labelledby="introduction-heading">
     <div class="bleed">
-      <SectionHead label={c.exploreMarker} heading={c.exploreHeading} id="explore-heading" />
-      <ol class="contents routes" role="list">
-        {c.routes.map((route) => (
-          <li class="entry reveal">
-            <h3 class="entry__title"><a href={route.href}>{route.title}</a></h3>
-            <p class="entry__one">{q(route.body)}</p>
-            <p class="entry__who">{c.routeCue.replace(' →', '')} <span class="arrow" aria-hidden="true">→</span></p>
-          </li>
-        ))}
-      </ol>
+      <SectionHead label={intro.marker} heading={intro.heading} id="introduction-heading" />
+      <article class="essay-page col-text">
+        <p class="lead">{q(intro.lede)}</p>
+        {intro.paragraphs.map((line) => <p>{q(line)}</p>)}
+      </article>
     </div>
   </section>
 
-  <section class="sec sec--minor" aria-labelledby="library-heading">
+  {platforms.map((platform) => (
+    <section class="sec sec--minor" id={platform.id} aria-labelledby={`${platform.id}-heading`}>
+      <div class="bleed">
+        <SectionHead label={platform.heading} labelAs="h2" id={`${platform.id}-heading`} />
+        <div class="prose col-text">
+          <p class="lead">{q(platform.lede)}</p>
+          <a class="textlink" href={platform.url} target="_blank" rel="noopener noreferrer">{platform.linkLabel}<span class="visually-hidden">{global.newTab}</span></a>
+        </div>
+      </div>
+    </section>
+  ))}
+
+  {socials.length > 0 && (
+    <section class="sec sec--minor" id="socials" aria-labelledby="socials-heading">
+      <div class="bleed">
+        <SectionHead label={pages.socials.heading} labelAs="h2" id="socials-heading" />
+        <div class="prose col-text">
+          <p class="lead">{q(pages.socials.lede)}</p>
+          <ul class="library" role="list">
+            {socials.map((link) => <li><a class="textlink" href={link.url} target="_blank" rel="noopener noreferrer">{link.label}<span class="visually-hidden">{global.newTab}</span></a></li>)}
+          </ul>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <section class="sec sec--band" id="collaborations" aria-labelledby="collaborations-heading">
     <div class="bleed">
-      <SectionHead label={c.libraryHeading} labelAs="h2" id="library-heading" />
-      <ul class="library col-text" role="list">
-        {links.library.map((link) => (
-          <li>{link.url
-            ? <a class="textlink" href={link.url} target="_blank" rel="noopener noreferrer">{link.label}<span class="visually-hidden">{global.newTab}</span></a>
-            : <>{link.label}<small>{c.libraryPending}</small></>}</li>
-        ))}
-      </ul>
+      <SectionHead label={collab.heading} labelAs="h2" id="collaborations-heading" />
+      <div class="prose col-text">
+        <p class="lead">{q(collab.lede)}</p>
+        <ul class="dash-list" role="list">{site.about.openTo.map((item) => <li>{q(item)}</li>)}</ul>
+        <a class="textlink" href={`mailto:${global.contact.email}`}>{collab.linkLabel}</a>
+      </div>
     </div>
   </section>
-</Content>
+</Base>

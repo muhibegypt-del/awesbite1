@@ -1,26 +1,6 @@
 ---
-import Content from '../../layouts/Content.astro';
-import Masthead from '../../components/Masthead.astro';
-import { q } from '../../lib/typeset.js';
-import pages from '../../content/pages.json';
+/* Content is one page now (approval PDF section 07). The section shows only
+   once a social link exists, so until then this address goes to the page itself. */
 import links from '../../content/content-links.json';
-import global from '../../content/global.json';
-
-const p = pages.socials;
+return Astro.redirect(links.socials.some((link) => link.url) ? '/content#socials' : '/content', 301);
 ---
-
-<Content page="socials">
-  <Masthead title={p.heading}>
-    <Fragment slot="below">
-      <p class="lead">{q(p.lede)}</p>
-      <ul class="library" role="list">
-        {links.socials.map((link) => (
-          <li>{link.url
-            ? <a class="textlink" href={link.url} target="_blank" rel="noopener noreferrer">{link.label}<span class="visually-hidden">{global.newTab}</span></a>
-            : <>{link.label}<small>{p.pending}</small></>}</li>
-        ))}
-      </ul>
-      <a class="textlink" href="/content">{pages.content.backLink}</a>
-    </Fragment>
-  </Masthead>
-</Content>

@@ -1,22 +1,4 @@
 ---
-/** Her essay on why the content exists, set as a printed essay. */
-import Content from '../../layouts/Content.astro';
-import Masthead from '../../components/Masthead.astro';
-import { q } from '../../lib/typeset.js';
-import pages from '../../content/pages.json';
-
-const i = pages.introduction;
+/* Content is one page now (approval PDF section 07): this address goes to its section. */
+return Astro.redirect('/content#introduction', 301);
 ---
-
-<Content page="introduction">
-  <Masthead runhead={i.marker} title={i.heading} />
-  <section class="sec" aria-label={i.heading}>
-    <div class="bleed">
-      <article class="essay-page col-text">
-        <p class="lead">{q(i.lede)}</p>
-        {i.paragraphs.map((line) => <p>{q(line)}</p>)}
-        <p class="space-7"><a class="textlink" href={i.link.href}>{i.link.label} <span class="arrow" aria-hidden="true">→</span></a></p>
-      </article>
-    </div>
-  </section>
-</Content>
