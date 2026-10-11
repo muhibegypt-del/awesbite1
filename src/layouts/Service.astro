@@ -46,6 +46,11 @@ const hasDetails = service.studio || service.examples?.length || service.backgro
     <Fragment slot="below">
       <p class="lead">{q(service.oneLiner)}</p>
       <p class="masthead__actions"><a class="btn" href={service.cta.href}>{service.cta.label}</a></p>
+      {service.routes && (
+        <nav class="jump" aria-label={service.tracksHeading}>
+          <ul role="list">{service.routes.map((route: { id: string; label: string }) => <li><a class="textlink" href={`#${route.id}`}>{route.label}</a></li>)}</ul>
+        </nav>
+      )}
     </Fragment>
   </Masthead>
 
@@ -55,6 +60,33 @@ const hasDetails = service.studio || service.examples?.length || service.backgro
       <div class="bleed">
         <SectionHead label={`${service.number} — ${service.tag}`} heading={service.portfolioHeading} id="portfolio-heading" />
         <TrackList />
+      </div>
+    </section>
+  )}
+
+  {/* Teaching: each route carries its descriptions and its packages, so a
+      visitor finds their level and its price in one place. */}
+  {service.routes && (
+    <section class="sec sec--band" aria-labelledby="routes-heading">
+      <div class="bleed">
+        <SectionHead label={service.tracksHeading} labelAs="h2" lead={service.rangeLine} id="routes-heading" />
+        <div class="levels col-wide">
+          {service.routes.map((route: Record<string, any>) => (
+            <article class="level" id={route.id} aria-labelledby={`${route.id}-title`}>
+              <h3 class="h3" id={`${route.id}-title`}>{route.label}</h3>
+              {route.tracks.length > 1
+                ? <dl class="pairs">{route.tracks.map((track: { label: string; body: string }) => <div><dt>{track.label}</dt><dd>{q(track.body)}</dd></div>)}</dl>
+                : <p class="muted">{q(route.tracks[0].body)}</p>}
+              <PriceList tiers={route.packages} />
+            </article>
+          ))}
+        </div>
+        {service.pricingLine && <p class="small muted col-text space-7">{q(service.pricingLine)}</p>}
+        {service.note && (
+          <div class="col-text space-7">
+            <Note heading={service.note.heading} body={service.note.body} />
+          </div>
+        )}
       </div>
     </section>
   )}
@@ -130,6 +162,29 @@ const hasDetails = service.studio || service.examples?.length || service.backgro
                 <div class="reveal"><p class="h3">{q(a.heading)}</p><p class="muted">{q(a.body)}</p></div>
               ))}
             </div>
+          </>
+        )}
+      </div>
+    </section>
+  )}
+
+  {service.routes && service.agreements?.length > 0 && (
+    <section class="sec sec--band" aria-labelledby="expect-heading">
+      <div class="bleed">
+        <SectionHead label={service.agreementsHeading} labelAs="h2" id="expect-heading" />
+        <div class="agreements">
+          {service.agreements.map((a: { heading: string; body: string }) => (
+            <div class="reveal"><p class="h3">{q(a.heading)}</p><p class="muted">{q(a.body)}</p></div>
+          ))}
+        </div>
+        {service.credentials?.length > 0 && (
+          <>
+            <h3 class="h3 col-text space-8">{service.credentialsHeading}</h3>
+            <ul class="honours space-5" role="list">
+              {service.credentials.map((c: { label: string; status: string }) => (
+                <li class="reveal"><span class="honours__q">{c.label}</span><span class="honours__b">{c.status}</span></li>
+              ))}
+            </ul>
           </>
         )}
       </div>

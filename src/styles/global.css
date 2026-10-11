@@ -678,6 +678,28 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
   .bleed > .prices { grid-column: col 3 / content-end; }
 }
 
+/* Packages: a tier that lists its options rather than an hourly rate. */
+.price__options { display: grid; gap: var(--s-1); font-size: 1.125rem; font-weight: 500; font-variant-numeric: lining-nums tabular-nums; }
+@media (min-width: 768px) {
+  .price--options { grid-template-areas: "label options" "cadence options"; }
+  .price__options { grid-area: options; text-align: right; }
+}
+@media (min-width: 1280px) {
+  .price--options { grid-template-columns: 3fr 3fr 5fr; grid-template-areas: "label cadence options"; }
+  .price__options { grid-auto-flow: column; justify-content: end; gap: var(--s-6); }
+}
+
+/* ---- Teaching levels: each route with its descriptions and packages ---- */
+
+.levels { display: grid; gap: var(--s-8); }
+.level { display: grid; gap: var(--s-5); scroll-margin-top: var(--s-7); }
+.level > .h3 { padding-top: var(--s-5); border-top: 2px solid var(--ink); }
+.level > .muted { max-width: var(--measure); }
+.level .prices { margin-top: var(--s-2); }
+
+/* Jump links from the masthead to each level. */
+.jump ul { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-5); margin-top: var(--s-5); }
+
 /* ---- What you can expect ---- */
 
 .agreements { display: grid; gap: var(--s-6); }

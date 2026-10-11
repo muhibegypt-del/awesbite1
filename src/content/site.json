@@ -56,7 +56,7 @@
     {
       "id": "teaching",
       "_comment_pillar": "Service card treatment on the hub and on every spoke. Moved verbatim from PillarCards.astro.",
-      "pillarCard": { "tag": "TEACH", "title": "learn the words.", "line": "Teaching — KS3, GCSE, International GCSE, A-Level, International A-Level, ESL & IELTS" },
+      "pillarCard": { "tag": "TEACH", "title": "learn the words.", "line": "Teaching — KS3, I/GCSE, I/A-Level, ESL & IELTS" },
       "route": "/teaching",
       "number": "01",
       "tag": "TEACH",
@@ -81,13 +81,53 @@
 
       "tracksHeading": "Who I teach",
       "rangeLine": "From blending sounds together through to A-Level and its international equivalent, with individual support shaped around the learner.",
-      "tracks": [
-        { "label": "Primary, 6 to 11", "body": "Phonics, reading, comprehension and confident writing" },
-        { "label": "Key Stage 3", "body": "Building the core reading and writing skills needed for GCSE" },
-        { "label": "GCSE and International GCSE", "body": "Exam technique, time management and writing under pressure, aligned with the student's qualification" },
-        { "label": "A-Level and International A-Level", "body": "Close analysis, inference and authorial intention, with preparation for the relevant qualification" },
-        { "label": "IELTS", "body": "Focused preparation across reading, writing, listening and speaking" },
-        { "label": "ESL and adult learners", "body": "General English from beginner to advanced, taught at a pace that suits you" }
+      "_comment_routes": "Teaching as three routes (client notes and approval PDF section 04). Route labels are hers: 'KS3 - I/GCSE', 'I/A-Level', 'ESL / IELTS'; I/GCSE and I/A-Level replace spelling out 'International'. Descriptions are the existing track lines. Packages only: the hourly rate is removed because she is not taking hourly clients.",
+      "routes": [
+        {
+          "id": "ks3-igcse",
+          "label": "KS3 - I/GCSE",
+          "tracks": [
+            { "label": "Key Stage 3", "body": "Building the core reading and writing skills needed for GCSE" },
+            { "label": "I/GCSE", "body": "Exam technique, time management and writing under pressure, aligned with the student's qualification" }
+          ],
+          "packages": [
+            { "label": "KS3 English", "cadence": "60-minute online lesson", "options": ["5 lessons £200", "10 lessons £400"] },
+            { "label": "I/GCSE English", "cadence": "60-minute online lesson", "options": ["5 lessons £250", "10 lessons £500"] }
+          ]
+        },
+        {
+          "id": "i-a-level",
+          "label": "I/A-Level",
+          "tracks": [
+            { "label": "I/A-Level", "body": "Close analysis, inference and authorial intention, with preparation for the relevant qualification" }
+          ],
+          "packages": [
+            { "label": "I/A-Level English", "cadence": "60-minute online lesson", "options": ["5 lessons £300", "10 lessons £600"] }
+          ]
+        },
+        {
+          "id": "esl-ielts",
+          "label": "ESL / IELTS",
+          "tracks": [
+            { "label": "ESL and adult learners", "body": "General English from beginner to advanced, taught at a pace that suits you" },
+            { "label": "IELTS", "body": "Focused preparation across reading, writing, listening and speaking" }
+          ],
+          "packages": [
+            { "label": "ESL / General English", "cadence": "60-minute online lesson", "options": ["5 lessons £200", "10 lessons £400"] },
+            { "label": "IELTS", "cadence": "60-minute online lesson", "options": ["5 lessons £300", "10 lessons £600"] }
+          ]
+        }
+      ],
+      "_comment_tracksRetired": "Not in the client's route list (approval PDF section 04), so not shown. Kept as content until she confirms whether primary tuition is still offered.",
+      "tracksRetired": [
+        { "label": "Primary, 6 to 11", "body": "Phonics, reading, comprehension and confident writing" }
+      ],
+
+      "_comment_credentials": "Approval PDF section 04: shown only with their current status. In her recording the training was in progress and the DBS application had been made.",
+      "credentialsHeading": "Credentials",
+      "credentials": [
+        { "label": "IELTS teacher training", "status": "In progress" },
+        { "label": "Enhanced DBS", "status": "Application made" }
       ],
 
       "methodHeading": "How it works",
@@ -100,16 +140,9 @@
       ],
 
       "publishPricing": true,
+      "_comment_pricingHeading": "Not shown since the packages moved into the routes; kept as content.",
       "pricingHeading": "Teaching prices",
       "pricingLine": "All teaching lessons are 60-minute online lessons. British Curriculum is separated from ESL and IELTS.",
-      "tiers": [
-        { "label": "KS3 English", "cadence": "60-minute online lesson", "price": "£40 / hour · 5 lessons £200 · 10 lessons £400" },
-        { "label": "GCSE English", "cadence": "60-minute online lesson", "price": "£50 / hour · 5 lessons £250 · 10 lessons £500" },
-        { "label": "A Level English", "cadence": "60-minute online lesson", "price": "£60 / hour · 5 lessons £300 · 10 lessons £600" },
-        { "label": "ESL / General English", "cadence": "60-minute online lesson", "price": "£40 / hour · 5 lessons £200 · 10 lessons £400" },
-        { "label": "IELTS", "cadence": "60-minute online lesson", "price": "£60 / hour · 5 lessons £300 · 10 lessons £600" }
-      ],
-
       "note": {
         "heading": "Support at every level",
         "body": "Tuition is not only for students who are struggling. It can also challenge students who are working ahead of their class and need more stimulating material."
