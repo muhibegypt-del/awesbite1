@@ -7,14 +7,22 @@ import Photo from '../components/Photo.astro';
 import { q } from '../lib/typeset.js';
 import site from '../content/site.json';
 import pages from '../content/pages.json';
+import global from '../content/global.json';
 
 const { about } = site;
 const labels = pages.about;
+/* One paragraph names the Television Workshop: it keeps its link. */
+const linked = (line: string) => {
+  const { text, href } = about.workshopLink;
+  if (!line.includes(text)) return null;
+  const [before, after] = line.split(text);
+  return { before, after, text, href };
+};
 ---
 
 <Base title={pages.meta.about.title} description={pages.meta.about.description}>
   <Masthead runhead={labels.marker} title={about.heading}>
-    <p slot="below" class="lead">{q(about.empathy)}</p>
+    <p slot="below" class="lead">{q(about.intro)}</p>
   </Masthead>
 
   <section class="sec" aria-label={about.heading}>
@@ -25,21 +33,14 @@ const labels = pages.about;
         <Photo src={about.portrait} alt={about.portraitAlt} sizes="(min-width: 1024px) 40vw, 100vw" eager />
       </div>
       <div class="about__text prose reveal">
-        {about.paragraphs.map((line) => <p>{q(line)}</p>)}
+        {about.paragraphs.map((line) => {
+          const link = linked(line);
+          return link
+            ? <p>{q(link.before)}<a href={link.href} target="_blank" rel="noopener noreferrer">{link.text}<span class="visually-hidden">{global.newTab}</span></a>{q(link.after)}</p>
+            : <p>{q(line)}</p>;
+        })}
       </div>
       <Honours />
-    </div>
-  </section>
-
-  <section class="sec sec--band" aria-labelledby="experience-heading">
-    <div class="bleed">
-      <SectionHead label={labels.experienceMarker} labelAs="h2" lead={about.authority} id="experience-heading" />
-      <div class="prose col-text reveal">
-        <p>{q(about.teachingBodies)}</p>
-        <h3 class="h3 space-5">{about.whyHeading}</h3>
-        {about.why.map((line) => <p>{q(line)}</p>)}
-        <a class="textlink" href={labels.teachingLink.href}>{labels.teachingLink.label} <span class="arrow" aria-hidden="true">→</span></a>
-      </div>
     </div>
   </section>
 

@@ -45,11 +45,12 @@
     "contentLink": { "label": "Explore the literary ecosystem", "href": "/content" }
   },
 
+  "_comment_credentials": "Approval PDF section 03: 'Cert TESOL' with a space, Trinity once; the British Council caption is her exact wording, 'Teacher Training Programme'.",
   "credentials": [
     { "qualification": "First-class BA (Hons)", "body": "English with a minor in American Literature and Film." },
-    { "qualification": "CertTESOL (Trinity College London)", "body": "Teaching English to speakers of other languages" },
+    { "qualification": "Cert TESOL (Trinity College London)", "body": "Teaching English to speakers of other languages" },
     { "qualification": "PGCE and QTS", "body": "Qualified Teacher Status" },
-    { "qualification": "British Council", "body": "Former teacher in Egypt" }
+    { "qualification": "British Council", "body": "Teacher Training Programme" }
   ],
 
   "services": [
@@ -372,29 +373,34 @@
   ],
 
   "about": {
+    "_comment": "About copy verbatim from the client's notes (approval PDF section 03), broken into paragraphs at sentence ends. The earlier About copy is kept under `retired` as content and is not shown.",
     "heading": "Aneesa",
+    "intro": "I am an English teacher, writer, and voice artist with 12 years of classroom experience across four countries. My work is grounded in listening closely, identifying what is needed and responding with care.",
+    "workshopLink": {
+      "text": "Television Workshop",
+      "href": "https://www.thetelevisionworkshop.co.uk/"
+    },
     "paragraphs": [
-      "I am an English teacher, voice artist and writer with 12 years of classroom experience across four countries. My work is grounded in listening closely, identifying what is needed and responding with care.",
-      "Before teaching, I acted, performed spoken word and read novels aloud in a care home. Each experience taught me something about language, interpretation and connecting with an audience."
+      "Discovering that I had a natural knack with the English language from a young age, I then knew that I wanted to use these same words to help others; whether teaching, writing, or performing them. Words have elevated people by allowing them to understand not only themselves, but the world around them, and have granted them real opportunities in their own lives.",
+      "My teenage years and early twenties were spent at various acting schools across the Midlands, culminating in my training at the renowned Television Workshop, where I became familiar with auditioning for both plays and casting directors. This fed into my already existent love for theatre and film. During this time, I also performed as a spoken word poet and volunteered my time reading stories in care homes, where I further indulged in my love for performing words and bringing them to life.",
+      "From a young age I also knew I wanted to teach abroad and see the world. So upon graduating with a 1st class in English, I initially taught as an English teaching assistant across primary and secondary schools, before teaching English as a second language with the British Council in Egypt, before then moving to Saudi Arabia. I returned to the UK to gain my PGCE before receiving my QTS in Qatar. It was here that I then taught English Language and Literature to 11-18 year olds for 5 years at a private British international school.",
+      "From America to Australia; Canada to Croatia; or Morocco to Malaysia - my extensive travels have only ever deep-rooted love for words, culture, and connection.",
+      "After years of travel, a textured word is a place where my love for words, literature, analysis and performance can finally come and take root; where I can encapsulate my years wrapped up in all things - and use these skills to help others achieve their own goals; whether for an exam, content, or an audiobook. It is a place that enables me to work with an array of people, all with different goals in mind, but a shared interest in utilising words to get there."
     ],
-    "empathy": "As a child, I found time pressure difficult even when I understood the subject. Years later, I needed a teacher to help me learn Arabic despite having access to countless free resources. Both experiences showed me that the right individual support can make all the difference.",
-    "authority": "I have spent 12 years teaching English across England, Egypt, Saudi and Qatar, working with learners from age six to adult.",
-    "teachingBodies": "I've taught with the British Council in Egypt, and with The Oxford Partnership in Saudi Arabia — one of several schools under the Colleges of Excellence programme.",
     "portrait": "/images/aneesa-with-poetry-anthology.webp",
     "portraitAlt": "Aneesa resting her chin on her hands beside an anthology of poetry",
-
-    "whyHeading": "The value of individual attention",
-    "why": [
-      "Classrooms, production schedules and content platforms are designed to serve many people efficiently. That can leave limited space for the needs of one student, the intention behind one book or the individual voice behind an idea.",
-      "Working individually creates that space: time to listen, ask thoughtful questions and shape the work around the person or project in front of me."
-    ],
-
     "reflectionFlag": null,
     "reflectionHeading": "Notes on books and language",
     "reflectionBody": "Outside my client work, I share reading notes, close analysis and reflections on the books and passages that stay with me.",
-    "reflectionTags": ["Words of the week", "Close reading", "Adaptations", "Literary devices", "Narrated extracts", "Takeaways"],
+    "reflectionTags": [
+      "Words of the week",
+      "Close reading",
+      "Adaptations",
+      "Literary devices",
+      "Narrated extracts",
+      "Takeaways"
+    ],
     "reflectionPlatforms": null,
-
     "openToHeading": "Open to",
     "openTo": [
       "Panel moderation",
@@ -402,7 +408,21 @@
       "Author interviews",
       "Publisher and bookshop events",
       "Brand partnerships with publishers, stationery brands and education companies"
-    ]
+    ],
+    "retired": {
+      "paragraphs": [
+        "I am an English teacher, voice artist and writer with 12 years of classroom experience across four countries. My work is grounded in listening closely, identifying what is needed and responding with care.",
+        "Before teaching, I acted, performed spoken word and read novels aloud in a care home. Each experience taught me something about language, interpretation and connecting with an audience."
+      ],
+      "empathy": "As a child, I found time pressure difficult even when I understood the subject. Years later, I needed a teacher to help me learn Arabic despite having access to countless free resources. Both experiences showed me that the right individual support can make all the difference.",
+      "authority": "I have spent 12 years teaching English across England, Egypt, Saudi and Qatar, working with learners from age six to adult.",
+      "teachingBodies": "I've taught with the British Council in Egypt, and with The Oxford Partnership in Saudi Arabia — one of several schools under the Colleges of Excellence programme.",
+      "whyHeading": "The value of individual attention",
+      "why": [
+        "Classrooms, production schedules and content platforms are designed to serve many people efficiently. That can leave limited space for the needs of one student, the intention behind one book or the individual voice behind an idea.",
+        "Working individually creates that space: time to listen, ask thoughtful questions and shape the work around the person or project in front of me."
+      ]
+    }
   },
 
   "contact": {
