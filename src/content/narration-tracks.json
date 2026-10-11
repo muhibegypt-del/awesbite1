@@ -1,5 +1,6 @@
 [
-  { "id": "voice-sample-01", "title": "Voice sample 01", "tag": "Audio pending", "src": null },
-  { "id": "voice-sample-02", "title": "Voice sample 02", "tag": "Audio pending", "src": null },
-  { "id": "voice-sample-03", "title": "Voice sample 03", "tag": "Audio pending", "src": null }
+  { "id": "voice-audiobook", "title": "Audiobook", "tag": "0:59", "src": "/audio/voice-audiobook.mp3" },
+  { "id": "voice-commercial", "title": "Commercial", "tag": "0:58", "src": "/audio/voice-commercial.mp3" },
+  { "id": "voice-explainer", "title": "Explainer: health video", "tag": "0:58", "src": "/audio/voice-explainer.mp3" },
+  { "id": "voice-ivr", "title": "IVR", "tag": "0:38", "src": "/audio/voice-ivr.mp3" }
 ]

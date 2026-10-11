@@ -174,15 +174,15 @@
       "showTestimonials": true,
       "backgroundLink": { "text": "The Television Workshop", "href": "https://www.thetelevisionworkshop.co.uk/" },
       "_comment_pillar": "Service card treatment on the hub and on every spoke. Moved verbatim from PillarCards.astro.",
-      "pillarCard": { "tag": "NARRATE", "title": "bring the words to life.", "line": "Voiceover & narration" },
+      "pillarCard": { "tag": "VOICE", "title": "bring the words to life.", "line": "Voiceover & narration" },
       "route": "/narration",
       "number": "03",
-      "tag": "NARRATE",
+      "tag": "VOICE",
       "pillar": "The Spoken Word",
       "plain": "Audiobook narration and voice work",
       "audience": "For authors, publishers and producers",
       "oneLiner": "I take the time to understand the text and its intention, then deliver a thoughtful performance that holds the listener's attention.",
-      "cta": { "label": "Request a custom audition", "href": "/contact?about=Audiobook+narration" },
+      "cta": { "label": "Request a custom audition", "href": "/contact?about=Voice+work" },
       "image": "/images/aneesa-with-poetry-anthology.webp",
       "imageAlt": "Aneesa resting her chin on her hands beside an anthology of poetry",
       "imagePosition": "65% center",
@@ -259,10 +259,12 @@
       "studio": null,
       "studioPlaceholder": "[ STUDIO SPEC WILL GO HERE — booth or treated room, microphone, interface, DAW, delivery formats, and typical turnaround. Corporate clients look for this to confirm broadcast quality. ]",
 
+      "_comment_background": "Voice: Further details, verbatim from the client's notes (approval PDF section 06). The Television Workshop story now lives in her About copy, so it is not repeated here; the earlier paragraph is kept below as content.",
       "background": {
         "heading": "Training and experience",
-        "body": "My voice-work experience includes my former business, Stylish Voice. I was a student at The Television Workshop. I have also trained with voice coach Gary Terzza and at Derby Academy. My performance experience also includes spoken word with Beatfreeks and university theatre in England and Canada."
+        "body": "Back in 2015, when I set up my first voiceover business, Stylish Voice, I had my professional demos recorded with Gary Terzza; channel 4’s continuity host for over two decades. It was under his tutelage that I made my first foray into the voiceover world and began to understand exactly what goes into bringing the very best of your voice into work that eventually spanned across audiobooks, commercials, explainers, IVRs, and much more."
       },
+      "backgroundRetired": "My voice-work experience includes my former business, Stylish Voice. I was a student at The Television Workshop. I have also trained with voice coach Gary Terzza and at Derby Academy. My performance experience also includes spoken word with Beatfreeks and university theatre in England and Canada.",
       "footnote": "Larger projects are priced per finished hour and quoted according to word count, finished audio length, usage and project requirements.",
       "proofHeading": "Testimonials",
       "proof": null,
@@ -417,7 +419,6 @@
     "topics": [
       "English tuition",
       "IELTS preparation",
-      "Audiobook narration",
       "Voice work",
       "Content repurposing",
       "Speaking or hosting",

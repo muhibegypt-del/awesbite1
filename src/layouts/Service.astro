@@ -226,16 +226,15 @@ const hasDetails = service.studio || service.examples?.length || service.backgro
     </section>
   )}
 
-  {service.showTestimonials && service.proofHeading && (
+  {/* Testimonials appear only once there are real ones: no placeholder. */}
+  {service.showTestimonials && service.proofHeading && service.proof?.length > 0 && (
     <section id="testimonials" class="sec sec--minor" aria-labelledby="testimonials-heading">
       <div class="bleed">
         <SectionHead label={service.proofHeading} labelAs="h2" id="testimonials-heading" />
         <div class="prose col-text reveal">
-          {service.proof?.length > 0
-            ? service.proof.map((item: { quote: string; attribution?: string }) => (
-                <blockquote><p class="lead">{q(item.quote)}</p>{item.attribution && <footer class="label">{item.attribution}</footer>}</blockquote>
-              ))
-            : <p class="pending-quote">{service.proofPlaceholder}</p>}
+          {service.proof.map((item: { quote: string; attribution?: string }) => (
+            <blockquote><p class="lead">{q(item.quote)}</p>{item.attribution && <footer class="label">{item.attribution}</footer>}</blockquote>
+          ))}
         </div>
       </div>
     </section>

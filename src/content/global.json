@@ -15,11 +15,10 @@
         ]
       },
       {
-        "label": "narrate",
+        "label": "voice",
         "href": "/narration",
         "children": [
-          { "label": "portfolio", "href": "/narration#portfolio" },
-          { "label": "testimonials", "href": "/narration#testimonials" }
+          { "label": "portfolio", "href": "/narration#portfolio" }
         ]
       },
       {
