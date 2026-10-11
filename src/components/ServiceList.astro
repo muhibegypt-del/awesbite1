@@ -1,37 +1,31 @@
 ---
 /**
- * The three services as chapter openings. One link per entry, on the title,
- * stretched over the entry so the whole entry is the target while the
- * accessible name stays short. Numerals are CSS counters, not copy.
+ * The three services as plain routes: Teach, Repurpose, Voice, each with
+ * who it is for and an arrow, the whole row one link. The same pattern on
+ * the home page's first screen and at the foot of each service page, so it
+ * always reads as navigation, never as page text (approval PDF section 08).
  *
- * `current` marks the page you are on (used under "Other services").
+ * `exclude` leaves out the page you are on (the onward links).
  */
-import { q } from '../lib/typeset.js';
 import site from '../content/site.json';
 
-interface Props { current?: string; compact?: boolean; headingTag?: 'h2' | 'h3' }
-const { current, compact = false, headingTag: Heading = 'h3' } = Astro.props;
+interface Props { exclude?: string; label?: string }
+const { exclude, label } = Astro.props;
 
 const order = ['teaching', 'repurposing', 'narration'];
-const services = [...site.services].sort((a, b) => order.indexOf(a.id) - order.indexOf(b.id));
+const services = order
+  .map((id) => site.services.find((s) => s.id === id)!)
+  .filter((service) => service.route !== exclude);
 ---
 
-<ol class:list={['contents', { 'contents--compact': compact }]} role="list">
-  {services.map((service) => {
-    const here = service.route === current;
-    return (
-      <li class:list={['entry reveal', { 'entry--current': here }]}>
-        <Heading class="entry__title">
-          {here
-            ? <span aria-current="page">{service.pillarCard.title}</span>
-            : <a href={service.route}>{service.pillarCard.title}</a>}
-        </Heading>
-        <p class="entry__line">{service.pillarCard.line}</p>
-        <p class="entry__one">{q(service.oneLiner)}</p>
-        <p class="entry__who">
-          {here ? site.hub.pillarsCurrent : <>{service.audience} <span class="arrow" aria-hidden="true">→</span></>}
-        </p>
-      </li>
-    );
-  })}
-</ol>
+<ul class="routes-nav" role="list" aria-label={label}>
+  {services.map((service) => (
+    <li>
+      <a href={service.route}>
+        <span class="routes-nav__name">{service.routeLabel}</span>
+        <span class="routes-nav__for">{service.audience}</span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+    </li>
+  ))}
+</ul>

@@ -239,10 +239,11 @@ const hasDetails = service.studio || service.examples?.length || service.backgro
     </section>
   )}
 
-  <section class="sec sec--band" aria-labelledby="other-heading">
+  {/* Onward links: plainly navigation, set apart from the page text. */}
+  <nav class="sec sec--band onward" aria-labelledby="other-heading">
     <div class="bleed">
       <SectionHead label={labels.otherMarker} labelAs="h2" id="other-heading" />
-      <ServiceList current={service.route} compact />
+      <div class="col-wide"><ServiceList exclude={service.route} /></div>
     </div>
-  </section>
+  </nav>
 </Base>

@@ -312,7 +312,7 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 .nav__item { position: relative; display: flex; align-items: center; }
 
 .nav a:not(.textlink), .menu a {
-  font-size: var(--t-small);
+  font-size: var(--t-body);
   text-decoration: none;
   text-transform: lowercase;
   transition: color var(--fast) var(--ease-out);
@@ -323,7 +323,7 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
   text-decoration-color: var(--clay);
   text-underline-offset: 0.4em;
 }
-.nav__cta { font-size: var(--t-small); }
+.nav__cta { font-size: var(--t-body); }
 
 /* Submenus open on a real button (details/summary) and need no script;
    a few lines of script only close the others and honour Escape. */
@@ -439,8 +439,10 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 }
 .hello__h1 em { font-weight: 300; color: var(--clay); }
 .hello__offer { margin-block-start: var(--s-5); }
-.hello__routes ul { margin-block-start: var(--s-6); border-bottom: 1px solid var(--rule); }
-.hello__routes a {
+/* The three services as plain routes (ServiceList): the same rows on the
+   home page's first screen and as the onward links on service pages. */
+.routes-nav { border-bottom: 1px solid var(--rule); }
+.routes-nav a {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   column-gap: var(--s-4);
@@ -449,11 +451,17 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
   border-top: 1px solid var(--rule);
   text-decoration: none;
 }
-.hello__route { font-family: var(--serif); font-size: var(--t-h3); line-height: 1.15; transition: color var(--fast) var(--ease-out); }
-.hello__for { grid-column: 1; font-size: var(--t-small); color: var(--ink-soft); }
-.hello__routes .arrow { grid-column: 2; grid-row: 1 / span 2; color: var(--clay-ink); font-size: var(--t-lead); transition: transform var(--fast) var(--ease-out); }
-.hello__routes a:hover .hello__route { color: var(--clay-ink); }
-.hello__routes a:hover .arrow { transform: translateX(var(--s-1)); }
+.routes-nav__name { font-family: var(--serif); font-size: var(--t-h3); line-height: 1.15; transition: color var(--fast) var(--ease-out); }
+.routes-nav__for { grid-column: 1; font-size: var(--t-small); color: var(--ink-soft); }
+.routes-nav .arrow { grid-column: 2; grid-row: 1 / span 2; color: var(--clay-ink); font-size: var(--t-lead); transition: transform var(--fast) var(--ease-out); }
+.routes-nav a:hover .routes-nav__name { color: var(--clay-ink); }
+.routes-nav a:hover .arrow { transform: translateX(var(--s-1)); }
+.hello__routes { margin-block-start: var(--s-6); }
+/* Onward links: two routes side by side once there is room. */
+@media (min-width: 768px) {
+  .onward .routes-nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: var(--s-7); border-bottom: 0; }
+  .onward .routes-nav li { border-bottom: 1px solid var(--rule); }
+}
 .hello__photo { aspect-ratio: 3 / 2; overflow: hidden; }
 .hello__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 62% center; }
 .hello__welcome { font-family: var(--serif); }
@@ -493,71 +501,6 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
   /* The photograph whole, in the shape it was shot; cropped only when it
      would be taller than the screen. */
   .masthead__photo { margin-block-start: var(--s-8); max-height: 100svh; width: 100%; }
-}
-
-/* ============================================================
-   Services as chapter openings
-   ============================================================ */
-
-.contents { counter-reset: entry; display: grid; }
-
-.entry {
-  position: relative;
-  counter-increment: entry;
-  display: grid;
-  gap: var(--s-3);
-  padding-block: var(--s-6);
-  border-top: 1px solid var(--rule-strong);
-}
-.entry:last-child { border-bottom: 1px solid var(--rule-strong); }
-
-.entry::before {
-  content: counter(entry, decimal-leading-zero);
-  font-family: var(--serif);
-  font-size: var(--t-small);
-  font-variant-numeric: lining-nums tabular-nums;
-  letter-spacing: var(--track-caps);
-  color: var(--ink-soft);
-}
-
-.entry__title {
-  font-family: var(--serif);
-  font-size: var(--t-entry);
-  font-weight: 300;
-  line-height: 1;
-  letter-spacing: -0.025em;
-}
-.entry__title a { text-decoration: none; transition: color var(--fast) var(--ease-out); }
-/* The whole entry is the target; the accessible name stays the title. */
-.entry__title a::after { content: ''; position: absolute; inset: 0; }
-.entry:hover .entry__title a { color: var(--clay-ink); }
-.entry:has(a:focus-visible) { outline: 2px solid var(--clay-ink); outline-offset: var(--s-2); }
-.entry__title a:focus-visible { outline: none; }
-.entry__line { font-family: var(--serif-caps); font-size: var(--t-body); letter-spacing: var(--track-caps); font-variant-caps: all-small-caps; color: var(--ink-soft); }
-.entry__one { max-width: var(--measure); }
-.entry__who { font-size: var(--t-small); font-weight: 500; color: var(--clay-ink); }
-.entry:hover .entry__who .arrow { transform: translateX(var(--s-1)); }
-
-/* The current page in "other services". */
-.entry--current .entry__title { color: var(--ink-soft); }
-.entry--current .entry__who { color: var(--ink-soft); }
-
-.contents--compact .entry__title, .routes .entry__title { font-size: var(--t-h2); }
-.contents--compact .entry__one { display: none; }
-
-@media (min-width: 1024px) {
-  .contents { grid-column: content; }
-  .entry { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gap); row-gap: var(--s-2); align-items: start; }
-  .entry::before { grid-column: 1 / span 1; grid-row: 1; padding-top: 0.9em; }
-  .entry__title { grid-column: 2 / span 6; grid-row: 1 / span 3; }
-  .entry__line { grid-column: 8 / span 5; grid-row: 1; padding-top: 0.5em; }
-  .entry__one { grid-column: 8 / span 5; grid-row: 2; }
-  .entry__who { grid-column: 8 / span 5; grid-row: 3; }
-  .contents--compact .entry::before { padding-top: 0.6em; }
-  /* Content routes have no small-caps line: the description takes its row. */
-  .routes .entry__one { grid-row: 1; padding-top: 0.6em; }
-  .routes .entry__who { grid-row: 2; }
-  .contents--compact .entry__line { padding-top: 0.3em; }
 }
 
 /* ============================================================
@@ -793,11 +736,6 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
    Content section
    ============================================================ */
 
-.subnav { border-bottom: 1px solid var(--rule); }
-.subnav ul { display: flex; flex-wrap: wrap; gap: 0 var(--s-6); }
-.subnav a { display: inline-flex; align-items: center; min-height: 44px; text-decoration: none; font-family: var(--serif-caps); letter-spacing: var(--track-caps); font-variant-caps: all-small-caps; font-size: var(--t-body); color: var(--ink-soft); transition: color var(--fast) var(--ease-out); }
-.subnav a:hover { color: var(--clay-ink); }
-.subnav a[aria-current='page'] { color: var(--ink); text-decoration: underline; text-decoration-color: var(--clay); text-underline-offset: 0.4em; }
 
 .library { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--s-2) var(--s-6); }
 .library li { font-family: var(--serif); font-size: var(--t-lead); }
