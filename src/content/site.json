@@ -7,6 +7,18 @@
 
   "hub": {
     "_comment": "OWNER: headline and sub supplied by the client, not traceable to Aneesa's transcripts. Everything else on the hub is her wording.",
+    "_comment_landing": "Landing Page copy verbatim from the client's notes (approval PDF section 02), split at sentence ends so it can be spread down the page, as she suggested. The page shows the offer sentence first so the services are clear on a phone; the rest follows in her order. The previous hero lines below are kept as content.",
+    "landing": {
+      "greeting": "Hello, I'm Aneesa, founder of a textured word.",
+      "story": [
+        "I built a brand around something I have always cherished: words. It began when I returned home after teaching abroad for almost a decade, and realised I had spent most of my life either teaching, writing, or performing words for others.",
+        "I decided I wanted to design a one-stop shop; where students, creators, and authors alike could find me in my own literary haven.",
+        "So, I got to work - and have since curated this space for us; a space where connection is made possible through the taught, written, and spoken word."
+      ],
+      "audience": "Whether you’re an English student finding your way through a text, a creator wanting your best ideas shaped into writing that reaches further, or an author or business looking to give new life and voice to the written word — you’re in the right place.",
+      "offer": "At a textured word, I work across the English spectrum: teaching, repurposing and performing words in all their textured forms.",
+      "welcome": "Welcome."
+    },
     "headline": "English teaching, content repurposing and narration, delivered with care.",
     "sub": "Thoughtful, professional support for students, authors and creators.",
     "pillarsHeading": "Three ways to work with me",
@@ -56,6 +68,7 @@
   "services": [
     {
       "id": "teaching",
+      "routeLabel": "Teach",
       "_comment_pillar": "Service card treatment on the hub and on every spoke. Moved verbatim from PillarCards.astro.",
       "pillarCard": { "tag": "TEACH", "title": "learn the words.", "line": "Teaching — KS3, I/GCSE, I/A-Level, ESL & IELTS" },
       "route": "/teaching",
@@ -172,6 +185,7 @@
 
     {
       "id": "narration",
+      "routeLabel": "Voice",
       "showTestimonials": true,
       "backgroundLink": { "text": "The Television Workshop", "href": "https://www.thetelevisionworkshop.co.uk/" },
       "_comment_pillar": "Service card treatment on the hub and on every spoke. Moved verbatim from PillarCards.astro.",
@@ -274,6 +288,7 @@
 
     {
       "id": "repurposing",
+      "routeLabel": "Repurpose",
       "_comment_portfolio": "Portfolio slot and testimonials flag. Moved verbatim from ServicePage.astro, which branched on the service id.",
       "portfolioHeading": "Portfolio",
       "portfolioPending": "Selected long-form and short-form examples will be shared here.",

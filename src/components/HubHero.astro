@@ -1,33 +1,46 @@
 ---
 /**
- * The hub's first screen: her portrait whole, edge to edge, with the brand
- * line set on the open wall to her left (desktop) or on paper above it
- * (phone). The existing hub headline stays the page's <h1>, set as the lead.
+ * The hub's first screen: who she is and what she offers, in plain words,
+ * before anything else (approval PDF sections 01 and 02). Her greeting is
+ * the <h1>, her offer sentence follows, then the three services as plainly
+ * labelled routes. The portrait sits beside it on desktop, below it on a
+ * phone. The poetic line lives further down, in the plum band.
  */
-import PencilMark from './PencilMark.astro';
 import Photo from './Photo.astro';
 import { q } from '../lib/typeset.js';
 import site from '../content/site.json';
-import global from '../content/global.json';
 
-const { hub, brand } = site;
+const { hub } = site;
+const { greeting, offer } = hub.landing;
+const order = ['teaching', 'repurposing', 'narration'];
+const routes = order.map((id) => site.services.find((s) => s.id === id)!);
+
+/* The brand name inside her greeting is set the way the wordmark is set:
+   'textured' in italic. Typesetting only; the words are hers. */
+const [beforeBrand, afterBrand] = greeting.split('textured');
 ---
 
-<section class="hero" aria-labelledby="hero-heading">
-  <p class="hero__runhead label">{brand.triad}</p>
-  <p class="hero__display display">
-    <span class="hero__line">{q(hub.name.line)}</span>
-    <span class="hero__line">{q(hub.name.lead)} <PencilMark><em>{hub.name.emphasis}</em></PencilMark></span>
-  </p>
-  <div class="hero__photo">
-    <Photo src={hub.image} alt={hub.imageAlt} eager />
-  </div>
-  <div class="hero__copy">
-    <h1 class="hero__h1" id="hero-heading">{q(hub.headline)}</h1>
-    <p class="hero__sub muted">{q(hub.sub)}</p>
-    <div class="hero__actions">
-      <a class="btn" href={global.nav.cta.href}>{global.nav.cta.label}</a>
-      <a class="textlink" href="#services">{hub.pillarsHeading}</a>
+<section class="hello" aria-labelledby="hello-heading">
+  <div class="bleed hello__inner">
+    <div class="hello__text">
+      <h1 class="hello__h1" id="hello-heading">{q(beforeBrand)}<em>textured</em>{q(afterBrand)}</h1>
+      <p class="lead hello__offer">{q(offer)}</p>
+      <nav class="hello__routes" aria-label={hub.markers.pillars}>
+        <ul role="list">
+          {routes.map((service) => (
+            <li>
+              <a href={service.route}>
+                <span class="hello__route">{service.routeLabel}</span>
+                <span class="hello__for">{service.audience}</span>
+                <span class="arrow" aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+    <div class="hello__photo full">
+      <Photo src={hub.image} alt={hub.imageAlt} sizes="(min-width: 1024px) 50vw, 100vw" eager />
     </div>
   </div>
 </section>

@@ -421,49 +421,50 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 .shead:last-child { margin-block-end: 0; }
 
 /* ============================================================
-   Hub hero: the portrait, whole, with the brand line on its wall
+   Hub first screen: greeting, offer, the three routes, the portrait
    ============================================================ */
 
-.hero { display: grid; grid-template-columns: [full-start] var(--gutter) [content-start] minmax(0, 1fr) [content-end] var(--gutter) [full-end]; padding-block-start: var(--s-7); }
-.hero > * { grid-column: content; }
-
-.hero__runhead { order: 0; margin-block-end: var(--s-5); }
-.hero__display { order: 1; }
-.hero__display em { font-weight: 300; color: var(--clay); }
-.hero__line { display: block; }
-.hero__photo { order: 2; grid-column: full; margin-block-start: var(--s-6); aspect-ratio: 3 / 2; overflow: hidden; }
-.hero__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 62% center; }
-.hero__copy { order: 3; display: grid; gap: var(--s-5); padding-block: var(--s-6) 0; }
-.hero__h1 { font-family: var(--serif); font-size: var(--t-lead); font-weight: 400; line-height: var(--lh-lead); max-width: 22em; }
-.hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-4) var(--s-6); }
+/* The first screen: her greeting, her offer, the three routes; the
+   portrait beside it on desktop, below it on a phone. */
+.hello { padding-block-start: var(--s-7); }
+.hello__inner { row-gap: var(--s-6); }
+.hello__h1 {
+  font-family: var(--serif);
+  font-size: var(--t-h2);
+  font-weight: 300;
+  line-height: var(--lh-heading);
+  letter-spacing: var(--track-heading);
+  max-width: 14em;
+  text-wrap: balance;
+}
+.hello__h1 em { font-weight: 300; color: var(--clay); }
+.hello__offer { margin-block-start: var(--s-5); }
+.hello__routes ul { margin-block-start: var(--s-6); border-bottom: 1px solid var(--rule); }
+.hello__routes a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: var(--s-4);
+  align-items: center;
+  padding-block: var(--s-4);
+  border-top: 1px solid var(--rule);
+  text-decoration: none;
+}
+.hello__route { font-family: var(--serif); font-size: var(--t-h3); line-height: 1.15; transition: color var(--fast) var(--ease-out); }
+.hello__for { grid-column: 1; font-size: var(--t-small); color: var(--ink-soft); }
+.hello__routes .arrow { grid-column: 2; grid-row: 1 / span 2; color: var(--clay-ink); font-size: var(--t-lead); transition: transform var(--fast) var(--ease-out); }
+.hello__routes a:hover .hello__route { color: var(--clay-ink); }
+.hello__routes a:hover .arrow { transform: translateX(var(--s-1)); }
+.hello__photo { aspect-ratio: 3 / 2; overflow: hidden; }
+.hello__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 62% center; }
+.hello__welcome { font-family: var(--serif); }
 
 @media (min-width: 1024px) {
-  .hero {
-    --col: calc((min(100%, var(--max)) - 2 * var(--gutter) - 11 * var(--gap)) / 12);
-    --text-edge: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
-    column-gap: var(--gap);
-    grid-template-columns:
-      [full-start] minmax(calc(var(--gutter) - var(--gap)), 1fr)
-      [content-start] repeat(12, [col] minmax(0, var(--col)))
-      [content-end] minmax(calc(var(--gutter) - var(--gap)), 1fr) [full-end];
-    grid-template-rows: auto 1fr auto;
-    padding-block-start: 0;
-  }
-  .hero__photo { grid-column: full; grid-row: 1 / span 2; margin: 0; max-height: min(calc(100svh - var(--hdr)), 900px); width: 100%; }
-  .hero__photo img { object-position: center 30%; }
-  /* A lifted grade for a photograph that carries type (Base.astro). */
-  .hero__photo .graded { filter: url(#duotone-lift); }
-  .hero__runhead { grid-column: col 1 / span 8; grid-row: 1; align-self: start; margin-block: var(--s-8) var(--s-4); z-index: 1; color: var(--ink); max-width: calc(50vw - var(--text-edge) - var(--s-4)); }
-  /* The portrait's open wall is the left half of the frame. The line is
-     sized so "Words aren't flat." (about 7.4em) always ends inside it. */
-  .hero__display { grid-column: col 1 / span 9; grid-row: 2; align-self: start; z-index: 1; font-size: min(var(--t-display), calc((50vw - var(--text-edge)) / 7.4)); }
-  /* On the photograph the italic is ink: clay on a mid-grey wall falls
-     under 3:1. The terracotta stays in the pencil line. */
-  .hero__display em { color: var(--ink); }
-  .hero__copy { grid-column: content; grid-row: 3; display: grid; grid-template-columns: subgrid; padding-block: var(--s-7) 0; align-items: end; }
-  .hero__h1 { grid-column: col 1 / span 7; }
-  .hero__sub { grid-column: col 1 / span 6; }
-  .hero__actions { grid-column: col 9 / span 4; grid-row: 1 / span 2; justify-content: flex-end; align-self: end; }
+  .hello { padding-block-start: 0; }
+  .hello__inner { align-items: center; }
+  .bleed > .hello__text { grid-column: col 1 / span 6; grid-row: 1; padding-block: var(--s-8); }
+  /* The portrait fills the right half, edge to edge, no taller than the screen. */
+  .bleed > .hello__photo { grid-column: col 7 / full-end; grid-row: 1; aspect-ratio: auto; align-self: stretch; height: min(calc(100svh - var(--hdr)), 860px); }
+  .hello__photo img { object-position: 70% 30%; }   /* her face, not the wall, centred in the half frame */
 }
 
 /* ============================================================
@@ -764,13 +765,25 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
   max-width: 24em;
   hanging-punctuation: first;
 }
+.essay__line {
+  margin-block-end: var(--s-6);
+  font-family: var(--serif);
+  font-size: var(--t-display);
+  font-weight: 300;
+  line-height: var(--lh-display);
+  letter-spacing: var(--track-display);
+}
+.essay__line > span { display: block; }
+/* On plum the italic is paper: clay would fall under 3:1. The pencil line keeps the clay. */
+.essay__line em { font-weight: 300; color: var(--on-dark); }
 .essay__mission { margin-top: var(--s-6); color: var(--on-dark-soft); }
 .essay__photo { margin: var(--sec) 0 0; aspect-ratio: 3 / 2; overflow: hidden; }
 .essay__photo img { width: 100%; height: 100%; object-fit: cover; }
 .essay .label { margin-block-end: var(--s-5); }
 
 @media (min-width: 1024px) {
-  .essay .label { grid-column: col 1 / span 2; grid-row: 1 / span 2; padding-top: 0.9em; }
+  .essay .label { grid-column: col 1 / span 2; grid-row: 1; padding-top: 0.9em; }
+  .essay__line { grid-column: col 3 / span 10; grid-row: 1; }
   .essay__lede { grid-column: col 3 / span 9; }
   .essay__mission { grid-column: col 3 / span 6; }
   .essay__photo { aspect-ratio: 21 / 9; }
@@ -869,6 +882,8 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 ::view-transition-old(root), ::view-transition-new(root) { animation-duration: var(--fast); }
 
 .pencil__mark path { stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1100ms var(--ease-out) 500ms forwards; }
+/* Below the fold the line waits for its heading to arrive, so the drawing is seen. */
+.reveal-pending:not(.is-in) .pencil__mark path { animation-play-state: paused; }
 @keyframes draw { to { stroke-dashoffset: 0; } }
 
 /* Scroll reveals. The script only ever hides an element that is below the

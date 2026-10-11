@@ -1,34 +1,32 @@
 ---
-/** The hub. Signposts the three services, introduces Aneesa, explains the
-    name, points to the content, and closes on the one action. */
+/** The hub. Says plainly what she offers and routes to the three services
+    first, then her own introduction with the qualifications, the name on
+    the plum band, and the close on the one action (approval PDF section
+    02). About and Content have their own pages, so they are not repeated
+    here. */
 import Base from '../layouts/Base.astro';
 import HubHero from '../components/HubHero.astro';
 import SectionHead from '../components/SectionHead.astro';
-import ServiceList from '../components/ServiceList.astro';
 import Honours from '../components/Honours.astro';
 import EssayBand from '../components/EssayBand.astro';
 import { q } from '../lib/typeset.js';
 import site from '../content/site.json';
 import global from '../content/global.json';
 
-const { hub, about, contact } = site;
+const { hub, contact } = site;
+const { story, audience, welcome } = hub.landing;
 ---
 
 <Base title={global.meta.title} bare>
   <HubHero />
 
-  <section class="sec" id="services" aria-labelledby="services-heading">
+  <section class="sec" aria-labelledby="story-heading">
     <div class="bleed">
-      <SectionHead label={hub.markers.pillars} heading={hub.pillarsHeading} lead={hub.pillarsLine} id="services-heading" />
-      <ServiceList />
-    </div>
-  </section>
-
-  <section class="sec" aria-labelledby="about-heading">
-    <div class="bleed">
-      <SectionHead label={hub.markers.authority} heading={hub.authorityHeading} id="about-heading" />
+      <SectionHead label={hub.markers.authority} labelAs="h2" id="story-heading" />
       <div class="prose col-text reveal">
-        {hub.authorityParagraphs.map((line) => <p>{q(line)}</p>)}
+        {story.map((line) => <p>{q(line)}</p>)}
+        <p class="lead">{q(audience)}</p>
+        <p class="lead hello__welcome"><em>{welcome}</em></p>
         <a class="textlink" href={hub.authorityLink.href}>{hub.authorityLink.label} <span class="arrow" aria-hidden="true">→</span></a>
       </div>
       <Honours />
@@ -36,14 +34,6 @@ const { hub, about, contact } = site;
   </section>
 
   <EssayBand />
-
-  <section class="sec" aria-labelledby="content-heading">
-    <div class="bleed">
-      <SectionHead label={hub.markers.content} heading={hub.contentHeading} lead={about.reflectionBody} id="content-heading">
-        <a class="textlink" href={hub.contentLink.href}>{hub.contentLink.label} <span class="arrow" aria-hidden="true">→</span></a>
-      </SectionHead>
-    </div>
-  </section>
 
   <section class="sec sec--band" aria-labelledby="close-heading">
     <div class="bleed">
