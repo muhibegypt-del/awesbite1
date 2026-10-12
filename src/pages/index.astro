@@ -25,8 +25,8 @@ const { story, audience, welcome } = hub.landing;
       <SectionHead label={hub.markers.authority} labelAs="h2" id="story-heading" />
       <div class="prose col-text reveal">
         {story.map((line) => <p>{q(line)}</p>)}
-        <p class="lead">{q(audience)}</p>
-        <p class="lead hello__welcome"><em>{welcome}</em></p>
+        <p>{q(audience)}</p>
+        <p>{welcome}</p>
         <a class="textlink" href={hub.authorityLink.href}>{hub.authorityLink.label} <span class="arrow" aria-hidden="true">→</span></a>
       </div>
       <Honours />

@@ -61,6 +61,7 @@ Copy changes still need the client's approval. Typesetting (curly apostrophes vi
 - Two families only. **Literata** for display, headings, leads, pull-quotes and labels (true small caps). **Instrument Sans** for body, UI, nav, buttons and figures. No monospace anywhere.
 - Body copy capped at `--measure` (30em, at most 68 characters; essay pages 28em). Never full-width paragraphs.
 - Emphasis is italic, not bold.
+- One passage, one style. A larger `.lead` paragraph may only open a page or section (a standfirst), never sit in the middle of running text; a client's continuous copy is set in a single face and size throughout.
 - Two left edges only: the page edge (grid column 1) and the text edge (column 3).
 - Brand name is always lowercase, including in `<title>` and OG tags.
 - The client's surname appears nowhere — not in copy, image filenames or metadata.

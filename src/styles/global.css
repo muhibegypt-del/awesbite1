@@ -464,7 +464,6 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 }
 .hello__photo { aspect-ratio: 3 / 2; overflow: hidden; }
 .hello__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 62% center; }
-.hello__welcome { font-family: var(--serif); }
 
 @media (min-width: 1024px) {
   .hello { padding-block-start: 0; }
