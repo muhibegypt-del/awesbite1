@@ -1,0 +1,31 @@
+---
+/**
+ * The three services as plain routes: Teach, Repurpose, Voice, each with
+ * who it is for and an arrow, the whole row one link. The same pattern on
+ * the home page's first screen and at the foot of each service page, so it
+ * always reads as navigation, never as page text (approval PDF section 08).
+ *
+ * `exclude` leaves out the page you are on (the onward links).
+ */
+import site from '../content/site.json';
+
+interface Props { exclude?: string; label?: string }
+const { exclude, label } = Astro.props;
+
+const order = ['teaching', 'repurposing', 'narration'];
+const services = order
+  .map((id) => site.services.find((s) => s.id === id)!)
+  .filter((service) => service.route !== exclude);
+---
+
+<ul class="routes-nav" role="list" aria-label={label}>
+  {services.map((service) => (
+    <li>
+      <a href={service.route}>
+        <span class="routes-nav__name">{service.routeLabel}</span>
+        <span class="routes-nav__for">{service.audience}</span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </a>
+    </li>
+  ))}
+</ul>

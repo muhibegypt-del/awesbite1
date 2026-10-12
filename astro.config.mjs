@@ -5,8 +5,9 @@ export default defineConfig({
   site: 'https://atexturedword.com',
   output: 'static',
   build: {
-    // One stylesheet rather than per-page <style> blocks: the token layer and
-    // the global layer are needed on every page anyway.
-    inlineStylesheets: 'never',
+    // The whole stylesheet is under 7KB gzipped, so it rides inside each page
+    // rather than costing a render-blocking request (about 450ms of LCP on a
+    // throttled phone in Lighthouse).
+    inlineStylesheets: 'always',
   },
 });

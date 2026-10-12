@@ -1,0 +1,28 @@
+---
+/** The name, explained, on the plum band: "Words aren't flat. They're
+    textured." as its heading (moved here from the first screen, approval
+    PDF section 02), the lede as a pull-quote, the mission, then the
+    manuscript photograph edge to edge. */
+import Photo from './Photo.astro';
+import PencilMark from './PencilMark.astro';
+import { q } from '../lib/typeset.js';
+import site from '../content/site.json';
+
+const { hub } = site;
+const repurposing = site.services.find((s) => s.id === 'repurposing')!;
+---
+
+<section class="sec sec--dark essay" aria-labelledby="essay-heading">
+  <div class="bleed">
+    <p class="label essay__label">{hub.markers.name}</p>
+    <h2 class="essay__line reveal" id="essay-heading">
+      <span>{q(hub.name.line)}</span>
+      <span>{q(hub.name.lead)} <PencilMark><em>{hub.name.emphasis}</em></PencilMark></span>
+    </h2>
+    <p class="essay__lede reveal">{q(hub.name.lede)}</p>
+    <p class="essay__mission reveal">{q(hub.name.mission)}</p>
+    <div class="essay__photo full reveal">
+      <Photo src={repurposing.image} alt={repurposing.imageAlt} />
+    </div>
+  </div>
+</section>

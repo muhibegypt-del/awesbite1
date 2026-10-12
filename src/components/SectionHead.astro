@@ -1,0 +1,25 @@
+---
+/**
+ * Gutter label on the page edge; heading and lead on the text edge.
+ * When a section has no heading of its own, the label is the heading
+ * (`labelAs="h2"`), so the outline still reaches every section.
+ */
+import { q } from '../lib/typeset.js';
+
+interface Props {
+  label?: string;
+  heading?: string;
+  lead?: string;
+  id?: string;
+  as?: 'h2' | 'h3';
+  labelAs?: 'p' | 'h2';
+}
+const { label, heading, lead, id, as: Tag = 'h2', labelAs: LabelTag = 'p' } = Astro.props;
+---
+
+<header class="shead reveal">
+  {label && <LabelTag class="label" id={LabelTag === 'h2' ? id : undefined}>{q(label)}</LabelTag>}
+  {heading && <Tag class="h2" id={LabelTag === 'h2' ? undefined : id}>{q(heading)}</Tag>}
+  {lead && <p class="lead">{q(lead)}</p>}
+  <slot />
+</header>

@@ -1,0 +1,182 @@
+{
+  "_comment": "Page-level copy moved verbatim out of the templates (extracted by script, not retyped). Visitor-facing words for about, contact, content and the utility pages, plus each page's title and meta description.",
+  "common": {
+    "backToSite": "Back to the site"
+  },
+  "meta": {
+    "teaching": {
+      "title": "Teaching",
+      "description": "Individual English teaching: primary, KS3, GCSE, International GCSE, A-Level and International A-Level, ESL and IELTS."
+    },
+    "narration": {
+      "title": "Audiobook narration and voice work",
+      "description": "Audiobook narration and voice work for authors, publishers and producers. I understand the text before I record it. Request a custom audition."
+    },
+    "repurposing": {
+      "title": "Content repurposing",
+      "description": "Long-form and short-form writing developed from your voice notes, podcasts and existing content, in a voice that remains yours."
+    },
+    "about": {
+      "title": "About Aneesa",
+      "description": "English teacher, voice artist and writer with 12 years of classroom experience across England, Egypt, Saudi and Qatar."
+    },
+    "contact": {
+      "title": "Start an enquiry",
+      "description": "Tell me what you are looking for and when you need it. We can begin with a free 20-minute call to see whether I am the right person to help."
+    },
+    "notFound": {
+      "title": "Not found"
+    },
+    "thankYou": {
+      "title": "Thank you"
+    },
+    "content": {
+      "title": "Content",
+      "description": "A literary ecosystem: reading notes, close analysis, narrated extracts and conversations about books and language."
+    },
+    "introduction": {
+      "title": "Intro",
+      "description": "Aneesa explains why a textured word extends beyond student and client work into a literary ecosystem."
+    },
+    "collaborations": {
+      "title": "Collaborations",
+      "description": "Enquiries for literary conversations, panel moderation, author interviews and events."
+    },
+    "socials": {
+      "title": "Socials",
+      "description": "Find a textured word on LinkedIn, Instagram and TikTok."
+    },
+    "substack": {
+      "title": "Substack",
+      "description": "Reading notes and literary reflections from a textured word."
+    },
+    "youtube": {
+      "title": "YouTube",
+      "description": "Long-form breakdowns of novels, plays and poems from a textured word."
+    }
+  },
+  "about": {
+    "marker": "About",
+    "experienceMarker": "Experience",
+    "teachingLink": {
+      "label": "Explore teaching",
+      "href": "/teaching"
+    },
+    "beyondMarker": "Beyond client work",
+    "beyondHeading": "Books, language and community",
+    "contentLink": {
+      "label": "Explore Content",
+      "href": "/content"
+    }
+  },
+  "contact": {
+    "marker": "Contact",
+    "direct": "Or email directly:"
+  },
+  "services": {
+    "problemLabelDefault": "The challenge",
+    "detailsMarker": "Further details",
+    "otherMarker": "Other services"
+  },
+  "content": {
+    "navHome": "Content",
+    "navLabel": "Content section",
+    "nav": [
+      {
+        "label": "Intro",
+        "href": "/content/introduction"
+      },
+      {
+        "label": "Substack",
+        "href": "/content/substack"
+      },
+      {
+        "label": "YouTube",
+        "href": "/content/youtube"
+      },
+      {
+        "label": "Socials",
+        "href": "/content/socials"
+      },
+      {
+        "label": "Collaborations",
+        "href": "/content/collaborations"
+      }
+    ],
+    "marker": "Content",
+    "heading": "A literary ecosystem",
+    "introLink": {
+      "label": "Why I started it",
+      "href": "/content/introduction"
+    },
+    "exploreMarker": "Explore",
+    "exploreHeading": "Meet words where you are",
+    "routes": [
+      {
+        "title": "Intro",
+        "body": "Why I started this literary ecosystem, and who it is for.",
+        "href": "/content/introduction"
+      },
+      {
+        "title": "Substack",
+        "body": "A home for reading notes and reflections. Publication link to follow.",
+        "href": "/content/substack"
+      },
+      {
+        "title": "YouTube",
+        "body": "Long-form breakdowns of novels, plays and poems.",
+        "href": "/content/youtube"
+      },
+      {
+        "title": "Socials",
+        "body": "Words, extracts and takeaways for everyday reading.",
+        "href": "/content/socials"
+      },
+      {
+        "title": "Collaborations",
+        "body": "Conversations and events that connect books, language and people.",
+        "href": "/content/collaborations"
+      }
+    ],
+    "routeCue": "Explore →",
+    "libraryHeading": "Library",
+    "libraryPending": "coming soon",
+    "backLink": "Back to Content"
+  },
+  "introduction": {
+    "marker": "Intro",
+    "heading": "Why I started it",
+    "lede": "I wanted a textured word to extend beyond my student and client work. Understanding and articulating ourselves in a way that we believe sets us up more accurately and confidently is a noble pursuit for anyone and everyone. As a former classroom teacher, naturally I believe that education is the right for all, and so whether it's somebody time-strapped but who may wish to learn a few new words a day, to a bonafide literary enthusiast who enjoys listening to a deeper analysis of one of their favourite stories — I set up this literary ecosystem in the hopes of meeting people wherever they are.",
+    "paragraphs": [
+      "As of late, with all the reports in the news of falling literacy rates and of nobody reading anymore — rather than adopting a fatalistic outlook, with a textured word, my aim across social platforms is to create a bridge; to simply meet people where they're at. Because being drawn in by a good story is a commonality we have shared with our ancestors since time immemorial. I do not believe that people no longer wish to read but, rather, that they may well have negative associations tied to or feel intimidated by various aspects of reading or writing. It may well be that, yes, they have succumbed to the mighty tech overlords and feel they have the concentration span of a gnat. But just like stories are put together — word by word — better habits are built — step by step. A textured word, a baby step, a day at a time; we can all work towards a better, more literate future.",
+      "This ecosystem was a way to enable my work hopefully reaching a wider community of people who may no longer want the English classroom, but miss pursuing and understanding intentions and interpretations behind stories in a way that brings relevance and enriches their everyday life in one way or another.",
+      "It sometimes sounds like a bit of a platitude to say that we must keep art, humanities and community alive in a world seemingly encroached by AI. But despite it coming off as a bit trite; well, it still seems to ring, quite simply, true? To have a place where the taught, written, and spoken word can reign triumphant, as inherently valuable as it is, is my small pursuit and contribution to where my own education has taken me so far."
+    ],
+    "link": {
+      "label": "Explore Content",
+      "href": "/content"
+    }
+  },
+  "collaborations": {
+    "heading": "Collaborations",
+    "lede": "Open to conversations and projects that bring books, language and people together.",
+    "linkLabel": "Enquire about a collaboration"
+  },
+  "socials": {
+    "heading": "Socials",
+    "lede": "Words of the week, close readings, narrated extracts and takeaways.",
+    "pending": "— link coming soon"
+  },
+  "substack": {
+    "heading": "Substack",
+    "lede": "Reading notes and reflections on books and language.",
+    "linkLabel": "Read on Substack",
+    "pending": "The publication link will be added here when ready."
+  },
+  "youtube": {
+    "heading": "YouTube",
+    "lede": "Long-form breakdowns of novels, plays and poems — with time to explore the language, context and choices behind a story.",
+    "linkLabel": "Watch on YouTube",
+    "pending": "Videos and the channel link will be added here when ready."
+  }
+}

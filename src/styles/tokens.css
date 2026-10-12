@@ -1,118 +1,105 @@
 /* ============================================================
-   a textured word — design tokens
-   Companion to: a-textured-word-master-web-brief.md
-   All values extracted from or derived from the client moodboard.
+   a textured word — design tokens (Direction B, "Printed Matter")
+
+   The single source of truth. Nothing downstream hardcodes a colour, a
+   space, a size or a duration that exists here.
    ============================================================ */
 
 :root {
   /* ---- Surfaces ---- */
-  --paper:      #FFFAF6;   /* warm white — page background */
-  --paper-lift: #FFFFFF;   /* cards and inputs */
-  --coconut:    #F6E9DF;   /* client-approved subtle orange tint */
+  --paper:      #F1E6D9;   /* warm uncoated stock: the page */
+  --band:       #E1CFBD;   /* the second surface, 1.23:1 against paper */
+  --lift:       #F8F1E9;   /* fields and anything raised off the paper */
 
-  /* ---- Type & structure ---- */
-  --ink:        #241C1A;   /* headings + body. Never use #000 */
-  --ink-soft:   #5A4E48;   /* captions, mono labels at rest */
-  /* Derived from --ink so it retunes with the palette. It was a hardcoded
-     rgba of variant A's ink, which left every hairline on the site warm
-     terracotta under the plum and sage palettes. */
-  --rule:       color-mix(in srgb, var(--ink) 14%, transparent);
+  /* ---- Ink ---- */
+  --ink:        #241C1A;   /* all text. Never #000: the client rejected black */
+  --ink-soft:   #5A4E48;   /* secondary text */
+  --rule:        color-mix(in srgb, var(--ink) 16%, transparent);
+  --rule-strong: color-mix(in srgb, var(--ink) 30%, transparent);
 
-  /* ---- Accent (Terracotta family) ---- */
-  --clay:       #AF593E;   /* fills, large type ≥24px, marks. NOT small text */
-  --clay-ink:   #8F4530;   /* text-safe: links, small labels, solid buttons */
+  /* ---- Accent: two tokens, not interchangeable ----
+     --clay is 3.95:1 on paper: fills, marks and text of 24px or more only.
+     Anything smaller uses --clay-ink (5.57:1 on paper, 4.53:1 on band). */
+  --clay:       #AF593E;
+  --clay-ink:   #8F4530;
 
-  /* ---- Quiet support ---- */
-  --olive:      #6D7456;   /* Reflection only, large text only */
-  --plum:       #5B3B4E;   /* raw palette colour */
+  /* ---- The dark key: plum ----
+     The essay band and the close. Photographs are graded into it too
+     (Base.astro, #duotone), so image and page are one material. */
+  --dark:         #5B3B4E;
+  --on-dark:      #F1E6D9;   /* 7.82:1 on plum */
+  --on-dark-soft: #E6D3CF;   /* 6.69:1 on plum */
+  --on-dark-rule: color-mix(in srgb, var(--on-dark) 22%, transparent);
+  --duo-shadow:   #2E1F29;   /* the photographs' black point */
 
-  /* ---- Dark bands ---- */
-  /* Every dark surface — the footer, and the pull-quote band when it is
-     built — reads this, never --plum directly, so the accent variants can
-     retune it. Defaults to plum, which is variant A. */
-  --surface-dark: #5B3B4E;
-  --teal:       #5F8A8B;   /* audio player scrubber ONLY */
+  /* ---- The one cool colour: audio scrubber fill only ---- */
+  --teal:       #5F8A8B;
 
   /* ---- Typefaces ---- */
-  --font-display: "Fraunces Variable", Georgia, serif;
-  --font-body:    "Inter Variable", -apple-system, "Segoe UI", sans-serif;
-  --font-mono:    "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --serif: "Literata", "Literata Fallback", Georgia, "Times New Roman", serif;
+  --serif-caps: "Literata", "Literata Caps Fallback", Georgia, "Times New Roman", serif;   /* small caps */
+  --sans:  "Instrument Sans", "Instrument Sans Fallback", -apple-system, "Segoe UI", sans-serif;
 
-  /* ---- Type scale (fluid, 360px → 1440px) ---- */
-  --t-hero:    clamp(2.75rem, 7vw, 6rem);
-  --t-h1:      clamp(2.25rem, 5vw, 4rem);
-  --t-h2:      clamp(1.75rem, 3.2vw, 2.75rem);
-  --t-h3:      clamp(1.25rem, 2vw, 1.5rem);
-  --t-quote:   clamp(1.5rem, 3vw, 2.25rem);
-  --t-lead:    clamp(1.125rem, 1.6vw, 1.3125rem);
-  --t-body:    1.0625rem;   /* 17px */
-  --t-small:   0.9375rem;   /* 15px */
-  --t-mono:    0.75rem;     /* 12px, tracking 0.14em */
-  --t-mono-lg: 0.875rem;    /* 14px, tracking 0.12em */
+  /* ---- Type roles (fluid 390 → 1440) ----
+     One family, weight, ramp and leading per role. */
+  --t-display: clamp(2.25rem, 0.5rem + 6.8vw, 5.75rem);
+  --t-title:   clamp(2.5rem, 1.2rem + 4.4vw, 5rem);
+  --t-h2:      clamp(2rem, 1.45rem + 2.2vw, 3.25rem);
+  --t-h3:      clamp(1.5rem, 1.3rem + 0.8vw, 2rem);
+  --t-entry:   clamp(2.25rem, 1.4rem + 3.4vw, 4.5rem);
+  --t-quote:   clamp(1.625rem, 1.2rem + 1.6vw, 2.625rem);
+  --t-lead:    clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
+  --t-body:    clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --t-small:   0.9375rem;
 
-  --track-mono:    0.14em;
-  --track-mono-lg: 0.12em;
-  --measure:       68ch;
-  --measure-lead:  58ch;
+  --lh-display: 0.95;
+  --lh-heading: 1.08;
+  --lh-lead:    1.42;
+  --lh-body:    1.62;
+  --lh-small:   1.5;
 
-  /* ---- Spacing (8px base — use no other values) ---- */
+  --track-display: -0.03em;
+  --track-heading: -0.015em;
+  --track-caps:     0.04em;   /* small caps want a little air */
+
+  /* ---- Measure ---- */
+  --measure:      30em;   /* 64–68 characters of body text in Instrument Sans */
+  --measure-lead: 24em;
+  --measure-head: 18em;
+
+  /* ---- Spacing: the only values allowed ---- */
   --s-1: 4px;   --s-2: 8px;   --s-3: 12px;  --s-4: 16px;
   --s-5: 24px;  --s-6: 32px;  --s-7: 48px;  --s-8: 64px;
   --s-9: 96px;  --s-10: 128px; --s-11: 160px;
 
-  /* ---- Radii & borders ---- */
-  --radius-none: 0;
-  --radius-sm:   2px;   /* inputs, buttons */
-  --radius-md:   10px;  /* cards, modal, audio player */
-  --border:      1px solid var(--rule);
-  /* No box-shadows anywhere on this site. */
-
   /* ---- Layout ---- */
-  --container:    1240px;
-  --gutter-x:     88px;
-  --gutter-x-md:  48px;
-  --gutter-x-sm:  20px;
+  --max:    1320px;
+  --gap:    var(--s-5);
+  --gutter: var(--s-5);
+  --hdr:    64px;
+  --sec:       var(--s-8);   /* a major section */
+  --sec-minor: var(--s-7);   /* a section that holds a line or two */
+
+  /* ---- Radii ---- */
+  --radius-sm: 2px;    /* buttons, fields */
+  --radius-md: 10px;   /* the audio player */
 
   /* ---- Motion ---- */
-  --ease:      cubic-bezier(0.65, 0, 0.35, 1);
-  --dur-fast:  180ms;
-  --dur-mid:   320ms;
-  --dur-slow:  640ms;
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --ease-reveal: cubic-bezier(0.16, 1, 0.3, 1);   /* long, soft landing */
+  --fast:     180ms;
+  --reveal:   900ms;
+  --reveal-step: 90ms;
+  --reveal-rise: var(--s-6);
+
+  /* ---- Texture ---- */
+  --grain: 0.085;
 }
 
-@media (max-width: 1023px) { :root { --gutter-x: var(--gutter-x-md); } }
-@media (max-width: 767px)  { :root { --gutter-x: var(--gutter-x-sm); } }
-
-@media (prefers-reduced-motion: reduce) {
-  :root { --dur-fast: 120ms; --dur-mid: 120ms; --dur-slow: 120ms; }
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-property: opacity, color, background-color, border-color !important;
-    scroll-behavior: auto !important;
-  }
+@media (min-width: 768px) {
+  :root { --gutter: var(--s-7); --sec: var(--s-9); --sec-minor: var(--s-8); }
 }
 
-/* ============================================================
-   Contrast reference (verified, WCAG 2.2)
-   ink / paper .............. 14.06  ✓ body
-   ink / coconut ............ 10.46  ✓ body
-   ink-soft / paper ..........  6.75  ✓ body
-   clay-ink / paper ..........  5.77  ✓ body + links
-   paper / clay-ink ..........  5.77  ✓ button label
-   paper / plum ..............  8.10  ✓ footer
-   clay / paper ..............  4.09  ✗ large text only (≥24px)
-   ink / clay ................  3.44  ✗ large text only
-   olive / paper .............  4.12  ✗ large text only
-   ============================================================ */
-
-/* ---- Grain overlay: paper tooth for the whole site ---- */
-.grain {
-  position: fixed;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  opacity: 0.03;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='1'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+@media (min-width: 1024px) {
+  :root { --gutter: var(--s-8); --sec: var(--s-10); --sec-minor: var(--s-9); --hdr: 88px; }
 }

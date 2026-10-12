@@ -7,28 +7,70 @@
 
   "hub": {
     "_comment": "OWNER: headline and sub supplied by the client, not traceable to Aneesa's transcripts. Everything else on the hub is her wording.",
+    "_comment_landing": "Landing Page copy verbatim from the client's notes (approval PDF section 02), split at sentence ends so it can be spread down the page, as she suggested. The page shows the offer sentence first so the services are clear on a phone; the rest follows in her order. The previous hero lines below are kept as content.",
+    "landing": {
+      "greeting": "Hello, I'm Aneesa, founder of a textured word.",
+      "story": [
+        "I built a brand around something I have always cherished: words. It began when I returned home after teaching abroad for almost a decade, and realised I had spent most of my life either teaching, writing, or performing words for others.",
+        "I decided I wanted to design a one-stop shop; where students, creators, and authors alike could find me in my own literary haven.",
+        "So, I got to work - and have since curated this space for us; a space where connection is made possible through the taught, written, and spoken word."
+      ],
+      "audience": "Whether you’re an English student finding your way through a text, a creator wanting your best ideas shaped into writing that reaches further, or an author or business looking to give new life and voice to the written word — you’re in the right place.",
+      "offer": "At a textured word, I work across the English spectrum: teaching, repurposing and performing words in all their textured forms.",
+      "welcome": "Welcome."
+    },
     "headline": "English teaching, content repurposing and narration, delivered with care.",
     "sub": "Thoughtful, professional support for students, authors and creators.",
     "pillarsHeading": "Three ways to work with me",
     "pillarsLine": "Each service begins with careful attention—to the student, the text or the voice behind the idea.",
+    "pillarsCurrent": "You are here",
     "authorityHeading": "Aneesa",
     "authorityParagraphs": [
       "I am an English teacher, voice artist and writer with 12 years of classroom experience across four countries. My work is grounded in listening closely, identifying what is needed and responding with care.",
       "Before teaching, I acted, performed spoken word and read novels aloud in a care home. Each experience taught me something about language, interpretation and connecting with an audience."
     ],
-    "authorityLink": { "label": "More about Aneesa", "href": "/about" }
+    "authorityLink": { "label": "More about Aneesa", "href": "/about" },
+
+    "_comment_markers": "Gutter labels for the hub sections. Moved verbatim from HomePage.astro.",
+    "markers": {
+      "pillars": "Services",
+      "authority": "About Aneesa",
+      "name": "The name",
+      "content": "Content",
+      "close": "Next step"
+    },
+
+    "_comment_name": "The brand line and the section that explains it. Moved verbatim from HomePage.astro; `emphasis` is the italic word.",
+    "name": {
+      "line": "Words aren't flat.",
+      "lead": "They're",
+      "emphasis": "textured.",
+      "lede": "“Texture” was the word I kept coming back to. We already know how the texture of a fabric or a dish changes the way it makes us feel — yet we rarely talk about words that way, even though the right word, in the right place, lands differently on everyone who hears it.",
+      "mission": "a textured word exists to help people learn, shape and voice language with intention — because words aren't flat, they're textured."
+    },
+
+    "_comment_image": "The hub hero photograph (chosen by the client). Moved here from the narration record, alt text verbatim; narration now uses the anthology portrait.",
+    "image": "/images/aneesa-portrait.webp",
+    "imageAlt": "Aneesa smiling in a softly lit black-and-white portrait",
+
+    "contentHeading": "Notes on books and language",
+    "contentLink": { "label": "Explore the literary ecosystem", "href": "/content" }
   },
 
+  "_comment_credentials": "Approval PDF section 03: 'Cert TESOL' with a space, Trinity once; the British Council caption is her exact wording, 'Teacher Training Programme'.",
   "credentials": [
     { "qualification": "First-class BA (Hons)", "body": "English with a minor in American Literature and Film." },
-    { "qualification": "CertTESOL (Trinity College London)", "body": "Teaching English to speakers of other languages" },
+    { "qualification": "Cert TESOL (Trinity College London)", "body": "Teaching English to speakers of other languages" },
     { "qualification": "PGCE and QTS", "body": "Qualified Teacher Status" },
-    { "qualification": "British Council", "body": "Former teacher in Egypt" }
+    { "qualification": "British Council", "body": "Teacher Training Programme" }
   ],
 
   "services": [
     {
       "id": "teaching",
+      "routeLabel": "Teach",
+      "_comment_pillar": "Service card treatment on the hub and on every spoke. Moved verbatim from PillarCards.astro.",
+      "pillarCard": { "tag": "TEACH", "title": "learn the words.", "line": "Teaching — KS3, I/GCSE, I/A-Level, ESL & IELTS" },
       "route": "/teaching",
       "number": "01",
       "tag": "TEACH",
@@ -53,13 +95,53 @@
 
       "tracksHeading": "Who I teach",
       "rangeLine": "From blending sounds together through to A-Level and its international equivalent, with individual support shaped around the learner.",
-      "tracks": [
-        { "label": "Primary, 6 to 11", "body": "Phonics, reading, comprehension and confident writing" },
-        { "label": "Key Stage 3", "body": "Building the core reading and writing skills needed for GCSE" },
-        { "label": "GCSE and International GCSE", "body": "Exam technique, time management and writing under pressure, aligned with the student's qualification" },
-        { "label": "A-Level and International A-Level", "body": "Close analysis, inference and authorial intention, with preparation for the relevant qualification" },
-        { "label": "IELTS", "body": "Focused preparation across reading, writing, listening and speaking" },
-        { "label": "ESL and adult learners", "body": "General English from beginner to advanced, taught at a pace that suits you" }
+      "_comment_routes": "Teaching as three routes (client notes and approval PDF section 04). Route labels are hers: 'KS3 - I/GCSE', 'I/A-Level', 'ESL / IELTS'; I/GCSE and I/A-Level replace spelling out 'International'. Descriptions are the existing track lines. Packages only: the hourly rate is removed because she is not taking hourly clients.",
+      "routes": [
+        {
+          "id": "ks3-igcse",
+          "label": "KS3 - I/GCSE",
+          "tracks": [
+            { "label": "Key Stage 3", "body": "Building the core reading and writing skills needed for GCSE" },
+            { "label": "I/GCSE", "body": "Exam technique, time management and writing under pressure, aligned with the student's qualification" }
+          ],
+          "packages": [
+            { "label": "KS3 English", "cadence": "60-minute online lesson", "options": ["5 lessons £200", "10 lessons £400"] },
+            { "label": "I/GCSE English", "cadence": "60-minute online lesson", "options": ["5 lessons £250", "10 lessons £500"] }
+          ]
+        },
+        {
+          "id": "i-a-level",
+          "label": "I/A-Level",
+          "tracks": [
+            { "label": "I/A-Level", "body": "Close analysis, inference and authorial intention, with preparation for the relevant qualification" }
+          ],
+          "packages": [
+            { "label": "I/A-Level English", "cadence": "60-minute online lesson", "options": ["5 lessons £300", "10 lessons £600"] }
+          ]
+        },
+        {
+          "id": "esl-ielts",
+          "label": "ESL / IELTS",
+          "tracks": [
+            { "label": "ESL and adult learners", "body": "General English from beginner to advanced, taught at a pace that suits you" },
+            { "label": "IELTS", "body": "Focused preparation across reading, writing, listening and speaking" }
+          ],
+          "packages": [
+            { "label": "ESL / General English", "cadence": "60-minute online lesson", "options": ["5 lessons £200", "10 lessons £400"] },
+            { "label": "IELTS", "cadence": "60-minute online lesson", "options": ["5 lessons £300", "10 lessons £600"] }
+          ]
+        }
+      ],
+      "_comment_tracksRetired": "Not in the client's route list (approval PDF section 04), so not shown. Kept as content until she confirms whether primary tuition is still offered.",
+      "tracksRetired": [
+        { "label": "Primary, 6 to 11", "body": "Phonics, reading, comprehension and confident writing" }
+      ],
+
+      "_comment_credentials": "Approval PDF section 04: shown only with their current status. In her recording the training was in progress and the DBS application had been made.",
+      "credentialsHeading": "Credentials",
+      "credentials": [
+        { "label": "IELTS teacher training", "status": "In progress" },
+        { "label": "Enhanced DBS", "status": "Application made" }
       ],
 
       "methodHeading": "How it works",
@@ -72,16 +154,9 @@
       ],
 
       "publishPricing": true,
+      "_comment_pricingHeading": "Not shown since the packages moved into the routes; kept as content.",
       "pricingHeading": "Teaching prices",
       "pricingLine": "All teaching lessons are 60-minute online lessons. British Curriculum is separated from ESL and IELTS.",
-      "tiers": [
-        { "label": "KS3 English", "cadence": "60-minute online lesson", "price": "£40 / hour · 5 lessons £200 · 10 lessons £400" },
-        { "label": "GCSE English", "cadence": "60-minute online lesson", "price": "£50 / hour · 5 lessons £250 · 10 lessons £500" },
-        { "label": "A Level English", "cadence": "60-minute online lesson", "price": "£60 / hour · 5 lessons £300 · 10 lessons £600" },
-        { "label": "ESL / General English", "cadence": "60-minute online lesson", "price": "£40 / hour · 5 lessons £200 · 10 lessons £400" },
-        { "label": "IELTS", "cadence": "60-minute online lesson", "price": "£60 / hour · 5 lessons £300 · 10 lessons £600" }
-      ],
-
       "note": {
         "heading": "Support at every level",
         "body": "Tuition is not only for students who are struggling. It can also challenge students who are working ahead of their class and need more stimulating material."
@@ -110,21 +185,30 @@
 
     {
       "id": "narration",
+      "routeLabel": "Voice",
+      "showTestimonials": true,
+      "backgroundLink": { "text": "The Television Workshop", "href": "https://www.thetelevisionworkshop.co.uk/" },
+      "_comment_pillar": "Service card treatment on the hub and on every spoke. Moved verbatim from PillarCards.astro.",
+      "pillarCard": { "tag": "VOICE", "title": "bring the words to life.", "line": "Voiceover & narration" },
       "route": "/narration",
       "number": "03",
-      "tag": "NARRATE",
+      "tag": "VOICE",
       "pillar": "The Spoken Word",
       "plain": "Audiobook narration and voice work",
       "audience": "For authors, publishers and producers",
       "oneLiner": "I take the time to understand the text and its intention, then deliver a thoughtful performance that holds the listener's attention.",
-      "cta": { "label": "Request a custom audition", "href": "/contact?about=Audiobook+narration" },
-      "image": "/images/aneesa-portrait.webp",
-      "imageAlt": "Aneesa smiling in a softly lit black-and-white portrait",
+      "cta": { "label": "Request a custom audition", "href": "/contact?about=Voice+work" },
+      "image": "/images/aneesa-with-poetry-anthology.webp",
+      "imageAlt": "Aneesa resting her chin on her hands beside an anthology of poetry",
       "imagePosition": "65% center",
       "problemLabel": "The performance",
 
       "reelsHeading": "Listen",
       "reels": null,
+      "_comment_portfolio": "Voice portfolio labels. Moved verbatim from ServicePage.astro and AudioPlayer.astro.",
+      "portfolioHeading": "Voice portfolio",
+      "samplesPending": "Samples will be added here shortly.",
+      "samplePendingLabel": "Voice sample not yet available",
       "reelsPlaceholder": "[ VOICE REELS WILL GO HERE — three separate demos: fiction narration, corporate explainer, e-learning. MP3, 60 to 90 seconds each. This block sits at the top of the page because producers listen before they read. ]",
 
       "problem": [
@@ -190,10 +274,12 @@
       "studio": null,
       "studioPlaceholder": "[ STUDIO SPEC WILL GO HERE — booth or treated room, microphone, interface, DAW, delivery formats, and typical turnaround. Corporate clients look for this to confirm broadcast quality. ]",
 
+      "_comment_background": "Voice: Further details, verbatim from the client's notes (approval PDF section 06). The Television Workshop story now lives in her About copy, so it is not repeated here; the earlier paragraph is kept below as content.",
       "background": {
         "heading": "Training and experience",
-        "body": "My voice-work experience includes my former business, Stylish Voice. I was a student at The Television Workshop. I have also trained with voice coach Gary Terzza and at Derby Academy. My performance experience also includes spoken word with Beatfreeks and university theatre in England and Canada."
+        "body": "Back in 2015, when I set up my first voiceover business, Stylish Voice, I had my professional demos recorded with Gary Terzza; channel 4’s continuity host for over two decades. It was under his tutelage that I made my first foray into the voiceover world and began to understand exactly what goes into bringing the very best of your voice into work that eventually spanned across audiobooks, commercials, explainers, IVRs, and much more."
       },
+      "backgroundRetired": "My voice-work experience includes my former business, Stylish Voice. I was a student at The Television Workshop. I have also trained with voice coach Gary Terzza and at Derby Academy. My performance experience also includes spoken word with Beatfreeks and university theatre in England and Canada.",
       "footnote": "Larger projects are priced per finished hour and quoted according to word count, finished audio length, usage and project requirements.",
       "proofHeading": "Testimonials",
       "proof": null,
@@ -202,6 +288,14 @@
 
     {
       "id": "repurposing",
+      "routeLabel": "Repurpose",
+      "_comment_portfolio": "Portfolio slot and testimonials flag. Moved verbatim from ServicePage.astro, which branched on the service id.",
+      "portfolioHeading": "Portfolio",
+      "portfolioPending": "Selected long-form and short-form examples will be shared here.",
+      "portfolioLink": { "label": "Discuss your source material" },
+      "showTestimonials": true,
+      "_comment_pillar": "Service card treatment on the hub and on every spoke. Moved verbatim from PillarCards.astro.",
+      "pillarCard": { "tag": "REPURPOSE", "title": "shape the words.", "line": "Content repurposing" },
       "route": "/repurposing",
       "number": "02",
       "tag": "REPURPOSE",
@@ -294,29 +388,34 @@
   ],
 
   "about": {
+    "_comment": "About copy verbatim from the client's notes (approval PDF section 03), broken into paragraphs at sentence ends. The earlier About copy is kept under `retired` as content and is not shown.",
     "heading": "Aneesa",
+    "intro": "I am an English teacher, writer, and voice artist with 12 years of classroom experience across four countries. My work is grounded in listening closely, identifying what is needed and responding with care.",
+    "workshopLink": {
+      "text": "Television Workshop",
+      "href": "https://www.thetelevisionworkshop.co.uk/"
+    },
     "paragraphs": [
-      "I am an English teacher, voice artist and writer with 12 years of classroom experience across four countries. My work is grounded in listening closely, identifying what is needed and responding with care.",
-      "Before teaching, I acted, performed spoken word and read novels aloud in a care home. Each experience taught me something about language, interpretation and connecting with an audience."
+      "Discovering that I had a natural knack with the English language from a young age, I then knew that I wanted to use these same words to help others; whether teaching, writing, or performing them. Words have elevated people by allowing them to understand not only themselves, but the world around them, and have granted them real opportunities in their own lives.",
+      "My teenage years and early twenties were spent at various acting schools across the Midlands, culminating in my training at the renowned Television Workshop, where I became familiar with auditioning for both plays and casting directors. This fed into my already existent love for theatre and film. During this time, I also performed as a spoken word poet and volunteered my time reading stories in care homes, where I further indulged in my love for performing words and bringing them to life.",
+      "From a young age I also knew I wanted to teach abroad and see the world. So upon graduating with a 1st class in English, I initially taught as an English teaching assistant across primary and secondary schools, before teaching English as a second language with the British Council in Egypt, before then moving to Saudi Arabia. I returned to the UK to gain my PGCE before receiving my QTS in Qatar. It was here that I then taught English Language and Literature to 11-18 year olds for 5 years at a private British international school.",
+      "From America to Australia; Canada to Croatia; or Morocco to Malaysia - my extensive travels have only ever deep-rooted love for words, culture, and connection.",
+      "After years of travel, a textured word is a place where my love for words, literature, analysis and performance can finally come and take root; where I can encapsulate my years wrapped up in all things - and use these skills to help others achieve their own goals; whether for an exam, content, or an audiobook. It is a place that enables me to work with an array of people, all with different goals in mind, but a shared interest in utilising words to get there."
     ],
-    "empathy": "As a child, I found time pressure difficult even when I understood the subject. Years later, I needed a teacher to help me learn Arabic despite having access to countless free resources. Both experiences showed me that the right individual support can make all the difference.",
-    "authority": "I have spent 12 years teaching English across England, Egypt, Saudi and Qatar, working with learners from age six to adult.",
-    "teachingBodies": "I've taught with the British Council in Egypt, and with The Oxford Partnership in Saudi Arabia — one of several schools under the Colleges of Excellence programme.",
     "portrait": "/images/aneesa-with-poetry-anthology.webp",
     "portraitAlt": "Aneesa resting her chin on her hands beside an anthology of poetry",
-
-    "whyHeading": "The value of individual attention",
-    "why": [
-      "Classrooms, production schedules and content platforms are designed to serve many people efficiently. That can leave limited space for the needs of one student, the intention behind one book or the individual voice behind an idea.",
-      "Working individually creates that space: time to listen, ask thoughtful questions and shape the work around the person or project in front of me."
-    ],
-
     "reflectionFlag": null,
     "reflectionHeading": "Notes on books and language",
     "reflectionBody": "Outside my client work, I share reading notes, close analysis and reflections on the books and passages that stay with me.",
-    "reflectionTags": ["Words of the week", "Close reading", "Adaptations", "Literary devices", "Narrated extracts", "Takeaways"],
+    "reflectionTags": [
+      "Words of the week",
+      "Close reading",
+      "Adaptations",
+      "Literary devices",
+      "Narrated extracts",
+      "Takeaways"
+    ],
     "reflectionPlatforms": null,
-
     "openToHeading": "Open to",
     "openTo": [
       "Panel moderation",
@@ -324,7 +423,21 @@
       "Author interviews",
       "Publisher and bookshop events",
       "Brand partnerships with publishers, stationery brands and education companies"
-    ]
+    ],
+    "retired": {
+      "paragraphs": [
+        "I am an English teacher, voice artist and writer with 12 years of classroom experience across four countries. My work is grounded in listening closely, identifying what is needed and responding with care.",
+        "Before teaching, I acted, performed spoken word and read novels aloud in a care home. Each experience taught me something about language, interpretation and connecting with an audience."
+      ],
+      "empathy": "As a child, I found time pressure difficult even when I understood the subject. Years later, I needed a teacher to help me learn Arabic despite having access to countless free resources. Both experiences showed me that the right individual support can make all the difference.",
+      "authority": "I have spent 12 years teaching English across England, Egypt, Saudi and Qatar, working with learners from age six to adult.",
+      "teachingBodies": "I've taught with the British Council in Egypt, and with The Oxford Partnership in Saudi Arabia — one of several schools under the Colleges of Excellence programme.",
+      "whyHeading": "The value of individual attention",
+      "why": [
+        "Classrooms, production schedules and content platforms are designed to serve many people efficiently. That can leave limited space for the needs of one student, the intention behind one book or the individual voice behind an idea.",
+        "Working individually creates that space: time to listen, ask thoughtful questions and shape the work around the person or project in front of me."
+      ]
+    }
   },
 
   "contact": {
@@ -341,7 +454,6 @@
     "topics": [
       "English tuition",
       "IELTS preparation",
-      "Audiobook narration",
       "Voice work",
       "Content repurposing",
       "Speaking or hosting",

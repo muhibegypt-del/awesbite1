@@ -1,15 +1,6 @@
 ---
-import ContentLayout from '../../components/ContentLayout.astro';
+/* Content is one page now (approval PDF section 07). The section shows only
+   once a social link exists, so until then this address goes to the page itself. */
 import links from '../../content/content-links.json';
+return Astro.redirect(links.socials.some((link) => link.url) ? '/content#socials' : '/content', 301);
 ---
-<ContentLayout title="Socials" description="Find a textured word on LinkedIn, Instagram and TikTok.">
-  <section class="page-hero"><div class="container stack">
-    <h1>Socials</h1>
-    <p class="t-lead">Words of the week, close readings, narrated extracts and takeaways.</p>
-    <ul class="social-list" role="list">{links.socials.map((link) => <li>{link.url
-      ? <a href={link.url} target="_blank" rel="noopener noreferrer">{link.label}<span class="visually-hidden"> (opens in a new tab)</span></a>
-      : <span>{link.label} <small>— link coming soon</small></span>}</li>)}</ul>
-    <a class="link-rule" href="/content">Back to Content</a>
-  </div></section>
-</ContentLayout>
-<style>.social-list { display: grid; gap: var(--s-4); } small { color: var(--ink-soft); }</style>

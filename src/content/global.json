@@ -2,39 +2,16 @@
   "brand": { "wordmark": "a textured word" },
 
   "nav": {
-    "_comment": "Five top-level navigation links. The enquiry CTA is a separate conversion action and is intentionally retained.",
+    "_comment": "Five top-level links, the three services first (approval PDF section 08); no drop-downs. The enquiry CTA is a separate conversion action and is intentionally retained.",
     "items": [
-      { "label": "about", "href": "/about" },
       { "label": "teach", "href": "/teaching" },
-      {
-        "label": "repurpose",
-        "href": "/repurposing",
-        "children": [
-          { "label": "portfolio", "href": "/repurposing#portfolio" },
-          { "label": "testimonials", "href": "/repurposing#testimonials" }
-        ]
-      },
-      {
-        "label": "narrate",
-        "href": "/narration",
-        "children": [
-          { "label": "portfolio", "href": "/narration#portfolio" },
-          { "label": "testimonials", "href": "/narration#testimonials" }
-        ]
-      },
-      {
-        "label": "content",
-        "href": "/content",
-        "children": [
-          { "label": "introduction", "href": "/content/introduction" },
-          { "label": "Substack", "href": "/content/substack" },
-          { "label": "YouTube", "href": "/content/youtube" },
-          { "label": "socials", "href": "/content/socials" },
-          { "label": "collaborations", "href": "/content/collaborations" }
-        ]
-      }
+      { "label": "repurpose", "href": "/repurposing" },
+      { "label": "voice", "href": "/narration" },
+      { "label": "about", "href": "/about" },
+      { "label": "content", "href": "/content" }
     ],
-    "cta": { "label": "Start an enquiry", "href": "/contact" }
+    "cta": { "label": "Start an enquiry", "href": "/contact" },
+    "menuLabel": "Menu"
   },
 
   "footer": {
@@ -49,9 +26,9 @@
       {
         "heading": "services",
         "links": [
-          { "label": "Teaching", "href": "/teaching" },
-          { "label": "Content repurposing", "href": "/repurposing" },
-          { "label": "Narration and voice work", "href": "/narration" },
+          { "label": "Teach", "href": "/teaching" },
+          { "label": "Repurpose", "href": "/repurposing" },
+          { "label": "Voice", "href": "/narration" },
           { "label": "Content", "href": "/content" }
         ]
       },
@@ -60,7 +37,7 @@
         "links": [
           { "label": "atexturedword@gmail.com", "href": "mailto:atexturedword@gmail.com" },
           { "label": "Start an enquiry", "href": "/contact" },
-          { "label": "About Aneesa", "href": "/about" }
+          { "label": "About", "href": "/about" }
         ]
       }
     ]
@@ -89,5 +66,6 @@
     "ogImage": "/images/aneesa-with-poetry-anthology.webp"
   },
 
-  "skipLink": "skip to content"
+  "skipLink": "skip to content",
+  "newTab": " (opens in a new tab)"
 }

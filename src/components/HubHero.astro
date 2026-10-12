@@ -1,0 +1,35 @@
+---
+/**
+ * The hub's first screen: who she is and what she offers, in plain words,
+ * before anything else (approval PDF sections 01 and 02). Her greeting is
+ * the <h1>, her offer sentence follows, then the three services as plainly
+ * labelled routes. The portrait sits beside it on desktop, below it on a
+ * phone. The poetic line lives further down, in the plum band.
+ */
+import Photo from './Photo.astro';
+import ServiceList from './ServiceList.astro';
+import { q } from '../lib/typeset.js';
+import site from '../content/site.json';
+
+const { hub } = site;
+const { greeting, offer } = hub.landing;
+
+/* The brand name inside her greeting is set the way the wordmark is set:
+   'textured' in italic. Typesetting only; the words are hers. */
+const [beforeBrand, afterBrand] = greeting.split('textured');
+---
+
+<section class="hello" aria-labelledby="hello-heading">
+  <div class="bleed hello__inner">
+    <div class="hello__text">
+      <h1 class="hello__h1" id="hello-heading">{q(beforeBrand)}<em>textured</em>{q(afterBrand)}</h1>
+      <p class="lead hello__offer">{q(offer)}</p>
+      <nav class="hello__routes" aria-label={hub.markers.pillars}>
+        <ServiceList />
+      </nav>
+    </div>
+    <div class="hello__photo full">
+      <Photo src={hub.image} alt={hub.imageAlt} sizes="(min-width: 1024px) 50vw, 100vw" eager />
+    </div>
+  </div>
+</section>
