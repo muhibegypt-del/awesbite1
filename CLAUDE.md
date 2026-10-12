@@ -48,6 +48,33 @@ Copy changes still need the client's approval. Typesetting (curly apostrophes vi
 
 **Client review, October 2026** (her approval PDF and notes): Home leads with her greeting, her plain offer sentence and the Teach / Repurpose / Voice routes; the poetic line sits on the plum band. Teaching is three routes (`KS3 - I/GCSE`, `I/A-Level`, `ESL / IELTS`), packages only, never an hourly rate. 'Voice' is the label for the narration service. Portfolios and testimonials appear only when real items exist; Content platforms only when their link exists. Her new copy is verbatim; earlier copy it replaced is kept in the JSON (`retired`, `*Retired`) and not shown.
 
+## Client brief and audit (`audit/client-brief-2026-10/`)
+
+The approved brief for the October 2026 round, and the checklist the site is audited against. Read this folder before any client-facing change or audit.
+
+| File | What it is |
+|---|---|
+| `approved-website-audit-checklist.md` | Acceptance checklist: one ID per requirement (COPY, VIS, HOME, ABOUT, TEACH, REP, VOICE, FORM, CONTENT, SITE), the release gate and the report format. **Source of truth for "done".** |
+| `muhib-notes-3.pdf` (+ `.txt`) | Her supplied copy and exact terms. Source key **N1, N2** = pages 1, 2. |
+| `website-changes-for-approval-3.pdf` (+ `.txt`) | The approved implementation direction. Source key **C1–C4** = pages 1–4. |
+
+The `.txt` files are extracts made because this cloud container cannot render PDF pages (no poppler; `Read` on a PDF fails). The PDFs are authoritative. To re-extract, install pypdf into the scratchpad (`pip install --target <scratch>/pyenv pypdf cffi cryptography`) and run with `PYTHONPATH`.
+
+**To audit** (when asked): follow the checklist's own audit rule and release gate exactly. Inspect the running site (https://awesbite1.vercel.app, or `npm run build` then `npx http-server dist -p 4321`) at phone and desktop widths with Playwright (`/opt/node22/lib/node_modules/playwright/index.mjs`, Chromium preinstalled). One row per ID: PASS / FAIL / UNVERIFIABLE, URL, evidence, exact discrepancy. Never PASS from code alone. Do not edit the site during an audit. Record the commit and date.
+
+**To change the site against it:** copy from N1/N2 verbatim (check by script against the `.txt`; moving paragraphs is allowed, rewording is not), cite the checklist ID in each commit message, and update `CHANGES.md` section 9/10.
+
+**Known open items as of commit `c71f85a`** (expect these to fail or be unverifiable until the client supplies something):
+- VOICE-04: 4 samples supplied, the brief says about six.
+- ABOUT-02: which alternate portrait — not yet chosen; the current one is shown.
+- VIS-04, VIS-06: font options and her handwriting for *textured* — not yet supplied; current fonts kept.
+- CONTENT-02: the "highlighted passage" for the start of the Content introduction is not in N1/N2.
+- CONTENT-03/04: no Substack, YouTube or social URLs supplied, so those sections are hidden, not placeholders.
+- SITE-05/06: two structure concepts were not prepared; the owner went straight to one.
+- SITE-08: no handover walkthrough yet.
+- COPY-03 note: her offer sentence ("At a textured word, I work across…") is shown second on Home, straight after the greeting, so the offer is clear first; the rest is in her order. Flag it, do not silently "fix" it.
+- TEACH: 'Primary, 6 to 11' is not in her route list, so it is hidden (kept in JSON as `tracksRetired`).
+
 ## Design rules — do not violate these
 
 - **Never use `#000000`.** Text is `var(--ink)` `#241C1A`. The client explicitly rejected black.
