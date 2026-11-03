@@ -76,7 +76,7 @@
         "name": "TEACH",
         "title": "Academic English & tuition",
         "oneLiner": "[ TEACHING ONE-LINER WILL GO HERE — 12 words max ]",
-        "bullets": ["Primary reading fluency", "KS3 · GCSE", "A-Level", "IELTS 6.5–9.0"],
+        "bullets": ["KS3 · GCSE", "A-Level", "IELTS 6.5–9.0"],
         "price": "[ TEACHING PRICE LINE WILL GO HERE — e.g. \"FROM £45 / HOUR\" ]",
         "link": { "label": "Book a trial", "href": "/services/teaching" }
       },

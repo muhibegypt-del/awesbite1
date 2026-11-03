@@ -1,0 +1,132 @@
+Plain-text extract of website-changes-for-approval-3.pdf (C1-C4 = pages 1-4). The PDF is authoritative.
+
+
+----- C1 -----
+A TEXTURED WORD  /  WEBSITE REVIEW
+1
+Proposed changes for confirmation
+PLEASE REVIEW
+Website changes for your confirmation
+This combines your Loom recording, revised written copy and later voice notes. Your latest direction is to
+simplify the structure while keeping the current visual feel. Please check that I have understood the changes
+before I update the site.
+01 Overall direction
+ • Make it immediately clear what you offer, particularly to someone arriving for the first time on a phone. Keep the
+ expressive language, but introduce the services in plain language first.
+• Simplify the interface and the paths between pages. Keep useful white space so visitors are not met with too much text or
+ too many choices at once. You like the current colours and overall visual feel; the example sites you sent are references
+for simplicity and navigation, not a request to copy their design.
+• Please find and send two or three font options you personally like, ideally with links and a note on which you would use for
+ headings and body text. Many of the strongest distinctive web fonts are paid and require a web-use licence, so it makes
+sense for you to shortlist the ones you would be happy to use. I will check licensing and suitability before implementation.
+• Once the fonts are chosen, use a consistent hierarchy and readable sizes across desktop and mobile, including the top
+ navigation. Break long copy into clearly spaced paragraphs.
+• Explore whether your own handwriting can be used for the word textured. If that is not practical, show a suitable
+ contrasting font treatment.
+02 Home page
+ • Use the Landing Page copy you have now supplied, beginning 'Hello, I'm Aneesa, founder of a textured word.' It explains
+ the offer through teaching, writing/repurposing and performance. Spread it through the page where that improves
+readability, as you suggested, and flag any proposed cuts to you.
+• Keep the service routes clearly labelled Teach, Repurpose and Voice, in line with your recording. Your newly supplied
+ paragraph uses 'performing words'; preserve that wording in the body copy unless you ask to change it.
+• Keep 'Words aren't flat. They're textured.' Consider moving it below the opening explanation, or to another suitable part of
+ the site, so the offer is clear first.
+• Keep the first screen concise, using the revised Landing Page text across the page rather than placing it all at the top.
+ Retain the open space you liked.
+• Avoid repeating a full About or Content section on the home page when those topics have their own pages. A short
+ qualifications area near the image is a possible alternative placement, subject to your approval.
+Please confirm: Is the direct service statement the right first message, with the current poetic headline retained further
+down or elsewhere?
+
+
+----- C2 -----
+A TEXTURED WORD  /  WEBSITE REVIEW
+2
+Proposed changes for confirmation
+PAGE CONTENT
+About and teaching
+03 About
+ • Keep the Aneesa heading. Use the About copy you have supplied, including your teaching, writing and performance
+ background, in readable paragraphs. Set one of the alternate portraits you previously sent alongside it, if the layout
+works.
+• Keep About as one clear page. Your later voice note withdraws the request for a separate subsection about why you
+ chose the name. The existing purple explanation box covers that story; avoid repeating it in another destination.
+• In the qualifications area, adjust 'CertTESOL' to read with a space between 'Cert' and 'TESOL', without repeating 'Trinity'.
+ Under British Council, replace 'Former teacher in Egypt' with the exact caption supplied in your notes: Teacher Training
+Programme.
+Please confirm: Which alternate portrait should be used on the simplified About page?
+04 Teach
+ • Make the teaching routes easy to reach: Key Stage 3, I/GCSE, I/A-Level, ESL/general English and IELTS. Your follow-up
+ notes give those two exact combined labels, so there is no need to spell out 'International' each time. Compare your
+earlier dropdown idea with a simpler Teach overview in the two structure concepts.
+• Use the short teaching-category descriptions from your latest materials. Teaching is currently the main service, so make
+ its routes and offer especially easy to understand.
+• Remove every '/hour' price. Present your teaching offer as packages, since you are not taking on hourly clients.
+ 
+• Include the IELTS teacher training and enhanced DBS information only with its correct current status and wording. In the
+ recording, the training was in progress and the DBS application had been made; neither was described as completed.
+Please confirm: I will use I/GCSE, I/A-Level and 'Teacher Training Programme' as written in your new notes. If the
+IELTS training or enhanced DBS appears on the site, should its current status be shown as pending/in progress?
+
+
+----- C3 -----
+A TEXTURED WORD  /  WEBSITE REVIEW
+3
+Proposed changes for confirmation
+SERVICE PAGES
+Repurpose, voice and content
+05 Repurpose
+ • Keep a portfolio only where real examples can be shown. Remove empty sample or testimonial placeholders.
+ Testimonials can be added once you have them.
+• The recording does not establish a number of Repurpose examples. Use only real pieces from the material already
+ supplied; leave the portfolio hidden if there is no approved work to show yet.
+06 Voice
+ • Use Voice consistently as the navigation and service label, replacing 'Narrate' where it is used for that route. This matches
+ your line 'I teach, repurpose and voice words'.
+• Use the Voice: Further details paragraph now supplied, including Stylish Voice, Gary Terzza and the types of voice work
+ you have done. The Television Workshop story is already in your revised About copy, so avoid repeating it here.
+• Populate the Voice/narration portfolio with the roughly six real samples you said you had sent. If any files cannot be
+ located, I will identify the missing ones rather than leaving placeholder samples visible.
+• In the enquiry form, remove the separate 'Audiobook narration' choice and retain the existing 'Voice work' choice. Keep
+ the other options you said were fine, including the distinction between types of teaching enquiry.
+07 Content
+ • Make Content one landing page instead of a set of dropdown pages. Retain the introduction and its explanation of why
+ this strand of work exists.
+• Move the passage you highlighted to the start of that introduction, using the latest copy you have supplied. Put Substack,
+ YouTube, social links and collaborations on the same page.
+• Use the social links and other materials you have already supplied. Keep room for future collaborations without showing
+ empty placeholder sections.
+Please confirm: Have I understood the portfolio distinction correctly: approximately six examples for Voice, and
+Repurpose examples only where you have material ready to show?
+
+
+----- C4 -----
+A TEXTURED WORD  /  WEBSITE REVIEW
+4
+Proposed changes for confirmation
+FINAL CHECK
+Navigation and your approval
+08 Sitewide navigation and handover
+ • Keep the purple 'textured word' panel and the way the word stands out. Use it for the name explanation and its connection
+ to all three services; agree any shortening or final placement with you, without adding a separate name subsection.
+• Replace the repeated three-service block near the bottom of pages with a simpler, clearly separate set of onward links. It
+ should be obvious that these are navigation choices, not part of the page text.
+• Check each route as a first-time visitor on both phone and desktop. Someone looking for IELTS should be able to find the
+ teaching information without having to work through Voice or other unrelated material.
+• Prepare two stripped-back structure concepts for you to compare. Keep the current colours and overall feel; show how
+ each version makes the three services distinct, preserves useful detail and removes unnecessary steps. Use the
+Pavone, Smith Galer, Miss Guided Films and Andy Hayward sites as navigation references, not visual templates.
+• As I edit, flag sections that seem unnecessary or confusing rather than adding every possible detail. Keep the material
+ that genuinely helps a visitor decide what to do next.
+• At handover, provide access and a short walkthrough so you can edit copy, links, qualifications, portfolios and future
+ testimonials yourself.
+Font selection
+You have already sent the revised copy and follow-up notes, so I will work from those. Please send two or three font options
+you like, with links if possible. Many distinctive web fonts require a paid licence; please indicate if you are happy to consider
+a paid option. I will check whether each choice is suitable and properly licensed for web use. If you still want your own
+handwriting for 'textured', a clear sample would help.
+Is this correct?
+Please reply to this message with either 'Yes, this reflects what I meant' or your corrections, referring to the section
+numbers above. Please include the font options you prefer, or let me know when you will send them. I will use your
+reply to agree the scope before making the changes.
+

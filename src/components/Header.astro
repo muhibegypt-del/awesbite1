@@ -1,0 +1,66 @@
+---
+/**
+ * One row at every width. Desktop: the wordmark on the page edge, the five
+ * sections (three with sub-links), and the enquiry as a quiet text link so
+ * each page keeps its one filled button for the real action.
+ *
+ * Phone and tablet: the wordmark and a typographic "menu". Both the menu
+ * and the sub-links are <details>, so they open with no JavaScript at all;
+ * the script in Base.astro only closes the others and honours Escape.
+ */
+import Wordmark from './Wordmark.astro';
+import global from '../content/global.json';
+
+interface Props { currentPath: string }
+const { currentPath } = Astro.props;
+const { items, cta, menuLabel } = global.nav;
+
+const isCurrent = (href: string) =>
+  href === '/' ? currentPath === '/' : currentPath === href || currentPath.startsWith(`${href}/`);
+---
+
+<header class="hdr">
+  <div class="bleed">
+    <div class="hdr__inner">
+      <Wordmark href="/" class="hdr__mark" />
+
+      <nav class="nav" aria-label="Primary">
+        <ul class="nav__list" role="list">
+          {items.map((item) => (
+            <li class="nav__item">
+              <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>
+              {item.children?.length && (
+                <details class="sub" data-sub>
+                  <summary aria-label={`${item.label}: more`}></summary>
+                  <ul role="list">
+                    {item.children.map((child) => <li><a href={child.href}>{child.label}</a></li>)}
+                  </ul>
+                </details>
+              )}
+            </li>
+          ))}
+        </ul>
+        <a class="nav__cta textlink" href={cta.href} aria-current={isCurrent(cta.href) ? 'page' : undefined}>{cta.label}</a>
+      </nav>
+
+      <details class="menu" data-sub>
+        <summary>{menuLabel}</summary>
+        <div class="menu__panel">
+          <ul role="list">
+            {items.map((item) => (
+              <li>
+                <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>
+                {item.children?.length && (
+                  <ul role="list">
+                    {item.children.map((child) => <li><a href={child.href}>{child.label}</a></li>)}
+                  </ul>
+                )}
+              </li>
+            ))}
+            <li><a href={cta.href}>{cta.label}</a></li>
+          </ul>
+        </div>
+      </details>
+    </div>
+  </div>
+</header>
