@@ -58,7 +58,9 @@ const hasDetails = service.studio || service.examples?.length || service.backgro
   {service.portfolioHeading && service.samplesPending && (
     <section id="portfolio" class="sec sec--band" aria-labelledby="portfolio-heading">
       <div class="bleed">
-        <SectionHead label={`${service.number} — ${service.tag}`} heading={service.portfolioHeading} id="portfolio-heading" />
+        {/* The word 'Voice', slightly larger, with no number or dash; the heading on the same step as
+            the page's other headings, so the sections share one scale (client revisions, November 2026). */}
+        <SectionHead label={service.routeLabel} labelLarge heading={service.portfolioHeading} headingSmall id="portfolio-heading" />
         <TrackList />
       </div>
     </section>
@@ -95,7 +97,8 @@ const hasDetails = service.studio || service.examples?.length || service.backgro
     <div class="bleed">
       <SectionHead label={service.problemLabel ?? labels.problemLabelDefault} labelAs="h2" id="problem-heading" />
       <div class="prose col-text">
-        {service.problem.map((line: string) => <p class="lead reveal">{q(line)}</p>)}
+        {/* Running copy in the home page's body face, one style throughout (client revisions, November 2026). */}
+        {service.problem.map((line: string) => <p class="reveal">{q(line)}</p>)}
       </div>
       <div class="col-text space-7">
         <Note heading={service.aside.heading} body={service.aside.body} />
@@ -134,7 +137,7 @@ const hasDetails = service.studio || service.examples?.length || service.backgro
     </section>
   )}
 
-  <section class="sec" aria-labelledby="method-heading">
+  <section class="sec sec--cream" aria-labelledby="method-heading">
     <div class="bleed">
       <SectionHead label={service.methodHeading} labelAs="h2" id="method-heading" />
       <ol class="steps" role="list">
@@ -177,16 +180,7 @@ const hasDetails = service.studio || service.examples?.length || service.backgro
             <div class="reveal"><p class="h3">{q(a.heading)}</p><p class="muted">{q(a.body)}</p></div>
           ))}
         </div>
-        {service.credentials?.length > 0 && (
-          <>
-            <h3 class="h3 col-text space-8">{service.credentialsHeading}</h3>
-            <ul class="honours space-5" role="list">
-              {service.credentials.map((c: { label: string; status: string }) => (
-                <li class="reveal"><span class="honours__q">{c.label}</span><span class="honours__b">{c.status}</span></li>
-              ))}
-            </ul>
-          </>
-        )}
+        {/* The Teach credentials moved to the home page's list (client revisions, November 2026). */}
       </div>
     </section>
   )}

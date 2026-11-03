@@ -1,10 +1,14 @@
 ---
-/** Credentials set as a list of honours. */
+/** Credentials set as a list of honours. About uses `credentials`; Home
+    passes `homeCredentials` (client revisions, November 2026). */
 import site from '../content/site.json';
+
+interface Props { items?: { qualification: string; body: string }[] }
+const { items = site.credentials } = Astro.props;
 ---
 
 <ul class="honours" role="list">
-  {site.credentials.map((c) => (
+  {items.map((c) => (
     <li class="reveal"><span class="honours__q">{c.qualification}</span> <span class="honours__b">{c.body}</span></li>
   ))}
 </ul>

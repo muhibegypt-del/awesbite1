@@ -6,7 +6,7 @@
   "meta": {
     "teaching": {
       "title": "Teaching",
-      "description": "Individual English teaching: primary, KS3, GCSE, International GCSE, A-Level and International A-Level, ESL and IELTS."
+      "description": "Individual English teaching for KS3, I/GCSE, I/A-Level, ESL and IELTS."
     },
     "narration": {
       "title": "Audiobook narration and voice work",
@@ -62,8 +62,13 @@
       "label": "Explore teaching",
       "href": "/teaching"
     },
+    "_comment_qualifications": "Client revisions, November 2026: the qualifications sit on their own plum band, which needs a heading of its own.",
+    "qualificationsMarker": "Qualifications",
     "beyondMarker": "Beyond client work",
     "beyondHeading": "Books, language and community",
+    "_comment_beyondImage": "Client revisions, November 2026: this section had no picture. A writing photograph from her own set; swap the path to use another image.",
+    "beyondImage": "/images/aneesa-writing.webp",
+    "beyondImageAlt": "Aneesa writing thoughtfully in a notebook",
     "contentLink": {
       "label": "Explore Content",
       "href": "/content"

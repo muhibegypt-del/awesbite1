@@ -110,7 +110,8 @@ a { color: inherit; }
 /* ---- Focus: visible on everything ---- */
 
 :focus-visible { outline: 2px solid var(--clay-ink); outline-offset: 3px; }
-.on-dark :focus-visible, .ftr :focus-visible, .essay :focus-visible { outline-color: var(--on-dark); }
+.on-dark :focus-visible, .ftr :focus-visible, .essay :focus-visible, .sec--dark :focus-visible,
+.hdr__inner > :focus-visible, .nav :focus-visible, .menu > summary:focus-visible { outline-color: var(--on-dark); }
 main:focus { outline: none; } /* skip-link target; a ring round the page helps nobody */
 
 .skip {
@@ -163,6 +164,9 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
   font-variant-numeric: lining-nums tabular-nums;
   color: var(--ink-soft);
 }
+
+/* A gutter label one step up: the body size instead of the small size. */
+.label--large { font-size: var(--t-body); }
 
 .display {
   font-family: var(--serif);
@@ -294,7 +298,14 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
    Header
    ============================================================ */
 
-.hdr { position: relative; z-index: 20; background: var(--paper); border-bottom: 1px solid var(--rule); }
+/* The forest green banner across the top of every page (client revisions,
+   November 2026), taller than the old paper bar (--hdr). Type on it is
+   paper: 6.00:1. As on plum, the wordmark's italic is paper too, since
+   clay on green is 1.52:1; the italic alone carries the emphasis. */
+.hdr { position: relative; z-index: 20; background: var(--forest); color: var(--on-forest); }
+.hdr .wordmark, .hdr .wordmark em { color: var(--on-forest); }
+.hdr .textlink { text-decoration-color: var(--on-forest-soft); }
+.hdr .textlink:hover { color: var(--on-forest); }
 
 .hdr__inner {
   display: flex;
@@ -317,12 +328,15 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
   text-transform: lowercase;
   transition: color var(--fast) var(--ease-out);
 }
-.nav a:not(.textlink):hover, .menu a:hover { color: var(--clay-ink); }
+.nav a:not(.textlink):hover { color: var(--on-forest-soft); }
+.menu a:hover { color: var(--clay-ink); }
 .nav a[aria-current='page'], .menu a[aria-current='page'] {
   text-decoration: underline;
   text-decoration-color: var(--clay);
   text-underline-offset: 0.4em;
 }
+/* On the green banner the current-page mark is paper: clay would vanish. */
+.nav a[aria-current='page'], .menu[open] > summary { text-decoration-color: var(--on-forest-soft); }
 .nav__cta { font-size: var(--t-body); }
 
 /* Submenus open on a real button (details/summary) and need no script;
@@ -369,12 +383,13 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
   cursor: pointer;
 }
 .menu > summary::-webkit-details-marker { display: none; }
-.menu[open] > summary { text-decoration: underline; text-decoration-color: var(--clay); text-underline-offset: 0.4em; }
+.menu[open] > summary { text-decoration: underline; text-underline-offset: 0.4em; }
 .menu__panel {
   position: absolute;
   inset-inline: 0;
   top: 100%;
   padding: var(--s-2) var(--gutter) var(--s-5);
+  color: var(--ink);   /* the panel drops onto paper below the green banner */
   background: var(--paper);
   border-bottom: 1px solid var(--rule);
 }
@@ -394,12 +409,15 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 .sec { padding-block: var(--sec); }
 .sec--minor { padding-block: var(--sec-minor); }
 /* Two plain sections in a row share one gap rather than doubling it. */
-.sec:not(.sec--band):not(.sec--dark) + .sec:not(.sec--band):not(.sec--dark) { padding-block-start: 0; }
+.sec:not(.sec--band):not(.sec--dark):not(.sec--cream) + .sec:not(.sec--band):not(.sec--dark):not(.sec--cream) { padding-block-start: 0; }
 /* Two bands that meet read as one surface: one gap between them, not two. */
-.sec--band + .sec--band { padding-block-start: 0; }
+.sec--band + .sec--band, .sec--cream + .sec--cream { padding-block-start: 0; }
 /* The rule under a plain masthead sits in the middle of the space around it. */
-.masthead--plain + .sec:not(.sec--band):not(.sec--dark) { padding-block-start: var(--sec-minor); }
+.masthead--plain + .sec:not(.sec--band):not(.sec--dark):not(.sec--cream) { padding-block-start: var(--sec-minor); }
 .sec--band { background: var(--band); }
+/* Cream: lighter than the beige page, for colour depth without weight
+   (client revisions, November 2026). Ink on it is 14.93:1, clay-ink 6.12:1. */
+.sec--cream { background: var(--lift); }
 .sec--dark, .on-dark { background: var(--dark); color: var(--on-dark); }
 .sec--dark .label, .on-dark .label { color: var(--on-dark-soft); }
 .sec--dark .muted { color: var(--on-dark-soft); }
@@ -470,7 +488,8 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
   .hello__inner { align-items: center; }
   .bleed > .hello__text { grid-column: col 1 / span 6; grid-row: 1; padding-block: var(--s-8); }
   /* The portrait fills the right half, edge to edge, no taller than the screen. */
-  .bleed > .hello__photo { grid-column: col 7 / full-end; grid-row: 1; aspect-ratio: auto; align-self: stretch; height: min(calc(100svh - var(--hdr)), 860px); }
+  /* At least the screen's height below the banner; taller only if the (larger) desktop type needs it, so no strip shows under it. */
+  .bleed > .hello__photo { grid-column: col 7 / full-end; grid-row: 1; aspect-ratio: auto; align-self: stretch; min-height: min(calc(100svh - var(--hdr)), 860px); }
   .hello__photo img { object-position: 70% 30%; }   /* her face, not the wall, centred in the half frame */
 }
 
@@ -533,7 +552,10 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 .prose + .honours { margin-block-start: var(--s-8); }
 .honours { display: grid; gap: var(--s-5); grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
 .honours li { display: grid; gap: var(--s-1); align-content: start; padding-top: var(--s-4); border-top: 1px solid var(--rule); }
-.honours__q { font-family: var(--serif-caps); font-size: var(--t-body); letter-spacing: var(--track-caps); font-variant-caps: all-small-caps; }
+/* small-caps, not all-small-caps: lowercase letters become small capitals
+   and real capitals stay full height, so DBS, QTS, PGCE and IELTS read as
+   capitalised (client revisions, November 2026). */
+.honours__q { font-family: var(--serif-caps); font-size: var(--t-body); letter-spacing: var(--track-caps); font-variant-caps: small-caps; }
 .honours__b { font-family: var(--serif); font-style: italic; font-weight: 300; }
 
 @media (min-width: 1024px) {
@@ -542,6 +564,8 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 /* Four across only once each column can hold a qualification in two lines. */
 @media (min-width: 1280px) {
   .bleed > .honours { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  /* Six (the home page's list): two even rows of three. */
+  .bleed > .honours:has(> li:nth-child(5)) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
 /* Label and body pairs: who I teach, what I take on. */
@@ -656,24 +680,23 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 
 /* ---- Voice portfolio ---- */
 
-.tracks { counter-reset: track; display: grid; }
+/* No running numbers on the samples (client revisions, November 2026). */
+.tracks { display: grid; }
 .track {
-  counter-increment: track;
   display: grid;
-  grid-template-columns: 2.5em 1fr auto;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: baseline;
   gap: var(--s-4);
   padding-block: var(--s-4);
   border-top: 1px solid var(--rule);
 }
 .track:last-child { border-bottom: 1px solid var(--rule); }
-.track::before { content: counter(track, decimal-leading-zero); font-size: var(--t-small); color: var(--ink-soft); font-variant-numeric: tabular-nums; }
 .track__title { font-family: var(--serif); font-size: 1.375rem; }
 .track__tag { font-size: var(--t-small); color: var(--ink-soft); }
 .tracks__note { margin-top: var(--s-5); }
 
 /* A playable track (once audio exists). */
-.player { grid-column: 2 / -1; display: flex; align-items: center; gap: var(--s-3); }
+.player { grid-column: 1 / -1; display: flex; align-items: center; gap: var(--s-3); }
 .player[hidden] { display: none; }
 .player__play { display: grid; place-items: center; flex: none; width: 44px; height: 44px; border: 1px solid var(--rule-strong); border-radius: var(--radius-md); color: var(--clay-ink); transition: border-color var(--fast) var(--ease-out), color var(--fast) var(--ease-out); }
 .player__play:hover { border-color: var(--clay-ink); }
@@ -686,6 +709,10 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 
 @media (min-width: 1024px) {
   .bleed > .tracks, .bleed > .tracks__note { grid-column: col 3 / span 8; }
+  /* Desktop type is larger (tokens.css): the fixed-size names grow with it. */
+  .price__label, .track__title { font-size: 1.5rem; }
+  .price__rate { font-size: 1.375rem; }
+  .price__options { font-size: 1.25rem; }
 }
 
 /* ---- Testimonials, before any exist ---- */
@@ -740,11 +767,6 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 .library li { font-family: var(--serif); font-size: var(--t-lead); }
 .library small { font-family: var(--sans); font-size: var(--t-small); color: var(--ink-soft); margin-inline-start: var(--s-2); }
 
-/* A page set as a printed essay. */
-.essay-page { font-family: var(--serif); font-size: clamp(1.125rem, 1.05rem + 0.3vw, 1.3125rem); font-weight: 300; line-height: 1.66; font-variant-numeric: oldstyle-nums proportional-nums; }
-.essay-page p { max-width: 28em; }
-.essay-page p + p:not(.space-7) { text-indent: 1.5em; }
-.essay-page .lead { font-size: var(--t-lead); }
 
 /* ============================================================
    Forms
@@ -864,7 +886,24 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
   .about__text { grid-column: col 7 / span 6; grid-row: 1; align-self: end; }
 }
 
+/* Qualifications on plum (client revisions, November 2026): paper type,
+   paper hairlines. */
+.sec--dark .honours li { border-top-color: var(--on-dark-rule); }
+.sec--dark .honours__b { color: var(--on-dark-soft); }
+
+/* Beyond client work: the text beside a writing photograph on desktop,
+   the photograph under the text on a phone. */
+.beyond__photo { aspect-ratio: 3 / 2; overflow: hidden; }
+.beyond__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 62% center; }
+
+@media (min-width: 1024px) {
+  .beyond { align-items: center; }
+  .beyond > .shead { grid-column: col 1 / span 7; grid-row: 1; margin-block-end: 0; }
+  .beyond > .shead > :not(.label) { grid-column: col 3 / span 5; }
+  .beyond > .beyond__photo { grid-column: col 9 / content-end; grid-row: 1; aspect-ratio: 4 / 5; }
+}
+
 /* A list with a clay dash for a bullet. */
 .dash-list { display: grid; gap: var(--s-3); }
-.dash-list li { display: grid; grid-template-columns: var(--s-5) 1fr; font-family: var(--serif); font-size: var(--t-lead); font-weight: 300; line-height: 1.35; }
+.dash-list li { display: grid; grid-template-columns: var(--s-5) 1fr; }
 .dash-list li::before { content: '–'; color: var(--clay); }

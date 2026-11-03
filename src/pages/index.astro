@@ -20,7 +20,7 @@ const { story, audience, welcome } = hub.landing;
 <Base title={global.meta.title} bare>
   <HubHero />
 
-  <section class="sec" aria-labelledby="story-heading">
+  <section class="sec sec--cream" aria-labelledby="story-heading">
     <div class="bleed">
       <SectionHead label={hub.markers.authority} labelAs="h2" id="story-heading" />
       <div class="prose col-text reveal">
@@ -29,7 +29,7 @@ const { story, audience, welcome } = hub.landing;
         <p>{welcome}</p>
         <a class="textlink" href={hub.authorityLink.href}>{hub.authorityLink.label} <span class="arrow" aria-hidden="true">→</span></a>
       </div>
-      <Honours />
+      <Honours items={site.homeCredentials} />
     </div>
   </section>
 

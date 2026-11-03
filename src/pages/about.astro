@@ -1,4 +1,11 @@
 ---
+/**
+ * About (client revisions, November 2026): the green banner, then her copy
+ * as one passage in the home page's body face beside the portrait, on
+ * cream; the qualifications on a short plum band; and the work beyond
+ * clients on sand, beside a writing photograph. Colour comes from the
+ * sections, since every photograph is black and white.
+ */
 import Base from '../layouts/Base.astro';
 import Masthead from '../components/Masthead.astro';
 import SectionHead from '../components/SectionHead.astro';
@@ -11,6 +18,9 @@ import global from '../content/global.json';
 
 const { about } = site;
 const labels = pages.about;
+/* Her intro opens the passage rather than standing above it as a larger
+   serif paragraph: one passage, one style. */
+const passage = [about.intro, ...about.paragraphs];
 /* One paragraph names the Television Workshop: it keeps its link. */
 const linked = (line: string) => {
   const { text, href } = about.workshopLink;
@@ -21,11 +31,9 @@ const linked = (line: string) => {
 ---
 
 <Base title={pages.meta.about.title} description={pages.meta.about.description}>
-  <Masthead runhead={labels.marker} title={about.heading}>
-    <p slot="below" class="lead">{q(about.intro)}</p>
-  </Masthead>
+  <Masthead runhead={labels.marker} title={about.heading} />
 
-  <section class="sec" aria-label={about.heading}>
+  <section class="sec sec--cream" aria-label={about.heading}>
     <div class="bleed about">
       {/* The anthology portrait, cropped close and upright: Narration shows
           the same frame whole and wide, so the two read as different. */}
@@ -33,22 +41,31 @@ const linked = (line: string) => {
         <Photo src={about.portrait} alt={about.portraitAlt} sizes="(min-width: 1024px) 40vw, 100vw" eager />
       </div>
       <div class="about__text prose reveal">
-        {about.paragraphs.map((line) => {
+        {passage.map((line) => {
           const link = linked(line);
           return link
             ? <p>{q(link.before)}<a href={link.href} target="_blank" rel="noopener noreferrer">{link.text}<span class="visually-hidden">{global.newTab}</span></a>{q(link.after)}</p>
             : <p>{q(line)}</p>;
         })}
       </div>
+    </div>
+  </section>
+
+  <section class="sec sec--dark" aria-labelledby="qualifications-heading">
+    <div class="bleed">
+      <SectionHead label={labels.qualificationsMarker} labelAs="h2" id="qualifications-heading" />
       <Honours />
     </div>
   </section>
 
-  <section class="sec" aria-labelledby="beyond-heading">
-    <div class="bleed">
+  <section class="sec sec--band" aria-labelledby="beyond-heading">
+    <div class="bleed beyond">
       <SectionHead label={labels.beyondMarker} heading={labels.beyondHeading} lead={about.reflectionBody} id="beyond-heading">
         <a class="textlink" href={labels.contentLink.href}>{labels.contentLink.label} <span class="arrow" aria-hidden="true">→</span></a>
       </SectionHead>
+      <div class="beyond__photo reveal">
+        <Photo src={labels.beyondImage} alt={labels.beyondImageAlt} sizes="(min-width: 1024px) 40vw, 100vw" />
+      </div>
     </div>
   </section>
 </Base>

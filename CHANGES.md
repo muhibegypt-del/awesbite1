@@ -130,7 +130,7 @@ Nothing below is shown as a placeholder: each appears on the site once it exists
 - **Which alternate portrait** to use on About.
 - **Font options and her handwriting** for "textured" (approval PDF section 01).
 - **The highlighted passage** to move to the start of the Content introduction (section 07): not in the supplied material.
-- **Primary tuition (6 to 11):** not in her route list, so not shown; its text is kept. Is it still offered?
+- ~~**Primary tuition (6 to 11)**~~: resolved in November 2026; she asked for all primary school content to be deleted (section 12).
 - **Links:** Substack, YouTube, LinkedIn, Instagram, TikTok. Each appears on /content and in the footer once its URL is added.
 - **Testimonials and Repurpose portfolio examples**, once approved.
 - **Privacy and terms pages.** The footer links appear once their pages exist. A privacy notice is advisable before the form or any analytics go live.
@@ -142,3 +142,34 @@ Nothing below is shown as a placeholder: each appears on the site once it exists
 - **Scheduling on the contact page** (Calendly or similar), loaded only when someone clicks, as the brief requires.
 - **Open Graph image.** It is currently the anthology photograph. A designed 1200×630 card with the wordmark would present better when links are shared.
 - **Analytics** (privacy-friendly and cookieless, such as Vercel Web Analytics), if the client wants to know which service page is doing the work.
+
+## 12. Client revisions, November 2026
+
+Her round of revisions, applied as listed. Her own copy is unchanged: the About passage is checked by script against her notes (identical, 2,221 characters).
+
+| Her request | What changed |
+|---|---|
+| Palette: purple, cream and a mid-depth forest green, text on green AA | New token `--forest` `#365E45`. Paper on it is 6.00:1 and the soft paper 5.13:1, so text of any size passes AA. Ink and clay are never set on it. |
+| The homepage font on every page | Running copy is Instrument Sans everywhere, as in her Home introduction. The service pages' two opening paragraphs, About's first paragraph and the whole Content introduction were set in the larger Literata; they are now body text. Headings, labels and a single standfirst under a title keep Literata, as on Home. |
+| Larger type on desktop, mobile unchanged | Body, small, lead, h3, h2, title, quote and display each grow on a second ramp from 1024px, starting exactly where the first ramp is at 1024 (no jump): body 19 → 21px, h2 52 → 58px, title 80 → 88px at 1440. Measured against the live build: identical at 390, 768 and 1023px. |
+| 1.1 Delete all primary school content | The retired "Primary, 6 to 11" track, "From blending sounds together" (now "From Key Stage 3 through to A-Level…") and "primary" in the Teach meta description, which also now uses I/GCSE and I/A-Level. Her About biography still mentions primary schools she taught in; that is her history, not the Teach offer. |
+| 1.2 British Council on Home: "ESL teacher" | Home has its own credentials list (`homeCredentials`). About keeps "Teacher Training Programme". |
+| 1.3 "Speakers of Other Languages" capitalised | Under Cert TESOL, on Home and About. |
+| 1.4 Enhanced DBS, DBS capitalised, italic expansion | "Enhanced DBS / *Disclosure and Barring Service*". The qualification line now uses small caps rather than all small caps, so acronyms (DBS, QTS, PGCE, TESOL, IELTS) stay full capitals. |
+| 1.5 IELTS with International House, no status | "IELTS (International House) / *[IELTS full name, pending from client]*". The placeholder is visible until she sends the full name. |
+| 1.6 Credentials from Teach to Home | Both now sit in Home's list, short form, six in two rows of three on desktop. The Credentials block is gone from Teach. |
+| 2.1–2.2 Voice portfolio: no dashes, no numbers, "Voice" larger | The label is "Voice" at body size instead of "03 — VOICE". The 01–04 numbers are gone. "Explainer: health video" is now "Health explainer". |
+| 2.3 A large font-size gap between sections | Measured per section: the portfolio heading was 52px (58px desktop) while no other section's heading passed 32px, and "The performance" ran its paragraphs at 26px serif. The portfolio heading is now on the h3 step and those paragraphs are body text. |
+| 3.1–3.2 A forest green banner across the top, taller | The header is the green banner on every page: 80px on a phone (was 64) and 112px on desktop (was 88). Wordmark and links are paper, the current page is marked with a paper underline, and the theme colour is the green. The phone menu still drops onto paper. |
+| 3.3 Colour depth, green restrained | A cream surface (`--lift`) for Home's introduction and credentials, each service page's "How it works" and the Content introduction. Green appears only in the banner. |
+| 4.1–4.6 About: less beige, side by side, a picture, homepage font | Cream for her passage beside the portrait; the qualifications on a short plum band; "Beyond client work" on sand, beside a writing photograph (`aneesa-writing.webp`, also the Teach masthead; one path in `pages.json` to swap). |
+| 4.7 The clients list | "Stationery brands" deleted. The list now leads with publishers, authors, literary festivals and education companies; panel moderation is last. |
+
+Waiting on her from this round:
+- **The IELTS full name** (the placeholder is live).
+- **Teach packages**: she said both keep and delete. Nothing changed.
+- **"Texture is fine actually, so I can get rid of that"**: probably no texture change is needed. Asked, nothing changed.
+- **"Lead with … teaching" in the clients list**: no item names teaching, and none was written for her. Her wording is needed.
+- **About's British Council caption**: still "Teacher Training Programme", because only Home was asked to change. Should About match?
+- **A different picture for "Beyond client work"**, if she would rather it were not her writing photograph used twice.
+

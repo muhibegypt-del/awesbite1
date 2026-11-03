@@ -33,11 +33,12 @@ const collab = pages.collaborations;
     </Fragment>
   </Masthead>
 
-  <section class="sec" id="introduction" aria-labelledby="introduction-heading">
+  <section class="sec sec--cream" id="introduction" aria-labelledby="introduction-heading">
     <div class="bleed">
       <SectionHead label={intro.marker} heading={intro.heading} id="introduction-heading" />
-      <article class="essay-page col-text">
-        <p class="lead">{q(intro.lede)}</p>
+      {/* Her introduction as one passage in the home page's body face (client revisions, November 2026). */}
+      <article class="prose col-text">
+        <p>{q(intro.lede)}</p>
         {intro.paragraphs.map((line) => <p>{q(line)}</p>)}
       </article>
     </div>

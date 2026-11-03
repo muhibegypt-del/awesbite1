@@ -8,18 +8,22 @@ import { q } from '../lib/typeset.js';
 
 interface Props {
   label?: string;
+  /** A slightly larger gutter label (the Voice portfolio). */
+  labelLarge?: boolean;
   heading?: string;
+  /** Set the heading one step down the scale, to match its neighbours. */
+  headingSmall?: boolean;
   lead?: string;
   id?: string;
   as?: 'h2' | 'h3';
   labelAs?: 'p' | 'h2';
 }
-const { label, heading, lead, id, as: Tag = 'h2', labelAs: LabelTag = 'p' } = Astro.props;
+const { label, labelLarge = false, heading, headingSmall = false, lead, id, as: Tag = 'h2', labelAs: LabelTag = 'p' } = Astro.props;
 ---
 
 <header class="shead reveal">
-  {label && <LabelTag class="label" id={LabelTag === 'h2' ? id : undefined}>{q(label)}</LabelTag>}
-  {heading && <Tag class="h2" id={LabelTag === 'h2' ? undefined : id}>{q(heading)}</Tag>}
+  {label && <LabelTag class:list={['label', { 'label--large': labelLarge }]} id={LabelTag === 'h2' ? id : undefined}>{q(label)}</LabelTag>}
+  {heading && <Tag class={headingSmall ? 'h3' : 'h2'} id={LabelTag === 'h2' ? undefined : id}>{q(heading)}</Tag>}
   {lead && <p class="lead">{q(lead)}</p>}
   <slot />
 </header>

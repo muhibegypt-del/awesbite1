@@ -57,12 +57,22 @@
     "contentLink": { "label": "Explore the literary ecosystem", "href": "/content" }
   },
 
-  "_comment_credentials": "Approval PDF section 03: 'Cert TESOL' with a space, Trinity once; the British Council caption is her exact wording, 'Teacher Training Programme'.",
+  "_comment_credentials": "About page. Approval PDF section 03: 'Cert TESOL' with a space, Trinity once; the British Council caption is her exact wording, 'Teacher Training Programme'. 'Speakers of Other Languages' capitalised (client revisions, November 2026).",
   "credentials": [
     { "qualification": "First-class BA (Hons)", "body": "English with a minor in American Literature and Film." },
-    { "qualification": "Cert TESOL (Trinity College London)", "body": "Teaching English to speakers of other languages" },
+    { "qualification": "Cert TESOL (Trinity College London)", "body": "Teaching English to Speakers of Other Languages" },
     { "qualification": "PGCE and QTS", "body": "Qualified Teacher Status" },
     { "qualification": "British Council", "body": "Teacher Training Programme" }
+  ],
+
+  "_comment_homeCredentials": "Home page (client revisions, November 2026). The About list above, with British Council captioned 'ESL teacher' only (the full phrase is already under Cert TESOL), and the two credentials moved here from the Teach page in their short form, no status wording. IELTS names its training provider in brackets, as Trinity is named for Cert TESOL. The IELTS caption is a placeholder until she sends the full name.",
+  "homeCredentials": [
+    { "qualification": "First-class BA (Hons)", "body": "English with a minor in American Literature and Film." },
+    { "qualification": "Cert TESOL (Trinity College London)", "body": "Teaching English to Speakers of Other Languages" },
+    { "qualification": "PGCE and QTS", "body": "Qualified Teacher Status" },
+    { "qualification": "British Council", "body": "ESL teacher" },
+    { "qualification": "Enhanced DBS", "body": "Disclosure and Barring Service" },
+    { "qualification": "IELTS (International House)", "body": "[IELTS full name, pending from client]" }
   ],
 
   "services": [
@@ -94,7 +104,8 @@
       },
 
       "tracksHeading": "Who I teach",
-      "rangeLine": "From blending sounds together through to A-Level and its international equivalent, with individual support shaped around the learner.",
+      "_comment_rangeLine": "Primary school content deleted (client revisions, November 2026): the line used to begin 'From blending sounds together'.",
+      "rangeLine": "From Key Stage 3 through to A-Level and its international equivalent, with individual support shaped around the learner.",
       "_comment_routes": "Teaching as three routes (client notes and approval PDF section 04). Route labels are hers: 'KS3 - I/GCSE', 'I/A-Level', 'ESL / IELTS'; I/GCSE and I/A-Level replace spelling out 'International'. Descriptions are the existing track lines. Packages only: the hourly rate is removed because she is not taking hourly clients.",
       "routes": [
         {
@@ -132,18 +143,6 @@
           ]
         }
       ],
-      "_comment_tracksRetired": "Not in the client's route list (approval PDF section 04), so not shown. Kept as content until she confirms whether primary tuition is still offered.",
-      "tracksRetired": [
-        { "label": "Primary, 6 to 11", "body": "Phonics, reading, comprehension and confident writing" }
-      ],
-
-      "_comment_credentials": "Approval PDF section 04: shown only with their current status. In her recording the training was in progress and the DBS application had been made.",
-      "credentialsHeading": "Credentials",
-      "credentials": [
-        { "label": "IELTS teacher training", "status": "In progress" },
-        { "label": "Enhanced DBS", "status": "Application made" }
-      ],
-
       "methodHeading": "How it works",
       "method": [
         { "number": "01", "title": "Tell me what you need", "body": "" },
@@ -417,12 +416,13 @@
     ],
     "reflectionPlatforms": null,
     "openToHeading": "Open to",
+    "_comment_openTo": "Client revisions, November 2026: 'stationery brands' deleted; publishers, authors, literary festivals and education companies lead. She also asked to lead with teaching, but no item names teaching yet: its wording waits on her.",
     "openTo": [
-      "Panel moderation",
-      "Literary festival hosting",
-      "Author interviews",
       "Publisher and bookshop events",
-      "Brand partnerships with publishers, stationery brands and education companies"
+      "Author interviews",
+      "Literary festival hosting",
+      "Brand partnerships with publishers and education companies",
+      "Panel moderation"
     ],
     "retired": {
       "paragraphs": [

@@ -44,6 +44,8 @@ Photographs live in `src/assets/images` and always go through `components/Photo.
 
 The client chose (September 2026) **Direction B, Printed Matter, with the portrait (`aneesa-portrait.webp`) as the hub hero**. Literata + Instrument Sans, plum as the second key, the photographs graded into the palette. `AUDIT.md` and `BRAND-AUDIT.md` record why; `CHANGES.md` records what changed.
 
+**Client revisions, November 2026** (CHANGES.md section 12): forest green `--forest` is the third key, used for the banner across the top of every page (the header, 80px phone / 112px desktop); a cream surface (`.sec--cream`, `--lift`) adds depth; running copy is the home page's body face (Instrument Sans) on every page; desktop type is larger from 1024px up, with mobile sizes unchanged.
+
 Copy changes still need the client's approval. Typesetting (curly apostrophes via `q()`, line breaks, case transforms) is not a copy change.
 
 **Client review, October 2026** (her approval PDF and notes): Home leads with her greeting, her plain offer sentence and the Teach / Repurpose / Voice routes; the poetic line sits on the plum band. Teaching is three routes (`KS3 - I/GCSE`, `I/A-Level`, `ESL / IELTS`), packages only, never an hourly rate. 'Voice' is the label for the narration service. Portfolios and testimonials appear only when real items exist; Content platforms only when their link exists. Her new copy is verbatim; earlier copy it replaced is kept in the JSON (`retired`, `*Retired`) and not shown.
@@ -73,20 +75,25 @@ The `.txt` files are extracts made because this cloud container cannot render PD
 - SITE-05/06: two structure concepts were not prepared; the owner went straight to one.
 - SITE-08: no handover walkthrough yet.
 - COPY-03 note: her offer sentence ("At a textured word, I work across…") is shown second on Home, straight after the greeting, so the offer is clear first; the rest is in her order. Flag it, do not silently "fix" it.
-- TEACH: 'Primary, 6 to 11' is not in her route list, so it is hidden (kept in JSON as `tracksRetired`).
+- TEACH: primary school content was deleted at her request (November 2026).
+- November 2026 round, waiting on her: the IELTS full name (a visible placeholder on Home), whether to keep or delete the Teach packages (unchanged), the "texture" remark (unchanged), wording for a teaching item in the collaborations list, and whether About's British Council caption should match Home's "ESL teacher".
 
 ## Design rules — do not violate these
 
 - **Never use `#000000`.** Text is `var(--ink)` `#241C1A`. The client explicitly rejected black.
 - **Two accent tokens, and they are not interchangeable.** `--clay` `#AF593E` is 3.95:1 on paper: fills, marks and text ≥24px only. Anything smaller uses `--clay-ink` `#8F4530` (5.57:1 on paper, 4.53:1 on band).
-- **Plum `--dark` is the second key**: the essay band and the footer only. Photographs are graded into it (`#duotone` in Base.astro). Type sits on a photograph only where there is open wall, and only after measuring contrast against the graded pixels (the hub hero: ink on `#duotone-lift`, about 6:1).
+- **Plum `--dark` is the second key**: the essay band, the About qualifications band and the footer.
+- **Forest green `--forest` `#365E45` is the third key, kept restrained**: the banner across the top of every page and nothing large besides. Text on it is paper (6.00:1) or soft paper (5.13:1); never ink or clay. The wordmark's italic is paper on it, as on plum. Photographs are graded into it (`#duotone` in Base.astro). Type sits on a photograph only where there is open wall, and only after measuring contrast against the graded pixels (the hub hero: ink on `#duotone-lift`, about 6:1).
 - **No `box-shadow` anywhere.** Depth comes from tone and 1px `var(--rule)` hairlines.
 - **One filled button (`.btn`) per viewport**, per page. The header enquiry link is a text link on purpose.
 - Spacing only from the scale: 4 8 12 16 24 32 48 64 96 128 160 (`--s-1`…`--s-11`).
 - Section rhythm `--sec` 64 / 96 / 128 (phone / tablet / desktop); `--sec-minor` 48 / 64 / 96 for a section holding a line or two.
 - Radii: 0 for structure, 2px for fields and buttons, 10px for the audio player.
-- Two families only. **Literata** for display, headings, leads, pull-quotes and labels (true small caps). **Instrument Sans** for body, UI, nav, buttons and figures. No monospace anywhere.
-- Body copy capped at `--measure` (30em, at most 68 characters; essay pages 28em). Never full-width paragraphs.
+- Two families only. **Literata** for display, headings, a single standfirst under a title, pull-quotes and labels (true small caps). **Instrument Sans** for body, UI, nav, buttons and figures. No monospace anywhere.
+- **Running copy is always Instrument Sans, as on the home page** (client, November 2026). No paragraph of continuous copy in the Literata lead, and no serif essay pages.
+- **Desktop type is larger, mobile unchanged.** The type tokens have a second ramp from 1024px that starts at exactly the size the first reaches at 1024. Change a size below 1024 only on purpose, and check 390 and 1440.
+- Body copy capped at `--measure` (30em, at most 68 characters). Never full-width paragraphs.
+- No dashes used as punctuation in new copy: no em dashes, no spaced hyphens, no other patterns that read as machine-written (client, November 2026). Her own copy keeps hers.
 - Emphasis is italic, not bold.
 - One passage, one style. A larger `.lead` paragraph may only open a page or section (a standfirst), never sit in the middle of running text; a client's continuous copy is set in a single face and size throughout.
 - Two left edges only: the page edge (grid column 1) and the text edge (column 3).
@@ -107,7 +114,7 @@ Menus are `<details>` and must work with no JavaScript. Every section is labelle
 
 - `preload="none"` on every `<audio>`. Nothing downloads until someone presses play.
 - One page-level controller: starting a track pauses any other.
-- The scrubber is a native `<input type="range">` (keyboard and touch for free) with live `aria-valuetext`. Its fill is `--teal` `#5F8A8B` — the only cool colour on the site, used nowhere else.
+- The scrubber is a native `<input type="range">` (keyboard and touch for free) with live `aria-valuetext`. Its fill is `--teal` `#5F8A8B`, used nowhere else.
 - A track without a `src` renders as a quiet row with its pending tag.
 
 ## Performance budget
