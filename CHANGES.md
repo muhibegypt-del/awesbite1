@@ -185,3 +185,16 @@ On the branch `preview/offerings-mulberry-bottle` for review before anything rea
 - The previous teaching routes and repurposing price list are kept in `site.json` (`routesRetired`, `tiers`) and not shown.
 
 Waiting on her: lines marked DRAFT in `offerings.json`; I/A-Level (not in her new list); whether the Content Multiplier is a one-off project or monthly; that retainers are per month; a name for "Package"; the hourly rate (her October brief said no hourly clients, this one lists £60 per hour).
+
+## 14. UI audit: magic numbers, margins, breakpoints, whitespace (November 2026)
+
+On `preview/offerings-mulberry-bottle`. Measured with Playwright on 10 pages at 390, 767, 768, 1023, 1024, 1279, 1280 and 1440px, plus a scan of every literal value in `global.css`.
+
+| Found | Fixed |
+|---|---|
+| Excess whitespace: every colour change on desktop left 256px of empty space between content (two 128px paddings), 192px on a tablet. With Mulberry & Bottle, paper and cream are 1.03:1 apart, so many of those gaps sat on what reads as one surface. About had 225px between its title and its content. | `--sec` 64/64/96 and `--sec-minor` 48/48/64 (were 64/96/128 and 48/64/96): colour changes now leave 128/128/192px. Where paper meets cream, one `--sec`, split evenly either side of the seam. Pages are about 6% shorter on tablet and laptop; phones are unchanged. |
+| Magic numbers: fixed rem font sizes for price names, track titles, rates and options, with a duplicate desktop override; seven ad-hoc line-heights; 44px and 40px targets written out; unscaled z-indexes; `max-width: 1240px` on the offer page; `24em` where `--measure-lead` exists. | Tokens: `--t-name`, `--t-rate`, `--t-option` (with their desktop step in tokens.css), `--lh-tight`, `--lh-snug`, `--target`, `--z-header`, `--z-grain`, `--z-skip`; the 1240px cap removed (the grid already caps at `--max`); `--measure-lead` used. |
+| Breakpoints: two ranges ended at 1023px and 1279px, so a zoomed, fractional width such as 1023.5px fell between ranges and got neither layout. | Ranges end at 1023.98px and 1279.98px; the breakpoints are documented in tokens.css. No overflow, no wrapping or crowded header at any of the eight widths. |
+| Dead code: `.display`, `.entry__who`, `.level`, `.levels`, `.masthead__lead`, `.on-dark`, `.pending-quote`, the submenu (`.sub`, nested menu lists) and its markup in Header, and the unused `--t-entry` token. | Removed. |
+
+After: axe-core reports no WCAG 2.2 AA violations on 14 pages at 390 and 1440, and the navbar is clean in all its states.

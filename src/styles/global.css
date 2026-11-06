@@ -98,7 +98,7 @@ body::after {
   content: '';
   position: fixed;
   inset: 0;
-  z-index: 50;
+  z-index: var(--z-grain);
   pointer-events: none;
   opacity: var(--grain);
   mix-blend-mode: multiply;
@@ -114,12 +114,12 @@ a { color: inherit; }
 /* ---- Focus: visible on everything ---- */
 
 :focus-visible { outline: 2px solid var(--clay-ink); outline-offset: 3px; }
-.on-dark :focus-visible, .ftr :focus-visible, .essay :focus-visible, .sec--dark :focus-visible,
+.ftr :focus-visible, .essay :focus-visible, .sec--dark :focus-visible,
 .hdr__inner > :focus-visible, .nav :focus-visible, .menu > summary:focus-visible { outline-color: var(--on-dark); }
 main:focus { outline: none; } /* skip-link target; a ring round the page helps nobody */
 
 .skip {
-  position: absolute; top: var(--s-2); left: var(--s-2); z-index: 100;
+  position: absolute; top: var(--s-2); left: var(--s-2); z-index: var(--z-skip);
   padding: var(--s-2) var(--s-4);
   background: var(--lift); border: 1px solid var(--rule); border-radius: var(--radius-sm);
   font-size: var(--t-small); text-decoration: none;
@@ -172,15 +172,6 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 /* A gutter label one step up: the body size instead of the small size. */
 .label--large { font-size: var(--t-body); }
 
-.display {
-  font-family: var(--serif);
-  font-size: var(--t-display);
-  font-weight: 300;
-  line-height: var(--lh-display);
-  letter-spacing: var(--track-display);
-  margin-inline-start: -0.04em; /* optical: the stem, not the glyph box, on the line */
-}
-
 .title {
   font-family: var(--serif);
   font-size: var(--t-title);
@@ -203,7 +194,7 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
   font-family: var(--serif);
   font-size: var(--t-h3);
   font-weight: 400;
-  line-height: 1.15;
+  line-height: var(--lh-tight);
   letter-spacing: -0.01em;
 }
 
@@ -235,7 +226,7 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
   transition: text-decoration-thickness var(--fast) var(--ease-out), color var(--fast) var(--ease-out);
 }
 .textlink:hover { color: var(--clay-ink); text-decoration-thickness: 2px; }
-.textlink .arrow, .entry__who .arrow { display: inline-block; transition: transform var(--fast) var(--ease-out); }
+.textlink .arrow { display: inline-block; transition: transform var(--fast) var(--ease-out); }
 .textlink:hover .arrow { transform: translateX(var(--s-1)); }
 
 .prose a:not(.textlink) { text-decoration-color: var(--clay); text-decoration-thickness: 1px; text-underline-offset: 0.25em; }
@@ -250,7 +241,7 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
   font-family: var(--sans);
   font-size: var(--t-body);
   font-weight: 500;
-  line-height: 1.2;
+  line-height: var(--lh-tight);
   color: var(--paper);
   background: var(--clay-ink);
   border: 0;
@@ -312,7 +303,7 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
    November 2026), taller than the old paper bar (--hdr). Type on it is
    paper: 6.00:1. As on plum, the wordmark's italic is paper too, since
    clay on green is 1.52:1; the italic alone carries the emphasis. */
-.hdr { position: relative; z-index: 20; background: var(--forest); color: var(--on-forest); }
+.hdr { position: relative; z-index: var(--z-header); background: var(--forest); color: var(--on-forest); }
 .hdr .wordmark, .hdr .wordmark em { color: var(--on-forest); }
 .hdr .textlink { text-decoration-color: var(--on-forest-soft); }
 .hdr .textlink:hover { color: var(--on-forest); }
@@ -349,44 +340,11 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 .nav a[aria-current='page'], .menu[open] > summary { text-decoration-color: var(--on-forest-soft); }
 .nav__cta { font-size: var(--t-body); }
 
-/* Submenus open on a real button (details/summary) and need no script;
-   a few lines of script only close the others and honour Escape. */
-.sub { position: relative; }
-.sub > summary {
-  display: grid;
-  place-items: center;
-  width: 32px;
-  height: 44px;
-  list-style: none;
-  cursor: pointer;
-}
-.sub > summary::-webkit-details-marker { display: none; }
-.sub > summary::before {
-  content: '';
-  width: 7px;
-  height: 7px;
-  border-right: 1.5px solid currentColor;
-  border-bottom: 1.5px solid currentColor;
-  transform: translateY(-2px) rotate(45deg);
-  transition: transform var(--fast) var(--ease-out);
-}
-.sub[open] > summary::before { transform: translateY(2px) rotate(225deg); }
-.sub > ul {
-  position: absolute;
-  top: calc(100% + var(--s-2));
-  left: calc(-1 * var(--s-4));
-  min-width: 12rem;
-  padding: var(--s-2) var(--s-4);
-  background: var(--paper);
-  border: 1px solid var(--rule);
-}
-.sub > ul a { display: flex; align-items: center; min-height: 44px; }
-
 /* Phone and tablet: one row, the wordmark and a typographic "menu". */
 .menu > summary {
   display: flex;
   align-items: center;
-  min-height: 44px;
+  min-height: var(--target);
   font-size: var(--t-small);
   text-transform: lowercase;
   list-style: none;
@@ -404,8 +362,6 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
   border-bottom: 1px solid var(--rule);
 }
 .menu__panel > ul > li > a { display: flex; align-items: center; min-height: var(--s-7); font-family: var(--serif); font-size: var(--t-lead); text-transform: none; }
-.menu__panel ul ul { padding-inline-start: var(--s-4); margin-block-end: var(--s-2); border-inline-start: 1px solid var(--rule); }
-.menu__panel ul ul a { display: flex; align-items: center; min-height: 40px; }
 
 @media (min-width: 1024px) {
   .nav { display: flex; align-items: center; gap: var(--s-7); }
@@ -422,14 +378,21 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 .sec:not(.sec--band):not(.sec--dark):not(.sec--cream) + .sec:not(.sec--band):not(.sec--dark):not(.sec--cream) { padding-block-start: 0; }
 /* Two bands that meet read as one surface: one gap between them, not two. */
 .sec--band + .sec--band, .sec--cream + .sec--cream { padding-block-start: 0; }
+/* Paper and cream are 1.03:1 apart, which reads as one surface: where they
+   meet, one section's worth of space rather than two, split evenly so
+   neither side's content sits on the faint seam (UI audit, November 2026). */
+.sec:not(.sec--band):not(.sec--dark):not(.sec--cream):has(+ .sec--cream),
+.sec--cream:has(+ .sec:not(.sec--band):not(.sec--dark):not(.sec--cream)) { padding-block-end: calc(var(--sec) / 2); }
+.sec:not(.sec--band):not(.sec--dark):not(.sec--cream) + .sec--cream,
+.sec--cream + .sec:not(.sec--band):not(.sec--dark):not(.sec--cream) { padding-block-start: calc(var(--sec) / 2); }
 /* The rule under a plain masthead sits in the middle of the space around it. */
-.masthead--plain + .sec:not(.sec--band):not(.sec--dark):not(.sec--cream) { padding-block-start: var(--sec-minor); }
+.masthead--plain + .sec:not(.sec--band):not(.sec--dark) { padding-block-start: var(--sec-minor); }
 .sec--band { background: var(--band); }
 /* Cream: lighter than the beige page, for colour depth without weight
    (client revisions, November 2026). Ink on it is 14.93:1, clay-ink 6.12:1. */
 .sec--cream { background: var(--lift); }
-.sec--dark, .on-dark { background: var(--dark); color: var(--on-dark); }
-.sec--dark .label, .on-dark .label { color: var(--on-dark-soft); }
+.sec--dark { background: var(--dark); color: var(--on-dark); }
+.sec--dark .label { color: var(--on-dark-soft); }
 .sec--dark .muted { color: var(--on-dark-soft); }
 .sec--dark .textlink { text-decoration-color: var(--on-dark-soft); }
 .sec--dark .textlink:hover { color: var(--on-dark); }
@@ -483,7 +446,7 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
   border-top: 1px solid var(--rule);
   text-decoration: none;
 }
-.routes-nav__name { font-family: var(--serif); font-size: var(--t-h3); line-height: 1.15; transition: color var(--fast) var(--ease-out); }
+.routes-nav__name { font-family: var(--serif); font-size: var(--t-h3); line-height: var(--lh-tight); transition: color var(--fast) var(--ease-out); }
 .routes-nav__for { grid-column: 1; font-size: var(--t-small); color: var(--ink-soft); }
 .routes-nav .arrow { grid-column: 2; grid-row: 1 / span 2; color: var(--clay-ink); font-size: var(--t-lead); transition: transform var(--fast) var(--ease-out); }
 .routes-nav a:hover .routes-nav__name { color: var(--clay-ink); }
@@ -516,7 +479,6 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 .masthead__inner { row-gap: var(--s-5); }
 .masthead__runhead { margin-block-end: calc(-1 * var(--s-2)); }
 .masthead__audience { color: var(--clay-ink); }
-.masthead__lead { max-width: var(--measure-lead); }
 .masthead__below { display: grid; gap: var(--s-5); justify-items: start; }
 .masthead__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-4) var(--s-6); }
 .masthead__photo { margin-block-start: var(--s-7); aspect-ratio: 3 / 2; overflow: hidden; }
@@ -616,7 +578,7 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
   font-variant-numeric: lining-nums;
   color: var(--clay);
 }
-.steps strong { font-family: var(--serif); font-size: var(--t-lead); font-weight: 400; line-height: 1.25; }
+.steps strong { font-family: var(--serif); font-size: var(--t-lead); font-weight: 400; line-height: var(--lh-snug); }
 .steps span { color: var(--ink-soft); }
 
 @media (min-width: 768px) { .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
@@ -629,10 +591,10 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 .prices { display: grid; font-variant-numeric: lining-nums tabular-nums; }
 .price { display: grid; gap: var(--s-1) var(--s-5); padding-block: var(--s-5); border-top: 1px solid var(--rule); }
 .price:last-child { border-bottom: 1px solid var(--rule); }
-.price__label { font-family: var(--serif); font-size: 1.375rem; line-height: 1.2; }
+.price__label { font-family: var(--serif); font-size: var(--t-name); line-height: var(--lh-tight); }
 .price__cadence, .price__bundles { font-size: var(--t-small); color: var(--ink-soft); }
 .price__cadence { max-width: var(--measure); }
-.price__rate { font-size: 1.25rem; font-weight: 500; }
+.price__rate { font-size: var(--t-rate); font-weight: 500; }
 .price__includes { display: grid; gap: var(--s-1); margin-top: var(--s-2); font-size: var(--t-small); color: var(--ink-soft); }
 .price__includes li::before { content: '– '; color: var(--clay); }
 
@@ -660,7 +622,7 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 }
 
 /* Packages: a tier that lists its options rather than an hourly rate. */
-.price__options { display: grid; gap: var(--s-1); font-size: 1.125rem; font-weight: 500; font-variant-numeric: lining-nums tabular-nums; }
+.price__options { display: grid; gap: var(--s-1); font-size: var(--t-option); font-weight: 500; font-variant-numeric: lining-nums tabular-nums; }
 @media (min-width: 768px) {
   .price--options { grid-template-areas: "label options" "cadence options"; }
   .price__options { grid-area: options; text-align: right; }
@@ -680,7 +642,7 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 @media (min-width: 1280px) { .offers:has(> li:nth-child(4)) { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .offer { display: flex; flex-direction: column; padding: var(--s-6); background: var(--lift); border: 1px solid var(--rule); }
 .offer__num { font-family: var(--serif); font-weight: 300; font-size: var(--t-h2); line-height: 1; font-variant-numeric: lining-nums; color: color-mix(in srgb, var(--dark) 65%, var(--lift)); }   /* 3.9:1, large text */
-.offer__title { margin-top: var(--s-6); font-family: var(--serif); font-size: var(--t-h3); font-weight: 400; line-height: 1.15; }
+.offer__title { margin-top: var(--s-6); font-family: var(--serif); font-size: var(--t-h3); font-weight: 400; line-height: var(--lh-tight); }
 .offer__kicker { margin-top: var(--s-2); color: var(--dark); }
 .offer__summary { flex: 1; margin-top: var(--s-4); font-size: var(--t-small); line-height: var(--lh-small); color: var(--ink-soft); }
 .offer__price { margin-top: var(--s-6); padding-top: var(--s-5); border-top: 1px solid var(--rule); }
@@ -695,7 +657,7 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 /* Her three types of teaching, side by side once there is room. */
 .types { display: grid; gap: var(--s-6) var(--s-7); }
 .type { display: grid; gap: var(--s-2); align-content: start; padding-top: var(--s-4); border-top: 2px solid var(--ink); scroll-margin-top: var(--s-7); }
-.type__tagline { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: var(--t-lead); line-height: 1.3; color: var(--dark); }
+.type__tagline { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: var(--t-lead); line-height: var(--lh-snug); color: var(--dark); }
 @media (min-width: 1024px) { .types { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 
 /* ---- One offer's page ---- */
@@ -704,7 +666,7 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 .pkg__glow { position: absolute; inset: -20% -20% auto auto; width: min(90vw, 980px); aspect-ratio: 1; pointer-events: none;
   background: radial-gradient(closest-side, color-mix(in srgb, var(--dark) 14%, var(--paper)), color-mix(in srgb, var(--dark) 6%, var(--paper)) 55%, transparent); }
 .pkg .bleed { position: relative; }
-.pkg__inner { display: grid; gap: var(--s-7); max-width: 1240px; }
+.pkg__inner { display: grid; gap: var(--s-7); }
 .pkg__crumb a { color: var(--clay-ink); text-decoration: underline; text-decoration-color: var(--clay); text-underline-offset: 0.3em; }
 .pkg__title { margin-block: var(--s-3) var(--s-5); font-family: var(--serif); font-size: var(--t-h2); font-weight: 300; line-height: var(--lh-heading); letter-spacing: var(--track-heading); text-wrap: balance; }
 .pkg__part { margin-top: var(--s-7); padding-top: var(--s-5); border-top: 1px solid var(--rule); display: grid; gap: var(--s-4); }
@@ -734,13 +696,6 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
   .pkg__card { position: sticky; top: var(--s-6); padding: var(--s-7); }
 }
 
-/* ---- Teaching levels: each route with its descriptions and packages ---- */
-
-.levels { display: grid; gap: var(--s-8); }
-.level { display: grid; gap: var(--s-5); scroll-margin-top: var(--s-7); }
-.level > .h3 { padding-top: var(--s-5); border-top: 2px solid var(--ink); }
-.level > .muted { max-width: var(--measure); }
-.level .prices { margin-top: var(--s-2); }
 
 /* Jump links from the masthead to each level. */
 .jump ul { display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-5); margin-top: var(--s-5); }
@@ -750,7 +705,7 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 .agreements { display: grid; gap: var(--s-6); }
 .agreements > div { display: grid; gap: var(--s-3); align-content: start; padding-top: var(--s-4); border-top: 1px solid var(--rule); }
 /* Heading beside its copy until there is room for three columns. */
-@media (min-width: 768px) and (max-width: 1279px) {
+@media (min-width: 768px) and (max-width: 1279.98px) {
   .agreements > div { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); column-gap: var(--s-5); }
 }
 @media (min-width: 1280px) { .agreements { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
@@ -769,33 +724,25 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
   border-top: 1px solid var(--rule);
 }
 .track:last-child { border-bottom: 1px solid var(--rule); }
-.track__title { font-family: var(--serif); font-size: 1.375rem; }
+.track__title { font-family: var(--serif); font-size: var(--t-name); }
 .track__tag { font-size: var(--t-small); color: var(--ink-soft); }
 .tracks__note { margin-top: var(--s-5); }
 
 /* A playable track (once audio exists). */
 .player { grid-column: 1 / -1; display: flex; align-items: center; gap: var(--s-3); }
 .player[hidden] { display: none; }
-.player__play { display: grid; place-items: center; flex: none; width: 44px; height: 44px; border: 1px solid var(--rule-strong); border-radius: var(--radius-md); color: var(--clay-ink); transition: border-color var(--fast) var(--ease-out), color var(--fast) var(--ease-out); }
+.player__play { display: grid; place-items: center; flex: none; width: var(--target); height: var(--target); border: 1px solid var(--rule-strong); border-radius: var(--radius-md); color: var(--clay-ink); transition: border-color var(--fast) var(--ease-out), color var(--fast) var(--ease-out); }
 .player__play:hover { border-color: var(--clay-ink); }
 /* SVG ignores the hidden attribute in some browsers: hide the inactive icon explicitly. */
 .player__play svg[hidden] { display: none; }
 .player__play:hover { color: var(--ink); }
-.player__seek { flex: 1; min-width: 0; min-height: 44px; accent-color: var(--teal); }
+.player__seek { flex: 1; min-width: 0; min-height: var(--target); accent-color: var(--teal); }
 .player__time { font-size: var(--t-small); color: var(--ink-soft); font-variant-numeric: tabular-nums; white-space: nowrap; }
 .player__status:empty { display: none; }
 
 @media (min-width: 1024px) {
   .bleed > .tracks, .bleed > .tracks__note { grid-column: col 3 / span 8; }
-  /* Desktop type is larger (tokens.css): the fixed-size names grow with it. */
-  .price__label, .track__title { font-size: 1.5rem; }
-  .price__rate { font-size: 1.375rem; }
-  .price__options { font-size: 1.25rem; }
 }
-
-/* ---- Testimonials, before any exist ---- */
-
-.pending-quote { font-family: var(--serif); font-style: italic; font-weight: 300; font-size: var(--t-lead); line-height: var(--lh-lead); color: var(--ink-soft); }
 
 /* ============================================================
    The essay moment and the photograph beneath it
@@ -807,9 +754,9 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
   font-style: italic;
   font-weight: 300;
   font-size: var(--t-quote);
-  line-height: 1.32;
+  line-height: var(--lh-snug);
   letter-spacing: -0.01em;
-  max-width: 24em;
+  max-width: var(--measure-lead);
   hanging-punctuation: first;
 }
 .essay__line {
@@ -861,7 +808,7 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
   min-height: var(--s-7);
   padding: var(--s-2) var(--s-3);
   font-size: var(--t-body);
-  line-height: 1.5;
+  line-height: var(--lh-small);
   background: var(--lift);
   border: 1px solid var(--rule-strong);
   border-radius: var(--radius-sm);
@@ -883,7 +830,7 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 .ftr .bleed { row-gap: var(--s-7); }
 .ftr__mark { font-size: calc(clamp(2.5rem, 1.6rem + 3.6vw, 4.5rem) * var(--hand-scale)); color: var(--on-dark); }
 .ftr__mark em { color: var(--on-dark); }
-.ftr__tagline { margin-top: var(--s-4); font-family: var(--serif); font-style: italic; font-weight: 300; font-size: var(--t-lead); line-height: 1.35; color: var(--on-dark-soft); }
+.ftr__tagline { margin-top: var(--s-4); font-family: var(--serif); font-style: italic; font-weight: 300; font-size: var(--t-lead); line-height: var(--lh-snug); color: var(--on-dark-soft); }
 .ftr__heading { margin-bottom: var(--s-4); color: var(--on-dark-soft); }
 .ftr__col ul { display: grid; gap: var(--s-2); }
 .ftr a { text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--on-dark) 40%, transparent); text-decoration-thickness: 1px; text-underline-offset: 0.3em; transition: text-decoration-color var(--fast) var(--ease-out); }
@@ -955,7 +902,7 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 .about__photo img { width: 100%; height: 100%; object-fit: cover; object-position: 70% 35%; }
 .about .honours { margin-block-start: var(--s-5); }
 
-@media (min-width: 768px) and (max-width: 1023px) {
+@media (min-width: 768px) and (max-width: 1023.98px) {
   .about__photo { aspect-ratio: 3 / 2; }
 }
 

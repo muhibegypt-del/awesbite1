@@ -87,7 +87,9 @@ The `.txt` files are extracts made because this cloud container cannot render PD
 - **No `box-shadow` anywhere.** Depth comes from tone and 1px `var(--rule)` hairlines.
 - **One filled button (`.btn`) per viewport**, per page. The header enquiry link is a text link on purpose.
 - Spacing only from the scale: 4 8 12 16 24 32 48 64 96 128 160 (`--s-1`…`--s-11`).
-- Section rhythm `--sec` 64 / 96 / 128 (phone / tablet / desktop); `--sec-minor` 48 / 64 / 96 for a section holding a line or two.
+- Section rhythm `--sec` 64 / 64 / 96 (phone / tablet / desktop); `--sec-minor` 48 / 48 / 64 for a section holding a line or two (UI audit, November 2026; it was 64/96/128). Two sections of different colour leave both paddings between their content (128 / 128 / 192). Paper and cream read as one surface, so where they meet the gap is one `--sec`, split evenly either side of the seam.
+- No magic numbers in `global.css`: sizes, line-heights, touch targets and stacking order come from tokens (`--t-name`, `--t-rate`, `--t-option`, `--lh-tight`, `--lh-snug`, `--target` 44px, `--z-header`/`--z-grain`/`--z-skip`). Optical nudges in em (a glyph's overhang, a 7px chevron) are the only exception.
+- Breakpoints are 768, 1024 and 1280 (min-width). A range ends at `.98px` (`max-width: 1023.98px`) so a fractional, zoomed width never falls between two ranges. CSS cannot read custom properties in `@media`, so the values are repeated; tokens.css documents them.
 - Radii: 0 for structure, 2px for fields and buttons, 10px for the audio player.
 - Two families only. **Literata** for display, headings, a single standfirst under a title, pull-quotes and labels (true small caps). **Instrument Sans** for body, UI, nav, buttons and figures. No monospace anywhere.
 - **Running copy is always Instrument Sans, as on the home page** (client, November 2026). No paragraph of continuous copy in the Literata lead, and no serif essay pages.

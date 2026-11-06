@@ -1,11 +1,11 @@
 ---
 /**
  * One row at every width. Desktop: the wordmark on the page edge, the five
- * sections (three with sub-links), and the enquiry as a quiet text link so
+ * sections, and the enquiry as a quiet text link so
  * each page keeps its one filled button for the real action.
  *
- * Phone and tablet: the wordmark and a typographic "menu". Both the menu
- * and the sub-links are <details>, so they open with no JavaScript at all;
+ * Phone and tablet: the wordmark and a typographic "menu". The menu is a
+ * <details>, so it opens with no JavaScript at all;
  * the script in Base.astro only closes the others and honours Escape.
  */
 import Wordmark from './Wordmark.astro';
@@ -29,14 +29,6 @@ const isCurrent = (href: string) =>
           {items.map((item) => (
             <li class="nav__item">
               <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>
-              {item.children?.length && (
-                <details class="sub" data-sub>
-                  <summary aria-label={`${item.label}: more`}></summary>
-                  <ul role="list">
-                    {item.children.map((child) => <li><a href={child.href}>{child.label}</a></li>)}
-                  </ul>
-                </details>
-              )}
             </li>
           ))}
         </ul>
@@ -50,11 +42,6 @@ const isCurrent = (href: string) =>
             {items.map((item) => (
               <li>
                 <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>
-                {item.children?.length && (
-                  <ul role="list">
-                    {item.children.map((child) => <li><a href={child.href}>{child.label}</a></li>)}
-                  </ul>
-                )}
               </li>
             ))}
             <li><a href={cta.href}>{cta.label}</a></li>
