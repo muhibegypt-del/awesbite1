@@ -30,8 +30,8 @@ const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
    black and white, so luminance maps straight from one colour to the
    other. The lifted variant pulls the mid-tones toward the paper for a
    photograph that carries type; its two ends are the same. */
-const SHADOW = '#2E1F29';
-const PAPER = '#F1E6D9';
+const SHADOW = '#2A1625';
+const PAPER = '#FBF6EE';
 const channel = (hex: string, i: number) => parseInt(hex.slice(1 + i * 2, 3 + i * 2), 16) / 255;
 const duo = [0, 1, 2].map((i) => `${channel(SHADOW, i).toFixed(4)} ${channel(PAPER, i).toFixed(4)}`);
 const duoLift = [0, 1, 2].map((i) => {
@@ -67,6 +67,7 @@ const duoLift = [0, 1, 2].map((i) => {
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preload" href="/fonts/literata-roman.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/square-peg.woff2" as="font" type="font/woff2" crossorigin />
 
     {/* The wordmark inks in on the first page of a visit only. Set before
         first paint so it never flashes in finished and then animates. */}

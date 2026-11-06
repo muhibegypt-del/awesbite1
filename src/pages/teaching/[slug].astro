@@ -1,0 +1,12 @@
+---
+/** One page per offer in offerings.json (client revisions, November 2026). */
+import Package from '../../layouts/Package.astro';
+import offerings from '../../content/offerings.json';
+
+export function getStaticPaths() {
+  return offerings.teaching.options.map((option) => ({ params: { slug: option.slug } }));
+}
+const { slug } = Astro.params;
+---
+
+<Package service="teaching" slug={slug} />

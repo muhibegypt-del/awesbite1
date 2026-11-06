@@ -10,19 +10,22 @@ import Photo from './Photo.astro';
 import ServiceList from './ServiceList.astro';
 import { q } from '../lib/typeset.js';
 import site from '../content/site.json';
+import global from '../content/global.json';
 
 const { hub } = site;
 const { greeting, offer } = hub.landing;
 
 /* The brand name inside her greeting is set the way the wordmark is set:
-   'textured' in italic. Typesetting only; the words are hers. */
-const [beforeBrand, afterBrand] = greeting.split('textured');
+   the whole name in the handwriting, 'textured' in clay. Typesetting only;
+   the words are hers. */
+const [beforeBrand, afterBrand] = greeting.split(global.brand.wordmark);
+const [first, middle, last] = global.brand.wordmark.split(' ');
 ---
 
 <section class="hello" aria-labelledby="hello-heading">
   <div class="bleed hello__inner">
     <div class="hello__text">
-      <h1 class="hello__h1" id="hello-heading">{q(beforeBrand)}<em>textured</em>{q(afterBrand)}</h1>
+      <h1 class="hello__h1" id="hello-heading">{q(beforeBrand)}<span class="hello__brand">{first} <em>{middle}</em> {last}</span>{q(afterBrand)}</h1>
       <p class="lead hello__offer">{q(offer)}</p>
       <nav class="hello__routes" aria-label={hub.markers.pillars}>
         <ServiceList />

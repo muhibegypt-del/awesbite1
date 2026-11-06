@@ -67,6 +67,14 @@ const { contact } = site;
       if (isKnownTopic) topic.value = requestedTopic;
     }
 
+    /* From an offer's page: start the message with the offer's name, so
+       she knows which one the enquiry is about. The visitor can edit it. */
+    const requestedPackage = new URLSearchParams(window.location.search).get('package');
+    const message = form.elements.namedItem('message');
+    if (message instanceof HTMLTextAreaElement && requestedPackage && !message.value) {
+      message.value = `${requestedPackage.slice(0, 80)}: `;
+    }
+
     type Field = HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement;
     const fields = Array.from(form.querySelectorAll<Field>('[data-error-missing]'));
 

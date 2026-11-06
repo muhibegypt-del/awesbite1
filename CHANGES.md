@@ -173,3 +173,15 @@ Waiting on her from this round:
 - **About's British Council caption**: still "Teacher Training Programme", because only Home was asked to change. Should About match?
 - **A different picture for "Beyond client work"**, if she would rather it were not her writing photograph used twice.
 
+
+## 13. Preview: Mulberry & Bottle, Square Peg, her offers (November 2026)
+
+On the branch `preview/offerings-mulberry-bottle` for review before anything reaches the live branch.
+
+- **Palette: Mulberry & Bottle** (her pick from the colour options), with a truer forest green for the banner (`#2E5A3C`, hue 139, in place of the sheet's bluer bottle green). Every text pairing passes WCAG AA; the banner is 7.38:1 (AAA). axe-core: no WCAG 2.2 AA violations on any of the 14 pages at 390 and 1440, header included in default, hover and open-menu states. Photographs are graded into the new mulberry and cream.
+- **Square Peg** (her handwriting pick, 16) sets the whole name, *a textured word*, in the banner, in her greeting and in the footer. Self-hosted with its OFL licence, preloaded, `font-display: block`.
+- **Her offers as cards** (`OfferCards.astro`, `offerings.json`), after the programme cards she sent: four on Teach (1:1 hourly £60, Package £500, Core Retainer £250, Premium Retainer £500) under her three types (KS3 English, I/GCSE, ESL & IELTS); three on Repurpose (The Content Starter £150, The Content Multiplier £500, The Thought Leadership Retainer £800) under her "Writing Strategy & Content Repurposing" copy.
+- **A page for each offer** (`layouts/Package.astro`, `/teaching/<offer>`, `/repurposing/<offer>`): introduction beside a sticky buy card (1.15fr / 0.85fr), a pale mulberry glow behind; the card runs price, terms, summary, "Enquire now" (prefills the form with the offer's name), "Ask a question first", rule, what's included.
+- The previous teaching routes and repurposing price list are kept in `site.json` (`routesRetired`, `tiers`) and not shown.
+
+Waiting on her: lines marked DRAFT in `offerings.json`; I/A-Level (not in her new list); whether the Content Multiplier is a one-off project or monthly; that retainers are per month; a name for "Package"; the hourly rate (her October brief said no hourly clients, this one lists £60 per hour).

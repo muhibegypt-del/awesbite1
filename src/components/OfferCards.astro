@@ -1,0 +1,34 @@
+---
+/**
+ * Her offers as cards (client revisions, November 2026), after the
+ * programme cards she sent as a reference, in this site's own system:
+ * number, name, a small-caps line, one or two sentences, then the price,
+ * its terms and one fact, and a link to the offer's own page. A card
+ * shows a little; the page shows everything. Every card's button is
+ * outlined, so each page keeps its one filled button.
+ */
+import { q } from '../lib/typeset.js';
+import offerings from '../content/offerings.json';
+
+interface Props { service: 'teaching' | 'repurposing'; route: string }
+const { service, route } = Astro.props;
+const set = offerings[service];
+const { labels } = offerings;
+---
+
+<ul class="offers" role="list">
+  {set.options.map((o) => (
+    <li class="offer reveal">
+      <p class="offer__num" aria-hidden="true">{o.number}</p>
+      <h3 class="offer__title">{o.title}</h3>
+      <p class="label offer__kicker">{o.kicker}</p>
+      <p class="offer__summary">{q(o.summary)}</p>
+      <div class="offer__price">
+        <p class="offer__amount">{o.price}</p>
+        <p class="label offer__term">{o.term}</p>
+        <p class="offer__meta">{o.meta}</p>
+      </div>
+      <a class="btn btn--outline offer__cta" href={`${route}/${o.slug}`}>{labels.cardCta}<span class="visually-hidden">: {o.title}</span></a>
+    </li>
+  ))}
+</ul>

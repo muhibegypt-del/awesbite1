@@ -107,7 +107,9 @@
       "_comment_rangeLine": "Primary school content deleted (client revisions, November 2026): the line used to begin 'From blending sounds together'.",
       "rangeLine": "From Key Stage 3 through to A-Level and its international equivalent, with individual support shaped around the learner.",
       "_comment_routes": "Teaching as three routes (client notes and approval PDF section 04). Route labels are hers: 'KS3 - I/GCSE', 'I/A-Level', 'ESL / IELTS'; I/GCSE and I/A-Level replace spelling out 'International'. Descriptions are the existing track lines. Packages only: the hourly rate is removed because she is not taking hourly clients.",
-      "routes": [
+      "_comment_offers": "Client revisions, November 2026: her three types and her lessons and packages come from offerings.json; the routes below are retired (not shown).",
+      "offers": "teaching",
+      "routesRetired": [
         {
           "id": "ks3-igcse",
           "label": "KS3 - I/GCSE",
@@ -364,6 +366,8 @@
         }
       ],
 
+      "_comment_offers": "Client revisions, November 2026: her packages come from offerings.json and replace the price list below (kept, not shown).",
+      "offers": "repurposing",
       "tracksHeading": "What I take on",
       "tracks": [
         { "label": "Carousels and short-form posts", "body": "One idea developed into concise, clear content for social platforms" },

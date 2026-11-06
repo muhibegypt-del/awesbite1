@@ -12,10 +12,12 @@ import Note from '../components/Note.astro';
 import PriceList from '../components/PriceList.astro';
 import TrackList from '../components/TrackList.astro';
 import ServiceList from '../components/ServiceList.astro';
+import OfferCards from '../components/OfferCards.astro';
 import { q } from '../lib/typeset.js';
 import site from '../content/site.json';
 import pages from '../content/pages.json';
 import global from '../content/global.json';
+import offerings from '../content/offerings.json';
 
 interface Props { id: 'teaching' | 'repurposing' | 'narration' }
 const { id } = Astro.props;
@@ -31,6 +33,10 @@ const linkIn = (body: string, link?: { text: string; href: string }) => {
 };
 const background = service.background && linkIn(service.background.body, service.backgroundLink);
 const hasDetails = service.studio || service.examples?.length || service.background;
+/* Her offers (client revisions, November 2026): cards here, a page each. */
+const offerSet: Record<string, any> | null = service.offers ? (offerings as Record<string, any>)[service.offers] : null;
+const types = offerSet?.types;
+const unsureHref = `/contact?about=${encodeURIComponent(offerSet?.topic ?? '')}`;
 ---
 
 <Base title={meta.title} description={meta.description}>
@@ -46,9 +52,12 @@ const hasDetails = service.studio || service.examples?.length || service.backgro
     <Fragment slot="below">
       <p class="lead">{q(service.oneLiner)}</p>
       <p class="masthead__actions"><a class="btn" href={service.cta.href}>{service.cta.label}</a></p>
-      {service.routes && (
+      {types && (
         <nav class="jump" aria-label={service.tracksHeading}>
-          <ul role="list">{service.routes.map((route: { id: string; label: string }) => <li><a class="textlink" href={`#${route.id}`}>{route.label}</a></li>)}</ul>
+          <ul role="list">
+            {types.map((type: { id: string; label: string }) => <li><a class="textlink" href={`#${type.id}`}>{type.label}</a></li>)}
+            <li><a class="textlink" href="#offers">{offerSet!.marker}</a></li>
+          </ul>
         </nav>
       )}
     </Fragment>
@@ -66,29 +75,39 @@ const hasDetails = service.studio || service.examples?.length || service.backgro
     </section>
   )}
 
-  {/* Teaching: each route carries its descriptions and its packages, so a
-      visitor finds their level and its price in one place. */}
-  {service.routes && (
-    <section class="sec sec--band" aria-labelledby="routes-heading">
+  {/* Teaching: her three types, then the ways to work together as cards
+      (client revisions, November 2026). */}
+  {types && (
+    <section class="sec sec--cream" aria-labelledby="types-heading">
       <div class="bleed">
-        <SectionHead label={service.tracksHeading} labelAs="h2" lead={service.rangeLine} id="routes-heading" />
-        <div class="levels col-wide">
-          {service.routes.map((route: Record<string, any>) => (
-            <article class="level" id={route.id} aria-labelledby={`${route.id}-title`}>
-              <h3 class="h3" id={`${route.id}-title`}>{route.label}</h3>
-              {route.tracks.length > 1
-                ? <dl class="pairs">{route.tracks.map((track: { label: string; body: string }) => <div><dt>{track.label}</dt><dd>{q(track.body)}</dd></div>)}</dl>
-                : <p class="muted">{q(route.tracks[0].body)}</p>}
-              <PriceList tiers={route.packages} />
+        <SectionHead label={service.tracksHeading} labelAs="h2" lead={service.rangeLine} id="types-heading" />
+        <div class="types col-wide">
+          {types.map((type: { id: string; label: string; tagline: string; body: string }) => (
+            <article class="type reveal" id={type.id} aria-labelledby={`${type.id}-title`}>
+              <h3 class="h3" id={`${type.id}-title`}>{type.label}</h3>
+              <p class="type__tagline">{q(type.tagline)}</p>
+              <p class="muted">{q(type.body)}</p>
             </article>
           ))}
         </div>
-        {service.pricingLine && <p class="small muted col-text space-7">{q(service.pricingLine)}</p>}
         {service.note && (
           <div class="col-text space-7">
             <Note heading={service.note.heading} body={service.note.body} />
           </div>
         )}
+      </div>
+    </section>
+  )}
+
+  {offerSet && types && (
+    <section class="sec sec--band" id="offers" aria-labelledby="offers-heading">
+      <div class="bleed">
+        <SectionHead label={offerSet.marker} labelAs="h2" lead={offerSet.availableFor} id="offers-heading" />
+        <div class="offers-wrap"><OfferCards service={service.offers} route={service.route} /></div>
+        <div class="prose col-text offers__after">
+          <p class="small muted">{q(offerSet.note)}</p>
+          <p class="small">{offerSet.unsure.before} <a class="textlink" href={unsureHref}>{offerSet.unsure.link}</a> {offerSet.unsure.after}</p>
+        </div>
       </div>
     </section>
   )}
@@ -152,7 +171,28 @@ const hasDetails = service.studio || service.examples?.length || service.backgro
     </div>
   </section>
 
-  {service.publishPricing === true && service.tiers && (
+  {/* Repurpose: her introduction, then the packages as cards (client revisions, November 2026). */}
+  {offerSet && !types && (
+    <section class="sec sec--band" id="offers" aria-labelledby="offers-heading">
+      <div class="bleed">
+        <SectionHead label={offerSet.marker} heading={offerSet.intro.heading} lead={offerSet.intro.standfirst} id="offers-heading" />
+        <div class="prose col-text">
+          {offerSet.intro.paragraphs.map((line: string) => <p>{q(line)}</p>)}
+        </div>
+        <dl class="pairs col-wide space-7">
+          {offerSet.intro.services.map((sv: { label: string; body: string }) => <div class="reveal"><dt>{sv.label}</dt><dd>{q(sv.body)}</dd></div>)}
+        </dl>
+        <p class="col-text space-7">{q(offerSet.intro.close)}</p>
+        <div class="offers-wrap space-8"><OfferCards service={service.offers} route={service.route} /></div>
+        <div class="prose col-text offers__after">
+          <p class="small">{q(offerSet.custom)}</p>
+          <p class="small">{offerSet.unsure.before} <a class="textlink" href={unsureHref}>{offerSet.unsure.link}</a> {offerSet.unsure.after}</p>
+        </div>
+      </div>
+    </section>
+  )}
+
+  {service.publishPricing === true && service.tiers && !offerSet && (
     <section class="sec sec--band" aria-labelledby="pricing-heading">
       <div class="bleed">
         <SectionHead label={service.pricingHeading} labelAs="h2" lead={service.pricingLine} id="pricing-heading" />
@@ -171,7 +211,7 @@ const hasDetails = service.studio || service.examples?.length || service.backgro
     </section>
   )}
 
-  {service.routes && service.agreements?.length > 0 && (
+  {types && service.agreements?.length > 0 && (
     <section class="sec sec--band" aria-labelledby="expect-heading">
       <div class="bleed">
         <SectionHead label={service.agreementsHeading} labelAs="h2" id="expect-heading" />

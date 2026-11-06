@@ -6,40 +6,44 @@
    ============================================================ */
 
 :root {
+  /* ---- Palette: Mulberry & Bottle (client's choice, November 2026) ----
+     Every pairing below is measured; all pass WCAG AA for text of any
+     size, and the banner passes AAA. */
+
   /* ---- Surfaces ---- */
-  --paper:      #F1E6D9;   /* warm uncoated stock: the page */
-  --band:       #E1CFBD;   /* the second surface, 1.23:1 against paper */
-  --lift:       #F8F1E9;   /* fields and anything raised off the paper */
+  --paper:      #FBF6EE;   /* warm milky cream: the page */
+  --band:       #F0E1DC;   /* blush: the second surface, 1.18:1 against paper */
+  --lift:       #FFFCF7;   /* the lightest cream: cream sections and cards */
 
   /* ---- Ink ---- */
-  --ink:        #241C1A;   /* all text. Never #000: the client rejected black */
-  --ink-soft:   #5A4E48;   /* secondary text */
+  --ink:        #26191F;   /* all text. Never #000: the client rejected black. 15.73:1 on paper */
+  --ink-soft:   #5A4850;   /* secondary text: 7.88:1 on paper, 6.66:1 on band */
   --rule:        color-mix(in srgb, var(--ink) 16%, transparent);
   --rule-strong: color-mix(in srgb, var(--ink) 30%, transparent);
 
   /* ---- Accent: two tokens, not interchangeable ----
-     --clay is 3.95:1 on paper: fills, marks and text of 24px or more only.
-     Anything smaller uses --clay-ink (5.57:1 on paper, 4.53:1 on band). */
-  --clay:       #AF593E;
-  --clay-ink:   #8F4530;
+     --clay is 4.53:1 on paper: fills, marks and large text.
+     Small text uses --clay-ink (6.69:1 on paper, 5.66:1 on band). */
+  --clay:       #B4553E;
+  --clay-ink:   #8F3F2E;
 
-  /* ---- The dark key: plum ----
-     The essay band and the close. Photographs are graded into it too
-     (Base.astro, #duotone), so image and page are one material. */
-  --dark:         #5B3B4E;
-  --on-dark:      #F1E6D9;   /* 7.82:1 on plum */
-  --on-dark-soft: #E6D3CF;   /* 6.69:1 on plum */
+  /* ---- The dark key: mulberry ----
+     The name band, the About qualifications and the close. Photographs are
+     graded into it too (Base.astro, #duotone), so image and page are one
+     material. */
+  --dark:         #6A3157;
+  --on-dark:      #FBF6EE;   /* 8.91:1 on mulberry */
+  --on-dark-soft: #F0DCE6;   /* 7.35:1 on mulberry */
   --on-dark-rule: color-mix(in srgb, var(--on-dark) 22%, transparent);
-  --duo-shadow:   #2E1F29;   /* the photographs' black point */
+  --duo-shadow:   #2A1625;   /* the photographs' black point */
 
-  /* ---- The third key: forest green (client revisions, November 2026) ----
-     Mid-depth, neither lime nor near-black. Restrained: the banner across
-     the top of every page, and nothing large besides. Paper on it is
-     6.00:1, the soft paper 5.13:1: both AA for text of any size. Ink and
-     clay are not used on it (2.26:1 and 1.52:1). */
-  --forest:          #365E45;
-  --on-forest:       var(--on-dark);        /* 6.00:1 on forest */
-  --on-forest-soft:  var(--on-dark-soft);   /* 5.13:1 on forest */
+  /* ---- The third key: forest green, the banner only ----
+     A true mid-depth forest (hue 139), not the bluer bottle green of the
+     colour sheet. Paper on it is 7.38:1 and the soft tint 6.61:1 (AAA for
+     the nav). Ink and clay are never set on it (2.13:1 and 1.63:1). */
+  --forest:          #2E5A3C;
+  --on-forest:       var(--on-dark);   /* 7.38:1 on forest */
+  --on-forest-soft:  #E3EDE2;          /* 6.61:1 on forest: hover and current-page marks */
 
   /* ---- Audio scrubber fill only ---- */
   --teal:       #5F8A8B;
@@ -48,6 +52,10 @@
   --serif: "Literata", "Literata Fallback", Georgia, "Times New Roman", serif;
   --serif-caps: "Literata", "Literata Caps Fallback", Georgia, "Times New Roman", serif;   /* small caps */
   --sans:  "Instrument Sans", "Instrument Sans Fallback", -apple-system, "Segoe UI", sans-serif;
+  /* The handwritten face for the name, a textured word, only (the client's
+     choice, November 2026: option 16 of her handwriting sheet). */
+  --hand:  "Square Peg", "Segoe Print", cursive;
+  --hand-scale: 1.6;   /* Square Peg's x-height is small: 1.6x sits level with Literata */
 
   /* ---- Type roles (fluid 390 → 1440) ----
      One family, weight, ramp and leading per role. */

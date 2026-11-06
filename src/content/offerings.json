@@ -1,0 +1,196 @@
+{
+  "_comment": "Her offerings from 'muhib revision 4' (November 2026), for the offer cards on Teach and Repurpose and a page for each offer. Her wording is used as written wherever it reads as site copy; lines marked DRAFT are adapted from her notes to the developer (which say 'you' meaning the developer, or give reasoning) and need her approval. The card shows a little; the page shows everything.",
+
+  "teaching": {
+    "_comment_types": "Her three types of teaching, verbatim. She did not list I/A-Level this time: the old route is kept in site.json as routesRetired until she confirms.",
+    "types": [
+      { "id": "ks3-english", "label": "KS3 English", "tagline": "Read closely. Write clearly. Think creatively.", "body": "Build the confidence and skills to understand texts, express ideas and develop a strong foundation in English." },
+      { "id": "igcse", "label": "I/GCSE", "tagline": "Read between the lines. Write beyond the obvious.", "body": "Develop the analytical, critical and written skills needed to engage deeply with English Language and Literature." },
+      { "id": "esl-ielts", "label": "ESL & IELTS", "tagline": "Find the words. Find your confidence.", "body": "Develop practical English for life, study and work — from everyday communication to IELTS preparation." }
+    ],
+    "marker": "Lessons and packages",
+    "_comment_marker": "DRAFT: section label.",
+    "availableFor": "Available for KS3 English, I/GCSE and ESL & IELTS.",
+    "_comment_availableFor": "DRAFT: she asked for these options for all three types of teaching.",
+    "topic": "English tuition",
+    "note": "A family’s place is kept during short holidays. With 48 hours’ notice a lesson can be moved to another time in the same month.",
+    "unsure": { "before": "Not sure which fits?", "link": "Start an enquiry", "after": "and we can talk it through on a free 20-minute call.", "_comment": "DRAFT, built from the site's existing free 20-minute call line." },
+    "options": [
+      {
+        "slug": "one-to-one",
+        "number": "01",
+        "title": "1:1 hourly",
+        "kicker": "Hourly",
+        "summary": "1 lesson a week, with a shared Google Classroom area complete with vocabulary bank, report card, annotated slides, and class slides.",
+        "price": "£60",
+        "term": "per hour",
+        "meta": "1 lesson a week",
+        "features": [
+          "1 lesson a week",
+          "Shared Google Classroom area complete with vocabulary bank, report card, annotated slides, and class slides"
+        ]
+      },
+      {
+        "slug": "exam-package",
+        "number": "02",
+        "title": "Package",
+        "kicker": "Upcoming exam or assessment",
+        "summary": "10 lessons used within 3 months, a mini assessment with video feedback and a final progress update.",
+        "price": "£500",
+        "term": "10 lessons",
+        "meta": "Used within 3 months, as many times each week",
+        "features": [
+          "10 lessons (used within 3 months, as many times each week)",
+          "Shared Google Classroom area complete with vocabulary bank, report card, annotated slides, and class slides",
+          "Mini assessment with video feedback",
+          "Final progress update"
+        ]
+      },
+      {
+        "slug": "core-retainer",
+        "number": "03",
+        "title": "Core Retainer",
+        "kicker": "Monthly ongoing support",
+        "summary": "1 protected lesson a week, a recording & written summary within 4 hours and a monthly progress update.",
+        "price": "£250",
+        "term": "per month",
+        "_comment_term": "She lists retainers as 'monthly ongoing support'; 'per month' is read from that. Confirm with her.",
+        "meta": "Minimum 3 month commitment",
+        "features": [
+          "1 protected lesson a week",
+          "A recording & written summary within 4 hours",
+          "Monthly progress update",
+          "Shared Google Classroom area complete with vocabulary bank, report card, annotated slides, and class slides"
+        ],
+        "notes": ["A family’s place is kept during short holidays. With 48 hours’ notice a lesson can be moved to another time in the same month."]
+      },
+      {
+        "slug": "premium-retainer",
+        "number": "04",
+        "title": "Premium Retainer",
+        "kicker": "Monthly ongoing support",
+        "summary": "2 protected lessons a week, priority access during busy periods and direct communication via WhatsApp.",
+        "price": "£500",
+        "term": "per month",
+        "meta": "Minimum 3 month commitment",
+        "features": [
+          "2 protected lessons a week",
+          "Priority access during busy periods",
+          "1 exam question a week marked outside lesson with short video feedback",
+          "Direct communication via WhatsApp"
+        ],
+        "notes": ["A family’s place is kept during short holidays. With 48 hours’ notice a lesson can be moved to another time in the same month."]
+      }
+    ]
+  },
+
+  "repurposing": {
+    "_comment_intro": "Her 'Writing Strategy & Content Repurposing' copy, verbatim (checked: it is not on the reference site she linked).",
+    "intro": {
+      "heading": "Writing Strategy & Content Repurposing",
+      "standfirst": "Make more of the words you already have.",
+      "paragraphs": [
+        "I help creators, founders, educators and thought leaders transform their ideas, expertise and existing content into purposeful written assets.",
+        "From SEO-led articles and email newsletters to long-form scripts, short-form video content and thought leadership, I bring structure, strategy and storytelling to your content."
+      ],
+      "services": [
+        { "label": "Content Repurposing", "body": "Transform podcasts, YouTube videos, webinars and livestreams into blogs, newsletters and social content." },
+        { "label": "Scriptwriting", "body": "Develop long-form video scripts, podcast outlines and short-form video scripts." }
+      ],
+      "close": "Whether you need a one-off content project or an ongoing writing partner, I help make your ideas work harder."
+    },
+    "marker": "Packages",
+    "topic": "Content repurposing",
+    "custom": "Need a DIY writing or repurposing package? We can customise one together on a discovery call.",
+    "_comment_custom": "DRAFT, from her note: 'if they need a DIY writing or repurposing package, that we can customise a package through a discovery call.'",
+    "unsure": { "before": "Not sure which fits?", "link": "Start an enquiry", "after": "and we can talk it through on a free 20-minute call.", "_comment": "DRAFT, as on Teach." },
+    "options": [
+      {
+        "slug": "content-starter",
+        "number": "01",
+        "title": "The Content Starter",
+        "kicker": "No monthly retainer",
+        "lead": "For anyone who would like to work together without committing to a monthly retainer.",
+        "_comment_lead": "DRAFT: her note reads 'For someone who is interested in working with you but doesn't want to commit to a monthly retainer.'",
+        "summary": "One podcast, YouTube video, webinar or livestream, turned into an SEO-informed blog article and an email newsletter.",
+        "price": "£150",
+        "term": "one-off",
+        "meta": "1 recording · up to 30–45 minutes",
+        "provides": "One podcast, YouTube video, webinar or livestream (up to 30–45 minutes).",
+        "features": [
+          "1 SEO-informed blog article (600–800 words)",
+          "1 email newsletter",
+          "SEO keyword research",
+          "Internal and external linking where appropriate"
+        ],
+        "notes": ["The starter fee is credited towards your first retainer if you sign up within 14 days."],
+        "_comment_notes": "DRAFT, from her note: 'I would credit the starter fee towards their first retainer if they sign up within 14 days.'"
+      },
+      {
+        "slug": "content-multiplier",
+        "number": "02",
+        "title": "The Content Multiplier",
+        "kicker": "One-off project",
+        "lead": "For established creators who regularly produce long-form content but aren't maximising its potential.",
+        "summary": "Two long-form recordings, turned into six pieces of repurposed content.",
+        "price": "£500",
+        "term": "one-off project",
+        "_comment_term": "Her notes call this a one-off project but say 'two long-form recordings per month'. Confirm which with her.",
+        "meta": "2 recordings · 6 pieces of content",
+        "provides": "Two long-form recordings per month (up to 60 minutes each).",
+        "features": [
+          "2 SEO blog articles (800–1,200 words)",
+          "2 email newsletters",
+          "2 social media captions / carousel posts",
+          "SEO keyword research",
+          "Internal and external linking where appropriate",
+          "Shared project management workspace",
+          "Clear onboarding and offboarding process",
+          "Voice and messaging consistency",
+          "1 round of revisions"
+        ]
+      },
+      {
+        "slug": "thought-leadership-retainer",
+        "number": "03",
+        "title": "The Thought Leadership Retainer",
+        "kicker": "Recurring monthly service",
+        "lead": "For coaches, consultants, founders and educators who want to become recognised voices in their industries.",
+        "summary": "Four long-form recordings a month, turned into twelve pieces of repurposed content.",
+        "price": "£800",
+        "term": "per month",
+        "meta": "4 recordings a month · 12 pieces of content",
+        "provides": "Four long-form recordings per month (up to 60 mins each).",
+        "features": [
+          "4 SEO blog articles (800–1,200 words)",
+          "4 email newsletters",
+          "4 social media captions / carousel posts",
+          "SEO keyword research",
+          "Internal and external linking where appropriate",
+          "Shared project management workspace",
+          "Clear onboarding and offboarding process",
+          "Optional monthly content call",
+          "Voice and messaging consistency",
+          "2 rounds of revision"
+        ],
+        "notes": [
+          "Option for light video editing.",
+          "Option for creating original long and short form scripts via a call / voice notes, for YouTube and other social media platforms. Prices discussed separately."
+        ],
+        "_comment_notes": "Her two '**Option for…' notes, which follow this retainer in her document; the dash in the second is a comma here."
+      }
+    ]
+  },
+
+  "labels": {
+    "_comment": "DRAFT: interface labels for the cards and the offer pages.",
+    "cardCta": "See what’s inside",
+    "enquire": "Enquire now",
+    "askFirst": "Ask a question first",
+    "included": "What’s included",
+    "provides": "What you provide",
+    "goodToKnow": "Good to know",
+    "whoFor": "Who it’s for",
+    "others": "Other options"
+  }
+}
