@@ -198,3 +198,7 @@ On `preview/offerings-mulberry-bottle`. Measured with Playwright on 10 pages at 
 | Dead code: `.display`, `.entry__who`, `.level`, `.levels`, `.masthead__lead`, `.on-dark`, `.pending-quote`, the submenu (`.sub`, nested menu lists) and its markup in Header, and the unused `--t-entry` token. | Removed. |
 
 After: axe-core reports no WCAG 2.2 AA violations on 14 pages at 390 and 1440, and the navbar is clean in all its states.
+
+## 15. Banner: deep aubergine instead of forest green (November 2026)
+
+On `preview/offerings-mulberry-bottle`. The green banner clashed with the mulberry. Four colours were mocked up on the home page (deep aubergine, mulberry, blush, cream); deep aubergine `#3D2236` was chosen as a darker shade of the mulberry, which keeps a coloured banner without a second hue. Paper on it is 13.18:1. The token is now `--banner` (was `--forest`); the browser theme colour follows. axe-core: no violations on 14 pages; the navbar is clean in all states. Runner-up, if she wants it lighter: a blush banner with the wordmark in clay.

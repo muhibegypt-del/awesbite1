@@ -299,14 +299,14 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
    Header
    ============================================================ */
 
-/* The forest green banner across the top of every page (client revisions,
-   November 2026), taller than the old paper bar (--hdr). Type on it is
-   paper: 6.00:1. As on plum, the wordmark's italic is paper too, since
-   clay on green is 1.52:1; the italic alone carries the emphasis. */
-.hdr { position: relative; z-index: var(--z-header); background: var(--forest); color: var(--on-forest); }
-.hdr .wordmark, .hdr .wordmark em { color: var(--on-forest); }
-.hdr .textlink { text-decoration-color: var(--on-forest-soft); }
-.hdr .textlink:hover { color: var(--on-forest); }
+/* The deep aubergine banner across the top of every page (it was forest
+   green until November 2026), taller than the old paper bar (--hdr). Type
+   on it is paper: 13.18:1. As on mulberry, the wordmark is paper too; the
+   handwriting alone carries it. */
+.hdr { position: relative; z-index: var(--z-header); background: var(--banner); color: var(--on-banner); }
+.hdr .wordmark, .hdr .wordmark em { color: var(--on-banner); }
+.hdr .textlink { text-decoration-color: var(--on-banner-soft); }
+.hdr .textlink:hover { color: var(--on-banner); }
 
 .hdr__inner {
   display: flex;
@@ -329,7 +329,7 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
   text-transform: lowercase;
   transition: color var(--fast) var(--ease-out);
 }
-.nav a:not(.textlink):hover { color: var(--on-forest-soft); }
+.nav a:not(.textlink):hover { color: var(--on-banner-soft); }
 .menu a:hover { color: var(--clay-ink); }
 .nav a[aria-current='page'], .menu a[aria-current='page'] {
   text-decoration: underline;
@@ -337,7 +337,7 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
   text-underline-offset: 0.4em;
 }
 /* On the green banner the current-page mark is paper: clay would vanish. */
-.nav a[aria-current='page'], .menu[open] > summary { text-decoration-color: var(--on-forest-soft); }
+.nav a[aria-current='page'], .menu[open] > summary { text-decoration-color: var(--on-banner-soft); }
 .nav__cta { font-size: var(--t-body); }
 
 /* Phone and tablet: one row, the wordmark and a typographic "menu". */

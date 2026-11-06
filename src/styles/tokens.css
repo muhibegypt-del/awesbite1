@@ -37,13 +37,13 @@
   --on-dark-rule: color-mix(in srgb, var(--on-dark) 22%, transparent);
   --duo-shadow:   #2A1625;   /* the photographs' black point */
 
-  /* ---- The third key: forest green, the banner only ----
-     A true mid-depth forest (hue 139), not the bluer bottle green of the
-     colour sheet. Paper on it is 7.38:1 and the soft tint 6.61:1 (AAA for
-     the nav). Ink and clay are never set on it (2.13:1 and 1.63:1). */
-  --forest:          #2E5A3C;
-  --on-forest:       var(--on-dark);   /* 7.38:1 on forest */
-  --on-forest-soft:  #E3EDE2;          /* 6.61:1 on forest: hover and current-page marks */
+  /* ---- The banner across the top of every page: deep aubergine ----
+     A darker shade of the mulberry (UI review, November 2026; it was
+     forest green, which fought the mulberry). Paper on it is 13.18:1 and
+     the soft paper 10.86:1. Ink and clay are never set on it. */
+  --banner:          #3D2236;
+  --on-banner:       var(--on-dark);        /* 13.18:1 on the banner */
+  --on-banner-soft:  var(--on-dark-soft);   /* 10.86:1: hover and current-page marks */
 
   /* ---- Audio scrubber fill only ---- */
   --teal:       #5F8A8B;

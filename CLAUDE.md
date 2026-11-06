@@ -44,7 +44,7 @@ Photographs live in `src/assets/images` and always go through `components/Photo.
 
 The client chose (September 2026) **Direction B, Printed Matter, with the portrait (`aneesa-portrait.webp`) as the hub hero**. Literata + Instrument Sans, plum as the second key, the photographs graded into the palette. `AUDIT.md` and `BRAND-AUDIT.md` record why; `CHANGES.md` records what changed.
 
-**Client revisions, November 2026** (CHANGES.md section 12): forest green `--forest` is the third key, used for the banner across the top of every page (the header, 80px phone / 112px desktop); a cream surface (`.sec--cream`, `--lift`) adds depth; running copy is the home page's body face (Instrument Sans) on every page; desktop type is larger from 1024px up, with mobile sizes unchanged.
+**Client revisions, November 2026** (CHANGES.md section 12): the banner across the top of every page (the header, 80px phone / 112px desktop) is the third key; since the preview round it is deep aubergine `--banner`, not forest green; a cream surface (`.sec--cream`, `--lift`) adds depth; running copy is the home page's body face (Instrument Sans) on every page; desktop type is larger from 1024px up, with mobile sizes unchanged.
 
 Copy changes still need the client's approval. Typesetting (curly apostrophes via `q()`, line breaks, case transforms) is not a copy change.
 
@@ -83,7 +83,7 @@ The `.txt` files are extracts made because this cloud container cannot render PD
 - **Never use `#000000`.** Text is `var(--ink)` `#241C1A`. The client explicitly rejected black.
 - **Two accent tokens, and they are not interchangeable.** `--clay` `#AF593E` is 3.95:1 on paper: fills, marks and text ≥24px only. Anything smaller uses `--clay-ink` `#8F4530` (5.57:1 on paper, 4.53:1 on band).
 - **Plum `--dark` is the second key**: the essay band, the About qualifications band and the footer.
-- **Forest green `--forest` `#365E45` is the third key, kept restrained**: the banner across the top of every page and nothing large besides. Text on it is paper (6.00:1) or soft paper (5.13:1); never ink or clay. The wordmark's italic is paper on it, as on plum. Photographs are graded into it (`#duotone` in Base.astro). Type sits on a photograph only where there is open wall, and only after measuring contrast against the graded pixels (the hub hero: ink on `#duotone-lift`, about 6:1).
+- **The banner `--banner` `#3D2236` (deep aubergine, a darker shade of the mulberry) runs across the top of every page and nowhere else.** It replaced the forest green in November 2026. Text on it is paper (13.18:1) or soft paper (10.86:1); never ink or clay. The wordmark is paper on it, as on mulberry. Photographs are graded into the palette (`#duotone` in Base.astro). Type sits on a photograph only where there is open wall, and only after measuring contrast against the graded pixels (the hub hero: ink on `#duotone-lift`, about 6:1).
 - **No `box-shadow` anywhere.** Depth comes from tone and 1px `var(--rule)` hairlines.
 - **One filled button (`.btn`) per viewport**, per page. The header enquiry link is a text link on purpose.
 - Spacing only from the scale: 4 8 12 16 24 32 48 64 96 128 160 (`--s-1`…`--s-11`).
