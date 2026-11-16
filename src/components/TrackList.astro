@@ -1,0 +1,74 @@
+---
+/**
+ * The voice portfolio. Before audio exists: one quiet list, each title with
+ * its pending tag, and the note once. A track with a `src` becomes a player:
+ * preload="none" (nothing downloads until someone presses play), one track
+ * plays at a time, the scrubber is a native range with live aria-valuetext.
+ */
+import site from '../content/site.json';
+import tracks from '../content/narration-tracks.json';
+
+const narration = site.services.find((s) => s.id === 'narration')!;
+const anyPending = tracks.some((track) => !track.src);
+---
+
+<ol class="tracks" role="list">
+  {tracks.map((track) => (
+    <li class="track reveal" data-track={track.src ? '' : undefined}>
+      <span class="track__title" id={`track-${track.id}`}>{track.title}</span>
+      {track.src ? (
+        <>
+          <span class="track__tag" data-duration>{track.tag}</span>
+          <div class="player">
+            <audio preload="none" src={track.src} aria-labelledby={`track-${track.id}`}></audio>
+            <button class="player__play" type="button" data-play aria-label={`Play ${track.title}`}>
+              <svg data-icon-play viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M7 4v16l14-8z" fill="currentColor" /></svg>
+              <svg data-icon-pause viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" hidden><path d="M6 4h4v16H6zm8 0h4v16h-4z" fill="currentColor" /></svg>
+            </button>
+            <input class="player__seek" type="range" min="0" max="100" step="0.1" value="0" disabled aria-label={`Seek in ${track.title}`} data-seek />
+            <span class="player__time" data-time>0:00</span>
+          </div>
+          <p class="player__status small muted" role="status" data-status></p>
+        </>
+      ) : (
+        <span class="track__tag">{track.tag}</span>
+      )}
+    </li>
+  ))}
+</ol>
+{anyPending && <p class="tracks__note small muted reveal">{narration.samplesPending}</p>}
+
+<script>
+  const time = (s: number) => {
+    const t = Number.isFinite(s) ? Math.floor(s) : 0;
+    return `${Math.floor(t / 60)}:${String(t % 60).padStart(2, '0')}`;
+  };
+  const rows = Array.from(document.querySelectorAll<HTMLElement>('[data-track]'));
+  const audios = rows.map((row) => row.querySelector('audio')).filter(Boolean) as HTMLAudioElement[];
+  for (const row of rows) {
+    const audio = row.querySelector('audio');
+    const play = row.querySelector<HTMLButtonElement>('[data-play]');
+    const seek = row.querySelector<HTMLInputElement>('[data-seek]');
+    const clock = row.querySelector<HTMLElement>('[data-time]');
+    const status = row.querySelector<HTMLElement>('[data-status]');
+    if (!audio || !play || !seek || !clock || !status) continue;
+    const title = row.querySelector('.track__title')?.textContent ?? '';
+    const sync = () => {
+      clock.textContent = time(audio.currentTime);
+      seek.value = String(audio.currentTime);
+      seek.setAttribute('aria-valuetext', `${time(audio.currentTime)} of ${time(audio.duration)}`);
+      play.setAttribute('aria-label', `${audio.paused ? 'Play' : 'Pause'} ${title}`);
+      play.querySelector('[data-icon-play]')?.toggleAttribute('hidden', !audio.paused);
+      play.querySelector('[data-icon-pause]')?.toggleAttribute('hidden', audio.paused);
+    };
+    audio.addEventListener('loadedmetadata', () => { seek.max = String(audio.duration); seek.disabled = false; sync(); });
+    ['timeupdate', 'play', 'pause', 'ended'].forEach((type) => audio.addEventListener(type, sync));
+    audio.addEventListener('error', () => { status.textContent = 'This sample could not load.'; });
+    play.addEventListener('click', async () => {
+      if (!audio.paused) { audio.pause(); return; }
+      audios.forEach((other) => { if (other !== audio) other.pause(); });
+      try { await audio.play(); status.textContent = ''; } catch { status.textContent = 'Playback could not start.'; }
+    });
+    seek.addEventListener('input', () => { audio.currentTime = Number(seek.value); sync(); });
+  }
+</script>

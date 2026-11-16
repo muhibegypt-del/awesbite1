@@ -1,0 +1,36 @@
+---
+/**
+ * The opening of every page but the hub: type on paper, then (optionally)
+ * the photograph whole and edge to edge. Slots: `side` sits beside the
+ * title on desktop, `below` under it on the text edge.
+ */
+import Photo from './Photo.astro';
+import { q } from '../lib/typeset.js';
+
+interface Props {
+  runhead?: string;
+  runheadHidden?: boolean;
+  title: string;
+  audience?: string;
+  image?: string;
+  imageAlt?: string;
+  imagePosition?: string;
+}
+const { runhead, runheadHidden = false, title, audience, image, imageAlt = '' } = Astro.props;
+const plain = !image;
+---
+
+<section class:list={['masthead', { 'masthead--plain': plain }]} aria-labelledby="page-title">
+  <div class="bleed masthead__inner">
+    {runhead && <p class="label masthead__runhead" aria-hidden={runheadHidden ? 'true' : undefined}>{runhead}</p>}
+    <h1 class="title masthead__title" id="page-title">{q(title)}</h1>
+    {audience && <p class="label masthead__audience">{audience}</p>}
+    {Astro.slots.has('side') && <div class="masthead__side"><slot name="side" /></div>}
+    {Astro.slots.has('below') && <div class="masthead__below"><slot name="below" /></div>}
+  </div>
+  {image && (
+    <div class="masthead__photo">
+      <Photo src={image} alt={imageAlt} eager />
+    </div>
+  )}
+</section>

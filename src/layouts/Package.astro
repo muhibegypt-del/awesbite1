@@ -1,0 +1,105 @@
+---
+/**
+ * One offer's page (client revisions, November 2026), after the programme
+ * page she sent as a reference. The introduction and the buy card stack on
+ * a phone and stand side by side from 1024px (1.15fr / 0.85fr); the card
+ * stays in view while the introduction scrolls. A pale mulberry glow sits
+ * behind the upper right, hidden from assistive technology.
+ *
+ * The card, in order: price, its terms, one summary line, the enquiry (the
+ * page's one filled button), "Ask a question first", a rule, and what is
+ * included. There is no "already enrolled" link: she has no course
+ * platform.
+ */
+import Base from './Base.astro';
+import { q } from '../lib/typeset.js';
+import site from '../content/site.json';
+import offerings from '../content/offerings.json';
+import global from '../content/global.json';
+
+interface Props { service: 'teaching' | 'repurposing'; slug: string }
+const { service: id, slug } = Astro.props;
+const set: Record<string, any> = offerings[id];
+const labels = offerings.labels;
+const service = site.services.find((s) => s.id === id)!;
+const offer = set.options.find((o: { slug: string }) => o.slug === slug)!;
+const others = set.options.filter((o: { slug: string }) => o.slug !== slug);
+
+const enquire = `/contact?about=${encodeURIComponent(set.topic)}&package=${encodeURIComponent(offer.title)}`;
+const ask = `mailto:${global.contact.email}?subject=${encodeURIComponent(`A question about ${offer.title}`)}`;
+const lead = offer.lead ?? set.availableFor;
+---
+
+<Base title={`${offer.title} · ${service.routeLabel}`} description={q(offer.summary)}>
+  <section class="pkg" aria-labelledby="pkg-title">
+    <div class="pkg__glow" aria-hidden="true"></div>
+    <div class="bleed">
+      <div class="pkg__inner">
+        <div class="pkg__intro">
+          <p class="label pkg__crumb"><a href={`${service.route}#offers`}>{service.routeLabel}</a> · {offer.kicker}</p>
+          <h1 class="pkg__title" id="pkg-title">{offer.title}</h1>
+          <p class="lead">{q(lead)}</p>
+
+          {set.types && (
+            <section class="pkg__part" aria-labelledby="who-heading">
+              <h2 class="h3" id="who-heading">{labels.whoFor}</h2>
+              <dl class="pkg__types">
+                {set.types.map((type: { id: string; label: string; tagline: string; body: string }) => (
+                  <div>
+                    <dt><a class="textlink" href={`${service.route}#${type.id}`}>{type.label}</a></dt>
+                    <dd><span class="type__tagline">{q(type.tagline)}</span> {q(type.body)}</dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+          )}
+
+          {offer.provides && (
+            <section class="pkg__part" aria-labelledby="provides-heading">
+              <h2 class="h3" id="provides-heading">{labels.provides}</h2>
+              <p>{q(offer.provides)}</p>
+            </section>
+          )}
+
+          {offer.notes?.length > 0 && (
+            <section class="pkg__part" aria-labelledby="know-heading">
+              <h2 class="h3" id="know-heading">{labels.goodToKnow}</h2>
+              <ul class="pkg__notes" role="list">{offer.notes.map((note: string) => <li>{q(note)}</li>)}</ul>
+            </section>
+          )}
+        </div>
+
+        <aside class="pkg__card reveal" aria-labelledby="included-heading">
+          <p class="pkg__price">{offer.price}</p>
+          <p class="label pkg__term">{offer.term}</p>
+          <p class="pkg__summary">{offer.meta}</p>
+          <a class="btn pkg__btn" href={enquire}>{labels.enquire}</a>
+          <a class="btn btn--outline pkg__btn" href={ask}>{labels.askFirst}</a>
+          <hr class="pkg__rule" />
+          <h2 class="label pkg__included" id="included-heading">{labels.included}</h2>
+          <ul class="pkg__features" role="list">{offer.features.map((item: string) => <li>{q(item)}</li>)}</ul>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  {/* The other offers: plainly navigation, as at the foot of the service pages. */}
+  <nav class="sec sec--band onward" aria-labelledby="others-heading">
+    <div class="bleed">
+      <header class="shead"><h2 class="label" id="others-heading">{labels.others}</h2></header>
+      <div class="col-wide">
+        <ul class="routes-nav" role="list">
+          {others.map((o: { slug: string; title: string; kicker: string; price: string; term: string }) => (
+            <li>
+              <a href={`${service.route}/${o.slug}`}>
+                <span class="routes-nav__name">{o.title}</span>
+                <span class="routes-nav__for">{o.price} · {o.term}</span>
+                <span class="arrow" aria-hidden="true">→</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </nav>
+</Base>
