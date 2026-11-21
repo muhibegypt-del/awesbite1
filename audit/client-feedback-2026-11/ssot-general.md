@@ -10,7 +10,7 @@ Status key: **done** (changed and verified), **blocked** (needs something from h
 | # | She asked | How it was read | What changed | Verified | Status |
 |---|---|---|---|---|---|
 | 1 | Bigger text throughout, "a normal font size" like perennialcontent.com | | | | pending |
-| 2 | Wrong font for "a textured word" (her picture) | | | | pending |
+| 2 | Wrong font for "a textured word" (her picture) | Her picture is Reenie Beanie (option 09 of the handwriting sheet), matched by setting the five candidates beside it; it replaces the live Square Peg wherever the name is handwritten | Reenie Beanie self-hosted (`public/fonts/reenie-beanie.woff2`, OFL licence added), preloaded; `--hand` points to it and `--hand-scale` is 1.2, as in the approved concept; Square Peg files removed | At 390 and 1440 the banner wordmark and the greeting's 'a textured word' compute to Reenie Beanie and the font is loaded; no request for the old font; no overflow. Screenshot matches her picture | **done** |
 | 3 | Package card font reads as AI-made; change it with the size | | | | pending |
 | 4 | Socials: TikTok, Substack, LinkedIn, Pinterest; colourful but not garish | | | | pending |
 | 5 | "packages" | | | | pending |
@@ -19,9 +19,9 @@ Status key: **done** (changed and verified), **blocked** (needs something from h
 | 8 | Just "IELTS (International House)", no full name | Home's IELTS credential: name only, no caption line | `homeCredentials`: IELTS caption removed (the placeholder is gone); `Honours.astro` renders no caption line when there is none | Home at 390 and 1440: 'IELTS (International House)' with no line under it; 0 empty caption elements in the page | **done** |
 | 9 | "English PGCE" with "University of Nottingham" underneath, no "Qualified Teacher Status" | The PGCE credential, on both Home and About (it is the same credential) | Both lists: 'English PGCE' / 'University of Nottingham' in place of 'PGCE and QTS' / 'Qualified Teacher Status' (QTS no longer appears in either list) | Home at 390 and 1440 and About at 1440 show 'English PGCE / University of Nottingham' | **done** |
 | 10 | Add "Examiner (Summer, 2027)" | A new credential on Home's list, as written, no caption | `homeCredentials`: 'Examiner (Summer, 2027)'. Seven credentials now sit four across on desktop (4 + 3) so none is alone on a row | Home at 390 and 1440 lists it last; desktop rows measured 4 + 3 | **done** |
-| 11 | The band's "textured." in the same font as the main title | | | | pending |
+| 11 | The band's "textured." in the same font as the main title | The band's 'textured.' takes the name's handwriting; the rest of the band stays in Literata, as the greeting does | `.essay__line .pencil em` set in `--hand`, same size ratio as the greeting; a little space added before it because the hand's long t-bar ran into 'They're' | At 390 and 1440 it computes to Reenie Beanie; the gap to 'They're' measured 4px and 12px (it touched before the fix); pencil underline still draws | **done** |
 | 12 | Lowercase for continuity (footer "SERVICES", "GET IN TOUCH") | | | | pending |
-| 13 | Footer name in the same font | | | | pending |
+| 13 | Footer name in the same font | The footer's 'a textured word' in the same handwriting | Follows from #2: the footer wordmark uses the same `--hand` setting | At 390 and 1440 the footer wordmark computes to Reenie Beanie; screenshot checked | **done** |
 | 14 | Email hello@atexturedword.com across the site | Every place the address appears | `global.json`: `contact.email` and the footer link (everything else reads `contact.email`) | Built site: 0 files still contain gmail; new address on 16 pages. Checked on the page: footer link, contact page link, enquiry form destination (`data-email`), offer page 'Ask a question first', Content collaboration link | **done** |
 | 15 | "Start" lowercase in the nav | The nav link only, on desktop and in the phone menu (her screenshot is the navbar); buttons elsewhere keep 'Start' | CSS `text-transform: lowercase` on `.nav__cta` and the phone menu's link (`Header.astro` gains `menu__cta`); the copy itself is unchanged | Rendered text at 1440: teach, repurpose, voice, about, content, start an enquiry. Phone menu at 390: the same. Home's 'Start an enquiry' button unchanged | **done** |
 | 16 | "01 — TEACH" style labels feel AI-made; change font or style | | | | pending |
@@ -31,3 +31,4 @@ Status key: **done** (changed and verified), **blocked** (needs something from h
 
 - **#9:** QTS no longer appears in either credential list. Her timeline has QTS (2021, Qatar International School) as a separate item. Should it come back as its own credential?
 - **#10:** Examiner is on Home's list only. Should About's list have it too?
+- **#11:** she said "the overall font within that paragraph may need to be changed". Only "textured." changed, matching how her greeting mixes the serif with the handwritten name. Does she want more of the band handwritten?

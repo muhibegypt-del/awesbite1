@@ -53,9 +53,9 @@
   --serif-caps: "Literata", "Literata Caps Fallback", Georgia, "Times New Roman", serif;   /* small caps */
   --sans:  "Instrument Sans", "Instrument Sans Fallback", -apple-system, "Segoe UI", sans-serif;
   /* The handwritten face for the name, a textured word, only (the client's
-     choice, November 2026: option 16 of her handwriting sheet). */
-  --hand:  "Square Peg", "Segoe Print", cursive;
-  --hand-scale: 1.6;   /* Square Peg's x-height is small: 1.6x sits level with Literata */
+     choice, November 2026: option 16 of her handwriting sheet, replaced by Reenie Beanie, option 09, in feedback 5). */
+  --hand:  "Reenie Beanie", "Segoe Print", cursive;   /* her choice in feedback 5 (option 09), replacing Square Peg */
+  --hand-scale: 1.2;   /* Reenie Beanie's x-height is small: 1.2x sits level with Literata, as in the approved concept */
 
   /* ---- Type roles (fluid 390 → 1440) ----
      One family, weight, ramp and leading per role. */
