@@ -2,5 +2,7 @@
   { "id": "voice-audiobook", "title": "Audiobook", "tag": "0:59", "src": "/audio/voice-audiobook.mp3" },
   { "id": "voice-commercial", "title": "Commercial", "tag": "0:58", "src": "/audio/voice-commercial.mp3" },
   { "id": "voice-explainer", "title": "Health explainer", "tag": "0:58", "src": "/audio/voice-explainer.mp3" },
-  { "id": "voice-ivr", "title": "IVR", "tag": "0:38", "src": "/audio/voice-ivr.mp3" }
+  { "id": "voice-ivr", "title": "IVR", "tag": "0:38", "src": "/audio/voice-ivr.mp3" },
+  { "id": "voice-software-explainer", "title": "Software explainer", "tag": "3:03", "src": "/audio/voice-software-explainer.mp3" },
+  { "id": "voice-charity-film", "title": "Charity film", "tag": "4:57", "src": "/audio/voice-charity-film.mp3" }
 ]
