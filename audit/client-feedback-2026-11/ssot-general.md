@@ -31,8 +31,8 @@ Status key: **done** (changed and verified), **blocked** (needs something from h
 
 | Check | Result |
 |---|---|
-| axe-core 4.10.3, WCAG 2.2 AA, 16 pages at 390 and 1440 | 0 violations. Two best-practice notes (About's two regions both named 'Aneesa'; the offer pages' price card is an \`<aside>\` inside a section) are on the live site too, so not from this branch; left for a later pass |
-| One \`<h1>\` per page | 16 of 16 |
+| axe-core 4.10.3, WCAG 2.2 AA, 16 pages at 390 and 1440 | 0 violations. Two best-practice notes (About's two regions both named 'Aneesa'; the offer pages' price card is an `<aside>` inside a section) are on the live site too, so not from this branch; left for a later pass |
+| One `<h1>` per page | 16 of 16 |
 | Horizontal overflow at 390, 768, 1024, 1280, 1440 (11 page types) | none |
 | Filled buttons in any one screen | never more than 1 |
 | Internal links | 27 checked, 0 broken |
