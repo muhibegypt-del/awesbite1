@@ -202,3 +202,18 @@ After: axe-core reports no WCAG 2.2 AA violations on 14 pages at 390 and 1440, a
 ## 15. Banner: deep aubergine instead of forest green (November 2026)
 
 On `preview/offerings-mulberry-bottle`. The green banner clashed with the mulberry. Four colours were mocked up on the home page (deep aubergine, mulberry, blush, cream); deep aubergine `#3D2236` was chosen as a darker shade of the mulberry, which keeps a coloured banner without a second hue. Paper on it is 13.18:1. The token is now `--banner` (was `--forest`); the browser theme colour follows. axe-core: no violations on 14 pages; the navbar is clean in all states. Runner-up, if she wants it lighter: a blush banner with the wordmark in clay.
+
+## 16. Feedback 5, general points 1 to 17 (November 2026)
+
+On `preview/feedback-5-general`. Her points 1 to 17 only (Teach, Write, Voice and About points are a later pass). Each point, how it was read, what changed and how it was checked: [`audit/client-feedback-2026-11/ssot-general.md`](audit/client-feedback-2026-11/ssot-general.md).
+
+- **Type:** body 18px on phones (was 17); the second, smaller size 17px on phones and 18px on desktop (was 15 and 16). Nothing is set below 17px.
+- **The name** in Reenie Beanie (her picture, option 09) in the banner, greeting, band and footer; Square Peg removed.
+- **Labels** lowercase italic Literata, no letter-spaced small caps; the service-page labels are the service name only (no "01 —"); "the taught / written / spoken word" lowercase and in the same place on all three pages. Card numerals removed; card names and prices in Instrument Sans.
+- **Credentials:** IELTS (International House) with no caption; English PGCE / University of Nottingham; Examiner (Summer, 2027).
+- **Email** hello@atexturedword.com everywhere. **Nav** "start an enquiry" lowercase.
+- **Discovery call:** a larger button (`.btn--lg`) in the first screen of Home, Teach, Repurpose, Voice, About and Content, opening the form with "Discovery call" chosen. Label is a draft.
+- **Socials:** Substack, TikTok and Pinterest as round marks in each platform's colour (footer and Content); the Substack section on Content now shows. LinkedIn waits for an address without her surname.
+- **Voice:** two more samples from her Drive links (six in all), levelled to the others, tags stripped.
+
+Regression after all of it: axe-core reports no WCAG 2.2 AA violations on 16 pages at 390 and 1440 (two best-practice notes, both already on the live site); one `<h1>` per page; no horizontal overflow at 390, 768, 1024, 1280 or 1440; never more than one filled button in a screen; all 27 internal links resolve; Home about 250 to 280KB with 6KB of JS; no audio loads before play.

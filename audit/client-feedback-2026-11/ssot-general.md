@@ -27,6 +27,18 @@ Status key: **done** (changed and verified), **blocked** (needs something from h
 | 16 | "01 — TEACH" style labels feel AI-made; change font or style | The service-page labels '01 — TEACH … FOR STUDENTS AND PARENTS' | Numbers and the dash removed: the label is the service name ('teach', 'repurpose', 'voice'); both lines take the new lowercase italic style (#12) | At 390 and 1440 the runheads read 'teach', 'repurpose', 'voice'; audience lines lowercase italic; screenshots checked | **done** |
 | 17 | "The Taught/Written/Spoken Word" lowercase, same position on every page | 'The Taught/Written/Spoken Word' beside each service title | Lowercase by CSS (the copy is unchanged). Desktop: pinned to the top of the title's row instead of its bottom, so title length no longer moves it. Phone: placed straight under the small label above the title on every service page | Measured from the top of the masthead on all three service pages: 147px at 1440 and 86px at 390, identical on each; text reads 'the taught word', 'the written word', 'the spoken word' | **done** |
 
+## Regression after all 17 (built site, local)
+
+| Check | Result |
+|---|---|
+| axe-core 4.10.3, WCAG 2.2 AA, 16 pages at 390 and 1440 | 0 violations. Two best-practice notes (About's two regions both named 'Aneesa'; the offer pages' price card is an \`<aside>\` inside a section) are on the live site too, so not from this branch; left for a later pass |
+| One \`<h1>\` per page | 16 of 16 |
+| Horizontal overflow at 390, 768, 1024, 1280, 1440 (11 page types) | none |
+| Filled buttons in any one screen | never more than 1 |
+| Internal links | 27 checked, 0 broken |
+| Home weight | about 250KB (phone) / 280KB (desktop), 6KB JS gzipped; budget 900KB / 140KB |
+| Audio before play | none requested on any page |
+
 ## Decisions to confirm with her
 
 - **#9:** QTS no longer appears in either credential list. Her timeline has QTS (2021, Qatar International School) as a separate item. Should it come back as its own credential?
