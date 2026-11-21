@@ -35,7 +35,7 @@
       {
         "heading": "get in touch",
         "links": [
-          { "label": "atexturedword@gmail.com", "href": "mailto:atexturedword@gmail.com" },
+          { "label": "hello@atexturedword.com", "href": "mailto:hello@atexturedword.com" },
           { "label": "Start an enquiry", "href": "/contact" },
           { "label": "About", "href": "/about" }
         ]
@@ -55,7 +55,7 @@
     ]
   },
 
-  "contact": { "email": "atexturedword@gmail.com" },
+  "contact": { "email": "hello@atexturedword.com" },
 
   "meta": {
     "titleSuffix": "a textured word",
