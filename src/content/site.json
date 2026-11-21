@@ -63,18 +63,19 @@
   "credentials": [
     { "qualification": "First-class BA (Hons)", "body": "English with a minor in American Literature and Film." },
     { "qualification": "Cert TESOL (Trinity College London)", "body": "Teaching English to Speakers of Other Languages" },
-    { "qualification": "PGCE and QTS", "body": "Qualified Teacher Status" },
+    { "qualification": "English PGCE", "body": "University of Nottingham" },
     { "qualification": "British Council", "body": "Teacher Training Programme" }
   ],
 
-  "_comment_homeCredentials": "Home page (client revisions, November 2026). The About list above, with British Council captioned 'ESL teacher' only (the full phrase is already under Cert TESOL), and the two credentials moved here from the Teach page in their short form, no status wording. IELTS names its training provider in brackets, as Trinity is named for Cert TESOL. The IELTS caption is a placeholder until she sends the full name.",
+  "_comment_homeCredentials": "Feedback 5 (November 2026): IELTS without a caption line (#8), English PGCE / University of Nottingham in place of PGCE and QTS (#9, both lists), Examiner (Summer, 2027) added (#10). Earlier: Home page (client revisions, November 2026). The About list above, with British Council captioned 'ESL teacher' only (the full phrase is already under Cert TESOL), and the two credentials moved here from the Teach page in their short form, no status wording. IELTS names its training provider in brackets, as Trinity is named for Cert TESOL. The IELTS caption is a placeholder until she sends the full name.",
   "homeCredentials": [
     { "qualification": "First-class BA (Hons)", "body": "English with a minor in American Literature and Film." },
     { "qualification": "Cert TESOL (Trinity College London)", "body": "Teaching English to Speakers of Other Languages" },
-    { "qualification": "PGCE and QTS", "body": "Qualified Teacher Status" },
+    { "qualification": "English PGCE", "body": "University of Nottingham" },
     { "qualification": "British Council", "body": "ESL teacher" },
     { "qualification": "Enhanced DBS", "body": "Disclosure and Barring Service" },
-    { "qualification": "IELTS (International House)", "body": "[IELTS full name, pending from client]" }
+    { "qualification": "IELTS (International House)", "body": "" },
+    { "qualification": "Examiner (Summer, 2027)", "body": "" }
   ],
 
   "services": [

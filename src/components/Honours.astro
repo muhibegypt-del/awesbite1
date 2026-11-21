@@ -9,6 +9,6 @@ const { items = site.credentials } = Astro.props;
 
 <ul class="honours" role="list">
   {items.map((c) => (
-    <li class="reveal"><span class="honours__q">{c.qualification}</span> <span class="honours__b">{c.body}</span></li>
+    <li class="reveal"><span class="honours__q">{c.qualification}</span>{c.body && <> <span class="honours__b">{c.body}</span></>}</li>
   ))}
 </ul>

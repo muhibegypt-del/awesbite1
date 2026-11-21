@@ -543,8 +543,9 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 /* Four across only once each column can hold a qualification in two lines. */
 @media (min-width: 1280px) {
   .bleed > .honours { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-  /* Six (the home page's list): two even rows of three. */
-  .bleed > .honours:has(> li:nth-child(5)) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  /* Five or six: rows of three. Seven or more (the home page's list) stay
+     four across, so no credential sits alone on a row. */
+  .bleed > .honours:has(> li:nth-child(5)):not(:has(> li:nth-child(7))) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
 /* Label and body pairs: who I teach, what I take on. */
