@@ -23,7 +23,7 @@ Status key: **done** (changed and verified), **blocked** (needs something from h
 | 12 | Lowercase for continuity (footer "SERVICES", "GET IN TOUCH") | | | | pending |
 | 13 | Footer name in the same font | | | | pending |
 | 14 | Email hello@atexturedword.com across the site | Every place the address appears | `global.json`: `contact.email` and the footer link (everything else reads `contact.email`) | Built site: 0 files still contain gmail; new address on 16 pages. Checked on the page: footer link, contact page link, enquiry form destination (`data-email`), offer page 'Ask a question first', Content collaboration link | **done** |
-| 15 | "Start" lowercase in the nav | | | | pending |
+| 15 | "Start" lowercase in the nav | The nav link only, on desktop and in the phone menu (her screenshot is the navbar); buttons elsewhere keep 'Start' | CSS `text-transform: lowercase` on `.nav__cta` and the phone menu's link (`Header.astro` gains `menu__cta`); the copy itself is unchanged | Rendered text at 1440: teach, repurpose, voice, about, content, start an enquiry. Phone menu at 390: the same. Home's 'Start an enquiry' button unchanged | **done** |
 | 16 | "01 — TEACH" style labels feel AI-made; change font or style | | | | pending |
 | 17 | "The Taught/Written/Spoken Word" lowercase, same position on every page | | | | pending |
 

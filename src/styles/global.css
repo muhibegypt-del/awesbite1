@@ -339,6 +339,9 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 /* On the green banner the current-page mark is paper: clay would vanish. */
 .nav a[aria-current='page'], .menu[open] > summary { text-decoration-color: var(--on-banner-soft); }
 .nav__cta { font-size: var(--t-body); }
+/* The enquiry link in the nav and the phone menu is lowercase like the
+   other nav items (feedback 5, #15). Elsewhere it keeps its capital. */
+.nav__cta, .menu__panel .menu__cta { text-transform: lowercase; }
 
 /* Phone and tablet: one row, the wordmark and a typographic "menu". */
 .menu > summary {
