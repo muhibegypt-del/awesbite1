@@ -30,6 +30,7 @@ const collab = pages.collaborations;
     <Fragment slot="below">
       <p class="lead">{q(site.about.reflectionBody)}</p>
       <ul class="tagline" role="list">{site.about.reflectionTags.map((tag) => <li>{tag}</li>)}</ul>
+      <p class="masthead__actions"><a class="btn btn--lg" href={global.nav.discovery.href}>{global.nav.discovery.label}</a></p>
     </Fragment>
   </Masthead>
 

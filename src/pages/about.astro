@@ -31,7 +31,11 @@ const linked = (line: string) => {
 ---
 
 <Base title={pages.meta.about.title} description={pages.meta.about.description}>
-  <Masthead runhead={labels.marker} title={about.heading} />
+  <Masthead runhead={labels.marker} title={about.heading}>
+    <Fragment slot="below">
+      <p class="masthead__actions"><a class="btn btn--lg" href={global.nav.discovery.href}>{global.nav.discovery.label}</a></p>
+    </Fragment>
+  </Masthead>
 
   <section class="sec sec--cream" aria-label={about.heading}>
     <div class="bleed about">

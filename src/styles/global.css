@@ -256,6 +256,9 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
   transition: background-color var(--fast) var(--ease-out);
 }
 .btn:hover { background: var(--ink); }
+/* The discovery call, the core action of every page (feedback 5 #6): the
+   same button, a size larger, in each page's opening screen. */
+.btn--lg { min-height: var(--s-8); padding: var(--s-4) var(--s-6); font-size: var(--t-cta); }
 /* The outlined button: never filled at rest, so a page still has only one
    filled button. Used on the offer cards and the buy card. */
 .btn--outline { color: var(--dark); background: transparent; border: 1px solid var(--dark); }
@@ -442,6 +445,7 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 .hello__brand { font-family: var(--hand); font-size: calc(var(--hand-scale) * 1em); font-weight: 400; line-height: 0; letter-spacing: 0; white-space: nowrap; }
 .hello__brand em { font-style: normal; font-weight: 400; }
 .hello__offer { margin-block-start: var(--s-5); }
+.hello__cta { margin-block-start: var(--s-6); }
 /* The three services as plain routes (ServiceList): the same rows on the
    home page's first screen and as the onward links on service pages. */
 .routes-nav { border-bottom: 1px solid var(--rule); }

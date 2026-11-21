@@ -51,7 +51,7 @@ const unsureHref = `/contact?about=${encodeURIComponent(offerSet?.topic ?? '')}`
     <p slot="side" class="lead masthead__pillar"><em>{service.pillar}</em></p>
     <Fragment slot="below">
       <p class="lead">{q(service.oneLiner)}</p>
-      <p class="masthead__actions"><a class="btn" href={service.cta.href}>{service.cta.label}</a></p>
+      <p class="masthead__actions"><a class="btn btn--lg" href={global.nav.discovery.href}>{global.nav.discovery.label}</a></p>
       {types && (
         <nav class="jump" aria-label={service.tracksHeading}>
           <ul role="list">

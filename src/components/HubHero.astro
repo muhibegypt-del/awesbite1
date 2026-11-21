@@ -27,6 +27,7 @@ const [first, middle, last] = global.brand.wordmark.split(' ');
     <div class="hello__text">
       <h1 class="hello__h1" id="hello-heading">{q(beforeBrand)}<span class="hello__brand">{first} <em>{middle}</em> {last}</span>{q(afterBrand)}</h1>
       <p class="lead hello__offer">{q(offer)}</p>
+      <p class="hello__cta"><a class="btn btn--lg" href={global.nav.discovery.href}>{global.nav.discovery.label}</a></p>
       <nav class="hello__routes" aria-label={hub.markers.pillars}>
         <ServiceList />
       </nav>

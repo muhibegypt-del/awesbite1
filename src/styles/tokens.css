@@ -74,6 +74,7 @@
   --t-name:    1.375rem;
   --t-rate:    1.25rem;
   --t-option:  1.125rem;
+  --t-cta:     1.25rem;    /* the discovery-call button (feedback 5 #6) */
 
   --lh-display: 0.95;
   --lh-heading: 1.08;
@@ -159,5 +160,6 @@
     --t-name:    1.5rem;
     --t-rate:    1.375rem;
     --t-option:  1.25rem;
+    --t-cta:     1.5rem;
   }
 }

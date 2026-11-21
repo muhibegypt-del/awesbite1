@@ -11,6 +11,7 @@
       { "label": "content", "href": "/content" }
     ],
     "cta": { "label": "Start an enquiry", "href": "/contact" },
+    "discovery": { "label": "Book a free discovery call", "href": "/contact?about=Discovery+call", "_comment": "DRAFT (feedback 5 #6): her word 'discovery'; 'free' from her approved contact line ('a free 20-minute call'). Confirm the wording with her." },
     "menuLabel": "Menu"
   },
 
