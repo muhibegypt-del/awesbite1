@@ -41,7 +41,7 @@ const unsureHref = `/contact?about=${encodeURIComponent(offerSet?.topic ?? '')}`
 
 <Base title={meta.title} description={meta.description}>
   <Masthead
-    runhead={`${service.number} — ${service.tag}`}
+    runhead={service.routeLabel}
     runheadHidden
     title={service.plain}
     audience={service.audience}

@@ -19,7 +19,6 @@ const { labels } = offerings;
 <ul class="offers" role="list">
   {set.options.map((o) => (
     <li class="offer reveal">
-      <p class="offer__num" aria-hidden="true">{o.number}</p>
       <h3 class="offer__title">{o.title}</h3>
       <p class="label offer__kicker">{o.kicker}</p>
       <p class="offer__summary">{q(o.summary)}</p>

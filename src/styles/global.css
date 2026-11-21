@@ -159,12 +159,17 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
    ============================================================ */
 
 .label {
-  font-family: var(--serif-caps);
-  font-size: var(--t-small);
-  font-weight: 400;
-  line-height: var(--lh-small);
-  letter-spacing: var(--track-caps);
-  font-variant-caps: all-small-caps;
+  /* Lowercase italic Literata, the style of "the taught word" lines she
+     likes, in place of letter-spaced small capitals, which read to her as
+     AI-made (feedback 5, #12 and #16). Every label is plain words, so
+     lowercasing them never breaks an acronym. */
+  font-family: var(--serif);
+  font-size: var(--t-body);
+  font-style: italic;
+  font-weight: 300;
+  line-height: var(--lh-snug);
+  letter-spacing: 0;
+  text-transform: lowercase;
   font-variant-numeric: lining-nums tabular-nums;
   color: var(--ink-soft);
 }
@@ -482,6 +487,14 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 .masthead__inner { row-gap: var(--s-5); }
 .masthead__runhead { margin-block-end: calc(-1 * var(--s-2)); }
 .masthead__audience { color: var(--clay-ink); }
+/* "the taught word" lines: lowercase (feedback 5, #17); on a phone they sit
+   straight under the small label above the title, the same place on every
+   service page. */
+.masthead__pillar { text-transform: lowercase; }
+@media (max-width: 1023.98px) {
+  .masthead__inner > .masthead__runhead { order: -2; }
+  .masthead__inner > .masthead__side { order: -1; }
+}
 .masthead__below { display: grid; gap: var(--s-5); justify-items: start; }
 .masthead__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-4) var(--s-6); }
 .masthead__photo { margin-block-start: var(--s-7); aspect-ratio: 3 / 2; overflow: hidden; }
@@ -493,7 +506,8 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
   .masthead__inner > .masthead__runhead { grid-column: col 1 / span 6; }
   .masthead__inner > .masthead__title { grid-column: col 1 / span 7; grid-row: 2 / span 2; align-self: end; }
   .masthead__inner > .masthead__audience { grid-column: col 9 / span 4; grid-row: 1; align-self: end; }
-  .masthead__inner > .masthead__side { grid-column: col 9 / span 4; grid-row: 2 / span 2; align-self: end; display: grid; gap: var(--s-5); }
+  /* Pinned to the top of the title's row, so it sits in the same place on every service page whatever the title's length (feedback 5, #17). */
+  .masthead__inner > .masthead__side { grid-column: col 9 / span 4; grid-row: 2 / span 2; align-self: start; display: grid; gap: var(--s-5); }
   .masthead__inner > .masthead__below { grid-column: col 1 / span 7; grid-row: 4; }
   /* The photograph whole, in the shape it was shot; cropped only when it
      would be taller than the screen. */
@@ -551,7 +565,8 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 /* Label and body pairs: who I teach, what I take on. */
 .pairs { display: grid; gap: 0 var(--s-7); margin-block-end: calc(-1 * var(--s-4)); }   /* the last row's padding is not extra space */
 .pairs > div { display: grid; gap: var(--s-1); align-content: start; padding-block: var(--s-4); border-top: 1px solid var(--rule); }
-.pairs dt { font-family: var(--serif-caps); font-size: var(--t-body); letter-spacing: var(--track-caps); font-variant-caps: all-small-caps; color: var(--ink); }
+/* Subheadings in sentence case, no small capitals (feedback 5, #12); some are acronyms (IVR), so no lowercase transform here. */
+.pairs dt { font-family: var(--serif); font-size: var(--t-body); font-weight: 400; color: var(--ink); }
 .pairs dd { color: var(--ink-soft); }
 
 @media (min-width: 768px) {
@@ -645,12 +660,12 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 @media (min-width: 1024px) { .offers:not(:has(> li:nth-child(4))) { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (min-width: 1280px) { .offers:has(> li:nth-child(4)) { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .offer { display: flex; flex-direction: column; padding: var(--s-6); background: var(--lift); border: 1px solid var(--rule); }
-.offer__num { font-family: var(--serif); font-weight: 300; font-size: var(--t-h2); line-height: 1; font-variant-numeric: lining-nums; color: color-mix(in srgb, var(--dark) 65%, var(--lift)); }   /* 3.9:1, large text */
-.offer__title { margin-top: var(--s-6); font-family: var(--serif); font-size: var(--t-h3); font-weight: 400; line-height: var(--lh-tight); }
+/* Card names and prices in Instrument Sans, not the light display serif (feedback 5, #3). */
+.offer__title { font-family: var(--sans); font-size: var(--t-lead); font-weight: 500; line-height: var(--lh-tight); }
 .offer__kicker { margin-top: var(--s-2); color: var(--dark); }
 .offer__summary { flex: 1; margin-top: var(--s-4); font-size: var(--t-small); line-height: var(--lh-small); color: var(--ink-soft); }
 .offer__price { margin-top: var(--s-6); padding-top: var(--s-5); border-top: 1px solid var(--rule); }
-.offer__amount { font-family: var(--serif); font-size: var(--t-h3); font-weight: 400; line-height: 1; font-variant-numeric: lining-nums; color: var(--dark); }
+.offer__amount { font-family: var(--sans); font-size: var(--t-h3); font-weight: 500; line-height: 1; font-variant-numeric: lining-nums; color: var(--dark); }
 .offer__term { margin-top: var(--s-2); color: var(--dark); }
 .offer__meta { margin-top: var(--s-2); font-size: var(--t-small); line-height: var(--lh-small); color: var(--ink-soft); }
 .offer__cta { margin-top: var(--s-6); justify-content: center; width: 100%; padding-inline: var(--s-4); }
@@ -683,7 +698,7 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 .pkg__notes li { max-width: var(--measure); }
 
 .pkg__card { display: flex; flex-direction: column; align-self: start; padding: var(--s-6); background: var(--lift); border: 1px solid var(--rule); }
-.pkg__price { font-family: var(--serif); font-size: var(--t-h2); font-weight: 300; line-height: 1; font-variant-numeric: lining-nums; color: var(--dark); }
+.pkg__price { font-family: var(--sans); font-size: var(--t-h2); font-weight: 500; line-height: 1; font-variant-numeric: lining-nums; color: var(--dark); }
 .pkg__term { margin-top: var(--s-2); color: var(--dark); }
 .pkg__summary { margin-top: var(--s-2); font-size: var(--t-small); color: var(--ink-soft); }
 .pkg__btn { justify-content: center; width: 100%; margin-top: var(--s-3); }
