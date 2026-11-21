@@ -93,7 +93,7 @@ The `.txt` files are extracts made because this cloud container cannot render PD
 - Radii: 0 for structure, 2px for fields and buttons, 10px for the audio player.
 - Two families only. **Literata** for display, headings, a single standfirst under a title, pull-quotes and labels (true small caps). **Instrument Sans** for body, UI, nav, buttons and figures. No monospace anywhere.
 - **Running copy is always Instrument Sans, as on the home page** (client, November 2026). No paragraph of continuous copy in the Literata lead, and no serif essay pages.
-- **Desktop type is larger, mobile unchanged.** The type tokens have a second ramp from 1024px that starts at exactly the size the first reaches at 1024. Change a size below 1024 only on purpose, and check 390 and 1440.
+- **Desktop type is larger.** The type tokens have a second ramp from 1024px that starts at exactly the size the first reaches at 1024. Feedback 5 (November 2026) raised body and small text on phones too (body 18px, small 17px; small 18px on desktop): nothing on the site is set below 17px. Check 390 and 1440 after any size change.
 - Body copy capped at `--measure` (30em, at most 68 characters). Never full-width paragraphs.
 - No dashes used as punctuation in new copy: no em dashes, no spaced hyphens, no other patterns that read as machine-written (client, November 2026). Her own copy keeps hers.
 - Emphasis is italic, not bold.
