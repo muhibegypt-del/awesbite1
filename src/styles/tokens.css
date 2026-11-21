@@ -45,6 +45,18 @@
   --on-banner:       var(--on-dark);        /* 13.18:1 on the banner */
   --on-banner-soft:  var(--on-dark-soft);   /* 10.86:1: hover and current-page marks */
 
+  /* ---- Social platforms: each one's own colour (feedback 5 #4) ----
+     Used only for the round social marks. Each passes 3:1 against the cream
+     it meets (the mark on paper, or paper inside the circle). Substack's own
+     #FF6719 is 2.7:1 with cream, so it is deepened; TikTok's black is ink,
+     never #000. */
+  --brand-substack:  #D4520F;   /* 3.89:1 with paper */
+  --brand-tiktok:    var(--ink);
+  --brand-pinterest: #BD081C;   /* 6.07:1 */
+  --brand-linkedin:  #0A66C2;   /* 5.29:1 */
+  --brand-youtube:   #FF0000;   /* 3.72:1 */
+  --brand-instagram: #E4405F;   /* 3.76:1 */
+
   /* ---- Audio scrubber fill only ---- */
   --teal:       #5F8A8B;
 

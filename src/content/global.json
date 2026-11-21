@@ -47,12 +47,14 @@
   "social": {
     "_comment": "G-04. Never render a dead link — the column only appears once at least one URL exists.",
     "heading": "follow",
+    "_comment_links": "Feedback 5 #4. LinkedIn: her profile address contains her surname, which the site never shows; add it once she sets a custom LinkedIn URL. YouTube: she could not create a channel yet.",
     "links": [
+      { "label": "Substack", "url": "https://atexturedword.substack.com/" },
+      { "label": "TikTok", "url": "https://www.tiktok.com/@atexturedword" },
+      { "label": "Pinterest", "url": "https://uk.pinterest.com/atexturedword/" },
       { "label": "LinkedIn", "url": null },
       { "label": "Instagram", "url": null },
-      { "label": "Substack", "url": null },
-      { "label": "YouTube", "url": null },
-      { "label": "TikTok", "url": null }
+      { "label": "YouTube", "url": null }
     ]
   },
 

@@ -1,0 +1,38 @@
+---
+/**
+ * Her social platforms as round marks in each platform's own colour
+ * (feedback 5 #4). On paper the circle takes the colour and the mark is
+ * cream; in the plum footer the circle is cream and the mark takes the
+ * colour, so every circle stands clear of the plum. Only links with a URL
+ * are passed in: never a dead link. `named` shows the platform's name
+ * beside its mark; otherwise the name is for screen readers only.
+ */
+import { socialIcons } from '../lib/social-icons.js';
+import global from '../content/global.json';
+
+interface Props { links: { label: string; url: string }[]; named?: boolean; newTab?: boolean }
+const { links, named = false, newTab = false } = Astro.props;
+const icons: Record<string, string> = socialIcons;
+---
+
+<ul class:list={['social', { 'social--named': named }]} role="list">
+  {links.map((link) => (
+    <li>
+      <a
+        class="social__link"
+        href={link.url}
+        style={`--brand: var(--brand-${link.label.toLowerCase()}, var(--dark))`}
+        target={newTab ? '_blank' : undefined}
+        rel={newTab ? 'me noopener noreferrer' : 'me noopener'}
+      >
+        {icons[link.label] && (
+          <span class="social__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false"><path d={icons[link.label]} /></svg>
+          </span>
+        )}
+        <span class:list={['social__name', { 'visually-hidden': !named && icons[link.label] }]}>{link.label}</span>
+        {newTab && <span class="visually-hidden">{global.newTab}</span>}
+      </a>
+    </li>
+  ))}
+</ul>

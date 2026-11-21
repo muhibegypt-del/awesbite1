@@ -4,6 +4,7 @@
  * exist: never a dead link, never an empty column.
  */
 import Wordmark from './Wordmark.astro';
+import SocialLinks from './SocialLinks.astro';
 import global from '../content/global.json';
 
 const { footer, social } = global;
@@ -30,9 +31,7 @@ const legalLinks = footer.legalLinks.filter((link) => link.href);
     {socialLinks.length > 0 && (
       <div class="ftr__col">
         <p class="label ftr__heading">{social.heading}</p>
-        <ul role="list">
-          {socialLinks.map((link) => <li><a href={link.url} rel="me noopener">{link.label}</a></li>)}
-        </ul>
+        <SocialLinks links={socialLinks} />
       </div>
     )}
 

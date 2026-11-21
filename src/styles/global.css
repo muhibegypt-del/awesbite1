@@ -816,9 +816,24 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
    ============================================================ */
 
 
-.library { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--s-2) var(--s-6); }
-.library li { font-family: var(--serif); font-size: var(--t-lead); }
-.library small { font-family: var(--sans); font-size: var(--t-small); color: var(--ink-soft); margin-inline-start: var(--s-2); }
+/* Social marks (feedback 5 #4): a round mark in each platform's colour.
+   The circle is the only round shape on the site, as in her reference. */
+.social { display: flex; flex-wrap: wrap; gap: var(--s-3) var(--s-5); }
+.social__link { display: inline-flex; align-items: center; gap: var(--s-3); min-height: var(--target); text-decoration: none; }
+.social__mark {
+  display: grid; place-items: center; flex: none;
+  width: var(--target); height: var(--target); border-radius: 50%;
+  color: var(--paper); background: var(--brand);
+  transition: background-color var(--fast) var(--ease-out), color var(--fast) var(--ease-out);
+}
+.social__mark svg { width: var(--s-5); height: var(--s-5); fill: currentColor; }
+.social__link:hover .social__mark { background: var(--ink); }
+.social--named .social__name { font-size: var(--t-body); text-decoration: underline; text-decoration-color: var(--rule-strong); text-decoration-thickness: 1px; text-underline-offset: 0.25em; }
+.social--named .social__link:hover .social__name { text-decoration-color: var(--clay); }
+/* In the plum footer the circle is cream and the mark takes the colour. */
+.ftr__col .social { display: flex; gap: var(--s-3); }
+.ftr .social__mark { color: var(--brand); background: var(--on-dark); }
+.ftr .social__link:hover .social__mark { color: var(--on-dark); background: var(--brand); }
 
 
 /* ============================================================

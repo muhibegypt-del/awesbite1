@@ -1,13 +1,14 @@
 {
-  "substack": null,
+  "substack": "https://atexturedword.substack.com/",
   "youtube": null,
   "socials": [
+    { "label": "TikTok", "url": "https://www.tiktok.com/@atexturedword" },
+    { "label": "Pinterest", "url": "https://uk.pinterest.com/atexturedword/" },
     { "label": "LinkedIn", "url": null },
-    { "label": "Instagram", "url": null },
-    { "label": "TikTok", "url": null }
+    { "label": "Instagram", "url": null }
   ],
   "library": [
-    { "label": "Substack", "url": null },
+    { "label": "Substack", "url": "https://atexturedword.substack.com/" },
     { "label": "YouTube", "url": null }
   ]
 }

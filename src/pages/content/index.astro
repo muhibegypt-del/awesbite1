@@ -9,6 +9,7 @@
 import Base from '../../layouts/Base.astro';
 import Masthead from '../../components/Masthead.astro';
 import SectionHead from '../../components/SectionHead.astro';
+import SocialLinks from '../../components/SocialLinks.astro';
 import { q } from '../../lib/typeset.js';
 import site from '../../content/site.json';
 import pages from '../../content/pages.json';
@@ -63,9 +64,7 @@ const collab = pages.collaborations;
         <SectionHead label={pages.socials.heading} labelAs="h2" id="socials-heading" />
         <div class="prose col-text">
           <p class="lead">{q(pages.socials.lede)}</p>
-          <ul class="library" role="list">
-            {socials.map((link) => <li><a class="textlink" href={link.url} target="_blank" rel="noopener noreferrer">{link.label}<span class="visually-hidden">{global.newTab}</span></a></li>)}
-          </ul>
+          <SocialLinks links={socials} named newTab />
         </div>
       </div>
     </section>
