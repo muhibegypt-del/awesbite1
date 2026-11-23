@@ -42,7 +42,7 @@ Status key: **done** (changed and verified), **blocked** (needs something from h
 
 ## Decisions to confirm with her
 
-- **#9:** QTS no longer appears in either credential list. Her timeline has QTS (2021, Qatar International School) as a separate item. Should it come back as its own credential?
+- **#9:** QTS no longer appears in either credential list (it was 'PGCE and QTS / Qualified Teacher Status'). Is she happy for QTS not to be mentioned at all?
 - **#10:** Examiner is on Home's list only. Should About's list have it too?
 - **#11:** she said "the overall font within that paragraph may need to be changed". Only "textured." changed, matching how her greeting mixes the serif with the handwritten name. Does she want more of the band handwritten?
 - **#3:** the card numerals (01, 02, 03) were removed as part of the "AI look". Does she want them back?
