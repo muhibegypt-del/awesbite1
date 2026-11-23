@@ -213,7 +213,7 @@ On `preview/feedback-5-general`. Her points 1 to 17 only (Teach, Write, Voice an
 - **Credentials:** IELTS (International House) with no caption; English PGCE / University of Nottingham; Examiner (Summer, 2027).
 - **Email** hello@atexturedword.com everywhere. **Nav** "start an enquiry" lowercase.
 - **Discovery call:** a larger button (`.btn--lg`) in the first screen of Home, Teach, Repurpose, Voice, About and Content, opening the form with "Discovery call" chosen. Label is a draft.
-- **Socials:** Substack, TikTok, Pinterest and LinkedIn as round marks in each platform's colour (footer and Content); the Substack section on Content now shows.
+- **Socials:** Substack, TikTok, Pinterest and LinkedIn as scalloped stamp badges in each platform's colour with a white symbol, as in her picture (footer and Content); the Substack section on Content now shows.
 - **Voice:** two more samples from her Drive links (six in all), levelled to the others, tags stripped.
 - **Voice, 'voiced for' (#26, at the owner's request):** the industries she has voiced for, each with the client sites she listed, linked by web address. No logos.
 
