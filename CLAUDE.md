@@ -67,7 +67,7 @@ The `.txt` files are extracts made because this cloud container cannot render PD
 **To change the site against it:** copy from N1/N2 verbatim (check by script against the `.txt`; moving paragraphs is allowed, rewording is not), cite the checklist ID in each commit message, and update `CHANGES.md` section 9/10.
 
 **Known open items as of commit `c71f85a`** (expect these to fail or be unverifiable until the client supplies something):
-- VOICE-04: six samples since feedback 5 (#7): two added from her Drive links (titles are drafts); a seventh, from an old client, is still to come.
+- VOICE-04: eight samples since feedback 5 (#7): four added from her Drive links (titles are drafts); one more, from an old client, may still come.
 - ABOUT-02: which alternate portrait — not yet chosen; the current one is shown.
 - VIS-04, VIS-06: font options and her handwriting for *textured* — not yet supplied; current fonts kept.
 - CONTENT-02: the "highlighted passage" for the start of the Content introduction is not in N1/N2.

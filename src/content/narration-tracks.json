@@ -4,5 +4,7 @@
   { "id": "voice-explainer", "title": "Health explainer", "tag": "0:58", "src": "/audio/voice-explainer.mp3" },
   { "id": "voice-ivr", "title": "IVR", "tag": "0:38", "src": "/audio/voice-ivr.mp3" },
   { "id": "voice-software-explainer", "title": "Software explainer", "tag": "3:03", "src": "/audio/voice-software-explainer.mp3" },
-  { "id": "voice-charity-film", "title": "Charity film", "tag": "4:57", "src": "/audio/voice-charity-film.mp3" }
+  { "id": "voice-charity-film", "title": "Charity film", "tag": "4:57", "src": "/audio/voice-charity-film.mp3" },
+  { "id": "voice-social-ad-1", "title": "Social ad series, episode 1", "tag": "1:22", "src": "/audio/voice-social-ad-1.mp3" },
+  { "id": "voice-social-ad-2", "title": "Social ad series, episode 2", "tag": "1:28", "src": "/audio/voice-social-ad-2.mp3" }
 ]
