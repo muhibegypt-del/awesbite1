@@ -44,7 +44,7 @@ Photographs live in `src/assets/images` and always go through `components/Photo.
 
 The client chose (September 2026) **Direction B, Printed Matter, with the portrait (`aneesa-portrait.webp`) as the hub hero**. Literata + Instrument Sans, plum as the second key, the photographs graded into the palette. `AUDIT.md` and `BRAND-AUDIT.md` record why; `CHANGES.md` records what changed.
 
-**Client revisions, November 2026** (CHANGES.md section 12): the banner across the top of every page (the header, 80px phone / 112px desktop) is the third key; since the preview round it is deep aubergine `--banner`, not forest green; a cream surface (`.sec--cream`, `--lift`) adds depth; running copy is the home page's body face (Instrument Sans) on every page; desktop type is larger from 1024px up, with mobile sizes unchanged.
+**Client revisions, November 2026** (CHANGES.md section 12): the banner across the top of every page (the header, 80px phone / 112px desktop) is the third key; since the preview round it is deep aubergine `--banner`, not forest green; a cream surface (`.sec--cream`, `--lift`) adds depth; running copy is the home page's body face (Instrument Sans) on every page; desktop type is larger from 1024px up (phone body and small text were raised in feedback 5).
 
 Copy changes still need the client's approval. Typesetting (curly apostrophes via `q()`, line breaks, case transforms) is not a copy change.
 
@@ -71,7 +71,7 @@ The `.txt` files are extracts made because this cloud container cannot render PD
 - ABOUT-02: which alternate portrait — not yet chosen; the current one is shown.
 - VIS-04, VIS-06: font options and her handwriting for *textured* — not yet supplied; current fonts kept.
 - CONTENT-02: the "highlighted passage" for the start of the Content introduction is not in N1/N2.
-- CONTENT-03/04: no Substack, YouTube or social URLs supplied, so those sections are hidden, not placeholders.
+- CONTENT-03/04: Substack, TikTok and Pinterest links supplied in feedback 5 (#4) and shown; YouTube (no channel yet) and LinkedIn (its address carries her surname) stay hidden until a usable link exists.
 - SITE-05/06: two structure concepts were not prepared; the owner went straight to one.
 - SITE-08: no handover walkthrough yet.
 - COPY-03 note: her offer sentence ("At a textured word, I work across…") is shown second on Home, straight after the greeting, so the offer is clear first; the rest is in her order. Flag it, do not silently "fix" it.
