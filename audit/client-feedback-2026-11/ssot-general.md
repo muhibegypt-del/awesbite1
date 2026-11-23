@@ -1,6 +1,7 @@
 # Feedback 5, general points 1 to 17: single source of truth
 
 Branch: `preview/feedback-5-general` (from `867ec3e`). Nothing here is live until it is merged and deployed.
+Preview deployment (not production): `awesbite1-gxbu8pyfb-muhibegypt-8034s-projects.vercel.app`, built from `29f3add` on 23 November 2026, and checked there at 390 and 1440 (name font, discovery button, body size, email, credentials, socials, six voice tracks, card sizes).
 Source of each request: [`feedback-5.md`](feedback-5.md), her words and screenshots.
 Each change is made, built, then checked on the built site by script at 390px and 1440px
 (and screenshots where the look matters) before its row is marked done.
