@@ -31,7 +31,7 @@ const linked = (line: string) => {
 ---
 
 <Base title={pages.meta.about.title} description={pages.meta.about.description}>
-  <Masthead runhead={labels.marker} title={about.heading}>
+  <Masthead runhead={labels.marker} title={about.heading} texture="ruled">
     <Fragment slot="below">
       <p class="masthead__actions"><a class="btn btn--lg" href={global.nav.discovery.href}>{global.nav.discovery.label}</a></p>
     </Fragment>
@@ -55,14 +55,14 @@ const linked = (line: string) => {
     </div>
   </section>
 
-  <section class="sec sec--dark" aria-labelledby="qualifications-heading">
+  <section class="sec sec--dark texture-hatched" aria-labelledby="qualifications-heading">
     <div class="bleed">
       <SectionHead label={labels.qualificationsMarker} labelAs="h2" id="qualifications-heading" />
       <Honours />
     </div>
   </section>
 
-  <section class="sec sec--band" aria-labelledby="beyond-heading">
+  <section class="sec sec--band texture-dotted" aria-labelledby="beyond-heading">
     <div class="bleed beyond">
       <SectionHead label={labels.beyondMarker} heading={labels.beyondHeading} lead={about.reflectionBody} id="beyond-heading">
         <a class="textlink" href={labels.contentLink.href}>{labels.contentLink.label} <span class="arrow" aria-hidden="true">→</span></a>

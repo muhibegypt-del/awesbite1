@@ -33,6 +33,7 @@ Status key: **done** (changed and verified), **blocked** (needs something from h
 | # | She asked | What changed | Verified | Status |
 |---|---|---|---|---|
 | 26 | List the companies she has voiced for, or at least the industries | Voice page: a new 'voiced for' section after 'Voice work', in the same two-column list. Her 11 industries in her order (first letter capitalised), each with the sites she gave, linked and opening in a new tab; the link text is the web address, so no company name is guessed. No logos. Label 'Voiced for' is a draft. Her YouTube video (the 13th line) is not used yet | 390 and 1440: 11 rows, 12 links, exactly her 12 URLs; 0 WCAG violations; no overflow; spacing to the sections either side follows the rhythm (128/64 phone, 192/96 desktop). 11 of 12 sites load; drsehmi.co.uk refuses this cloud server (403), so it could not be checked from here | **done** |
+| 27 | About: 'ways to design this page so it feels a bit fuller / textured' | Three faint paper and pencil textures from the palette, About only (opt-in classes, tokens `--texture-*`): ruled exercise-book lines behind the title, pencil hatching on the plum qualifications band, printed halftone dots on the blush 'beyond client work' band. On desktop the portrait stays beside her passage as it scrolls (it used to end a third of the way down, leaving an empty column). No copy changed | 390, 768, 1024 and 1440: 0 WCAG violations, no overflow; at mid-scroll on desktop the portrait is in view beside the text (1024 and 1440); phone and tablet unchanged (photo above the text). Real-size crops of each texture checked | **done** |
 
 ## Regression after all 17 (built site, local)
 
@@ -48,7 +49,7 @@ Status key: **done** (changed and verified), **blocked** (needs something from h
 
 ## Decisions to confirm with her
 
-- **#9:** QTS no longer appears in either credential list (it was 'PGCE and QTS / Qualified Teacher Status'). Is she happy for QTS not to be mentioned at all?
+- **#9:** QTS no longer appears in either credential list (it was 'PGCE and QTS / Qualified Teacher Status'); it is still in her About passage ('receiving my QTS in Qatar'). Her instruction was clear, so this is not a question for her.
 - **#10:** Examiner is on Home's list only. Should About's list have it too?
 - **#11:** she said "the overall font within that paragraph may need to be changed". Only "textured." changed, matching how her greeting mixes the serif with the handwritten name. Does she want more of the band handwritten?
 - **#3:** the card numerals (01, 02, 03) were removed as part of the "AI look". Does she want them back?

@@ -505,6 +505,11 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 .masthead__photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; }
 .masthead--plain { padding-block-end: var(--sec-minor); border-bottom: 1px solid var(--rule); }
 
+/* Textures (feedback 5 #27): faint paper and pencil grounds, opt-in. */
+.texture-ruled { background-image: repeating-linear-gradient(to bottom, transparent 0 calc(var(--s-6) - 1px), var(--texture-rule) calc(var(--s-6) - 1px) var(--s-6)); }
+.texture-hatched { background-image: repeating-linear-gradient(135deg, transparent 0 calc(var(--s-2) - 1px), var(--texture-hatch) calc(var(--s-2) - 1px) var(--s-2)); }
+.texture-dotted { background-image: radial-gradient(circle, var(--texture-dot) 1px, transparent 1.5px); background-size: var(--s-3) var(--s-3); }
+
 @media (min-width: 1024px) {
   .masthead { padding-block-start: var(--s-9); }
   .masthead__inner > .masthead__runhead { grid-column: col 1 / span 6; }
@@ -950,7 +955,7 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 }
 
 @media (min-width: 1024px) {
-  .about__photo { grid-column: col 1 / span 5; grid-row: 1; }
+  .about__photo { grid-column: col 1 / span 5; grid-row: 1; align-self: start; position: sticky; top: var(--s-6); }   /* stays beside her passage as it scrolls (feedback 5 #27) */
   .about__text { grid-column: col 7 / span 6; grid-row: 1; align-self: end; }
 }
 

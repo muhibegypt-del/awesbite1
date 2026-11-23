@@ -15,12 +15,13 @@ interface Props {
   image?: string;
   imageAlt?: string;
   imagePosition?: string;
+  texture?: 'ruled' | 'hatched' | 'dotted';
 }
-const { runhead, runheadHidden = false, title, audience, image, imageAlt = '' } = Astro.props;
+const { runhead, runheadHidden = false, title, audience, image, imageAlt = '', texture } = Astro.props;
 const plain = !image;
 ---
 
-<section class:list={['masthead', { 'masthead--plain': plain }]} aria-labelledby="page-title">
+<section class:list={['masthead', { 'masthead--plain': plain }, texture && `texture-${texture}`]} aria-labelledby="page-title">
   <div class="bleed masthead__inner">
     {runhead && <p class="label masthead__runhead" aria-hidden={runheadHidden ? 'true' : undefined}>{runhead}</p>}
     <h1 class="title masthead__title" id="page-title">{q(title)}</h1>
