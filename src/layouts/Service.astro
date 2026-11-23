@@ -156,6 +156,23 @@ const unsureHref = `/contact?about=${encodeURIComponent(offerSet?.topic ?? '')}`
     </section>
   )}
 
+  {/* Who she has voiced for (feedback 5 #26): her industries, each with the client sites she listed. */}
+  {service.clients?.length > 0 && (
+    <section class="sec" aria-labelledby="clients-heading">
+      <div class="bleed">
+        <SectionHead label={service.clientsHeading} labelAs="h2" id="clients-heading" />
+        <dl class="pairs col-wide">
+          {service.clients.map((client: { industry: string; sites: { label: string; href: string }[] }) => (
+            <div class="reveal">
+              <dt>{client.industry}</dt>
+              {client.sites.map((site) => <dd><a class="textlink" href={site.href} target="_blank" rel="noopener noreferrer">{site.label}<span class="visually-hidden">{global.newTab}</span></a></dd>)}
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+  )}
+
   <section class="sec sec--cream" aria-labelledby="method-heading">
     <div class="bleed">
       <SectionHead label={service.methodHeading} labelAs="h2" id="method-heading" />

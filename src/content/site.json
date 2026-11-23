@@ -240,6 +240,21 @@
         { "label": "Animation", "body": "Voices for animated characters and stories" }
       ],
 
+      "_comment_clients": "Feedback 5 #26: the industries she has voiced for and the sites still live, in her order (her wording, first letter capitalised). Named in text only, no logos. The label is a DRAFT. Her YouTube video link is not used yet.",
+      "clientsHeading": "Voiced for",
+      "clients": [
+        { "industry": "Tech", "sites": [{ "label": "in4it.io", "href": "https://www.in4it.io/" }, { "label": "techgenies.com", "href": "https://techgenies.com/" }] },
+        { "industry": "Media", "sites": [{ "label": "seveer.tv", "href": "https://seveer.tv/" }] },
+        { "industry": "Animation studio", "sites": [{ "label": "justanim8.com", "href": "https://justanim8.com/" }] },
+        { "industry": "Dentist", "sites": [{ "label": "drsehmi.co.uk", "href": "https://drsehmi.co.uk/" }] },
+        { "industry": "Chocolatier", "sites": [{ "label": "loynds.com", "href": "https://www.loynds.com/" }] },
+        { "industry": "Sport focused production house", "sites": [{ "label": "rhodapondproductions.co.uk", "href": "https://rhodapondproductions.co.uk/" }] },
+        { "industry": "App video agency", "sites": [{ "label": "apptamin.com", "href": "https://www.apptamin.com/" }] },
+        { "industry": "Professional event filming", "sites": [{ "label": "creative-films.net", "href": "https://www.creative-films.net/" }] },
+        { "industry": "Digital & branding agency", "sites": [{ "label": "pastilla.co", "href": "https://pastilla.co/" }] },
+        { "industry": "Production company", "sites": [{ "label": "distantfuture.co.uk", "href": "https://www.distantfuture.co.uk/" }] },
+        { "industry": "Data management software", "sites": [{ "label": "ehsdata.com", "href": "https://ehsdata.com/" }] }
+      ],
       "methodHeading": "How it works",
       "method": [
         { "number": "01", "title": "Tell me about the project", "body": "" },

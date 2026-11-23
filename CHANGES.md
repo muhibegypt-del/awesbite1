@@ -215,5 +215,6 @@ On `preview/feedback-5-general`. Her points 1 to 17 only (Teach, Write, Voice an
 - **Discovery call:** a larger button (`.btn--lg`) in the first screen of Home, Teach, Repurpose, Voice, About and Content, opening the form with "Discovery call" chosen. Label is a draft.
 - **Socials:** Substack, TikTok, Pinterest and LinkedIn as round marks in each platform's colour (footer and Content); the Substack section on Content now shows.
 - **Voice:** two more samples from her Drive links (six in all), levelled to the others, tags stripped.
+- **Voice, 'voiced for' (#26, at the owner's request):** the industries she has voiced for, each with the client sites she listed, linked by web address. No logos.
 
 Regression after all of it: axe-core reports no WCAG 2.2 AA violations on 16 pages at 390 and 1440 (two best-practice notes, both already on the live site); one `<h1>` per page; no horizontal overflow at 390, 768, 1024, 1280 or 1440; never more than one filled button in a screen; all 27 internal links resolve; Home about 250 to 280KB with 6KB of JS; no audio loads before play.

@@ -28,6 +28,12 @@ Status key: **done** (changed and verified), **blocked** (needs something from h
 | 16 | "01 — TEACH" style labels feel AI-made; change font or style | The service-page labels '01 — TEACH … FOR STUDENTS AND PARENTS' | Numbers and the dash removed: the label is the service name ('teach', 'repurpose', 'voice'); both lines take the new lowercase italic style (#12) | At 390 and 1440 the runheads read 'teach', 'repurpose', 'voice'; audience lines lowercase italic; screenshots checked | **done** |
 | 17 | "The Taught/Written/Spoken Word" lowercase, same position on every page | 'The Taught/Written/Spoken Word' beside each service title | Lowercase by CSS (the copy is unchanged). Desktop: pinned to the top of the title's row instead of its bottom, so title length no longer moves it. Phone: placed straight under the small label above the title on every service page | Measured from the top of the masthead on all three service pages: 147px at 1440 and 86px at 390, identical on each; text reads 'the taught word', 'the written word', 'the spoken word' | **done** |
 
+## Beyond the general points (done at the owner's request)
+
+| # | She asked | What changed | Verified | Status |
+|---|---|---|---|---|
+| 26 | List the companies she has voiced for, or at least the industries | Voice page: a new 'voiced for' section after 'Voice work', in the same two-column list. Her 11 industries in her order (first letter capitalised), each with the sites she gave, linked and opening in a new tab; the link text is the web address, so no company name is guessed. No logos. Label 'Voiced for' is a draft. Her YouTube video (the 13th line) is not used yet | 390 and 1440: 11 rows, 12 links, exactly her 12 URLs; 0 WCAG violations; no overflow; spacing to the sections either side follows the rhythm (128/64 phone, 192/96 desktop). 11 of 12 sites load; drsehmi.co.uk refuses this cloud server (403), so it could not be checked from here | **done** |
+
 ## Regression after all 17 (built site, local)
 
 | Check | Result |
