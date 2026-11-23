@@ -228,6 +228,7 @@ On `preview/feedback-5-general`. Lighthouse 12 on the Vercel preview, 8 pages, p
 - Lenis starts after the page has loaded, so it no longer forces a layout during loading.
 - The enquiry form no longer has a `mailto:` action (Chrome flagged it as mixed content); the script already builds the email, and the page shows the address for anyone without JavaScript.
 - Fonts and audio cached for a year (`vercel.json`); they were revalidated on every visit.
+- Security headers on every page (`vercel.json`): `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin`, `X-Frame-Options: DENY`, and a `Permissions-Policy` turning off camera, microphone, location, payment and USB. HTTPS and HSTS were already in place (Vercel).
 - A sitemap (`/sitemap.xml`, 14 pages) and robots.txt pointing to it.
 - Share image: a 1200 x 630 JPEG with its size and alt text declared (it was a 2200px WebP, which LinkedIn and older WhatsApp do not reliably show).
 - Photos gain a 1400px width, so 1280 to 1440px laptops no longer download the 1600px file.

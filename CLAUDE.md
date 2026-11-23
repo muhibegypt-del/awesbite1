@@ -41,8 +41,8 @@ public/fonts/              self-hosted WOFF2 (Literata, Instrument Sans, Reenie 
                            . , ' only (it only sets the name). Re-trim if any of that changes.
 public/audio/              voice samples: neutral filenames, ID3 tags stripped
 src/pages/sitemap.xml.js   the sitemap, from the page list and offerings.json; robots.txt.js points to it
-vercel.json                cache headers: fonts and audio are cached for a year, so a changed font
-                           or audio file must get a new filename
+vercel.json                security headers on every page; cache headers: fonts and audio are cached
+                           for a year, so a changed font or audio file must get a new filename
 ```
 
 Photographs live in `src/assets/images` and always go through `components/Photo.astro` (astro:assets `<Picture>`, AVIF + WebP, graded). `public/images` keeps one copy for the OG image only.
