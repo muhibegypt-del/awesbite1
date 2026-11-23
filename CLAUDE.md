@@ -71,7 +71,7 @@ The `.txt` files are extracts made because this cloud container cannot render PD
 - ABOUT-02: which alternate portrait — not yet chosen; the current one is shown.
 - VIS-04, VIS-06: font options and her handwriting for *textured* — not yet supplied; current fonts kept.
 - CONTENT-02: the "highlighted passage" for the start of the Content introduction is not in N1/N2.
-- CONTENT-03/04: Substack, TikTok and Pinterest links supplied in feedback 5 (#4) and shown; YouTube (no channel yet) and LinkedIn (its address carries her surname) stay hidden until a usable link exists.
+- CONTENT-03/04: Substack, TikTok, Pinterest and LinkedIn links supplied in feedback 5 (#4) and shown; YouTube stays hidden until she has a channel.
 - SITE-05/06: two structure concepts were not prepared; the owner went straight to one.
 - SITE-08: no handover walkthrough yet.
 - COPY-03 note: her offer sentence ("At a textured word, I work across…") is shown second on Home, straight after the greeting, so the offer is clear first; the rest is in her order. Flag it, do not silently "fix" it.
@@ -100,7 +100,7 @@ The `.txt` files are extracts made because this cloud container cannot render PD
 - One passage, one style. A larger `.lead` paragraph may only open a page or section (a standfirst), never sit in the middle of running text; a client's continuous copy is set in a single face and size throughout.
 - Two left edges only: the page edge (grid column 1) and the text edge (column 3).
 - Brand name is always lowercase, including in `<title>` and OG tags.
-- The client's surname appears nowhere — not in copy, image filenames or metadata.
+- The client's surname appears nowhere — not in copy, image filenames or metadata. One exception, by the owner's decision (23 November 2026): her LinkedIn profile address contains it, so it is used as a link target only (footer and Content), never as visible text.
 
 ## Motion
 
