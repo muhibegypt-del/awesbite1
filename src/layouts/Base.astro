@@ -179,7 +179,6 @@ const duoLift = [0, 1, 2].map((i) => {
      another. */
   try {
     if ('IntersectionObserver' in window) {
-      const fold = window.innerHeight * 0.92;
       const reveal = new IntersectionObserver((entries) => {
         for (const entry of entries) {
           if (!entry.isIntersecting) continue;
@@ -199,6 +198,9 @@ const duoLift = [0, 1, 2].map((i) => {
       // November 2026). Blocks below the fold are hidden only now, out of
       // sight, so nothing on screen changes.
       const sort = new IntersectionObserver((entries) => {
+        // The viewport's height comes with the entries: reading innerHeight
+        // here could force a layout too.
+        const fold = (entries[0]?.rootBounds?.height ?? window.innerHeight) * 0.92;
         const index = new Map<Element | null, number>();
         const below = entries
           .filter((entry) => entry.boundingClientRect.top > fold)
