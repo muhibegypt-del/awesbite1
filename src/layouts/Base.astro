@@ -15,11 +15,11 @@ interface Props {
   description?: string;
   bare?: boolean;
   noindex?: boolean;
-  /** Preload Literata italic. Off only where no italic is in the first screen (Home), so it does not compete with the fonts that are. */
+  /** Preload Literata italic. Only where large italic sits in the first screen and its late arrival moved the layout (Content's tags); elsewhere it would queue ahead of the first photograph. */
   italicFirst?: boolean;
 }
 
-const { title, description, bare = false, noindex = false, italicFirst = true } = Astro.props;
+const { title, description, bare = false, noindex = false, italicFirst = false } = Astro.props;
 
 const pageTitle = bare ? title : `${title} — ${global.meta.titleSuffix}`;
 const pageDescription = description ?? global.meta.description;
@@ -180,31 +180,41 @@ const duoLift = [0, 1, 2].map((i) => {
   try {
     if ('IntersectionObserver' in window) {
       const fold = window.innerHeight * 0.92;
-      const pending = Array.from(document.querySelectorAll<HTMLElement>('.reveal')).filter(
-        (el) => el.getBoundingClientRect().top > fold
-      );
-      const index = new Map<Element | null, number>();
-      for (const el of pending) {
-        const i = index.get(el.parentElement) ?? 0;
-        index.set(el.parentElement, i + 1);
-        el.style.setProperty('--i', String(Math.min(i, 6)));
-        el.classList.add('reveal-pending');
-      }
-      const observer = new IntersectionObserver((entries) => {
+      const reveal = new IntersectionObserver((entries) => {
         for (const entry of entries) {
           if (!entry.isIntersecting) continue;
           entry.target.classList.add('is-in');
-          observer.unobserve(entry.target);
+          reveal.unobserve(entry.target);
         }
       }, { rootMargin: '0px 0px -12% 0px' });   // once it is a little way up the screen, where the eye is
-      pending.forEach((el) => observer.observe(el));
       // A block that can never scroll that far up still arrives at the bottom of the page.
       const atEnd = () => {
         if (window.innerHeight + window.scrollY < document.documentElement.scrollHeight - 2) return;
         document.querySelectorAll('.reveal-pending:not(.is-in)').forEach((el) => el.classList.add('is-in'));
         window.removeEventListener('scroll', atEnd);
       };
-      if (pending.length) window.addEventListener('scroll', atEnd, { passive: true });
+      // Where each block sits comes from an observer, which the browser
+      // answers during its own rendering step: measuring every block here
+      // forced a layout while the page was loading (performance audit,
+      // November 2026). Blocks below the fold are hidden only now, out of
+      // sight, so nothing on screen changes.
+      const sort = new IntersectionObserver((entries) => {
+        const index = new Map<Element | null, number>();
+        const below = entries
+          .filter((entry) => entry.boundingClientRect.top > fold)
+          .map((entry) => entry.target as HTMLElement)
+          .sort((a, b) => (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1));
+        for (const el of below) {
+          const i = index.get(el.parentElement) ?? 0;
+          index.set(el.parentElement, i + 1);
+          el.style.setProperty('--i', String(Math.min(i, 6)));
+          el.classList.add('reveal-pending');
+          reveal.observe(el);
+        }
+        entries.forEach((entry) => sort.unobserve(entry.target));
+        if (below.length) window.addEventListener('scroll', atEnd, { passive: true });
+      });
+      document.querySelectorAll('.reveal').forEach((el) => sort.observe(el));
     }
   } catch {
     document.querySelectorAll('.reveal-pending').forEach((el) => el.classList.add('is-in'));

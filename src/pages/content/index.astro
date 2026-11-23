@@ -26,7 +26,7 @@ const socials = links.socials.filter((link) => link.url);
 const collab = pages.collaborations;
 ---
 
-<Base title={pages.meta.content.title} description={pages.meta.content.description}>
+<Base title={pages.meta.content.title} description={pages.meta.content.description} italicFirst>
   <Masthead runhead={c.marker} title={c.heading}>
     <Fragment slot="below">
       <p class="lead">{q(site.about.reflectionBody)}</p>

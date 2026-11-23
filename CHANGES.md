@@ -224,7 +224,7 @@ Regression after all of it: axe-core reports no WCAG 2.2 AA violations on 16 pag
 
 On `preview/feedback-5-general`. Lighthouse 12 on the Vercel preview, 8 pages, phone (throttled) and desktop, before and after. Full report: [`audit/performance-2026-11.md`](audit/performance-2026-11.md).
 
-- Fonts trimmed with no visible change: Reenie Beanie 28 to 6KB (only the letters the name uses), Literata italic 68 to 31KB (fixed optical size; it is only used at 17 to 29px), Literata roman 96 to 79KB (optical sizes 12 to 72; nothing is set below 17px). Italic preloaded where it is in the first screen (every page but Home), which also removes the Content page's layout shift.
+- Fonts trimmed with no visible change: Reenie Beanie 28 to 6KB (only the letters the name uses), Literata italic 68 to 31KB (fixed optical size; it is only used at 17 to 29px), Literata roman 96 to 79KB (optical sizes 12 to 72; nothing is set below 17px). Italic preloaded on Content only, which removes that page's layout shift without delaying the photographs elsewhere.
 - Lenis starts after the page has loaded, so it no longer forces a layout during loading.
 - The enquiry form no longer has a `mailto:` action (Chrome flagged it as mixed content); the script already builds the email, and the page shows the address for anyone without JavaScript.
 - Fonts and audio cached for a year (`vercel.json`); they were revalidated on every visit.

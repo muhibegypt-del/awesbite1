@@ -128,7 +128,7 @@ Menus are `<details>` and must work with no JavaScript. Every section is labelle
 ## Performance budget
 
 LCP < 2.0s mobile. CLS < 0.05. Home under 900KB, JS under 140KB gzipped.
-Literata roman, Instrument Sans and Reenie Beanie are preloaded on every page, and Literata italic on every page but Home (Base `italicFirst`), since it is in their first screen; the fallback faces are metric-matched in `global.css` so the swap does not shift layout. Lenis starts after the page has loaded (it measures the page when it starts).
+Literata roman, Instrument Sans and Reenie Beanie are preloaded on every page, and Literata italic only on Content (Base `italicFirst`), where its large italic tags moved the layout when it arrived late; elsewhere it would queue ahead of the first photograph; the fallback faces are metric-matched in `global.css` so the swap does not shift layout. Lenis starts after the page has loaded (it measures the page when it starts).
 Calendly and any Instagram script load **on interaction only**, never on page load.
 
 ## Content
