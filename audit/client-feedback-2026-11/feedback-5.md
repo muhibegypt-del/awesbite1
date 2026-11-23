@@ -46,14 +46,11 @@ background may be nice
 |---|---|
 | TikTok | https://www.tiktok.com/@atexturedword |
 | Substack | https://atexturedword.substack.com/ |
-| LinkedIn | (in her sheet; the URL contains her surname, so it is not stored in the repository) |
+| LinkedIn | https://www.linkedin.com/in/aneesa-siddique-79b31676/ |
 | YouTube | won't let me create new account? |
 | Pinterest | https://uk.pinterest.com/atexturedword/ |
 | Fiverr (voiceovers) | (no link given) |
 
-> Note: the LinkedIn URL contains her surname. The site must not show her surname
-> (CLAUDE.md), so it is kept out of this file; take it from her sheet when the link is added,
-> and use it as a link only, never as visible text.
 
 **5.** packages
 

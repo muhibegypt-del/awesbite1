@@ -35,7 +35,7 @@ src/
   styles/tokens.css        design tokens — source of truth
   styles/global.css        everything else
 public/fonts/              self-hosted WOFF2 (Literata, Instrument Sans) + OFL licences
-public/audio/              voice samples: neutral filenames, ID3 tags stripped (they carried her surname)
+public/audio/              voice samples: neutral filenames, ID3 tags stripped
 ```
 
 Photographs live in `src/assets/images` and always go through `components/Photo.astro` (astro:assets `<Picture>`, AVIF + WebP, graded). `public/images` keeps one copy for the OG image only.
@@ -100,7 +100,6 @@ The `.txt` files are extracts made because this cloud container cannot render PD
 - One passage, one style. A larger `.lead` paragraph may only open a page or section (a standfirst), never sit in the middle of running text; a client's continuous copy is set in a single face and size throughout.
 - Two left edges only: the page edge (grid column 1) and the text edge (column 3).
 - Brand name is always lowercase, including in `<title>` and OG tags.
-- The client's surname appears nowhere — not in copy, image filenames or metadata. One exception, by the owner's decision (23 November 2026): her LinkedIn profile address contains it, so it is used as a link target only (footer and Content), never as visible text.
 
 ## Motion
 
