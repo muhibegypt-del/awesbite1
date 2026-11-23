@@ -15,9 +15,11 @@ interface Props {
   description?: string;
   bare?: boolean;
   noindex?: boolean;
+  /** Preload Literata italic. Off only where no italic is in the first screen (Home), so it does not compete with the fonts that are. */
+  italicFirst?: boolean;
 }
 
-const { title, description, bare = false, noindex = false } = Astro.props;
+const { title, description, bare = false, noindex = false, italicFirst = true } = Astro.props;
 
 const pageTitle = bare ? title : `${title} — ${global.meta.titleSuffix}`;
 const pageDescription = description ?? global.meta.description;
@@ -58,16 +60,21 @@ const duoLift = [0, 1, 2].map((i) => {
     <meta property="og:description" content={pageDescription} />
     <meta property="og:url" content={canonical} />
     {socialImage && <meta property="og:image" content={socialImage} />}
+    {socialImage && <meta property="og:image:width" content={global.meta.ogImageWidth} />}
+    {socialImage && <meta property="og:image:height" content={global.meta.ogImageHeight} />}
+    {socialImage && <meta property="og:image:alt" content={global.meta.ogImageAlt} />}
     <meta name="twitter:card" content={socialImage ? 'summary_large_image' : 'summary'} />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={pageDescription} />
     {socialImage && <meta name="twitter:image" content={socialImage} />}
+    {socialImage && <meta name="twitter:image:alt" content={global.meta.ogImageAlt} />}
 
     <meta name="theme-color" content={global.meta.themeColor} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preload" href="/fonts/literata-roman.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/instrument-sans.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/reenie-beanie.woff2" as="font" type="font/woff2" crossorigin />
+    {italicFirst && <link rel="preload" href="/fonts/literata-italic.woff2" as="font" type="font/woff2" crossorigin />}
 
     {/* The wordmark inks in on the first page of a visit only. Set before
         first paint so it never flashes in finished and then animates. */}
@@ -123,7 +130,9 @@ const duoLift = [0, 1, 2].map((i) => {
      Lenis glides mouse-wheel and trackpad scrolling; touch keeps the
      phone's own scrolling. It moves the real page scroll, so the reveals
      below and the browser's own scroll restoration are unaffected. */
-  try {
+  // Started once the page has loaded: Lenis measures the whole page when it
+  // starts, which forced a layout during loading (performance audit, November 2026).
+  const startSmoothScroll = () => { try {
     const lenis = new Lenis({ autoRaf: true, lerp: 0.1 });
     const pad = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
     // In-page links glide too. The skip link is left native so focus moves with it.
@@ -139,7 +148,9 @@ const duoLift = [0, 1, 2].map((i) => {
     });
   } catch {
     // Without Lenis the page scrolls natively; nothing else depends on it.
-  }
+  } };
+  if (document.readyState === 'complete') startSmoothScroll();
+  else window.addEventListener('load', startSmoothScroll, { once: true });
 
   /* ---- Menus ----
      <details> does the opening. This only closes the others when one opens,

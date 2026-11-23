@@ -66,7 +66,10 @@
     "description": "Thoughtful English teaching, content repurposing, narration and voice work from Aneesa. Start an enquiry.",
     "locale": "en_GB",
     "themeColor": "#3D2236",
-    "ogImage": "/images/aneesa-with-poetry-anthology.webp"
+    "ogImage": "/images/og-aneesa.jpg",
+    "ogImageWidth": "1200",
+    "ogImageHeight": "630",
+    "ogImageAlt": "Aneesa resting her chin on her hands"
   },
 
   "skipLink": "skip to content",

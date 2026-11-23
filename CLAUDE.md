@@ -34,8 +34,15 @@ src/
   lib/typeset.js           q(): curly quotes and apostrophes at render time
   styles/tokens.css        design tokens — source of truth
   styles/global.css        everything else
-public/fonts/              self-hosted WOFF2 (Literata, Instrument Sans) + OFL licences
+public/fonts/              self-hosted WOFF2 (Literata, Instrument Sans, Reenie Beanie) + OFL licences.
+                           Trimmed for speed (performance audit, November 2026): Literata roman keeps
+                           optical sizes 12 to 72 only; Literata italic is fixed at optical size 20
+                           (it is only used at 17 to 29px); Reenie Beanie holds a to z, space and
+                           . , ' only (it only sets the name). Re-trim if any of that changes.
 public/audio/              voice samples: neutral filenames, ID3 tags stripped
+src/pages/sitemap.xml.js   the sitemap, from the page list and offerings.json; robots.txt.js points to it
+vercel.json                cache headers: fonts and audio are cached for a year, so a changed font
+                           or audio file must get a new filename
 ```
 
 Photographs live in `src/assets/images` and always go through `components/Photo.astro` (astro:assets `<Picture>`, AVIF + WebP, graded). `public/images` keeps one copy for the OG image only.
@@ -121,7 +128,7 @@ Menus are `<details>` and must work with no JavaScript. Every section is labelle
 ## Performance budget
 
 LCP < 2.0s mobile. CLS < 0.05. Home under 900KB, JS under 140KB gzipped.
-Literata roman and Instrument Sans are preloaded; their fallback faces are metric-matched in `global.css` so the swap does not shift layout.
+Literata roman, Instrument Sans and Reenie Beanie are preloaded on every page, and Literata italic on every page but Home (Base `italicFirst`), since it is in their first screen; the fallback faces are metric-matched in `global.css` so the swap does not shift layout. Lenis starts after the page has loaded (it measures the page when it starts).
 Calendly and any Instagram script load **on interaction only**, never on page load.
 
 ## Content

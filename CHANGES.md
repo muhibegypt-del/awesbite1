@@ -219,3 +219,15 @@ On `preview/feedback-5-general`. Her points 1 to 17 only (Teach, Write, Voice an
 - **Voice, 'voiced for' (#26, at the owner's request):** the industries she has voiced for, each with the client sites she listed, linked by web address. No logos.
 
 Regression after all of it: axe-core reports no WCAG 2.2 AA violations on 16 pages at 390 and 1440 (two best-practice notes, both already on the live site); one `<h1>` per page; no horizontal overflow at 390, 768, 1024, 1280 or 1440; never more than one filled button in a screen; all 27 internal links resolve; Home about 250 to 280KB with 6KB of JS; no audio loads before play.
+
+## 17. Performance and SEO audit (November 2026)
+
+On `preview/feedback-5-general`. Lighthouse 12 on the Vercel preview, 8 pages, phone (throttled) and desktop, before and after. Full report: [`audit/performance-2026-11.md`](audit/performance-2026-11.md).
+
+- Fonts trimmed with no visible change: Reenie Beanie 28 to 6KB (only the letters the name uses), Literata italic 68 to 31KB (fixed optical size; it is only used at 17 to 29px), Literata roman 96 to 79KB (optical sizes 12 to 72; nothing is set below 17px). Italic preloaded where it is in the first screen (every page but Home), which also removes the Content page's layout shift.
+- Lenis starts after the page has loaded, so it no longer forces a layout during loading.
+- The enquiry form no longer has a `mailto:` action (Chrome flagged it as mixed content); the script already builds the email, and the page shows the address for anyone without JavaScript.
+- Fonts and audio cached for a year (`vercel.json`); they were revalidated on every visit.
+- A sitemap (`/sitemap.xml`, 14 pages) and robots.txt pointing to it.
+- Share image: a 1200 x 630 JPEG with its size and alt text declared (it was a 2200px WebP, which LinkedIn and older WhatsApp do not reliably show).
+- Photos gain a 1400px width, so 1280 to 1440px laptops no longer download the 1600px file.
