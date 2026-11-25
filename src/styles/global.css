@@ -666,7 +666,9 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 .offers { display: grid; gap: var(--s-5); }
 @media (min-width: 768px) { .offers { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 /* Three across from 1024; four (Teach) across only from 1280, two by two before. */
-@media (min-width: 1024px) { .offers:not(:has(> li:nth-child(4))) { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (min-width: 1024px) { .offers:has(> li:nth-child(3)):not(:has(> li:nth-child(4))) { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+/* Two offers (Repurpose since feedback 5 #23): two columns from the text edge, in line with the copy above, rather than two of three columns. */
+@media (min-width: 1024px) { .bleed > .offers-wrap:has(> .offers > li:nth-child(2):last-child) { grid-column: col 3 / content-end; } }
 @media (min-width: 1280px) { .offers:has(> li:nth-child(4)) { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .offer { display: flex; flex-direction: column; padding: var(--s-6); background: var(--lift); border: 1px solid var(--rule); }
 /* Card names and prices in Instrument Sans, not the light display serif (feedback 5, #3). */
@@ -676,6 +678,8 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 .offer__price { margin-top: var(--s-6); padding-top: var(--s-5); border-top: 1px solid var(--rule); }
 .offer__amount { font-family: var(--sans); font-size: var(--t-h3); font-weight: 500; line-height: 1; font-variant-numeric: lining-nums; color: var(--dark); }
 .offer__term { margin-top: var(--s-2); color: var(--dark); }
+/* "starting at", above a price that is a starting point (feedback 5 #23). */
+.offer__from, .pkg__from { margin-bottom: var(--s-2); color: var(--dark); }
 .offer__meta { margin-top: var(--s-2); font-size: var(--t-small); line-height: var(--lh-small); color: var(--ink-soft); }
 .offer__cta { margin-top: var(--s-6); justify-content: center; width: 100%; padding-inline: var(--s-4); }
 .offers__after { margin-top: var(--s-7); }

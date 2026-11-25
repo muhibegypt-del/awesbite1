@@ -124,7 +124,9 @@
       "services": [
         {
           "label": "Content Repurposing",
-          "body": "Transform podcasts, YouTube videos, webinars and livestreams into blogs, newsletters and social content."
+          "body": "Transform podcasts, YouTube videos, webinars and livestreams into SEO blog posts, newsletters, social content, Pinterest pins and micro video clips.",
+          "bodyRetired": "Transform podcasts, YouTube videos, webinars and livestreams into blogs, newsletters and social content.",
+          "_comment": "Feedback 5 #22: pins and micro clips added; 'blogs' reads 'SEO blog posts' to match #21."
         },
         {
           "label": "Scriptwriting",
@@ -135,8 +137,6 @@
     },
     "marker": "Packages",
     "topic": "Content repurposing",
-    "custom": "Need a DIY writing or repurposing package? We can customise one together on a discovery call.",
-    "_comment_custom": "DRAFT, from her note: 'if they need a DIY writing or repurposing package, that we can customise a package through a discovery call.'",
     "unsure": {
       "before": "Not sure which fits?",
       "link": "Start an enquiry",
@@ -167,6 +167,45 @@
         ],
         "_comment_notes": "DRAFT, from her note: 'I would credit the starter fee towards their first retainer if they sign up within 14 days.'"
       },
+      {
+        "slug": "thought-leadership-retainer",
+        "number": "02",
+        "title": "The Thought Leadership Retainer",
+        "kicker": "Monthly content bundle",
+        "lead": "For coaches, consultants, founders and educators who want to become recognised voices in their industries.",
+        "summary": "Your videos and podcasts turned into SEO blog posts, email newsletters, social media posts, Pinterest pins and micro video clips.",
+        "priceFrom": "starting at",
+        "price": "£600",
+        "term": "per month",
+        "meta": "You choose what goes into each bundle",
+        "provides": "Four videos or recordings a month, each between 10 and 60 minutes long.",
+        "features": [
+          "SEO blog posts",
+          "Email newsletters",
+          "Social media posts",
+          "Pinterest pins",
+          "Micro video clips",
+          "SEO keyword research",
+          "Internal and external linking where appropriate",
+          "Shared project management workspace",
+          "Clear onboarding and offboarding process",
+          "Optional monthly content call",
+          "Voice and messaging consistency",
+          "2 rounds of revision"
+        ],
+        "notes": [
+          "You choose which pieces go into your monthly bundle, and how many of each, so the exact price depends on what you choose.",
+          "Beyond short-form posts, evergreen pieces such as SEO blog posts and Pinterest pins keep working for your business long after they are published.",
+          "There is an initial 3-month commitment, then a rolling monthly contract you can cancel with 30 days’ notice.",
+          "Option for light video editing.",
+          "Option for creating original long and short form scripts via a call / voice notes, for YouTube and other social media platforms. Prices discussed separately."
+        ],
+        "_comment": "Feedback 5 #23: one monthly bundle 'starting at £600' in place of the Content Multiplier (£500) and this retainer (£800), after the reference card she sent, reworded in her own terms (her client welcome pack: the five products, four recordings a month of 10 to 60 minutes, a 3-month commitment then rolling monthly). Her name for the retainer and her who-for line are kept. No strategy or analytics line: she is not offering them yet. The Content Starter stays as the one-off way in. DRAFT wording for her approval: kicker, summary, meta, provides and the first three notes."
+      }
+    ],
+    "customRetired": "Need a DIY writing or repurposing package? We can customise one together on a discovery call.",
+    "_comment_customRetired": "Feedback 5 #23: removed; 'the DIY part is baked into the package itself now'.",
+    "optionsRetired": [
       {
         "slug": "content-multiplier",
         "number": "02",

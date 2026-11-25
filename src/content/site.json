@@ -342,20 +342,21 @@
       "swapHeading": "What you send, and what comes back",
       "swap": {
         "fromLabel": "You send",
-        "from": "A voice note, podcast episode, old newsletter or any other material in which your thinking already exists.",
+        "from": "A voice note, podcast episode, video or any other recording in which your thinking already exists.", "fromRetired": "A voice note, podcast episode, old newsletter or any other material in which your thinking already exists.",
         "toLabel": "You get back",
         "to": "Long-form and short-form content adapted for more than one platform and written in a voice that remains recognisably yours."
       },
 
       "methodHeading": "How it works",
+      "_comment_method": "Feedback 5 #24: her client welcome pack's process (Trello: Resources, Videos Ready, Ready for Review, Approved, Posted Content), reworded to one line a step as she asked. Step 06, Performance Analysis, is left out because she is not offering metrics in her packages yet (#23). The earlier steps are kept as methodRetired.",
       "method": [
-        { "number": "01", "title": "Share your content", "body": "" },
-        { "number": "02", "title": "Find the texture", "body": "" },
-        { "number": "03", "title": "Shape the story", "body": "" },
-        { "number": "04", "title": "Repurpose with purpose", "body": "" },
-        { "number": "05", "title": "Review & refine", "body": "" },
-        { "number": "06", "title": "Publish more, create less", "body": "" }
+        { "number": "01", "title": "Share your intake form and links", "body": "" },
+        { "number": "02", "title": "Add your videos to our shared board", "body": "" },
+        { "number": "03", "title": "Review the week's content in Google Docs", "body": "" },
+        { "number": "04", "title": "Approve it, ready to schedule and post", "body": "" },
+        { "number": "05", "title": "Keep everything you've published in one place", "body": "" }
       ],
+      "methodRetired": ["Share your content", "Find the texture", "Shape the story", "Repurpose with purpose", "Review & refine", "Publish more, create less"],
 
       "publishPricing": true,
       "pricingHeading": "Repurposing prices",
@@ -389,7 +390,15 @@
       "_comment_offers": "Client revisions, November 2026: her packages come from offerings.json and replace the price list below (kept, not shown).",
       "offers": "repurposing",
       "tracksHeading": "What I take on",
+      "_comment_tracks": "Feedback 5 #21: her five repurposing products from her client welcome pack, in its order (the SEO blog post first: it is the first thing she makes from a video). Each line is the first sentence of her own description there, as the one-sentence 'why' she asked for. 'Repurposing systems' is not one of her products; the earlier list is kept as tracksRetired.",
       "tracks": [
+        { "label": "SEO blog posts", "body": "Turn your existing ideas and conversations into searchable, evergreen content that helps potential customers discover your business through Google." },
+        { "label": "Email newsletters", "body": "Stay connected with your audience through thoughtful, value-driven emails that keep your brand front of mind." },
+        { "label": "Social media posts", "body": "Extend the reach of your existing content with engaging posts that communicate your expertise and reinforce your brand identity." },
+        { "label": "Pinterest pins", "body": "Give your content a longer shelf life by transforming it into searchable Pinterest pins that lead audiences back to your website and other platforms." },
+        { "label": "Micro video clips", "body": "Repurpose longer videos, podcasts and conversations into short, engaging clips designed to capture attention across social platforms." }
+      ],
+      "tracksRetired": [
         { "label": "Carousels and short-form posts", "body": "One idea developed into concise, clear content for social platforms" },
         { "label": "Newsletters", "body": "Structured writing developed from your existing ideas" },
         { "label": "Articles and long-form writing", "body": "Thoughtful, structured writing in your voice" },

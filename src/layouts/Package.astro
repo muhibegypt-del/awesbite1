@@ -70,6 +70,7 @@ const lead = offer.lead ?? set.availableFor;
         </div>
 
         <aside class="pkg__card reveal" aria-labelledby="included-heading">
+          {offer.priceFrom && <p class="label pkg__from">{offer.priceFrom}</p>}
           <p class="pkg__price">{offer.price}</p>
           <p class="label pkg__term">{offer.term}</p>
           <p class="pkg__summary">{offer.meta}</p>

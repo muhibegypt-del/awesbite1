@@ -23,6 +23,7 @@ const { labels } = offerings;
       <p class="label offer__kicker">{o.kicker}</p>
       <p class="offer__summary">{q(o.summary)}</p>
       <div class="offer__price">
+        {o.priceFrom && <p class="label offer__from">{o.priceFrom}</p>}
         <p class="offer__amount">{o.price}</p>
         <p class="label offer__term">{o.term}</p>
         <p class="offer__meta">{o.meta}</p>

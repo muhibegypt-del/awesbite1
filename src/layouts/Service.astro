@@ -178,7 +178,7 @@ const unsureHref = `/contact?about=${encodeURIComponent(offerSet?.topic ?? '')}`
       <SectionHead label={service.methodHeading} labelAs="h2" id="method-heading" />
       <ol class="steps" role="list">
         {service.method.map((step: { title: string; body: string }) => (
-          <li class="reveal"><strong>{step.title}</strong>{step.body && <span>{q(step.body)}</span>}</li>
+          <li class="reveal"><strong>{q(step.title)}</strong>{step.body && <span>{q(step.body)}</span>}</li>
         ))}
       </ol>
       <div class="prose col-text space-7">
@@ -202,7 +202,7 @@ const unsureHref = `/contact?about=${encodeURIComponent(offerSet?.topic ?? '')}`
         <p class="col-text space-7">{q(offerSet.intro.close)}</p>
         <div class="offers-wrap space-8"><OfferCards service={service.offers} route={service.route} /></div>
         <div class="prose col-text offers__after">
-          <p class="small">{q(offerSet.custom)}</p>
+          {offerSet.custom && <p class="small">{q(offerSet.custom)}</p>}
           <p class="small">{offerSet.unsure.before} <a class="textlink" href={unsureHref}>{offerSet.unsure.link}</a> {offerSet.unsure.after}</p>
         </div>
       </div>
