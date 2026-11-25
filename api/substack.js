@@ -4,7 +4,8 @@
  * (no CORS), so this Vercel Function reads it on the server and Vercel's
  * cache keeps the answer for 30 minutes: a new post appears on the site
  * within half an hour, with no rebuild. Any failure returns an empty list,
- * and the page then simply shows its 'Read on Substack' link.
+ * and the page then simply shows its 'Read on Substack' link. `ok` says
+ * whether the feed was read, so the function can be checked from outside.
  */
 const FEED = 'https://atexturedword.substack.com/feed';
 const LIMIT = 3;
@@ -38,9 +39,9 @@ export default async function handler(req, res) {
     const response = await fetch(FEED, { headers: { Accept: 'application/rss+xml, application/xml' } });
     if (!response.ok) throw new Error(`feed ${response.status}`);
     res.setHeader('Cache-Control', 'public, s-maxage=1800, stale-while-revalidate=86400');
-    res.status(200).json({ items: parseFeed(await response.text()) });
+    res.status(200).json({ ok: true, items: parseFeed(await response.text()) });
   } catch {
     res.setHeader('Cache-Control', 'public, s-maxage=300');
-    res.status(200).json({ items: [] });
+    res.status(200).json({ ok: false, items: [] });
   }
 }
