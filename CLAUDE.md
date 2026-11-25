@@ -55,7 +55,7 @@ The client chose (September 2026) **Direction B, Printed Matter, with the portra
 
 Copy changes still need the client's approval. Typesetting (curly apostrophes via `q()`, line breaks, case transforms) is not a copy change.
 
-**Client review, October 2026** (her approval PDF and notes): Home leads with her greeting, her plain offer sentence and the Teach / Repurpose / Voice routes; the poetic line sits on the plum band. Teaching is three routes (`KS3 - I/GCSE`, `I/A-Level`, `ESL / IELTS`), packages only, never an hourly rate. 'Voice' is the label for the narration service. Portfolios and testimonials appear only when real items exist; Content platforms only when their link exists. Her new copy is verbatim; earlier copy it replaced is kept in the JSON (`retired`, `*Retired`) and not shown.
+**Client review, October 2026** (her approval PDF and notes): Home leads with her greeting, her plain offer sentence and the Teach / Repurpose / Voice routes; the poetic line sits on the plum band. Teaching was three routes (`KS3 - I/GCSE`, `I/A-Level`, `ESL / IELTS`); since feedback 5 (November 2026) A-Level is gone (she focuses on 11 to 16) and the offers are her own: 1:1 hourly, a 10-lesson Package and one Core Retainer (£280); the Premium Retainer is retired for now. 'Voice' is the label for the narration service. Portfolios and testimonials appear only when real items exist; Content platforms only when their link exists. Her new copy is verbatim; earlier copy it replaced is kept in the JSON (`retired`, `*Retired`) and not shown.
 
 ## Client brief and audit (`audit/client-brief-2026-10/`)
 
@@ -83,7 +83,8 @@ The `.txt` files are extracts made because this cloud container cannot render PD
 - SITE-08: no handover walkthrough yet.
 - COPY-03 note: her offer sentence ("At a textured word, I work across…") is shown second on Home, straight after the greeting, so the offer is clear first; the rest is in her order. Flag it, do not silently "fix" it.
 - TEACH: primary school content was deleted at her request (November 2026).
-- November 2026 round, waiting on her: the IELTS full name (a visible placeholder on Home), whether to keep or delete the Teach packages (unchanged), the "texture" remark (unchanged), wording for a teaching item in the collaborations list, and whether About's British Council caption should match Home's "ESL teacher".
+- November 2026 round, still open: the "texture" remark (unchanged), wording for a teaching item in the collaborations list, and whether About's British Council caption should match Home's "ESL teacher". (The IELTS full name was dropped in feedback 5 #8; the Teach packages were settled in #19.)
+- Feedback 5 points 18 to 25 were actioned on the owner's instruction with decisions recorded in `audit/client-feedback-2026-11/ssot-general.md`; the new package wording is DRAFT for her approval.
 
 ## Design rules — do not violate these
 
