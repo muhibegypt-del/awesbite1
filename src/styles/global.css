@@ -825,6 +825,13 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
    ============================================================ */
 
 
+/* Her latest Substack posts on Content (filled by script; hidden when there are none). */
+.posts { display: grid; gap: var(--s-5); }
+.posts li { display: grid; gap: var(--s-1); padding-top: var(--s-4); border-top: 1px solid var(--rule); }
+.posts__title { font-size: var(--t-body); font-weight: 500; justify-self: start; }
+.posts__date { font-size: var(--t-small); color: var(--ink-soft); }
+.posts__summary { font-size: var(--t-small); color: var(--ink-soft); }
+
 /* Social marks (feedback 5 #4): her picture's stamp badges. Each platform's
    own colour, a cream mark, a scalloped edge; the same on paper and on the
    plum footer. */
@@ -846,33 +853,13 @@ main:focus { outline: none; } /* skip-link target; a ring round the page helps n
 
 
 /* ============================================================
-   Forms
+   Contact: the address, Email me and Copy (the form is retired)
    ============================================================ */
 
-.form { display: grid; gap: var(--s-5); max-width: var(--measure); }
-.form__row { display: grid; gap: var(--s-5); }
-@media (min-width: 768px) { .form__row { grid-template-columns: 1fr 1fr; } }
-
-.field { display: grid; gap: var(--s-2); }
-.field__label { font-size: var(--t-small); color: var(--ink-soft); }
-.field input, .field select, .field textarea {
-  width: 100%;
-  min-height: var(--s-7);
-  padding: var(--s-2) var(--s-3);
-  font-size: var(--t-body);
-  line-height: var(--lh-small);
-  background: var(--lift);
-  border: 1px solid var(--rule-strong);
-  border-radius: var(--radius-sm);
-  transition: border-color var(--fast) var(--ease-out);
-}
-.field textarea { resize: vertical; min-height: 9rem; }
-.field input:hover, .field select:hover, .field textarea:hover { border-color: var(--ink-soft); }
-.field [aria-invalid='true'] { border-color: var(--clay-ink); }
-.field ::placeholder { color: var(--ink-soft); opacity: 1; }
-.field__error { font-size: var(--t-small); color: var(--clay-ink); }
-.field__error:empty { display: none; }
-.form__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-5); }
+.contact { display: grid; gap: var(--s-4); justify-items: start; }
+.contact__email { font-size: var(--t-h3); font-weight: 500; overflow-wrap: anywhere; }
+.contact__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3) var(--s-4); margin-top: var(--s-2); }
+.contact__done { font-size: var(--t-small); color: var(--ink-soft); }
 
 /* ============================================================
    Close

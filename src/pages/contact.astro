@@ -1,25 +1,62 @@
 ---
-/** The one destination for every call to action on the site. */
+/**
+ * The one destination for every call to action on the site. The enquiry
+ * form is retired (owner, November 2026): it built an email in the
+ * visitor's email app, and with no app set up it did nothing. This page
+ * offers what always works: her address, an Email me link, a Copy button,
+ * and her Calendly booking first once its link is set.
+ */
 import Base from '../layouts/Base.astro';
 import Masthead from '../components/Masthead.astro';
-import ContactForm from '../components/ContactForm.astro';
 import { q } from '../lib/typeset.js';
+import { discovery } from '../lib/discovery.js';
 import global from '../content/global.json';
 import site from '../content/site.json';
 import pages from '../content/pages.json';
+
+const { email } = global.contact;
+const labels = pages.contact;
+const mailto = `mailto:${email}`;
 ---
 
 <Base title={pages.meta.contact.title} description={pages.meta.contact.description}>
-  <Masthead runhead={pages.contact.marker} title={site.contact.heading}>
+  <Masthead runhead={labels.marker} title={site.contact.heading}>
     <p slot="below" class="lead">{q(site.contact.line)}</p>
   </Masthead>
 
-  <section class="sec" aria-label={pages.meta.contact.title}>
+  <section class="sec" aria-labelledby="email-heading">
     <div class="bleed">
-      <div class="col-text">
-        <ContactForm />
-        <p class="small muted space-7">{pages.contact.direct} <a class="textlink" href={`mailto:${global.contact.email}`}>{global.contact.email}</a></p>
+      <div class="col-text contact">
+        {discovery.external && (
+          <p><a class="btn btn--lg" href={discovery.href} target="_blank" rel="noopener noreferrer">{discovery.label}<span class="visually-hidden">{global.newTab}</span></a></p>
+        )}
+        <h2 class="label" id="email-heading">{labels.emailLabel}</h2>
+        <p class="contact__email"><a class="textlink" href={mailto}>{email}</a></p>
+        <div class="contact__actions">
+          <a class:list={['btn', { 'btn--outline': discovery.external }]} href={mailto}>{labels.emailMe}</a>
+          <button class="btn btn--outline" type="button" data-copy={email} data-done={labels.copied} hidden>{labels.copy}</button>
+          <span class="contact__done" role="status" aria-live="polite" data-copy-status></span>
+        </div>
+        <p class="small muted">{labels.reply}</p>
       </div>
     </div>
   </section>
 </Base>
+
+<script>
+  /* The Copy button appears only where the browser can copy; without
+     script the address and Email me still work. */
+  const button = document.querySelector<HTMLButtonElement>('[data-copy]');
+  const status = document.querySelector<HTMLElement>('[data-copy-status]');
+  if (button && status && navigator.clipboard) {
+    button.hidden = false;
+    button.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(button.dataset.copy!);
+        status.textContent = button.dataset.done ?? '';
+      } catch {
+        status.textContent = '';
+      }
+    });
+  }
+</script>

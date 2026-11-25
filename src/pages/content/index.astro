@@ -15,6 +15,7 @@ import site from '../../content/site.json';
 import pages from '../../content/pages.json';
 import links from '../../content/content-links.json';
 import global from '../../content/global.json';
+import { discovery } from '../../lib/discovery.js';
 
 const c = pages.content;
 const intro = pages.introduction;
@@ -31,7 +32,7 @@ const collab = pages.collaborations;
     <Fragment slot="below">
       <p class="lead">{q(site.about.reflectionBody)}</p>
       <ul class="tagline" role="list">{site.about.reflectionTags.map((tag) => <li>{tag}</li>)}</ul>
-      <p class="masthead__actions"><a class="btn btn--lg" href={global.nav.discovery.href}>{global.nav.discovery.label}</a></p>
+      <p class="masthead__actions"><a class="btn btn--lg" href={discovery.href} target={discovery.external ? '_blank' : undefined} rel={discovery.external ? 'noopener noreferrer' : undefined}>{discovery.label}{discovery.external && <span class="visually-hidden">{global.newTab}</span>}</a></p>
     </Fragment>
   </Masthead>
 
@@ -52,6 +53,8 @@ const collab = pages.collaborations;
         <SectionHead label={platform.heading} labelAs="h2" id={`${platform.id}-heading`} />
         <div class="prose col-text">
           <p class="lead">{q(platform.lede)}</p>
+          {/* Her latest posts, filled from /api/substack (owner's request, November 2026); hidden until there are some. */}
+          {platform.id === 'substack' && <ul class="posts" role="list" data-feed="/api/substack" data-locale={global.meta.locale.replace('_', '-')} hidden></ul>}
           <a class="textlink" href={platform.url} target="_blank" rel="noopener noreferrer">{platform.linkLabel}<span class="visually-hidden">{global.newTab}</span></a>
         </div>
       </div>
@@ -81,3 +84,44 @@ const collab = pages.collaborations;
     </div>
   </section>
 </Base>
+
+<script>
+  /* Fill her Substack posts from the site's own feed reader. Text only
+     (textContent), new tab for each post, nothing shown if the list is
+     empty or the request fails. */
+  const list = document.querySelector<HTMLUListElement>('[data-feed]');
+  if (list) {
+    fetch(list.dataset.feed!)
+      .then((response) => (response.ok ? response.json() : { items: [] }))
+      .then(({ items }: { items: { title: string; link: string; date: string; summary: string }[] }) => {
+        if (!items?.length) return;
+        const format = new Intl.DateTimeFormat(list.dataset.locale || 'en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+        for (const post of items) {
+          const li = document.createElement('li');
+          const a = document.createElement('a');
+          a.className = 'textlink posts__title';
+          a.href = post.link;
+          a.target = '_blank';
+          a.rel = 'noopener noreferrer';
+          a.textContent = post.title;
+          li.append(a);
+          if (post.date) {
+            const time = document.createElement('time');
+            time.className = 'posts__date';
+            time.dateTime = post.date;
+            time.textContent = format.format(new Date(post.date));
+            li.append(time);
+          }
+          if (post.summary) {
+            const p = document.createElement('p');
+            p.className = 'posts__summary';
+            p.textContent = post.summary;
+            li.append(p);
+          }
+          list.append(li);
+        }
+        list.hidden = false;
+      })
+      .catch(() => {});
+  }
+</script>

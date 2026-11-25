@@ -9,7 +9,7 @@ Full spec: `docs/brief.md`. Content slots: `docs/slot-map.md`. Read those only w
 - Astro, static output. Zero JS shipped unless a component needs it.
 - Vanilla CSS with custom properties. Tokens in `src/styles/tokens.css` — never hardcode a colour or a spacing value.
 - Copy lives in `src/content/*.json`, never inline in templates.
-- Deploy: Vercel, static (`dist/`). No backend. The enquiry form builds a `mailto:` message on the client; there is no form service.
+- Deploy: Vercel, static (`dist/`), plus one small Vercel Function, `api/substack.js`, which reads her Substack feed for the Content page (cached 30 minutes). No other backend and no form service: the enquiry form was retired in November 2026 (a `mailto:` form did nothing for visitors without an email app); the contact page offers her address, Email me and Copy, and her Calendly link once `global.json` `contact.calendly` is set (`src/lib/discovery.js` points every discovery button at it).
 
 ## Structure
 
@@ -23,7 +23,7 @@ src/
                            youtube, socials, collaborations (to /content sections)
   components/              Header, Footer, Wordmark, PencilMark, Photo, HubHero, Masthead,
                            SectionHead, ServiceList, Honours, EssayBand, Note, PriceList,
-                           TrackList, ContactForm
+                           TrackList
                            (ServiceList = the Teach / Repurpose / Voice route rows, used on
                            the home first screen and as onward links on service pages)
   content/                 all copy as JSON: site.json (hub, services, about, contact),
@@ -41,6 +41,8 @@ public/fonts/              self-hosted WOFF2 (Literata, Instrument Sans, Reenie 
                            . , ' only (it only sets the name). Re-trim if any of that changes.
 public/audio/              voice samples: neutral filenames, ID3 tags stripped
 src/pages/sitemap.xml.js   the sitemap, from the page list and offerings.json; robots.txt.js points to it
+src/lib/discovery.js       where every Book a free discovery call button goes (Calendly once set, else /contact)
+api/substack.js            Vercel Function: her latest Substack posts as JSON for the Content page
 vercel.json                security headers on every page; cache headers: fonts and audio are cached
                            for a year, so a changed font or audio file must get a new filename
 ```

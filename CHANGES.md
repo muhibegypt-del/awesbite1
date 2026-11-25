@@ -236,3 +236,11 @@ On `preview/feedback-5-general`. Lighthouse 12 on the Vercel preview, 8 pages, p
 - A sitemap (`/sitemap.xml`, 14 pages) and robots.txt pointing to it.
 - Share image: a 1200 x 630 JPEG with its size and alt text declared (it was a 2200px WebP, which LinkedIn and older WhatsApp do not reliably show).
 - Photos gain a 1400px width, so 1280 to 1440px laptops no longer download the 1600px file.
+
+## 18. Substack posts on the site, contact without the form (November 2026)
+
+On `preview/feedback-5-general`, owner's requests.
+
+- **Her Substack posts appear on the Content page automatically.** Substack's feed cannot be read from a visitor's browser, so a small Vercel Function (`api/substack.js`) reads it and Vercel caches the answer for 30 minutes: a new post shows within half an hour, with no rebuild. The latest three posts show under her Substack section (title, date, a short summary, opening in a new tab); with no posts yet, or if the feed cannot be read, nothing extra shows. No new dependencies.
+- **The enquiry form is retired.** It opened a ready-made email in the visitor's email app and did nothing where none is set up (most work computers, many phones). Her address (Google Workspace, receiving mail) is now shown with Email me and a Copy button that confirms 'Copied'; without script the address and Email me still work. Every Book a free discovery call button goes to the contact page, or straight to her Calendly once `contact.calendly` is set in `global.json`, which also puts booking first on the contact page.
+

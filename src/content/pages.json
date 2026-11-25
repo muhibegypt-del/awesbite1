@@ -76,7 +76,13 @@
   },
   "contact": {
     "marker": "Contact",
-    "direct": "Or email directly:"
+    "direct": "Or email directly:",
+    "emailLabel": "Email",
+    "emailMe": "Email me",
+    "copy": "Copy email address",
+    "copied": "Copied",
+    "reply": "I reply within two working days.",
+    "_comment": "Owner, November 2026: the enquiry form is retired (it relied on the visitor having an email app set up, and often did nothing). The page offers the address, an Email me link and a Copy button, and leads with her Calendly link once global.json has it. Interface labels are drafts."
   },
   "services": {
     "problemLabelDefault": "The challenge",
