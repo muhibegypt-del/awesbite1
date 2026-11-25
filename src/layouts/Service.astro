@@ -183,10 +183,21 @@ const unsureHref = `/contact?about=${encodeURIComponent(offerSet?.topic ?? '')}`
       </ol>
       <div class="prose col-text space-7">
         {service.footnote && <p class="small muted">{q(service.footnote)}</p>}
-        <a class="textlink" href={service.cta.href}>{service.cta.label} <span class="arrow" aria-hidden="true">→</span></a>
+        {!service.quote && <a class="textlink" href={service.cta.href}>{service.cta.label} <span class="arrow" aria-hidden="true">→</span></a>}
       </div>
     </div>
   </section>
+
+  {/* Voice: how larger projects are quoted, in place of a price list (feedback 5 #25). */}
+  {service.quote && (
+    <section class="sec sec--band" id="prices" aria-labelledby="quote-heading">
+      <div class="bleed">
+        <SectionHead label={service.quote.heading} labelAs="h2" lead={service.quote.body} id="quote-heading">
+          <p><a class="btn" href={service.cta.href}>{service.cta.label}</a></p>
+        </SectionHead>
+      </div>
+    </section>
+  )}
 
   {/* Repurpose: her introduction, then the packages as cards (client revisions, November 2026). */}
   {offerSet && !types && (

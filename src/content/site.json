@@ -267,7 +267,8 @@
         { "number": "06", "title": "Receive your final audio", "body": "" }
       ],
 
-      "publishPricing": true,
+      "publishPricing": false,
+      "_comment_publishPricing": "Feedback 5 #25: narration prices deleted for now ('not focusing my energy on voiceover packages'); the tiers are kept below, unpublished. Her quote message is emphasised instead (quote).",
       "pricingHeading": "Narration prices",
       "pricingLine": "Choose the level of support that fits the recording. Larger projects are quoted by word count, finished audio length, usage and project requirements.",
       "tiers": [
@@ -298,10 +299,12 @@
       "_comment_background": "Voice: Further details, verbatim from the client's notes (approval PDF section 06). The Television Workshop story now lives in her About copy, so it is not repeated here; the earlier paragraph is kept below as content.",
       "background": {
         "heading": "Training and experience",
-        "body": "Back in 2015, when I set up my first voiceover business, Stylish Voice, I had my professional demos recorded with Gary Terzza; channel 4’s continuity host for over two decades. It was under his tutelage that I made my first foray into the voiceover world and began to understand exactly what goes into bringing the very best of your voice into work that eventually spanned across audiobooks, commercials, explainers, IVRs, and much more."
+        "body": "Back in 2015, when I set up my first voiceover business, Stylish Voice, I had my professional demos recorded with Gary Terzza; channel 4’s continuity host for over two decades. It was under his tutelage that I made my first foray into the voiceover world and began to understand exactly what goes into bringing the very best of your voice into work that eventually spanned across audiobooks, commercials, explainers, IVRs, and much more. I also volunteered my time reading stories in care homes, where I further indulged in my love for performing words and bringing them to life."
       },
       "backgroundRetired": "My voice-work experience includes my former business, Stylish Voice. I was a student at The Television Workshop. I have also trained with voice coach Gary Terzza and at Derby Academy. My performance experience also includes spoken word with Beatfreeks and university theatre in England and Canada.",
-      "footnote": "Larger projects are priced per finished hour and quoted according to word count, finished audio length, usage and project requirements.",
+      "quote": { "heading": "Narration prices", "body": "Larger projects are priced per finished hour and quoted according to word count, finished audio length, usage and project requirements." },
+      "_comment_quote": "Feedback 5 #25: her message, emphasised in its own section in place of the prices, with the custom audition as its button. It was the small print under How it works (footnoteRetired).",
+      "footnoteRetired": "Larger projects are priced per finished hour and quoted according to word count, finished audio length, usage and project requirements.",
       "proofHeading": "Testimonials",
       "proof": null,
       "proofPlaceholder": "Testimonials will be added here when they are available."
