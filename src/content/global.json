@@ -17,6 +17,8 @@
 
   "footer": {
     "tagline": "learn the words. shape the words. bring the words to life.",
+    "taglineLines": ["learn the words", "shape the words", "bring the words to life"],
+    "_comment_taglineLines": "Feedback 5 #24: one under another, no full stops (her example). The one-line version stays in tagline.",
     "legal": "© 2026 a textured word · United Kingdom",
     "_comment_legal": "G-07. Privacy and Terms block launch — a UK site running a contact form that collects a name and an email needs a privacy notice. Until the pages exist the hrefs stay null and nothing renders, per the same rule as social.",
     "legalLinks": [

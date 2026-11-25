@@ -16,7 +16,7 @@ const legalLinks = footer.legalLinks.filter((link) => link.href);
   <div class="bleed">
     <div class="ftr__brand">
       <Wordmark class="ftr__mark" />
-      <p class="ftr__tagline">{footer.tagline}</p>
+      <p class="ftr__tagline">{footer.taglineLines.map((line, i) => <>{i > 0 && <br />}{line}</>)}</p>
     </div>
 
     {footer.columns.map((column) => (
