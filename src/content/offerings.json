@@ -1,12 +1,26 @@
 {
   "_comment": "Her offerings from 'muhib revision 4' (November 2026), for the offer cards on Teach and Repurpose and a page for each offer. Her wording is used as written wherever it reads as site copy; lines marked DRAFT are adapted from her notes to the developer (which say 'you' meaning the developer, or give reasoning) and need her approval. The card shows a little; the page shows everything.",
-
   "teaching": {
     "_comment_types": "Her three types of teaching, verbatim. She did not list I/A-Level this time: the old route is kept in site.json as routesRetired until she confirms.",
     "types": [
-      { "id": "ks3-english", "label": "KS3 English", "tagline": "Read closely. Write clearly. Think creatively.", "body": "Build the confidence and skills to understand texts, express ideas and develop a strong foundation in English." },
-      { "id": "igcse", "label": "I/GCSE", "tagline": "Read between the lines. Write beyond the obvious.", "body": "Develop the analytical, critical and written skills needed to engage deeply with English Language and Literature." },
-      { "id": "esl-ielts", "label": "ESL & IELTS", "tagline": "Find the words. Find your confidence.", "body": "Develop practical English for life, study and work — from everyday communication to IELTS preparation." }
+      {
+        "id": "ks3-english",
+        "label": "KS3 English",
+        "tagline": "Read closely. Write clearly. Think creatively.",
+        "body": "Build the confidence and skills to understand texts, express ideas and develop a strong foundation in English."
+      },
+      {
+        "id": "igcse",
+        "label": "I/GCSE",
+        "tagline": "Read between the lines. Write beyond the obvious.",
+        "body": "Develop the analytical, critical and written skills needed to engage deeply with English Language and Literature."
+      },
+      {
+        "id": "esl-ielts",
+        "label": "ESL & IELTS",
+        "tagline": "Find the words. Find your confidence.",
+        "body": "Develop practical English for life, study and work — from everyday communication to IELTS preparation."
+      }
     ],
     "marker": "Lessons and packages",
     "_comment_marker": "DRAFT: section label.",
@@ -14,7 +28,12 @@
     "_comment_availableFor": "DRAFT: she asked for these options for all three types of teaching.",
     "topic": "English tuition",
     "note": "A family’s place is kept during short holidays. With 48 hours’ notice a lesson can be moved to another time in the same month.",
-    "unsure": { "before": "Not sure which fits?", "link": "Start an enquiry", "after": "and we can talk it through on a free 20-minute call.", "_comment": "DRAFT, built from the site's existing free 20-minute call line." },
+    "unsure": {
+      "before": "Not sure which fits?",
+      "link": "Start an enquiry",
+      "after": "and we can talk it through on a free 20-minute call.",
+      "_comment": "DRAFT, built from the site's existing free 20-minute call line."
+    },
     "options": [
       {
         "slug": "one-to-one",
@@ -51,39 +70,48 @@
         "number": "03",
         "title": "Core Retainer",
         "kicker": "Monthly ongoing support",
-        "summary": "1 protected lesson a week, a recording & written summary within 4 hours and a monthly progress update.",
-        "price": "£250",
+        "summary": "1 protected lesson a week, a written summary within 4 hours of each lesson and a written report every 6 weeks.",
+        "price": "£280",
         "term": "per month",
-        "_comment_term": "She lists retainers as 'monthly ongoing support'; 'per month' is read from that. Confirm with her.",
         "meta": "Minimum 3 month commitment",
         "features": [
           "1 protected lesson a week",
-          "A recording & written summary within 4 hours",
-          "Monthly progress update",
-          "Shared Google Classroom area complete with vocabulary bank, report card, annotated slides, and class slides"
+          "Written summary within 4 hours after each lesson",
+          "Written report every 6 weeks",
+          "Shared Google Classroom area complete with vocabulary bank, report card, annotated slides with additional notes, as well as original classroom slides",
+          "Interactive whiteboard lessons with iPad",
+          "1 exam question a week marked outside lesson, with live annotation via short video feedback"
         ],
-        "notes": ["A family’s place is kept during short holidays. With 48 hours’ notice a lesson can be moved to another time in the same month."]
-      },
-      {
-        "slug": "premium-retainer",
-        "number": "04",
-        "title": "Premium Retainer",
-        "kicker": "Monthly ongoing support",
-        "summary": "2 protected lessons a week, priority access during busy periods and direct communication via WhatsApp.",
-        "price": "£500",
-        "term": "per month",
-        "meta": "Minimum 3 month commitment",
-        "features": [
-          "2 protected lessons a week",
-          "Priority access during busy periods",
-          "1 exam question a week marked outside lesson with short video feedback",
-          "Direct communication via WhatsApp"
-        ],
-        "notes": ["A family’s place is kept during short holidays. With 48 hours’ notice a lesson can be moved to another time in the same month."]
+        "_comment_features": "Feedback 5 #19: her six items for the one retainer, as written (capitals and one comma added). The Premium Retainer is off for now ('may introduce premium retainer later'); its entry is kept below as premiumRetired.",
+        "notes": [
+          "A family’s place is kept during short holidays. With 48 hours’ notice a lesson can be moved to another time in the same month."
+        ]
       }
-    ]
+    ],
+    "premiumRetired": {
+      "slug": "premium-retainer",
+      "number": "04",
+      "title": "Premium Retainer",
+      "kicker": "Monthly ongoing support",
+      "summary": "2 protected lessons a week, priority access during busy periods and direct communication via WhatsApp.",
+      "price": "£500",
+      "term": "per month",
+      "meta": "Minimum 3 month commitment",
+      "features": [
+        "2 protected lessons a week",
+        "Priority access during busy periods",
+        "1 exam question a week marked outside lesson with short video feedback",
+        "Direct communication via WhatsApp"
+      ],
+      "notes": [
+        "A family’s place is kept during short holidays. With 48 hours’ notice a lesson can be moved to another time in the same month."
+      ]
+    },
+    "coreRetired": {
+      "price": "£250",
+      "summary": "1 protected lesson a week, a recording & written summary within 4 hours and a monthly progress update."
+    }
   },
-
   "repurposing": {
     "_comment_intro": "Her 'Writing Strategy & Content Repurposing' copy, verbatim (checked: it is not on the reference site she linked).",
     "intro": {
@@ -94,8 +122,14 @@
         "From SEO-led articles and email newsletters to long-form scripts, short-form video content and thought leadership, I bring structure, strategy and storytelling to your content."
       ],
       "services": [
-        { "label": "Content Repurposing", "body": "Transform podcasts, YouTube videos, webinars and livestreams into blogs, newsletters and social content." },
-        { "label": "Scriptwriting", "body": "Develop long-form video scripts, podcast outlines and short-form video scripts." }
+        {
+          "label": "Content Repurposing",
+          "body": "Transform podcasts, YouTube videos, webinars and livestreams into blogs, newsletters and social content."
+        },
+        {
+          "label": "Scriptwriting",
+          "body": "Develop long-form video scripts, podcast outlines and short-form video scripts."
+        }
       ],
       "close": "Whether you need a one-off content project or an ongoing writing partner, I help make your ideas work harder."
     },
@@ -103,7 +137,12 @@
     "topic": "Content repurposing",
     "custom": "Need a DIY writing or repurposing package? We can customise one together on a discovery call.",
     "_comment_custom": "DRAFT, from her note: 'if they need a DIY writing or repurposing package, that we can customise a package through a discovery call.'",
-    "unsure": { "before": "Not sure which fits?", "link": "Start an enquiry", "after": "and we can talk it through on a free 20-minute call.", "_comment": "DRAFT, as on Teach." },
+    "unsure": {
+      "before": "Not sure which fits?",
+      "link": "Start an enquiry",
+      "after": "and we can talk it through on a free 20-minute call.",
+      "_comment": "DRAFT, as on Teach."
+    },
     "options": [
       {
         "slug": "content-starter",
@@ -123,7 +162,9 @@
           "SEO keyword research",
           "Internal and external linking where appropriate"
         ],
-        "notes": ["The starter fee is credited towards your first retainer if you sign up within 14 days."],
+        "notes": [
+          "The starter fee is credited towards your first retainer if you sign up within 14 days."
+        ],
         "_comment_notes": "DRAFT, from her note: 'I would credit the starter fee towards their first retainer if they sign up within 14 days.'"
       },
       {
@@ -181,7 +222,6 @@
       }
     ]
   },
-
   "labels": {
     "_comment": "DRAFT: interface labels for the cards and the offer pages.",
     "cardCta": "See what’s inside",
