@@ -44,9 +44,9 @@ Muhib's decision (a service, hosting or cost).
 > The images above show sharp and round-edged boxes.
 > Psychologically, apparently this is better?
 
-*Screenshots:* the two images under point 1. Ours has near-square buttons (2px). Hers has rounded fields, a rounded message box and a rounded *Submit*, inside a **square** panel.
+*Screenshots:* the two images under point 1. Ours has near-square buttons (`--radius-sm`, 2px, also used on fields). Hers has rounded fields, a rounded message box and a rounded *Submit*, inside a **square** panel. Today only the audio player's play button is rounder (`--radius-md`, 10px); the player row itself is square.
 
-*Reading:* round the boxes you click, type into or read inside: buttons, form fields, cards, cream boxes, credential tiles and the audio player. Her own example keeps the outer panel square, so full-width bands (header, plum band, footer) and photographs stay square.
+*Reading:* round the boxes you click, type into or read inside: buttons, form fields, cards, cream boxes, credential tiles and the audio player rows. Her own example keeps the outer panel square, so full-width bands (header, plum band, footer) and photographs stay square.
 
 *Call:* one soft radius token (12px) for all of those. Update the radii rule in `CLAUDE.md`.
 
@@ -118,7 +118,7 @@ Muhib's decision (a service, hosting or cost).
 
 *Live mentions to change:*
 - the Teach masthead jump link;
-- the "Who I teach" card title and body;
+- the "Who I teach" card title and body (the same card also appears under "Who it's for" on each of the three offer pages);
 - "Available for…" on Teach and on all three offer pages;
 - the Teach meta description ("…KS3, I/GCSE, ESL and IELTS").
 
@@ -142,9 +142,9 @@ Muhib's decision (a service, hosting or cost).
 - [packages section](screens-6/p07-repurpose-packages.jpg): labelled *packages*; it opens with "Writing Strategy & Content Repurposing / Make more of the words you already have.", her intro and the services, then the package cards.
 - [the raw material](screens-6/p07-raw-material.jpg).
 
-*Live order:* masthead, the raw material, what I take on, how it works, **packages**, further details.
+*Live order (checked):* masthead, the raw material, what I take on, how it works, **packages** (its heading is "Writing Strategy & Content Repurposing"), further details, other services.
 
-*New order:* masthead, the raw material, **packages**, what I take on, how it works, further details. Section colours are re-alternated so two bands do not touch.
+*New order:* masthead, the raw material, **packages**, what I take on, how it works, further details, other services. Section colours are re-alternated so two bands do not touch.
 
 ## 8. Unfinished. **Ask her**
 
@@ -172,11 +172,16 @@ The sentence stops there, with no screenshot beside it. It may lead into the Abo
 | Social ad 1 | `FINAL EP-1.mp4` | 87 MB |
 | Social ad 2 (being removed) | `FINAL EP-2.mp4` | 74 MB |
 
-Three videos are therefore available now. The other four samples (Audiobook, Commercial, Health explainer, IVR) came as audio only; videos for them would have to come from her.
+Three videos are therefore available now.
+
+The first four samples (Audiobook, Commercial, Health explainer, IVR) were supplied in October as MP3 audio (commit `b201a6a`). One of them was named "Explainer: health video", so a video of it may exist; videos for any of them would have to come from her.
+
+In feedback 5 she also listed a YouTube video with her voice clients: "not sure if you can download this video? https://www.youtube.com/watch?v=VaZIPc3z2-Q". That is "Hello Paris, France | Hello World" on a motion design studio's channel. It was never used. A YouTube video can be embedded without her own channel.
 
 *Decide:* hosting.
 - Self-host, compressed to 720p (about 15 to 40 MB each), loading only on play, with a poster frame.
-- Or YouTube, which needs the channel she does not have.
+- Or upload them to YouTube, which needs the channel she does not have.
+- The "Hello Paris" video is already on YouTube and can be embedded now (the YouTube player loading only when pressed, as with Calendly).
 
 ## 10. Voice: delete "How it works". **Clear**
 
@@ -281,17 +286,22 @@ Three videos are therefore available now. The other four samples (Audiobook, Com
 
 **Something to send**
 1. Your main Instagram link.
-2. Do you have videos for the Audiobook, Commercial, Health explainer or IVR samples? (We already have the videos for the other three.)
+2. Do you have videos for the Audiobook, Commercial, Health explainer or IVR samples? (We already have the videos for the software explainer, the charity film and the social ad.)
+3. The "Hello Paris" YouTube video you sent last time: is that your voice, and would you like it on the Voice page?
 
 **Something unclear**
-3. Point 8 stops mid-sentence: "The long pieces of text on the 'about'…" What did you want to say?
-4. Your new About sentence ("I can help students and small business owners…"): should it **replace** "Words have elevated people…", or go **after** it?
-5. In that sentence, "teaching them the grade to connect with their examiner": is that the wording you want?
-6. Your new credentials list has four entries. Should First-class BA, Cert TESOL and Enhanced DBS stay on as well?
+4. Point 8 stops mid-sentence: "The long pieces of text on the 'about'…" What did you want to say?
+5. Your new About sentence ("I can help students and small business owners…"): should it **replace** "Words have elevated people…", or go **after** it?
+6. In that sentence, "teaching them the grade to connect with their examiner": is that the wording you want?
+7. Your new credentials list has four entries. Should First-class BA, Cert TESOL and Enhanced DBS stay on as well?
 
 ## Decisions for Muhib
 
 1. **Enquiry form service** (point 1): Web3Forms or Formspree (quick, free tier, needs one confirmation from the hello@ inbox), or Vercel Function plus Resend (needs an account, an API key and DNS records).
-2. **Video hosting** (point 9): self-host compressed copies (recommended), or wait for YouTube.
+2. **Video hosting** (point 9): self-host compressed copies (recommended), or wait for YouTube. The "Hello Paris" video can be embedded from YouTube either way.
 3. **YouTube channel**: her feedback 5 reminder 3 asked you to open it.
 4. Removing Substack also retires the automatic Substack list built last round. She says the blog comes later.
+
+---
+
+*Verified 27 November 2026 by script against the PDF, the live site and the repo: 38 checks (the PDF's points and screenshots; each live text, section order and link quoted above; feedback 5 quotes; the domain's MX record; the Drive files' sizes). Two first-run failures were faults in the check, not the record: `texture-ruled` is in the shared stylesheet on every page but used only by the About masthead, and the footer already prints each platform name, but visually hidden.*
